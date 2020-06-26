@@ -18,6 +18,10 @@ class Login extends MY_Controller {
         $this->load->view('kart/login');
     }
 
+    public function forgot(){
+        $this->load->view('kart/forgot-password');
+    }
+
     public function authenticate(){
         $this->redirectIfLoggedIn();
         $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');

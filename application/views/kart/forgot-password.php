@@ -10,28 +10,28 @@
     <meta name="keywords" content="">
     <meta name="author" content="Ankur (Cluebix)">
     <title>Kart.cropicle - Forgot password</title>
-    <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
+    <link rel="apple-touch-icon" href="<?=base_url()?>app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/vendors.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/authentication.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/pages/authentication.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/components.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/horizontal-menu.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/core/menu/menu-types/horizontal-menu.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
     <!-- END: Custom CSS-->
 
 </head>
@@ -62,19 +62,19 @@
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body">
-                                                <div class="text-muted text-center mb-2"><span>Enter the phone number you
+                                                <div class="text-muted text-center mb-2"><span>Enter the mobile number you
                                                         used
                                                         when you joined
                                                         and we will send you temporary password</span></div>
                                                 <form class="mb-2" action="reset-password.html">
                                                     <div class="form-group mb-2">
-                                                        <label class="text-bold-600" for="exampleInputEmailPhone1">
-                                                            Phone</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmailPhone1" placeholder="10 digit Phone" required></div>
+                                                        <label class="text-bold-600">
+                                                            Mobile no.</label>
+                                                        <input type="text" class="form-control" placeholder="10 digit mobile no." required></div>
                                                     <button type="submit" class="btn btn-primary glow position-relative w-100">SEND
                                                         PASSWORD<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
                                                 </form>
-                                                <div class="text-center mb-2"><a href="login.html"><u class="text-muted">I
+                                                <div class="text-center mb-2"><a href="<?=base_url()?>"><u class="text-muted">I
                                                             remembered my
                                                             password</u></a></div>
                                             </div>
@@ -83,7 +83,7 @@
                                 </div>
                                 <!-- right section image -->
                                 <div class="col-md-6 d-md-block d-none text-center align-self-center">
-                                    <img class="img-fluid" src="../../../app-assets/images/pages/forgot-password.png" alt="branding logo" width="300">
+                                    <img class="img-fluid" src="<?=base_url()?>app-assets/images/pages/forgot-password.png" alt="branding logo" width="300">
                                 </div>
                             </div>
                         </div>
@@ -98,22 +98,22 @@
 
 
     <!-- BEGIN: Vendor JS-->
-    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
-    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
-    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
-    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+    <script src="<?=base_url()?>app-assets/vendors/js/vendors.min.js"></script>
+    <script src="<?=base_url()?>app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+    <script src="<?=base_url()?>app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+    <script src="<?=base_url()?>app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
-    <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="<?=base_url()?>app-assets/vendors/js/ui/jquery.sticky.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
-    <script src="../../../app-assets/js/scripts/configs/horizontal-menu.js"></script>
-    <script src="../../../app-assets/js/core/app-menu.js"></script>
-    <script src="../../../app-assets/js/core/app.js"></script>
-    <script src="../../../app-assets/js/scripts/components.js"></script>
-    <script src="../../../app-assets/js/scripts/footer.js"></script>
+    <script src="<?=base_url()?>app-assets/js/scripts/configs/horizontal-menu.js"></script>
+    <script src="<?=base_url()?>app-assets/js/core/app-menu.js"></script>
+    <script src="<?=base_url()?>app-assets/js/core/app.js"></script>
+    <script src="<?=base_url()?>app-assets/js/scripts/components.js"></script>
+    <script src="<?=base_url()?>app-assets/js/scripts/footer.js"></script>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
