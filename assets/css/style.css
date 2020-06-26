@@ -1,0 +1,57 @@
+/* PLACE HERE YOUR OWN CSS CODES */
+#widgets-Statistics .card:hover{
+	box-shadow: -10px 15px 25px 0 rgba(25, 42, 70, 0.3);
+}
+#widgets-Statistics .card:active{
+	box-shadow: -5px 10px 20px 0 rgba(25, 42, 70, 0.2);
+}
+
+.activeLink{
+	background-color:#5A8DEE11 !important;
+	border: 1px solid #5A8DEE22 !important;
+}
+
+.cpointer{
+	cursor: pointer;
+}
+
+nav{
+	background-color:#FEC007 !important ;
+}
+
+@media(max-width:450px){
+	.cards .card-body{
+		padding: 0;
+	}
+	#stockModal .row .form-group{
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	#stockModal .modal-header{
+		padding-left: 25px;
+		padding-right: 25px;
+	}
+	#stockModal .modItm{
+		width: auto;
+	}
+	#stockModal .modQty{
+		width: auto;
+		font-weight: 600;
+	}
+	#stockModal .modStk{
+		margin: 6px 0;
+	}
+	#stockModal .heads{
+		display:none;
+	}
+	.horizontal-layout.vertical-overlay-menu .app-content .content-wrapper{
+		padding:calc(2.2rem - 0.4rem) calc(2.2rem - 1rem) 0;
+	}
+	.dFormLabel{
+		display: none !important;
+	}
+	.dFormAdder{
+		font-size: 13px;
+		padding:5px 10px ;
+	}
+}
