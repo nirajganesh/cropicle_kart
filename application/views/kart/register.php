@@ -10,29 +10,29 @@
     <meta name="keywords" content="">
     <meta name="author" content="Ankur (Cluebix)">
     <title>Kart.cropicle - Register</title>
-    <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
+    <link rel="apple-touch-icon" href="<?=base_url()?>app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/vendors.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/authentication.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/pages/authentication.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/components.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/horizontal-menu.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/wizard.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/core/menu/menu-types/horizontal-menu.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/plugins/forms/wizard.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
     <!-- END: Custom CSS-->
 
 </head>
@@ -85,6 +85,7 @@
                                                         <div class="form-group">
                                                             <label for="emailAddress5">Contact</label>
                                                             <input type="twxt" class="form-control digits required" id="phone" name="phone" placeholder="Enter 10 digit contact no." maxlength="10" minlength="10">
+                                                            <label id="checkPh" class="danger"></label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -104,8 +105,9 @@
                                                             <label for="proposalTitle3 mb-2">
                                                                An OTP has been sent to your number:
                                                             </label>
-                                                            <input type="text" class="form-control required" id="otp" name="otp" placeholder="Enter 6 digit OTP here" maxlength="6" minlength="6">
+                                                            <input type="text" class="form-control digits required" id="otp" name="otp" placeholder="Enter 6 digit OTP here" maxlength="6" minlength="6">
                                                         </div>
+                                                        <label id="otp_status" ></label>
                                                     </div>
                                                 </div>
                                             </fieldset>
@@ -124,7 +126,7 @@
                                                             <label for="eventName3">
                                                                 Choose passsowrd
                                                             </label>
-                                                            <input type="text" class="form-control required" id="pwd" name="pwd" placeholder="Enter password">
+                                                            <input type="password" class="form-control required" id="pwd" name="pwd" placeholder="Enter password">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
@@ -132,7 +134,7 @@
                                                             <label for="eventName3">
                                                                 Retype password
                                                             </label>
-                                                            <input type="text" class="form-control required" id="pwd2" name="pwd2" placeholder="Enter password again Name">
+                                                            <input type="password" class="form-control required" data-rule-equalTo="#pwd" data-msg-equalTo="Please enter the same password again" id="pwd2" name="pwd2" placeholder="Enter password again">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -140,14 +142,14 @@
                                             <!-- step 3 content end-->
                                         </form>
                                         <hr>
-                                        <div class="text-center"><span class="mr-25">Already have an account?</span><a href="login.html"><span>Sign in</span> </a></div>
+                                        <div class="text-center"><span class="mr-25">Already have an account?</span><a href="<?=base_url('login')?>"><span>Sign in</span> </a></div>
                                     </div>
                                 </div>
                             </div>
                             <small class="brand-name d-flex align-items-center text-muted" style="position: absolute; bottom: 5px; left: 15px;">Kart.cropicle</small>
                         </div>
                         <div class="col-md-5 d-md-block d-none text-center p-3 shadow-lg" style="z-index: -1;">
-                            <img class="img-fluid" src="../../../app-assets/images/pages/register.png" alt="branding logo">
+                            <img class="img-fluid" src="<?=base_url()?>app-assets/images/pages/register.png" alt="branding logo">
                         </div>
                     </div>
                 </section>
@@ -158,29 +160,34 @@
     <!-- END: Content-->
 
     <!-- BEGIN: Vendor JS-->
-    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
-    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
-    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
-    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+    <script src="<?=base_url()?>app-assets/vendors/js/vendors.min.js"></script>
+    <script src="<?=base_url()?>app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+    <script src="<?=base_url()?>app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+    <script src="<?=base_url()?>app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
-    <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
-    <script src="../../../app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <script src="<?=base_url()?>app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="<?=base_url()?>app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+    <script src="<?=base_url()?>app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
-    <script src="../../../app-assets/js/scripts/configs/horizontal-menu.js"></script>
-    <script src="../../../app-assets/js/core/app-menu.js"></script>
-    <script src="../../../app-assets/js/core/app.js"></script>
-    <script src="../../../app-assets/js/scripts/components.js"></script>
-    <script src="../../../app-assets/js/scripts/footer.js"></script>
+    <script src="<?=base_url()?>app-assets/js/scripts/configs/horizontal-menu.js"></script>
+    <script src="<?=base_url()?>app-assets/js/core/app-menu.js"></script>
+    <script src="<?=base_url()?>app-assets/js/core/app.js"></script>
+    <script src="<?=base_url()?>app-assets/js/scripts/components.js"></script>
+    <script src="<?=base_url()?>app-assets/js/scripts/footer.js"></script>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="../../../app-assets/js/scripts/forms/wizard-steps.js"></script>
+    <script src="<?=base_url()?>app-assets/js/scripts/forms/wizard-steps.js"></script>
+    <script src="<?=base_url()?>assets/js/scripts.js"></script>
     <!-- END: Page JS-->
+    <script>
+       
+      
+    </script>
 
 </body>
 <!-- END: Body-->

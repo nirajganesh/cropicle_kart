@@ -5,6 +5,13 @@ class GetModel extends CI_Model{
     {
         return $this->db->get($table)->result();
     }
+    public function getPhone($phn)
+    {
+        $query= $this->db->select('*')
+                        ->where('mobile_no',$phn)
+                        ->get('users');
+        return $query->num_rows();
+    }
 
     public function getInfoById($table,$column,$id)
     {

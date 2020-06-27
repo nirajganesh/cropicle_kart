@@ -55,3 +55,4 @@ $route['sitemap.xml'] = 'Sitemap';
 $route['404_override'] = 'Error404';
 
 $route['forgot-password'] = 'Login/forgot';
+$route['sign-up'] = 'Login/register';

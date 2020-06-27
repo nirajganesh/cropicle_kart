@@ -18,6 +18,50 @@ class Login extends MY_Controller {
         $this->load->view('kart/login');
     }
 
+    
+	public function register()
+	{
+		$this->load->view('kart/register');
+    }
+
+        
+	public function regPhoneCheck()
+	{
+       if($this->fetch->getPhone($this->input->post('mobile_no')) > 0){
+           echo true;
+       }
+       else{
+           echo false;
+       }
+	}
+    
+	public function regOtp()
+	{
+        $_SESSION["vno"] = rand(100000,999999);
+        echo $_SESSION["vno"];
+    }
+    
+	public function VerifyOtp()
+	{
+        if($_POST['otp']==$_SESSION['vno']){
+            echo true;
+        }
+        else{
+            echo false;
+        }
+    }
+    
+	public function regKart()
+	{
+        $data=$this->input->post();
+        $data['password']=password_hash($data['password'], PASSWORD_DEFAULT);
+        
+        $this->load->model('AddModel', 'add');
+        $status=$this->add->saveInfo('users', $data);
+        echo $status;
+    }
+
+
     public function forgot(){
         $this->load->view('kart/forgot-password');
     }
@@ -57,48 +101,6 @@ class Login extends MY_Controller {
 
                     if($status){
                         $this->session->set_flashdata('success','Password Updated ! Please login again.');
-                        redirect('Login/logout');
-                    }
-                    else{
-                        $this->session->set_flashdata('failed','Error !');
-                        redirect('Admin/adminProfile');
-                    }
-                }
-                else{
-                    $this->session->set_flashdata('failed','Invalid old password !');
-                    redirect('Admin/adminProfile');
-                }
-            }
-            else{
-                $this->session->set_flashdata('failed','New & confirm password should be same !');
-                redirect('Admin/adminProfile');
-            }
-
-            
-        }
-        else{
-            $admProfile=$this->fetch->getAdminProfile();
-            $this->load->view( 'kart/adminheader', ['admProfile' => $admProfile, 'errors'=> validation_errors()] ); 
-            $this->load->view('kart/adminaside'); 
-            $this->load->view('kart/adminProfile'); 
-            $this->load->view('kart/adminfooter');  
-        }
-    }
-
-    public function changeTPwd(){
-        $this->form_validation->set_rules('oldp', 'Old Password', 'required|min_length[6]');
-        $this->form_validation->set_rules('newp', 'New Password', 'required|min_length[6]');
-        $this->form_validation->set_rules('cnfp', 'Confirm Password', 'required|min_length[6]');
-        if($this->form_validation->run() == TRUE){
-            $data=$this->input->post();
-            $admProfile=$this->fetch->getAdminProfile();
-            if($data['newp']==$data['cnfp']){
-                if( $data['oldp']===$admProfile->transaction_pwd ){
-                    $hash['transaction_pwd'] = $this->input->post('cnfp');
-                    $status=$this->auth->changeTPassword($hash, $admProfile->user_id);
-
-                    if($status){
-                        $this->session->set_flashdata('success','Transaction Password Updated ! Please login again.');
                         redirect('Login/logout');
                     }
                     else{

@@ -92,12 +92,12 @@
                                                                         in</small></label>
                                                             </div>
                                                         </div> -->
-                                                        <div class="text-right ml-auto"><a href="forgot-password" class="card-link"><small>Forgot Password?</small></a></div>
+                                                        <div class="text-right ml-auto"><a href="<?=base_url()?>forgot-password" class="card-link"><small>Forgot Password?</small></a></div>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary glow w-100 position-relative">Login<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
                                                 </form>
                                                 <hr>
-                                                <div class="text-center"><span class="mr-25">Don't have an account?</span><a href="register.html"><span>Sign up</span></a></div>
+                                                <div class="text-center"><span class="mr-25">Don't have an account?</span><a href="<?=base_url()?>sign-up"><span>Sign up</span></a></div>
                                             </div>
                                         </div>
                                     </div>

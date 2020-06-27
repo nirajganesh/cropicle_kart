@@ -7,36 +7,6 @@
     Author: PIXINVENT
     Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
-//    Wizard tabs with icons setup
-// ------------------------------
-$(".wizard-horizontal").steps({
-  headerTag: "h6",
-  bodyTag: "fieldset",
-  transitionEffect: "fade",
-  titleTemplate: '<span class="step">#index#</span> #title#',
-  labels: {
-    finish: 'Submit'
-  },
-  onFinished: function (event, currentIndex) {
-    alert("Form submitted.");
-  }
-});
-//        vertical Wizard       //
-// ------------------------------
-$(".wizard-vertical").steps({
-  headerTag: "h3",
-  bodyTag: "fieldset",
-  transitionEffect: "fade",
-  enableAllSteps: true,
-  stepsOrientation: "vertical",
-  labels: {
-    finish: 'Submit'
-  },
-  onFinished: function (event, currentIndex) {
-    alert("Form submitted.");
-  }
-});
-
 
 //       Validate steps wizard //
 // -----------------------------
@@ -65,7 +35,22 @@ stepsValidation.steps({
     return form.valid();
   },
   onFinished: function (event, currentIndex) {
-    alert("Submitted!");
+    $.ajax({ 
+      type        : 'POST',
+      data        : {
+                      name : $("#name").val(),
+                      mobile_no : $("#phone").val(),
+                      password : $("#pwd").val()
+                    },
+      url         : "Login/regKart",
+      success: function(data) {
+        console.log(data);
+        alert(data);
+      },
+      error:function(data) {
+          alert('error');
+      }
+  });
   }
 });
 
