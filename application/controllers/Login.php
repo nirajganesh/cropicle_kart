@@ -17,14 +17,12 @@ class Login extends MY_Controller {
         $this->redirectIfLoggedIn();
         $this->load->view('kart/login');
     }
-
     
 	public function register()
 	{
 		$this->load->view('kart/register');
     }
-
-        
+  
 	public function regPhoneCheck()
 	{
        if($this->fetch->getPhone($this->input->post('mobile_no')) > 0){
@@ -55,12 +53,25 @@ class Login extends MY_Controller {
 	{
         $data=$this->input->post();
         $data['password']=password_hash($data['password'], PASSWORD_DEFAULT);
+        $data['role_id']='2';
         
         $this->load->model('AddModel', 'add');
-        $status=$this->add->saveInfo('users', $data);
+        $id=$this->add->create_user('users', $data);
+
+        $data2['user_id']=$id;
+        $status=$this->add->saveInfo('user_info', $data2);
         echo $status;
     }
 
+    public function regSuccess(){
+        $this->session->set_flashdata('success','You have successfully registered with Cropicle. You can login after your profile has been verified by our executive. Further information will be sent to your registered number.' );
+        redirect('Login');
+    }
+
+    public function regError(){
+        $this->session->set_flashdata('failed','Some error occured. Please try again after sometime.' );
+        redirect('Login');
+    }
 
     public function forgot(){
         $this->load->view('kart/forgot-password');
@@ -77,6 +88,16 @@ class Login extends MY_Controller {
         }
         else{
             if($user = $this->auth->authenticate($this->input->post()) ){
+                $userSessArr = array(
+                    "role_id" => $user->role_id,
+                    "user_id" => $user->id,
+                    "login_time" =>date("Y-m-d H:i:s"),
+                    "is_logged_in" => 1,
+                    "ip_address" => $this->input->ip_address(),
+                );
+                $this->load->model('AddModel', 'add');
+                $sessResult = $this->add->create_user_session($userSessArr);
+                $user->kart_session_id = $sessResult;
                 $this->session->set_userdata(['kart' =>  $user]);
                 $this->redirectIfLoggedIn();
             }else{
@@ -130,9 +151,20 @@ class Login extends MY_Controller {
     }
 
     public function logout(){
+        $sessId='';
+        $sessId = $this->session->kart->kart_session_id;
+		if($sessId!=''){
+
+			$data = array(
+				"is_logged_in" => 0,
+				"logout_time" => date("Y-m-d H:i:s"),
+			);
+            $this->load->model('EditModel', 'update');
+            $sessResult = $this->update->updateInfoById('user_sessions', $data,'id',$sessId);
+		}
         $this->session->unset_userdata(['kart']);
         $this->session->sess_destroy();
-        $this->index();
+        $this->redirectIfNotLoggedIn();
     }
 
 

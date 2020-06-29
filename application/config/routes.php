@@ -56,3 +56,6 @@ $route['404_override'] = 'Error404';
 
 $route['forgot-password'] = 'Login/forgot';
 $route['sign-up'] = 'Login/register';
+$route['registered'] = 'Login/regSuccess';
+$route['registration-error'] = 'Login/regError';
+$route['profile'] = 'Home/profile';

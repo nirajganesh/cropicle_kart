@@ -19,6 +19,7 @@
 
     <!-- BEGIN: Page Vendor JS-->
     <script src="<?=base_url()?>app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="<?=base_url()?>app-assets/vendors/js/extensions/toastr.min.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -30,7 +31,23 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
+    <script src="<?=base_url()?>assets/js/scripts.js"></script>
     <!-- END: Page JS-->
+
+    <script>
+          <?php if($this->session->flashdata('success') || $message = $this->session->flashdata('failed')):
+              $class = $this->session->flashdata('success') ? 'success' : 'error';
+              if($class=='success'){
+            ?>
+                toastr.success('<?=$this->session->flashdata('success')?>', 'Done !', {"showMethod": "slideDown","timeOut": 5000 });
+              <?php } else{?>
+                toastr.error('<?=$this->session->flashdata('failed')?>', 'Error !', {"showMethod": "slideDown","timeOut": 0,"closeButton": true});
+              <?php }?>
+          <?php 
+              endif;
+          ?>
+          
+    </script>
 
 </body>
 <!-- END: Body-->

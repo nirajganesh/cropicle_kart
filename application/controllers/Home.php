@@ -32,6 +32,17 @@ class Home extends MY_Controller {
 		$this->load->view('kart/footer');
 	}
 
+	public function profile()
+	{
+		$profile=$this->fetch->getInfoById('user_info','user_id',$this->session->kart->id);
+		// var_dump($profile);exit;
+		$this->load->view('kart/header',['title'=>'Profile',
+									'data'=>$profile
+								]);
+		$this->load->view('kart/profile');
+		$this->load->view('kart/footer');
+	}
+
 
 	public function Mail()
 	{

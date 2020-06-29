@@ -10,7 +10,7 @@ class Auth_model extends CI_Model {
 
     public function authenticate($data) 
     {
-        $this->db->where(['mobile_no' => $data['mobile_no'] , 'is_active' => 1, 'is_verified' => 1 ]);
+        $this->db->where(['mobile_no' => $data['mobile_no'] , 'is_active' => 1]);
         $query = $this->db->get('users');
         if($query->num_rows() == 0)
             return false;

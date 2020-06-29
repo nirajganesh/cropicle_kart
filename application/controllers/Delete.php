@@ -10,22 +10,6 @@ class Delete extends MY_Controller {
                 $this->load->model('DeleteModel','delete');
         }
 
-
-   
-        public function Testimonial($id)
-        {
-            $status= $this->delete->deleteById('feedbacks','id',$id);
-            if($status){
-                $this->session->set_flashdata('success','Testimonial deleted !');
-                redirect('Admin/Testimonials');
-            }
-            else{
-                $this->session->set_flashdata('failed','Error!');
-                redirect('Admin/Testimonials');
-            }
-        }
-
- 
         public function News($id)
         {
             $news= $this->fetch->getInfoById('news','id',$id);
@@ -43,145 +27,23 @@ class Delete extends MY_Controller {
                 redirect('Admin/News');
             }
         }
- 
 
-        public function TC($id)
+        public function profile_img()
         {
-            $tc= $this->fetch->getInfoById('transfer_cert','id',$id);
-            $status= $this->delete->deleteById('transfer_cert','id',$id);
+            $info= $this->fetch->getInfoById('user_info','user_id',$this->session->kart->id);
+            $this->load->model('EditModel','edit');
+            $data['profile_img']='';
+            $status= $this->edit->updateInfoById('user_info',$data,'user_id',$this->session->kart->id);
             if($status){
-                $path= 'assets/tc/'.$tc->img_src;
-                unlink($path);
-                $this->session->set_flashdata('success','TC Deleted!');
-                redirect('Admin/TC');
-            }
-            else{
-                $this->session->set_flashdata('failed','Error!');
-                redirect('Admin/TC');
-            }
-        }
-
-        public function Banner($id)
-        {
-            $t= $this->fetch->getInfoById('hero_images','id',$id);
-            $status= $this->delete->deleteById('hero_images','id',$id);
-            if($status){
-                $path= 'assets/images/'.$t->img_src;
-                unlink($path);
-                $this->session->set_flashdata('success','Banner Deleted!');
-                redirect('Admin/Banner');
-            }
-            else{
-                $this->session->set_flashdata('failed','Error!');
-                redirect('Admin/Banner');
-            }
-        }
-
-        public function TopAch($id)
-        {
-            $ach= $this->fetch->getInfoById('achievers','id',$id);
-            $status= $this->delete->deleteById('achievers','id',$id);
-            if($status){
-                $path= 'assets/images/'.$ach->img_src;
-                unlink($path);
-                $this->session->set_flashdata('success','Achiever Deleted !');
-                redirect('Admin/TopAch');
-            }
-            else{
-                $this->session->set_flashdata('failed','Error!');
-                redirect('Admin/TopAch');
-            }
-        }
-
-
-        public function Notice($id)
-        {
-            $notice= $this->fetch->getInfoById('notice','id',$id);
-            $status= $this->delete->deleteById('notice','id',$id);
-            if($status){
-                if($notice->file_src!=''){
-                    $path= 'assets/notice/'.$notice->file_src;
+                if($info->profile_img!=''){
+                    $path= 'assets/images/'.$info->profile_img;
                     unlink($path);
                 }
-                $this->session->set_flashdata('success','Notice Deleted!');
-                redirect('Admin/Notice');
+                $this->session->set_flashdata('success','Profile image deleted!');
             }
             else{
-                $this->session->set_flashdata('failed','Error!');
-                redirect('Admin/Notice');
+                $this->session->set_flashdata('failed','Some error occured!');
             }
         }
-
-   
-        public function gallCategory($id)
-        {
-            $status= $this->delete->deleteById('gallery_categories','id',$id);
-            if($status){
-                $images= $this->fetch->getInfoParams('gallery','gall_cat_id',$id);
-                foreach($images as $image){
-                    $path= 'assets/images/'.$image->img_src;
-                    unlink("$path");
-                }
-                $status= $this->delete->deleteById('gallery','gall_cat_id',$id);
-                $this->session->set_flashdata('success','Album Deleted!');
-                redirect('Admin/Gallery');
-            }
-            else{
-                $this->session->set_flashdata('failed','Error!');
-                redirect('Admin/Gallery');
-            }
-        }
-
-       
-        public function galleryImg($id)
-        {
-            $imgData= $this->fetch->getInfoById('gallery','id',$id);
-            $unlink_src= $imgData->img_src;
-            $cat_id= $imgData->gall_cat_id;
-            $count= $this->fetch->getCountOfImages($cat_id);
-            $redirect="Admin/galleryInner/$cat_id";
-            
-            $status= $this->delete->deleteById('gallery','id',$id);
-            if($status){
-                if ($count < 2){
-                    $redirect="Admin/Gallery";
-                    $this->delete->deleteById('gallery_categories','id',$cat_id);
-                }
-                $path= 'assets/images/'.$unlink_src;
-                unlink("$path");
-                $this->session->set_flashdata('success','Image Deleted!');
-                redirect("$redirect");
-            }
-            else{
-                $this->session->set_flashdata('failed','Error!');
-                redirect("$redirect");
-            }
-        }
-
-
-        public function heroImg($id)
-        {
-            $unlink_src= $this->fetch->getHeroImageById($id)->img_src;
-            $count= $this->fetch->getCountOfHeroImages();
-            if ($count < 2){
-                $this->session->set_flashdata('failed','Slider Images cannot be empty');
-                redirect("Admin/Slider");
-            }
-            else{
-                $status= $this->delete->deleteHeroImg($id);
-                if($status){
-                    $path= 'assets/images/'.$unlink_src;
-                    unlink("$path");
-                    $this->session->set_flashdata('success','Image Deleted!');
-                    redirect("Admin/Slider");
-                }
-                else{
-                    $this->session->set_flashdata('failed','Error!');
-                    redirect("Admin/Slider");
-                }
-            }
-        }
-
-
 
 }

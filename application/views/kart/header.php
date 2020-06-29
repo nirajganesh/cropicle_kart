@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Ankur (Cluebix)">
-    <title>Cropicle - Admin</title>
+    <title>Cropicle Kart - <?=isset($title)?$title:''?></title>
     <link rel="apple-touch-icon" href="<?=base_url()?>app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/bootstrap-extended.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/colors.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/extensions/toastr.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
@@ -73,10 +74,10 @@
                             </div>
                         </li>
                         <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="user-nav d-lg-flex d-none"><span class="user-name text-white">John Doe</span></div><span><img class="round" src="<?=base_url()?>app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
+                                <div class="user-nav d-lg-flex d-none"><span class="user-name text-white"><?=$this->session->kart->name?></span></div><span><img class="round" src="<?=base_url()?>app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right pb-0">
-                                <a class="dropdown-item" href="profile.html"><i class="bx bx-user mr-50"></i> Edit Profile</a>
+                                <a class="dropdown-item" href="<?=base_url('profile')?>"><i class="bx bx-user mr-50"></i> Edit Profile</a>
                                 <div class="dropdown-divider mb-0"></div>
                                 <a class="dropdown-item" href="<?=base_url('Login/logout')?>"><i class="bx bx-power-off mr-50"></i> Logout</a>
                             </div>

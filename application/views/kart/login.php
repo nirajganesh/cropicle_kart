@@ -16,6 +16,7 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/extensions/toastr.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -23,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/bootstrap-extended.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/pages/authentication.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/plugins/extensions/toastr.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/components.css">
     <!-- END: Theme CSS-->
 
@@ -135,6 +137,7 @@
 
     <!-- BEGIN: Theme JS-->
     <script src="<?=base_url()?>app-assets/js/scripts/configs/horizontal-menu.js"></script>
+    <script src="<?=base_url()?>app-assets/vendors/js/extensions/toastr.min.js"></script>
     <script src="<?=base_url()?>app-assets/js/core/app-menu.js"></script>
     <script src="<?=base_url()?>app-assets/js/core/app.js"></script>
     <script src="<?=base_url()?>app-assets/js/scripts/components.js"></script>
@@ -142,6 +145,21 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
+    <!-- Toastr -->
+    <script>
+          <?php if($this->session->flashdata('success') || $message = $this->session->flashdata('failed')):
+              $class = $this->session->flashdata('success') ? 'success' : 'error';
+              if($class=='success'){
+            ?>
+                toastr.success('<?=$this->session->flashdata('success')?>', 'Congratulations !', { positionClass: 'toast-top-full-width', "timeOut": 50000 });
+              <?php } else{?>
+                toastr.error('<?=$this->session->flashdata('failed')?>', 'Error !', { positionClass: 'toast-top-full-width', "timeOut": 50000 });
+              <?php }?>
+          <?php 
+              endif;
+          ?>
+          
+    </script>
     <!-- END: Page JS-->
 
 </body>
