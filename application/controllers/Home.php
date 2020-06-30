@@ -27,7 +27,7 @@ class Home extends MY_Controller {
 		// 							'news'=>$news,
 		// 							'img'=>$gallery
 		// 						]);
-		$this->load->view('kart/header');
+		$this->load->view('kart/header',['title'=>'Dashboard']);
 		$this->load->view('kart/index');
 		$this->load->view('kart/footer');
 	}
@@ -35,11 +35,21 @@ class Home extends MY_Controller {
 	public function profile()
 	{
 		$profile=$this->fetch->getInfoById('user_info','user_id',$this->session->kart->id);
-		// var_dump($profile);exit;
 		$this->load->view('kart/header',['title'=>'Profile',
 									'data'=>$profile
 								]);
 		$this->load->view('kart/profile');
+		$this->load->view('kart/footer');
+	}
+
+	public function manageKart()
+	{
+		$profile=$this->fetch->demandLists(3);
+		// var_dump($profile);exit;
+		$this->load->view('kart/header',['title'=>'Manage Kart',
+									'data'=>$profile
+								]);
+		$this->load->view('kart/manage-kart');
 		$this->load->view('kart/footer');
 	}
 

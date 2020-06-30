@@ -59,3 +59,4 @@ $route['sign-up'] = 'Login/register';
 $route['registered'] = 'Login/regSuccess';
 $route['registration-error'] = 'Login/regError';
 $route['profile'] = 'Home/profile';
+$route['manage-kart'] = 'Home/manageKart';

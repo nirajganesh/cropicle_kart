@@ -81,6 +81,54 @@ class Edit extends MY_Controller {
            
         }
 
+        public function general()
+        {
+            $data=$this->input->post();
+            $this->session->kart->name=$data['name'];
+            unset($data['name']);
+            unset($data['mobile_no']);
+            $status= $this->edit->updateInfoById('user_info',$data,'user_id', $this->session->kart->id);
+
+            if($status){
+                $this->session->set_flashdata('success','Profile updated !' );
+                redirect('profile');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('profile');
+            }
+        }
+
+        public function kart_profile()
+        {
+            $data=$this->input->post();
+            $status= $this->edit->updateInfoById('user_info',$data,'user_id', $this->session->kart->id);
+
+            if($status){
+                $this->session->set_flashdata('success','Profile updated !' );
+                redirect('profile');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('profile');
+            }
+        }
+
+        public function bank_info()
+        {
+            $data=$this->input->post();
+            // var_dump($data);exit;
+            $status= $this->edit->updateInfoById('user_info',$data,'user_id', $this->session->kart->id);
+
+            if($status){
+                $this->session->set_flashdata('success','Profile updated !' );
+                redirect('profile');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('profile');
+            }
+        }
 
 
         function generate_url_slug($string,$table,$field='slug',$key=NULL,$value=NULL){

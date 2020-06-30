@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/colors.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/components.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/extensions/toastr.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
@@ -45,7 +46,7 @@
     <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-fixed navbar-brand-center">
         <div class="navbar-header d-xl-block d-none">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item"><a class="navbar-brand" href="<?=base_url()?>html/ltr/horizontal-menu-template/index.html">
+                <li class="nav-item"><a class="navbar-brand" href="<?=base_url()?>">
                         <div class="brand-logo mb-1"><img class="logo" src="<?=base_url()?>app-assets/images/logo/favicon.png"></div>
                         <h2 class="brand-text mb-0">Cropicle</h2>
                     </a></li>
@@ -94,7 +95,7 @@
     <div class="header-navbar navbar-expand-sm navbar navbar-horizontal navbar-fixed navbar-light navbar-without-dd-arrow shadow" role="navigation" data-menu="menu-wrapper">
         <div class="navbar-header d-xl-none d-block">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html">
+                <li class="nav-item mr-auto"><a class="navbar-brand" href="<?=base_url()?>">
                         <div class="brand-logo"><img class="logos" height="38" src="<?=base_url()?>app-assets/images/logo/logo.png" /></div>
                         <h2 class="brand-text mb-0"></h2>
                     </a></li>
@@ -108,14 +109,14 @@
             <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="filled">
 
                 <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white shadow-md activeLink" href="index.html">
+                    <a class="nav-link bg-white shadow-md <?=$this->uri->segment(1)==''?' activeLink':''?>" href="<?=base_url()?>">
                         <i class="menu-livicon" data-icon="desktop"></i><span data-i18n="Dashboard">
                         Dashboard</span>
                     </a>
                 </li>
 
                 <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white" href="manage-kart.html">
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='manage-kart' || $this->uri->segment(1)=='demand-lists'?' activeLink':''?>" href="<?=base_url()?>manage-kart">
                         <i class="menu-livicon" data-icon="gear"></i><span data-i18n="Dashboard">
                         Manage Kart</span>
                     </a>
@@ -123,7 +124,7 @@
 
 
                 <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white" href="orders.html">
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='orders'?' activeLink':''?>" href="<?=base_url()?>orders">
                         <i class="menu-livicon" data-icon="truck"></i><span data-i18n="Dashboard">
                         Orders</span>
                     </a>
@@ -131,7 +132,7 @@
 
 
                 <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white" href="payments.html">
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='payments'?' activeLink':''?>" href="<?=base_url()?>payments">
                         <i class="menu-livicon" data-icon="bank"></i><span data-i18n="Dashboard">
                         Payments</span>
                     </a>
@@ -139,7 +140,7 @@
 
 
                 <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white" href="profile.html">
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='profile'?' activeLink':''?>" href="<?=base_url()?>profile">
                         <i class="menu-livicon" data-icon="user"></i><span data-i18n="Dashboard">
                         Profile</span>
                     </a>

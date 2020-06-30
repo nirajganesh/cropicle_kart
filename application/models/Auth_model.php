@@ -35,7 +35,7 @@ class Auth_model extends CI_Model {
 
 
     public function changeLoginPassword($h, $user_id) {
-		$this->db->where('user_id', $user_id);
+		$this->db->where('id', $user_id);
 		$flag=$this->db->update('users', $h);
 		if($flag){
             return true;

@@ -5,6 +5,7 @@ class GetModel extends CI_Model{
     {
         return $this->db->get($table)->result();
     }
+
     public function getPhone($phn)
     {
         $query= $this->db->select('*')
@@ -31,34 +32,28 @@ class GetModel extends CI_Model{
         return $this->db->get($table)->result();
     }
 
-    // Fetch Website Profile
+    public function demandLists($lim=NULL)
+    {
+     
+        $this->db->select('*')
+                ->from('demand_lists d')
+                ->join('demand_lists_details dd', 'd.id = dd.demand_list_id', 'LEFT')
+                ->join('items_master i', 'i.id = dd.item_id', 'LEFT')
+                ->join('units u', 'u.id = dd.unit_id', 'LEFT')
+                ->where('i.is_active','1')
+                ->where('d.is_active','1')
+                ->where('d.user_id',$this->session->kart->id)
+                ->order_by('d.id','desc');
+        echo"<pre>";var_dump($this->db->get()->result());exit;
+        // return $this->db->get()->result();
+    }
+
+
     public function getWebProfile()
     {
         return $this->db->get('webprofile')->row();
     }
 
-    // Fetch latest category
-    public function getLatestCategory()
-    {
-        $catg = $this->db->order_by('id','desc')
-                        ->limit(1)
-                        ->get('gallery_categories')
-                        ->row();
-        return $catg->id;
-    }
-
-    // Fetch gallery categories backgroung img
-    public function getThumbnail($tid)
-    {
-        return $this->db->select('img_src')
-                        ->where('gall_cat_id',$tid)
-                        ->order_by('id','desc')
-                        ->limit('1')
-                        ->get('gallery')
-                        ->row();
-    }
-
-    // Fetch gallery img with limit
     public function getInfoLim($table,$lim,$orderby)
     {
         return $this->db->order_by($orderby,'desc')
@@ -67,22 +62,12 @@ class GetModel extends CI_Model{
                         ->result();
     }
 
-    // Count images in category 
-    public function getCountOfImages($cid)
-    {
-        $query= $this->db->select('*')
-                        ->where('gall_cat_id',$cid)
-                        ->get('gallery');
-        return $query->num_rows();
-    }
-
-    // Count no. of rows in table 
     public function record_count($table) 
     {
         return $this->db->count_all($table);
     }
 
-    // Fetch Admin Profile
+
     public function getAdminProfile()
     {
         return $this->db->get('users')->row();

@@ -109,44 +109,32 @@ class Login extends MY_Controller {
     }
 
     public function changePwd(){
-        $this->form_validation->set_rules('oldp', 'Old Password', 'required|min_length[6]');
-        $this->form_validation->set_rules('newp', 'New Password', 'required|min_length[6]');
-        $this->form_validation->set_rules('cnfp', 'Confirm Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('oldp', 'Old Password', 'required');
+        $this->form_validation->set_rules('newp', 'New Password', 'required');
+        $this->form_validation->set_rules('cnfp', 'Confirm Password', 'required|matches[newp]');
         if($this->form_validation->run() == TRUE){
-            $data=$this->input->post();
-            $admProfile=$this->fetch->getAdminProfile();
-            if($data['newp']==$data['cnfp']){
-                if( password_verify($data['oldp'], $admProfile->pwd) ){
-                    $hash['pwd'] = password_hash( $this->input->post('cnfp'), PASSWORD_DEFAULT );
-                    $status=$this->auth->changeLoginPassword($hash, $admProfile->user_id);
+            if( password_verify($this->input->post('oldp'), $this->session->kart->password) ){
+                $data['password'] = password_hash( $this->input->post('cnfp'), PASSWORD_DEFAULT );
+                $status=$this->auth->changeLoginPassword($data, $this->session->kart->id);
 
-                    if($status){
-                        $this->session->set_flashdata('success','Password Updated ! Please login again.');
-                        redirect('Login/logout');
-                    }
-                    else{
-                        $this->session->set_flashdata('failed','Error !');
-                        redirect('Admin/adminProfile');
-                    }
+                if($status){
+                    $this->session->kart->password=$data['password'];
+                    $this->session->set_flashdata('success','Password Updated !');
+                    redirect('profile');
                 }
                 else{
-                    $this->session->set_flashdata('failed','Invalid old password !');
-                    redirect('Admin/adminProfile');
+                    $this->session->set_flashdata('failed','Error !');
+                    redirect('profile');
                 }
             }
             else{
-                $this->session->set_flashdata('failed','New & confirm password should be same !');
-                redirect('Admin/adminProfile');
+                $this->session->set_flashdata('failed','Invalid password! Please enter correct password');
+                redirect('profile');
             }
-
-            
         }
         else{
-            $admProfile=$this->fetch->getAdminProfile();
-            $this->load->view( 'kart/adminheader', ['admProfile' => $admProfile, 'errors'=> validation_errors()] ); 
-            $this->load->view('kart/adminaside'); 
-            $this->load->view('kart/adminProfile'); 
-            $this->load->view('kart/adminfooter');  
+            $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
+            redirect('profile');
         }
     }
 

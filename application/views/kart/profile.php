@@ -86,13 +86,13 @@
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <form novalidate method="POST" action="<?base_url('Edit/General')?>">
+                                                        <form method="POST" action="<?=base_url('Edit/general')?>">
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <div class="controls">
                                                                             <label>Name</label>
-                                                                            <input type="text" class="form-control" placeholder="Name" value="<?=$this->session->kart->name?>" required data-validation-required-message="This name field is required">
+                                                                            <input type="text" class="form-control" placeholder="Name" value="<?=$this->session->kart->name?>" name="name" required data-validation-required-message="This name field is required">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -100,7 +100,7 @@
                                                                     <div class="form-group">
                                                                         <div class="controls">
                                                                             <label>Contact no</label>
-                                                                            <input type="text" class="form-control" placeholder="Contact no." value="<?=$this->session->kart->mobile_no?>" required readonly data-validation-required-message="This name field is required">
+                                                                            <input type="text" class="form-control" placeholder="Contact no." value="<?=$this->session->kart->mobile_no?>" name="mobile_no" required readonly data-validation-required-message="This name field is required">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -108,7 +108,7 @@
                                                                     <div class="form-group">
                                                                         <div class="controls">
                                                                             <label>E-mail</label>
-                                                                            <input type="email" class="form-control" placeholder="Example@gmail.com" value="<?=$data->email?>" required data-validation-required-message="This email field is required">
+                                                                            <input type="email" class="form-control" placeholder="Example@gmail.com" value="<?=$data->email?>" name="email" data-validation-required-message="This email field is required">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -121,13 +121,13 @@
                                                         </form>
                                                     </div>
                                                     <div class="tab-pane fade " id="account-vertical-password" role="tabpanel" aria-labelledby="account-pill-password" aria-expanded="false">
-                                                        <form novalidate>
+                                                        <form action="<?=base_url('Login/changePwd')?>" method="POST" id="pwd_change">
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <div class="controls">
                                                                             <label>Old Password</label>
-                                                                            <input type="password" class="form-control" required placeholder="Old Password" data-validation-required-message="This old password field is required">
+                                                                            <input type="password" class="form-control required" required name="oldp" placeholder="Old Password" data-validation-required-message="This old password field is required">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -135,7 +135,7 @@
                                                                     <div class="form-group">
                                                                         <div class="controls">
                                                                             <label>New Password</label>
-                                                                            <input type="password" name="password" class="form-control" placeholder="New Password" required data-validation-required-message="The password field is required" minlength="6">
+                                                                            <input type="password" name="newp" id="newp" class="form-control required" placeholder="New Password" required data-validation-required-message="The password field is required" minlength="6">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -143,7 +143,7 @@
                                                                     <div class="form-group">
                                                                         <div class="controls">
                                                                             <label>Retype new Password</label>
-                                                                            <input type="password" name="con-password" class="form-control" required data-validation-match-match="password" placeholder="Re-type Password" data-validation-required-message="The Confirm password field is required" minlength="6">
+                                                                            <input type="password" name="cnfp" class="form-control required" required data-validation-match-match="password" placeholder="Re-type Password" data-rule-equalTo="#newp" data-msg-equalTo="Please enter the same password again" minlength="6">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -156,30 +156,30 @@
                                                         </form>
                                                     </div>
                                                     <div class="tab-pane fade" id="account-vertical-info" role="tabpanel" aria-labelledby="account-pill-info" aria-expanded="false">
-                                                        <form novalidate>
+                                                        <form method="POST" action="<?=base_url('Edit/bank_info')?>">
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label>Bank name</label>
-                                                                        <input type="text" class="form-control birthdate-picker" required placeholder="Bank name" data-validation-required-message="This field is required">
+                                                                        <input type="text" class="form-control birthdate-picker" required placeholder="Bank name" value="<?=$data->bank_name?>" name="bank_name">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label>Account holder's name</label>
-                                                                        <input type="text" class="form-control birthdate-picker" required placeholder="Holder name" data-validation-required-message="This field is required">
+                                                                        <input type="text" class="form-control birthdate-picker" required placeholder="Holder name" value="<?=$data->holder_name?>"  name="holder_name">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label>Account no.</label>
-                                                                        <input type="text" class="form-control birthdate-picker" required placeholder="A/C no." data-validation-required-message="This field is required">
+                                                                        <input type="text" class="form-control birthdate-picker" required placeholder="A/C no." value="<?=$data->acc_no?>" name="acc_no">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label>IFSC Code</label>
-                                                                        <input type="text" class="form-control birthdate-picker" required placeholder="DDDD00000000" data-validation-required-message="This field is required">
+                                                                        <input type="text" class="form-control birthdate-picker" required placeholder="DDDD00000000" value="<?=$data->ifsc_code?>" name="ifsc_code">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
@@ -191,24 +191,24 @@
                                                         </form>
                                                     </div>
                                                     <div class="tab-pane fade " id="account-vertical-social" role="tabpanel" aria-labelledby="account-pill-social" aria-expanded="false">
-                                                        <form>
+                                                        <form method="POST" action="<?=base_url('Edit/kart_profile')?>">
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label>Capacity of kart</label>
-                                                                        <input type="text" class="form-control" placeholder="capacity in kg" value="150kg">
+                                                                        <input type="text" class="form-control" placeholder="capacity in kg" value="<?=$data->capacity_kart?>" name="capacity_kart" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label>Sales qty per day</label>
-                                                                        <input type="text" class="form-control" placeholder="Example: 20kg/day">
+                                                                        <input type="text" value="<?=$data->sales_qty_daily?>" class="form-control" name="sales_qty_daily" value="<?=$data->sales_qty_daily?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label>Source of purchase</label>
-                                                                        <input type="text" class="form-control" placeholder="Example: ">
+                                                                        <input value="<?=$data->source_purchase?>" name="source_purchase" type="text" class="form-control" placeholder="Example: ">
                                                                     </div>
                                                                 </div>
                                                                 <a href="#" class="ml-1 link link-info">See account ledger</a>
@@ -234,4 +234,6 @@
             </div>
         </div>
     </div>
+
+ 
     <!-- END: Content-->

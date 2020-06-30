@@ -116,4 +116,7 @@
         });
     });
 
+    $('#pwd_change').validate({})
+
+
 })(window);
