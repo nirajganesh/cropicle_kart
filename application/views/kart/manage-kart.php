@@ -87,7 +87,7 @@
                                     </h4>
                                     <small class='font-small-2'> (Total 4 lists)</small>
                                     <div class="heading-elements">
-                                        <a href="demand-lists.html" type="button" class="btn btn-sm btn-light-primary">See All</a>
+                                        <a href="<?=base_url()?>demand-lists" type="button" class="btn btn-sm btn-light-primary">See All</a>
                                     </div>
                                 </div>
                                 <div class="card-content">

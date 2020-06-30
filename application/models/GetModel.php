@@ -44,8 +44,8 @@ class GetModel extends CI_Model{
                 ->where('d.is_active','1')
                 ->where('d.user_id',$this->session->kart->id)
                 ->order_by('d.id','desc');
-        echo"<pre>";var_dump($this->db->get()->result());exit;
-        // return $this->db->get()->result();
+        // echo"<pre>";var_dump($this->db->get()->result());exit;
+        return $this->db->get()->result();
     }
 
 

@@ -53,6 +53,34 @@ class Home extends MY_Controller {
 		$this->load->view('kart/footer');
 	}
 
+	public function demandLists()
+	{
+		$this->load->view('kart/header',['title'=>'Demand lists']);
+		$this->load->view('kart/demand-lists');
+		$this->load->view('kart/footer');
+	}
+
+	public function demandForm()
+	{
+		$this->load->view('kart/header',['title'=>'Demand fORM']);
+		$this->load->view('kart/demand-FORM');
+		$this->load->view('kart/footer');
+	}
+
+	public function orders()
+	{
+		$this->load->view('kart/header',['title'=>'Orders']);
+		$this->load->view('kart/orders');
+		$this->load->view('kart/footer');
+	}
+
+	public function payments()
+	{
+		$this->load->view('kart/header',['title'=>'Payments']);
+		$this->load->view('kart/payments');
+		$this->load->view('kart/footer');
+	}
+
 
 	public function Mail()
 	{

@@ -22,6 +22,7 @@
     <script src="<?=base_url()?>app-assets/vendors/js/extensions/toastr.min.js"></script>
     <script src="<?=base_url()?>app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
     <script src="<?=base_url()?>app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+    <script src="../../../app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -35,6 +36,7 @@
     <!-- BEGIN: Page JS-->
     <script src="<?=base_url()?>app-assets/js/scripts/forms/number-input.js"></script>
     <script src="<?=base_url()?>assets/js/scripts.js"></script>
+    <script src="../../../app-assets/js/scripts/forms/form-repeater.js"></script>
     <!-- END: Page JS-->
 
     <script>

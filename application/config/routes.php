@@ -60,3 +60,7 @@ $route['registered'] = 'Login/regSuccess';
 $route['registration-error'] = 'Login/regError';
 $route['profile'] = 'Home/profile';
 $route['manage-kart'] = 'Home/manageKart';
+$route['demand-lists'] = 'Home/demandLists';
+$route['demand-form'] = 'Home/demandForm';
+$route['orders'] = 'Home/orders';
+$route['payments'] = 'Home/payments';
