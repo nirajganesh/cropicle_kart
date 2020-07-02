@@ -116,7 +116,27 @@
         });
     });
 
-    $('#pwd_change').validate({})
+    $('#pwd_change').validate({});
+
+
+    $('.listOpen').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Home/listFullDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#listModal .modal-body').html('Loading...');
+                $('#listModal').modal('show');
+            },
+            success: function(response){
+                $('#listModal .modal-body').html(response);
+            },
+            error: function(response){
+                $('#listModal .modal-body').html('Error !');
+            }
+        });
+    });
 
 
 })(window);

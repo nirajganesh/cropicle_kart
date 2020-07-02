@@ -1,9 +1,74 @@
 <?php
 class GetModel extends CI_Model{
 
-    public function getInfo($table)
+
+    public function demandLists($lim=NULL)
     {
-        return $this->db->get($table)->result();
+        $lists=$this->db->select('id,name')
+                        ->where('user_id',$this->session->kart->id)
+                        ->limit($lim)
+                        ->order_by('id','desc')
+                        ->get('demand_lists')
+                        ->result();
+        foreach($lists as $list){
+            $list->items=$this->demandListItems($list->id);
+            $list->itemsCount=sizeof($list->items);
+        }
+        return $lists;
+    }
+
+    public function demandListsLess($lim=NULL)
+    {
+        $lists=$this->db->select('id,name,created')
+                        ->where('user_id',$this->session->kart->id)
+                        ->limit($lim)
+                        ->order_by('id','desc')
+                        ->get('demand_lists')
+                        ->result();
+        foreach($lists as $list){
+            $list->itemsCount=$this->record_count('demand_lists_details','demand_list_id',$list->id);
+        }
+        return $lists;
+    }
+
+    public function demandListById($id)
+    {
+        $list=$this->db->select('id,name')
+                        ->where('user_id',$this->session->kart->id)
+                        ->where('id',$id)
+                        ->get('demand_lists')
+                        ->row();
+        $list->items=$this->demandListItems($list->id);
+        $list->itemsCount=sizeof($list->items);
+        return $list;
+    }
+
+    public function demandListItems($listId)
+    {
+        $items=$this->db->select('dd.qty, i.item_name, u.unit_short_name')
+                ->from('demand_lists_details dd')
+                ->join('items_master i', 'i.id = dd.item_id', 'LEFT')
+                ->join('units u', 'u.id = i.unit_id', 'LEFT')
+                ->where('i.is_active','1')
+                ->where('dd.is_active','1')
+                ->where('dd.demand_list_id',$listId)
+                ->order_by('dd.id','desc')
+                ->get()
+                ->result();
+        return $items;
+    }
+
+    public function allItems($lim=NULL)
+    {
+        $items=$this->db->select('i.id, i.item_name, i.max_order_qty, i.item_price_kart, u.unit_short_name')
+                ->from('items_master i')
+                ->join('units u', 'u.id = i.unit_id', 'LEFT')
+                ->where('i.is_active','1')
+                ->limit($lim)
+                ->order_by('i.id','desc')
+                ->get()
+                ->result();
+        return $items;
     }
 
     public function getPhone($phn)
@@ -13,6 +78,21 @@ class GetModel extends CI_Model{
                         ->get('users');
         return $query->num_rows();
     }
+
+
+    
+
+    //  -----------------------------------------------------------
+    //  -----------------------------------------------------------
+    //  -----------------------------------------------------------
+
+
+
+    public function getInfo($table)
+    {
+        return $this->db->get($table)->result();
+    }
+
 
     public function getInfoById($table,$column,$id)
     {
@@ -32,23 +112,6 @@ class GetModel extends CI_Model{
         return $this->db->get($table)->result();
     }
 
-    public function demandLists($lim=NULL)
-    {
-     
-        $this->db->select('*')
-                ->from('demand_lists d')
-                ->join('demand_lists_details dd', 'd.id = dd.demand_list_id', 'LEFT')
-                ->join('items_master i', 'i.id = dd.item_id', 'LEFT')
-                ->join('units u', 'u.id = dd.unit_id', 'LEFT')
-                ->where('i.is_active','1')
-                ->where('d.is_active','1')
-                ->where('d.user_id',$this->session->kart->id)
-                ->order_by('d.id','desc');
-        // echo"<pre>";var_dump($this->db->get()->result());exit;
-        return $this->db->get()->result();
-    }
-
-
     public function getWebProfile()
     {
         return $this->db->get('webprofile')->row();
@@ -62,9 +125,9 @@ class GetModel extends CI_Model{
                         ->result();
     }
 
-    public function record_count($table) 
+    public function record_count($table,$col,$id) 
     {
-        return $this->db->count_all($table);
+        return $this->db->where($col,$id)->get($table)->num_rows();
     }
 
 

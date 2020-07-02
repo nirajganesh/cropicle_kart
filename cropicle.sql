@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2020 at 11:59 AM
+-- Generation Time: Jul 02, 2020 at 02:55 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -65,7 +65,8 @@ CREATE TABLE `demand_lists` (
 
 INSERT INTO `demand_lists` (`id`, `user_id`, `name`, `is_active`, `is_deleted`, `created`, `modified`, `created_by`, `modified_by`) VALUES
 (1, 25, 'Regular list', 1, 0, '2020-06-30 09:49:38', '2020-06-30 09:49:38', '', ''),
-(2, 25, 'Special list', 1, 0, '2020-06-30 09:49:38', '2020-06-30 09:49:38', '', '');
+(2, 25, 'Special list', 1, 0, '2020-06-30 09:49:38', '2020-06-30 09:49:38', '', ''),
+(3, 26, 'Custom list ', 1, 0, '2020-06-30 09:49:38', '2020-06-30 09:49:38', '', '');
 
 -- --------------------------------------------------------
 
@@ -122,18 +123,70 @@ CREATE TABLE `items_master` (
 --
 
 INSERT INTO `items_master` (`id`, `category_id`, `max_order_qty`, `item_name`, `item_img`, `unit_id`, `item_price_kart`, `item_price_customer`, `is_active`, `created`, `modified`) VALUES
-(1, 1, '', 'Apple', '', 1, '140', '145', 1, '2020-06-30 07:41:52', '2020-06-30 07:41:52'),
-(2, 1, '', 'Potato', '', 1, '20', '30', 1, '2020-06-30 07:41:52', '2020-06-30 07:41:52'),
-(3, 1, '', 'Tomato', '', 1, '25', '40', 1, '2020-06-30 07:42:30', '2020-06-30 07:42:30'),
-(4, 1, '', 'Pumpkin', '', 1, '10', '15', 1, '2020-06-30 07:42:30', '2020-06-30 07:42:30'),
-(5, 1, '', 'Coriander', '', 4, '140', '160', 1, '2020-06-30 07:43:07', '2020-06-30 07:43:07'),
-(6, 1, '', 'Carrot', '', 1, '40', '45', 1, '2020-06-30 07:43:07', '2020-06-30 07:43:07'),
-(7, 1, '', 'Grapes', '', 1, '80', '90', 1, '2020-06-30 07:43:59', '2020-06-30 07:43:59'),
-(8, 1, '', 'Banana', '', 3, '30', '40', 1, '2020-06-30 07:43:59', '2020-06-30 07:43:59'),
-(9, 1, '', 'Onion', '', 1, '60', '80', 1, '2020-06-30 07:44:51', '2020-06-30 07:44:51'),
-(10, 1, '', 'Watermelon', '', 1, '40', '45', 1, '2020-06-30 07:44:51', '2020-06-30 07:44:51'),
-(11, 1, '', 'Ginger', '', 1, '90', '120', 1, '2020-06-30 07:45:29', '2020-06-30 07:45:29'),
-(12, 1, '', 'Garlic', '', 1, '50', '80', 1, '2020-06-30 07:45:29', '2020-06-30 07:45:29');
+(1, 1, '8', 'Apple', '', 1, '140', '145', 1, '2020-06-30 07:41:52', '2020-06-30 07:41:52'),
+(2, 1, '8', 'Potato', '', 1, '20', '30', 1, '2020-06-30 07:41:52', '2020-06-30 07:41:52'),
+(3, 1, '8', 'Tomato', '', 1, '25', '40', 1, '2020-06-30 07:42:30', '2020-06-30 07:42:30'),
+(4, 1, '8', 'Pumpkin', '', 1, '10', '15', 1, '2020-06-30 07:42:30', '2020-06-30 07:42:30'),
+(5, 1, '2', 'Coriander', '', 1, '140', '160', 1, '2020-06-30 07:43:07', '2020-06-30 07:43:07'),
+(6, 1, '5', 'Carrot', '', 1, '40', '45', 1, '2020-06-30 07:43:07', '2020-06-30 07:43:07'),
+(7, 1, '4', 'Grapes', '', 1, '80', '90', 1, '2020-06-30 07:43:59', '2020-06-30 07:43:59'),
+(8, 1, '5', 'Banana', '', 1, '30', '40', 1, '2020-06-30 07:43:59', '2020-06-30 07:43:59'),
+(9, 1, '8', 'Onion', '', 1, '60', '80', 1, '2020-06-30 07:44:51', '2020-06-30 07:44:51'),
+(10, 1, '5', 'Watermelon', '', 1, '40', '45', 1, '2020-06-30 07:44:51', '2020-06-30 07:44:51'),
+(11, 1, '3', 'Ginger', '', 1, '90', '120', 1, '2020-06-30 07:45:29', '2020-06-30 07:45:29'),
+(12, 1, '3', 'Garlic', '', 1, '50', '80', 1, '2020-06-30 07:45:29', '2020-06-30 07:45:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `total_qty` varchar(100) NOT NULL,
+  `total_amt` varchar(100) NOT NULL,
+  `date` date NOT NULL,
+  `payment_type` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `is_deleted` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `qty` varchar(100) NOT NULL,
+  `sold_qty` varchar(100) NOT NULL,
+  `item_price_kart` varchar(100) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_details`
+--
+
+CREATE TABLE `payment_details` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `api_payment_id` varchar(1000) NOT NULL,
+  `api_order_id` varchar(1000) NOT NULL,
+  `api_signature` varchar(1000) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `is_deleted` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -225,7 +278,7 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`id`, `user_id`, `email`, `capacity_kart`, `sales_qty_daily`, `source_purchase`, `bank_name`, `holder_name`, `acc_no`, `ifsc_code`, `latitude`, `longitude`, `profile_img`, `is_active`, `is_deleted`, `created`, `modified`, `created_by`, `modified_by`) VALUES
-(2, 25, '', 0, 0, '', 'SBI', 'asas', '78946542300', 'asasadf4465', '', '', '', 0, 0, '2020-06-29 09:55:01', '2020-06-29 09:34:00', '', '');
+(2, 25, '', 200, 200, '', 'SBI', 'asas', '78946542300', 'asasadf4465', '', '', '', 0, 0, '2020-06-29 09:55:01', '2020-06-29 09:34:00', '', '');
 
 -- --------------------------------------------------------
 
@@ -265,7 +318,9 @@ INSERT INTO `user_sessions` (`id`, `user_id`, `role_id`, `login_time`, `logout_t
 (13, 25, 2, '2020-06-30 01:51:41', '2020-06-30 01:52:07', 0, 0, 0, 0, 0, 0, 0),
 (14, 25, 2, '2020-06-30 01:52:20', '2020-06-30 03:31:52', 0, 0, 0, 0, 0, 0, 0),
 (15, 25, 2, '2020-06-30 03:31:59', '2020-06-30 03:34:04', 0, 0, 0, 0, 0, 0, 0),
-(16, 25, 2, '2020-06-30 03:34:08', NULL, 1, 0, 0, 0, 0, 0, 0);
+(16, 25, 2, '2020-06-30 03:34:08', NULL, 1, 0, 0, 0, 0, 0, 0),
+(17, 25, 2, '2020-06-30 08:44:46', NULL, 1, 0, 0, 0, 0, 0, 0),
+(18, 25, 2, '2020-07-02 02:04:12', NULL, 1, 0, 0, 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -293,6 +348,18 @@ ALTER TABLE `demand_lists_details`
 -- Indexes for table `items_master`
 --
 ALTER TABLE `items_master`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_details`
+--
+ALTER TABLE `order_details`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -333,7 +400,7 @@ ALTER TABLE `categories_master`
 -- AUTO_INCREMENT for table `demand_lists`
 --
 ALTER TABLE `demand_lists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `demand_lists_details`
@@ -346,6 +413,18 @@ ALTER TABLE `demand_lists_details`
 --
 ALTER TABLE `items_master`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `units`
@@ -369,7 +448,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

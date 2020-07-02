@@ -10,8 +10,8 @@
                             <h5 class="content-header-title float-left pr-1 mb-0">Manage Kart</h5>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb p-0 mb-0">
-                                    <li class="breadcrumb-item"><a href="index.html"><i class="bx bx-home-alt"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="manage-kart.html">Manage Kart</a></li>
+                                    <li class="breadcrumb-item"><a href="<?=base_url()?>"><i class="bx bx-home-alt"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="<?=base_url()?>manage-kart">Manage Kart</a></li>
                                     <li class="breadcrumb-item active">List of demands</li>
                                 </ol>
                             </div>
@@ -38,10 +38,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php foreach($data as $d){?>
                                         <tr>
-                                            <td>23-06-2020</td>
-                                            <td>Special items list </td>
-                                            <td>8 items</td>
+                                            <td><?=date('d-M-Y',strtotime($d->created))?></td>
+                                            <td><?=$d->name?></td>
+                                            <td><?=$d->itemsCount?> <?=$d->itemsCount>1 ? 'items' : 'item'?></td>
                                             <td class='d-flex'>
                                                 <a href="#" data-toggle="tooltip" data-placement="top" title="Order now"><i class="badge-circle badge-circle-light-secondary  text-primary bx bx-truck font-medium-1"></i></a>
 
@@ -49,43 +50,12 @@
 
                                                 <a href="#" class="mr-1" data-toggle="tooltip" data-placement="top" title="Delete list"><i class="badge-circle badge-circle-light-secondary text-danger bx bx-trash font-medium-1"></i></a>
 
-                                                <span data-toggle="modal" data-target="#listModal">
+                                                <span data-id='<?=$d->id?>' class="listOpen">
                                                     <a href="#" data-toggle="tooltip" title="See list"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-warning font-medium-1"></i></a>
                                                 </span>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>23-06-2020</td>
-                                            <td>Special items list </td>
-                                            <td>8 items</td>
-                                            <td class='d-flex'>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Order now"><i class="badge-circle badge-circle-light-secondary text-primary bx bx-truck font-medium-1"></i></a>
-
-                                                <a href="<?=base_url()?>demand-form" class="mx-1" data-toggle="tooltip" data-placement="top" title="Edit list"><i class="badge-circle text-primary badge-circle-light-secondary bx bx-edit font-medium-1"></i></a>
-
-                                                <a href="#" class="mr-1" data-toggle="tooltip" data-placement="top" title="Delete list"><i class="badge-circle badge-circle-light-secondary text-danger bx bx-trash font-medium-1"></i></a>
-
-                                                <span data-toggle="modal" data-target="#listModal">
-                                                    <a href="#" data-toggle="tooltip" title="See list"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-warning font-medium-1"></i></a>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>23-06-2020</td>
-                                            <td>Special items list </td>
-                                            <td>8 items</td>
-                                            <td class='d-flex'>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Order now"><i class="badge-circle badge-circle-light-secondary text-primary bx bx-truck font-medium-1"></i></a>
-
-                                                <a href="<?=base_url()?>demand-form" class="mx-1" data-toggle="tooltip" data-placement="top" title="Edit list"><i class="badge-circle text-primary badge-circle-light-secondary bx bx-edit font-medium-1"></i></a>
-
-                                                <a href="#" class="mr-1" data-toggle="tooltip" data-placement="top" title="Delete list"><i class="badge-circle badge-circle-light-secondary text-danger bx bx-trash font-medium-1"></i></a>
-
-                                                <span data-toggle="modal" data-target="#listModal">
-                                                    <a href="#" data-toggle="tooltip" title="See list"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-warning font-medium-1"></i></a>
-                                                </span>
-                                            </td>
-                                        </tr>
+                                        <?php }?>
                                     </tbody>
                                 </table>
                             </div>
@@ -97,7 +67,6 @@
         </div>
     </div>
 
-    
     <div class="modal fade " id="listModal" tabindex="-1" role="dialog" aria-labelledby="Demand List Modal" aria-modal="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -108,49 +77,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-                    <div class="row">
-                        <p class="ml-1 text-dark">List Name - Special items list</p>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-sm-6 p-0 pt-1 border-right d-flex">
-                            <div class="col-6">Potato -</div>
-                            <div class="col-5">8kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 d-flex">
-                            <div class="col-6">Tomato -</div>
-                            <div class="col-4">5kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 border-right  d-flex">
-                            <div class="col-6">Ginger -</div>
-                            <div class="col-5">3kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 d-flex">
-                            <div class="col-6">Garlic -</div>
-                            <div class="col-4">3kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 border-right d-flex">
-                            <div class="col-6">Cauliflower -</div>
-                            <div class="col-5">10kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 d-flex">
-                            <div class="col-6">Pumpkin -</div>
-                            <div class="col-4">5kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 border-right d-flex">
-                            <div class="col-6">Coriander -</div>
-                            <div class="col-5">1.5kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 d-flex">
-                            <div class="col-6">Chilles -</div>
-                            <div class="col-4">2kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 border-right d-flex">
-                            <div class="col-6"> </div>
-                            <div class="col-4"></div>
-                        </div>
-                    </div>
+                
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-secondary" data-dismiss="modal">

@@ -10,7 +10,7 @@
                             <h5 class="content-header-title float-left pr-1 mb-0">Manage Kart</h5>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb p-0 mb-0">
-                                    <li class="breadcrumb-item"><a href="index.html"><i class="bx bx-home-alt"></i></a>
+                                    <li class="breadcrumb-item"><a href="<?=base_url()?>"><i class="bx bx-home-alt"></i></a>
                                     </li>
                                     <li class="breadcrumb-item active"> Manage kart
                                     </li>
@@ -85,7 +85,7 @@
                                     <h4 class="card-title d-flex align-items-center">
                                         <i class='bx bx-notepad font-medium-4 mr-1'></i>List of demands
                                     </h4>
-                                    <small class='font-small-2'> (Total 4 lists)</small>
+                                    <small class='font-small-2'> (Total <?=sizeof($data)?> lists)</small>
                                     <div class="heading-elements">
                                         <a href="<?=base_url()?>demand-lists" type="button" class="btn btn-sm btn-light-primary">See All</a>
                                     </div>
@@ -93,78 +93,38 @@
                                 <div class="card-content">
                                     <div class="card-body p-0">
                                         <ul class="list-group list-group-flush">
+                                            <?php foreach($data as $d){?>
                                             <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
                                                 <div class="list-left d-flex">
                                                     <div class="list-content">
-                                                        <span class="list-title">Regular demand list</span>
-                                                        <small class="text-muted d-block">Onion (2kg), Potato (5kg), Garlic (1kg) ...</small>
+                                                        <span class="list-title"><?=$d->name?></span>
+                                                        <small class="text-muted d-block">
+                                                        <?php 
+                                                            $z=1; 
+                                                            foreach($d->items as $i){ 
+                                                                if($z<4){
+                                                        ?>
+                                                                    <?=$i->item_name.' ('.$i->qty.' '.$i->unit_short_name.')&nbsp; '?>
+                                                        <?php   
+                                                                }
+                                                                $z++;
+                                                            }
+                                                        ?>
+                                                        </small>
                                                     </div>
                                                 </div>
                                                 <div class="row justify-content-end">
-                                                    <a href="" class="badge-circle badge-circle badge-circle-light-primary mr-md-1 mr-0 my-1"  data-toggle="tooltip"  data-placement="top"  title="Order now">
+                                                    <a href="" class="badge-circle badge-circle badge-circle-light-primary mr-md-1 mr-0 my-1"  data-toggle="tooltip" data-placement="top"  title="Order now">
                                                         <i class="bx bx-truck font-small-5"></i>
                                                     </a>
-                                                    <span data-toggle="modal" data-target="#listModal">
+                                                    <span data-id='<?=$d->id?>' class="listOpen">
                                                         <a class="badge-circle badge-circle badge-circle-light-warning my-1 cpointer"  data-toggle="tooltip" title="See list">
                                                             <i class="bx bx-info-circle font-small-5 text-warning"></i>
                                                         </a>
                                                     </span>
                                                 </div>
                                             </li>
-                                            <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
-                                                <div class="list-left d-flex">
-                                                    <div class="list-content">
-                                                        <span class="list-title">Special list</span>
-                                                        <small class="text-muted d-block">Broccoli (1kg), Beans (2kg), Mint (0.5kg) ...</small>
-                                                    </div>
-                                                </div>
-                                                <div class="row justify-content-end">
-                                                    <a href="" class="badge-circle badge-circle badge-circle-light-primary mr-md-1 mr-0 my-1"  data-toggle="tooltip"  data-placement="top"  title="Order now">
-                                                        <i class="bx bx-truck font-small-5"></i>
-                                                    </a>
-                                                    <span data-toggle="modal" data-target="#listModal">
-                                                        <a class="badge-circle badge-circle badge-circle-light-warning my-1 cpointer"  data-toggle="tooltip" title="See list">
-                                                            <i class="bx bx-info-circle font-small-5 text-warning"></i>
-                                                        </a>
-                                                    </span>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
-                                                <div class="list-left d-flex">
-                                                    <div class="list-content">
-                                                        <span class="list-title">Fruits list</span>
-                                                        <small class="text-muted d-block">Orange (2kg), Banana (4dozen) ...</small>
-                                                    </div>
-                                                </div>
-                                                <div class="row justify-content-end">
-                                                    <a href="" class="badge-circle badge-circle badge-circle-light-primary mr-md-1 mr-0 my-1"  data-toggle="tooltip"  data-placement="top"  title="Order now">
-                                                        <i class="bx bx-truck font-small-5"></i>
-                                                    </a>
-                                                    <span data-toggle="modal" data-target="#listModal">
-                                                        <a class="badge-circle badge-circle badge-circle-light-warning my-1 cpointer"  data-toggle="tooltip" title="See list">
-                                                            <i class="bx bx-info-circle font-small-5 text-warning"></i>
-                                                        </a>
-                                                    </span>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item list-group-item-action border-0 d-flex align-items-center justify-content-between">
-                                                <div class="list-left d-flex">
-                                                    <div class="list-content">
-                                                        <span class="list-title">Custom list name</span>
-                                                        <small class="text-muted d-block">Onion (2kg), Potato (5kg), Garlic (1kg) ...</small>
-                                                    </div>
-                                                </div>
-                                                <div class="row justify-content-end">
-                                                    <a href="" class="badge-circle badge-circle badge-circle-light-primary mr-md-1 mr-0  my-1"  data-toggle="tooltip"  data-placement="top"  title="Order now">
-                                                        <i class="bx bx-truck font-small-5"></i>
-                                                    </a>
-                                                    <span data-toggle="modal" data-target="#listModal">
-                                                        <a class="badge-circle badge-circle badge-circle-light-warning my-1 cpointer"  data-toggle="tooltip" title="See list">
-                                                            <i class="bx bx-info-circle font-small-5 text-warning"></i>
-                                                        </a>
-                                                    </span>
-                                                </div>
-                                            </li>
+                                            <?php }?>
                                         </ul>
                                     </div>
                                 </div>
@@ -282,49 +242,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-                    <div class="row">
-                        <p class="ml-1 text-dark">List Name - Special items list</p>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-sm-6 p-0 pt-1 border-right d-flex">
-                            <div class="col-6">Potato -</div>
-                            <div class="col-5">8kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 d-flex">
-                            <div class="col-6">Tomato -</div>
-                            <div class="col-4">5kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 border-right  d-flex">
-                            <div class="col-6">Ginger -</div>
-                            <div class="col-5">3kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 d-flex">
-                            <div class="col-6">Garlic -</div>
-                            <div class="col-4">3kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 border-right d-flex">
-                            <div class="col-6">Cauliflower -</div>
-                            <div class="col-5">10kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 d-flex">
-                            <div class="col-6">Pumpkin -</div>
-                            <div class="col-4">5kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 border-right d-flex">
-                            <div class="col-6">Coriander -</div>
-                            <div class="col-5">1.5kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 d-flex">
-                            <div class="col-6">Chilles -</div>
-                            <div class="col-4">2kg</div>
-                        </div>
-                        <div class="col-sm-6 p-0 pt-1 border-right d-flex">
-                            <div class="col-6"> </div>
-                            <div class="col-4"></div>
-                        </div>
-                    </div>
+                
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
@@ -337,3 +255,7 @@
     </div>
 
     <!-- END: Content-->
+
+    <script>
+        
+    </script>

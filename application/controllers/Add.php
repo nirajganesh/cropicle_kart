@@ -10,6 +10,11 @@ class Add extends MY_Controller {
                 $this->load->model('GetModel','fetch');
         }
 
+        public function saveDemand()
+        {
+            echo'<pre>';var_dump($this->input->post());exit;
+        }
+
         public function saveNews()
         {
             $this->form_validation->set_rules('heading', 'Heading', 'required');

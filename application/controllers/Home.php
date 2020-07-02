@@ -11,22 +11,6 @@ class Home extends MY_Controller {
 
 	public function index()
 	{
-		// $profile=$this->fetch->getWebProfile();
-		// $hero=$this->fetch->getInfo('hero_images');
-		// $feeds=$this->fetch->getInfo('feedbacks');
-		// $ach=$this->fetch->getInfo('achievers');
-		// $notice=$this->fetch->getInfoLim('notice','3','id');
-		// $news=$this->fetch->getInfoLim('news','3','id');
-		// $gallery=$this->fetch->getInfoLim('gallery','5','id');
-		// $this->load->view('header',['web'=>$profile ,
-		// 							'title'=>'Home',
-		// 							'feeds'=>$feeds,
-		// 							'hero'=>$hero,
-		// 							'notice'=>$notice,
-		// 							'ach'=>$ach,
-		// 							'news'=>$news,
-		// 							'img'=>$gallery
-		// 						]);
 		$this->load->view('kart/header',['title'=>'Dashboard']);
 		$this->load->view('kart/index');
 		$this->load->view('kart/footer');
@@ -44,10 +28,10 @@ class Home extends MY_Controller {
 
 	public function manageKart()
 	{
-		$profile=$this->fetch->demandLists(3);
-		// var_dump($profile);exit;
+		$lists=$this->fetch->demandLists(4);
+		// echo'<pre>';var_dump($lists);exit;
 		$this->load->view('kart/header',['title'=>'Manage Kart',
-									'data'=>$profile
+									'data'=>$lists
 								]);
 		$this->load->view('kart/manage-kart');
 		$this->load->view('kart/footer');
@@ -55,15 +39,45 @@ class Home extends MY_Controller {
 
 	public function demandLists()
 	{
-		$this->load->view('kart/header',['title'=>'Demand lists']);
+		$lists=$this->fetch->demandListsLess();
+		// echo'<pre>';var_dump($lists);exit;
+		$this->load->view('kart/header',['title'=>'Demand lists',
+									'data'=>$lists
+								]);
 		$this->load->view('kart/demand-lists');
 		$this->load->view('kart/footer');
 	}
 
+	public function listFullDetails()
+	{
+		$list=$this->fetch->demandListById($this->input->post('id'));
+		$response='
+			<div class="row">
+				<p class="ml-1 text-dark">List Name - <strong>'.$list->name.'</strong></p>
+			</div>
+			<div class="row">
+				<p class="ml-1 text-dark">No. of items - '.$list->itemsCount.'</p>
+			</div>
+			<hr>
+			<div class="row">';
+
+		foreach($list->items as $i){
+			$response.='
+						<div class="col-sm-6 p-0 pt-1 border-right d-flex">
+							<div class="col-6">'.$i->item_name.' -</div>
+							<div class="col-5">'.$i->qty.' '.$i->unit_short_name.'</div>
+						</div>
+						';
+		}	
+		$response.='</div>';
+		echo $response;
+	}
+
 	public function demandForm()
 	{
-		$this->load->view('kart/header',['title'=>'Demand fORM']);
-		$this->load->view('kart/demand-FORM');
+		$data=$this->fetch->allItems();
+		$this->load->view('kart/header',['title'=>'Demand form','data'=>$data,'submissionPath'=>'Add/demandForm']);
+		$this->load->view('kart/demand-form');
 		$this->load->view('kart/footer');
 	}
 

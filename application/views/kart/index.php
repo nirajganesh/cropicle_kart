@@ -17,7 +17,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xl-2 col-md-4 col-sm-6">
-                            <a href="demand-lists.html" class="card text-center">
+                            <a href="<?=base_url()?>demand-lists" class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="badge-circle badge-circle-lg badge-circle-light-info mx-auto my-1">
@@ -30,7 +30,7 @@
                             </a>
                         </div>
                         <div class="col-xl-2 col-md-4 col-sm-6">
-                            <a href="manage-kart.html" class="card text-center">
+                            <a href="<?=base_url()?>manage-kart" class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto my-1">
@@ -43,7 +43,7 @@
                             </a>
                         </div>
                         <div class="col-xl-2 col-md-4 col-sm-6">
-                            <a href="orders.html" class="card text-center">
+                            <a href="<?=base_url()?>orders" class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="badge-circle badge-circle-lg badge-circle-light-danger mx-auto my-1">
@@ -56,7 +56,7 @@
                             </a>
                         </div>
                         <div class="col-xl-2 col-md-4 col-sm-6">
-                            <a href="payments.html" class="card text-center">
+                            <a href="<?=base_url()?>payments" class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="badge-circle badge-circle-lg badge-circle-light-primary mx-auto my-1">
@@ -69,7 +69,7 @@
                             </a>
                         </div>
                         <div class="col-xl-3 col-md-4 col-sm-6">
-                            <a href="payments.html" class="card text-center">
+                            <a href="<?=base_url()?>payments" class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="badge-circle badge-circle-lg badge-circle-light-success mx-auto my-1">
