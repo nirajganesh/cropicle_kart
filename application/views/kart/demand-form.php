@@ -90,7 +90,7 @@
 					<select name="item_id[]" class="select form-control" required>
 						<option value="">Items</option>
 						<?php foreach($data as $d){?>
-							<option value="<?=$d->id?>"><?=$d->item_name?></option>
+							<option value="<?=$d->id?>"><?=$d->item_name.'&nbsp;(Rs. '.$d->item_price_kart.'/'.$d->unit_short_name.')'.'&nbsp;(max:'.$d->max_order_qty.' '.$d->unit_short_name.')'?></option>
 						<?php }?>
 					</select>
 				</div>
