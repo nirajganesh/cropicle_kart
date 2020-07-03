@@ -2,6 +2,10 @@
 label.error{
 	color: red !important;
 }
+.errorB{
+	border:1px solid rgb(255, 139, 139) !important;
+	background-color: #ffe2e2;
+}
 
 #widgets-Statistics .card:hover{
 	box-shadow: -10px 15px 25px 0 rgba(25, 42, 70, 0.3);

@@ -12,7 +12,39 @@ class Add extends MY_Controller {
 
         public function saveDemand()
         {
-            echo'<pre>';var_dump($this->input->post());exit;
+            $this->form_validation->set_rules('name', 'List name', 'required');
+            $this->form_validation->set_rules('item_id[]', 'Item', 'required');
+            $this->form_validation->set_rules('qty[]', 'Item qty', 'required');
+            if($this->form_validation->run() == true){
+                $data=$this->input->post();
+                $name['name']=$data['name'];
+                $name['user_id']=$this->session->kart->id;
+                // echo'<pre>';var_dump($data);exit;
+
+                $this->db->trans_start();
+                $demand_id=$this->save->saveInfo('demand_lists',$name);
+                for($d=0;$d<sizeof($data['item_id']);$d++){
+                    $data2['demand_list_id']=$demand_id;
+                    $data2['item_id']=$data['item_id'][$d];
+                    $data2['qty']=$data['qty'][$d];
+                    $data2['unit_id']='1';
+                    $this->save->saveInfo('demand_lists_details',$data2);
+                }
+                $this->db->trans_complete();
+
+                if ($this->db->trans_status() === FALSE)
+                {
+                    $this->session->set_flashdata('failed','some error occured');
+                    echo false;
+                }
+                else{
+                    $this->session->set_flashdata('success','Demand list created !');
+                    echo true;
+                }
+            }
+            else{
+                echo false;
+            }
         }
 
         public function saveNews()

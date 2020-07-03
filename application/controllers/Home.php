@@ -76,7 +76,8 @@ class Home extends MY_Controller {
 	public function demandForm()
 	{
 		$data=$this->fetch->allItems();
-		$this->load->view('kart/header',['title'=>'Demand form','data'=>$data,'submissionPath'=>'Add/demandForm']);
+		$cap=$this->fetch->getInfoById('user_info','user_id',$this->session->kart->id);
+		$this->load->view('kart/header',['title'=>'Demand form','data'=>$data,'cap'=>$cap->capacity_kart]);
 		$this->load->view('kart/demand-form');
 		$this->load->view('kart/footer');
 	}

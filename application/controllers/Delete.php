@@ -28,6 +28,19 @@ class Delete extends MY_Controller {
             }
         }
 
+        public function demand($id)
+        {
+            $status= $this->delete->deleteById('demand_lists','id',$id);
+            if($status){
+                $this->session->set_flashdata('success','Demand list Deleted!');
+                redirect('demand-lists');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error!');
+                redirect('demand-lists');
+            }
+        }
+
         public function profile_img()
         {
             $info= $this->fetch->getInfoById('user_info','user_id',$this->session->kart->id);

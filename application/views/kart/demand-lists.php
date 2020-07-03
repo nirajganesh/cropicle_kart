@@ -46,9 +46,9 @@
                                             <td class='d-flex'>
                                                 <a href="#" data-toggle="tooltip" data-placement="top" title="Order now"><i class="badge-circle badge-circle-light-secondary  text-primary bx bx-truck font-medium-1"></i></a>
 
-                                                <a href="<?=base_url()?>demand-form" class="mx-1" data-toggle="tooltip" data-placement="top" title="Edit list"><i class="badge-circle text-primary badge-circle-light-secondary bx bx-edit font-medium-1"></i></a>
+                                                <!-- <a href="<?=base_url()?>demand-form" class="mx-1" data-toggle="tooltip" data-placement="top" title="Edit list"><i class="badge-circle text-primary badge-circle-light-secondary bx bx-edit font-medium-1"></i></a> -->
 
-                                                <a href="#" class="mr-1" data-toggle="tooltip" data-placement="top" title="Delete list"><i class="badge-circle badge-circle-light-secondary text-danger bx bx-trash font-medium-1"></i></a>
+                                                <a href="<?=base_url('Delete/demand/').$d->id?>"  onclick="return confirm(' you want to delete?');" class="mx-1" data-toggle="tooltip" data-placement="top" title="Delete list"><i class="badge-circle badge-circle-light-secondary text-danger bx bx-trash font-medium-1"></i></a>
 
                                                 <span data-id='<?=$d->id?>' class="listOpen">
                                                     <a href="#" data-toggle="tooltip" title="See list"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-warning font-medium-1"></i></a>
@@ -90,3 +90,5 @@
     </div>
 
     <!-- END: Content-->
+
+

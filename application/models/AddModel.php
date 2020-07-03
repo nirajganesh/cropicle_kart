@@ -3,13 +3,11 @@ class AddModel extends CI_Model{
 
     public function saveInfo($table,$d)
     {
-        $flag = $this->db->insert($table,$d);
-        if($flag){
-            return true;
+        if(!empty($d)){
+            $this->db->insert($table,$d);
+            return $this->db->insert_id();
         }
-        else{
-            return false;
-        }
+		return false;
     }
 
     public function create_user($table,$data) {
