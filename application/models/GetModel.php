@@ -71,6 +71,53 @@ class GetModel extends CI_Model{
         return $items;
     }
 
+    public function lastKartStock()
+    {
+        $latest_order=$this->db->limit(1)
+                ->order_by('id','desc')
+                ->where('user_id',$this->session->kart->id)
+                ->where('updated_by_hawker','0')
+                ->get('orders')
+                ->row();
+        if(!empty($latest_order)){
+            $latest_order=$latest_order->id;
+            $order=$this->db->select('od.qty, od.updated, od.item_id, i.item_name, u.unit_short_name')
+                            ->from('orders o')
+                            ->join('order_details od', 'od.order_id = o.id', 'LEFT')
+                            ->join('items_master i', 'i.id = od.item_id', 'LEFT')
+                            ->join('units u', 'u.id = od.unit_id', 'LEFT')
+                            ->where('o.is_deleted','0')
+                            ->where('od.order_id',$latest_order)
+                            ->order_by('o.id','desc')
+                            ->get()
+                            ->result();
+            return $order;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function lastSecondKartStock()
+    {
+        $last_second_order=$this->db->limit(1)
+                ->order_by('id','desc')
+                ->where('user_id',$this->session->kart->id)
+                ->where('updated_by_hawker','1')
+                ->get('orders')
+                ->row()->id;
+
+        $lsorder=$this->db->select('od.item_id, od.remaining_qty, od.updated, i.item_name, u.unit_short_name')
+                ->from('order_details od')
+                ->join('items_master i', 'i.id = od.item_id', 'LEFT')
+                ->join('units u', 'u.id = od.unit_id', 'LEFT')
+                ->where('od.order_id',$last_second_order)
+                ->where('od.order_id',$last_second_order)
+                ->get()
+                ->result();
+        return $lsorder;
+    }
+
     public function getPhone($phn)
     {
         $query= $this->db->select('*')

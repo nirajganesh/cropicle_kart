@@ -64,3 +64,4 @@ $route['demand-lists'] = 'Home/demandLists';
 $route['demand-form'] = 'Home/demandForm';
 $route['orders'] = 'Home/orders';
 $route['payments'] = 'Home/payments';
+$route['update-stock'] = 'Home/updateStock';

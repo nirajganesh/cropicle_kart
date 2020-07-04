@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2020 at 02:55 PM
+-- Generation Time: Jul 04, 2020 at 02:51 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -51,8 +51,8 @@ CREATE TABLE `demand_lists` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `is_active` int(11) NOT NULL,
-  `is_deleted` int(11) NOT NULL,
+  `is_active` int(11) NOT NULL DEFAULT 1,
+  `is_deleted` int(11) NOT NULL DEFAULT 0,
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `modified` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_by` varchar(50) NOT NULL,
@@ -65,8 +65,7 @@ CREATE TABLE `demand_lists` (
 
 INSERT INTO `demand_lists` (`id`, `user_id`, `name`, `is_active`, `is_deleted`, `created`, `modified`, `created_by`, `modified_by`) VALUES
 (1, 25, 'Regular list', 1, 0, '2020-06-30 09:49:38', '2020-06-30 09:49:38', '', ''),
-(2, 25, 'Special list', 1, 0, '2020-06-30 09:49:38', '2020-06-30 09:49:38', '', ''),
-(3, 26, 'Custom list ', 1, 0, '2020-06-30 09:49:38', '2020-06-30 09:49:38', '', '');
+(18, 25, 'Special List', 1, 0, '2020-07-03 12:37:01', '2020-07-03 12:37:01', '', '');
 
 -- --------------------------------------------------------
 
@@ -80,8 +79,8 @@ CREATE TABLE `demand_lists_details` (
   `item_id` varchar(50) NOT NULL,
   `qty` float NOT NULL,
   `unit_id` int(11) NOT NULL,
-  `is_active` int(11) NOT NULL,
-  `is_deleted` int(11) NOT NULL,
+  `is_active` int(11) NOT NULL DEFAULT 1,
+  `is_deleted` int(11) NOT NULL DEFAULT 0,
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `modified` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_by` varchar(50) NOT NULL,
@@ -96,7 +95,15 @@ INSERT INTO `demand_lists_details` (`id`, `demand_list_id`, `item_id`, `qty`, `u
 (1, 1, '1', 20, 1, 1, 0, '2020-06-30 09:50:21', '2020-06-30 09:50:21', '', ''),
 (2, 1, '2', 4, 1, 1, 0, '2020-06-30 09:50:21', '2020-06-30 09:50:21', '', ''),
 (3, 1, '4', 6, 1, 1, 0, '2020-06-30 09:50:50', '2020-06-30 09:50:50', '', ''),
-(4, 2, '1', 2, 1, 1, 0, '2020-06-30 09:50:50', '2020-06-30 09:50:50', '', '');
+(4, 2, '1', 2, 1, 1, 0, '2020-06-30 09:50:50', '2020-06-30 09:50:50', '', ''),
+(30, 17, '12', 1, 1, 1, 0, '2020-07-03 11:59:24', '2020-07-03 11:59:24', '', ''),
+(31, 18, '10', 3, 1, 1, 0, '2020-07-03 12:37:01', '2020-07-03 12:37:01', '', ''),
+(32, 18, '11', 1, 1, 1, 0, '2020-07-03 12:37:01', '2020-07-03 12:37:01', '', ''),
+(33, 18, '7', 2, 1, 1, 0, '2020-07-03 12:37:01', '2020-07-03 12:37:01', '', ''),
+(34, 18, '5', 1, 1, 1, 0, '2020-07-03 12:37:01', '2020-07-03 12:37:01', '', ''),
+(35, 19, '4', 4, 1, 1, 0, '2020-07-03 12:37:18', '2020-07-03 12:37:18', '', ''),
+(36, 20, '10', 1, 1, 1, 0, '2020-07-03 12:48:36', '2020-07-03 12:48:36', '', ''),
+(37, 21, '11', 4, 1, 1, 0, '2020-07-03 12:48:47', '2020-07-03 12:48:47', '', '');
 
 -- --------------------------------------------------------
 
@@ -150,8 +157,17 @@ CREATE TABLE `orders` (
   `date` date NOT NULL,
   `payment_type` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL,
+  `updated_by_hawker` int(11) NOT NULL DEFAULT 0,
   `is_deleted` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `total_qty`, `total_amt`, `date`, `payment_type`, `status`, `updated_by_hawker`, `is_deleted`) VALUES
+(1, 25, '50', '2500', '2020-07-01', 'CASH', 'DELIVERED', 1, 0),
+(2, 25, '80', '3000', '2020-07-04', 'CASH', 'DELIVERED', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -165,11 +181,23 @@ CREATE TABLE `order_details` (
   `item_id` int(11) NOT NULL,
   `unit_id` int(11) NOT NULL,
   `qty` varchar(100) NOT NULL,
-  `sold_qty` varchar(100) NOT NULL,
+  `remaining_qty` varchar(100) NOT NULL,
   `item_price_kart` varchar(100) NOT NULL,
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `item_id`, `unit_id`, `qty`, `remaining_qty`, `item_price_kart`, `created`, `updated`) VALUES
+(1, 1, 1, 1, '8', '2', '40', '2020-07-04 05:28:40', '2020-07-04 05:28:40'),
+(2, 1, 2, 1, '5', '3', '50', '2020-07-04 05:28:40', '2020-07-04 05:28:40'),
+(3, 2, 1, 1, '4', '1', '40', '2020-07-04 05:59:29', '2020-07-04 05:59:29'),
+(4, 2, 2, 1, '3', '0', '45', '2020-07-04 06:00:03', '2020-07-04 06:00:03'),
+(5, 2, 3, 1, '5', '1', '50', '2020-07-04 06:00:03', '2020-07-04 06:00:03'),
+(6, 2, 4, 1, '3', '1', '20', '2020-07-04 06:00:28', '2020-07-04 06:00:28');
 
 -- --------------------------------------------------------
 
@@ -320,7 +348,10 @@ INSERT INTO `user_sessions` (`id`, `user_id`, `role_id`, `login_time`, `logout_t
 (15, 25, 2, '2020-06-30 03:31:59', '2020-06-30 03:34:04', 0, 0, 0, 0, 0, 0, 0),
 (16, 25, 2, '2020-06-30 03:34:08', NULL, 1, 0, 0, 0, 0, 0, 0),
 (17, 25, 2, '2020-06-30 08:44:46', NULL, 1, 0, 0, 0, 0, 0, 0),
-(18, 25, 2, '2020-07-02 02:04:12', NULL, 1, 0, 0, 0, 0, 0, 0);
+(18, 25, 2, '2020-07-02 02:04:12', NULL, 1, 0, 0, 0, 0, 0, 0),
+(19, 25, 2, '2020-07-03 01:44:31', NULL, 1, 0, 0, 0, 0, 0, 0),
+(20, 25, 2, '2020-07-04 01:51:33', NULL, 1, 0, 0, 0, 0, 0, 0),
+(21, 25, 2, '2020-07-04 06:24:59', NULL, 1, 0, 0, 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -400,13 +431,13 @@ ALTER TABLE `categories_master`
 -- AUTO_INCREMENT for table `demand_lists`
 --
 ALTER TABLE `demand_lists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `demand_lists_details`
 --
 ALTER TABLE `demand_lists_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `items_master`
@@ -418,13 +449,13 @@ ALTER TABLE `items_master`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `units`
@@ -448,7 +479,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

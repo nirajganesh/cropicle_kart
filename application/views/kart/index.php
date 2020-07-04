@@ -17,19 +17,6 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xl-2 col-md-4 col-sm-6">
-                            <a href="<?=base_url()?>demand-lists" class="card text-center">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="badge-circle badge-circle-lg badge-circle-light-info mx-auto my-1">
-                                            <i class="bx bx-notepad font-medium-5"></i>
-                                        </div>
-                                        <p class="text-muted mb-0 line-ellipsis">Demand lists</p>
-                                        <h2 class="mb-0">05</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xl-2 col-md-4 col-sm-6">
                             <a href="<?=base_url()?>manage-kart" class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body">
@@ -38,6 +25,19 @@
                                         </div>
                                         <p class="text-muted mb-0 line-ellipsis">Current Stock Qty</p>
                                         <h2 class="mb-0">20Kg</h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-6">
+                            <a href="<?=base_url()?>demand-lists" class="card text-center">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="badge-circle badge-circle-lg badge-circle-light-info mx-auto my-1">
+                                            <i class="bx bx-notepad font-medium-5"></i>
+                                        </div>
+                                        <p class="text-muted mb-0 line-ellipsis">Demand lists</p>
+                                        <h2 class="mb-0">05</h2>
                                     </div>
                                 </div>
                             </a>
@@ -76,7 +76,7 @@
                                             <i class="bx bx-money font-medium-5"></i>
                                         </div>
                                         <p class="text-muted mb-0 line-ellipsis">Latest payment</p>
-                                        <h2 class="mb-0">Rs.10500/-</h2>
+                                        <h2 class="mb-0">₹ 10,500/-</h2>
                                     </div>
                                 </div>
                             </a>

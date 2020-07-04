@@ -29,10 +29,50 @@ class Home extends MY_Controller {
 	public function manageKart()
 	{
 		$lists=$this->fetch->demandLists(4);
-		// echo'<pre>';var_dump($lists);exit;
-		$this->load->view('kart/header',['title'=>'Manage Kart',
-									'data'=>$lists
-								]);
+		$order=$this->fetch->lastKartStock();
+		if(!empty($order)){
+			$order_old=$this->fetch->lastSecondKartStock();
+			$q=0;
+			foreach($order as $o){
+				foreach($order_old as $k=>$old){
+					if($old->item_id==$o->item_id){
+						$o->qty+=$old->remaining_qty;
+						unset($order_old[$k]);
+					}
+					else{
+						$old->qty=$old->remaining_qty;
+						$time=date('d-m-Y',strtotime($old->updated));
+					}
+				}
+			}
+			foreach($order_old as $o){
+				$order[]=$o;
+			}
+			foreach($order as $o){
+				$q+=$o->qty;
+			}
+			$c=sizeof($order);
+		}
+		else{
+			$order=$this->fetch->lastSecondKartStock();
+			$q=0;
+			foreach($order as $o){
+				$o->qty=$o->remaining_qty;
+				$time=date('d-m-Y',strtotime($o->updated));
+				// $q+=$o->qty;
+			}
+			$c=sizeof($order);
+		}
+		$c=sizeof($order);
+		$q="0";
+		$response=['title'=>'Manage Kart',
+					'data'=>$lists,
+					'stock'=>$order,
+					'count'=>$c,
+					'time'=>$time,
+					'qty'=>$q	
+					];
+		$this->load->view('kart/header',$response);
 		$this->load->view('kart/manage-kart');
 		$this->load->view('kart/footer');
 	}
@@ -46,6 +86,12 @@ class Home extends MY_Controller {
 								]);
 		$this->load->view('kart/demand-lists');
 		$this->load->view('kart/footer');
+	}
+
+	public function updateStock()
+	{
+		$data=$this->input->post();
+		echo'<pre>';var_dump($data);exit;
 	}
 
 	public function listFullDetails()

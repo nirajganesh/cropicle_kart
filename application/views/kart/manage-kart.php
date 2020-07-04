@@ -28,9 +28,9 @@
                             <div class="card widget-notification">
                                 <div class="card-header border-bottom">
                                     <h4 class="card-title d-flex align-items-center">
-                                        <i class='bx bx-cart font-medium-4 mr-1'></i>Kart stock
+                                        <i class='bx bx-cart font-medium-4 mr-1'></i>Kart stock (<?=$qty ?> Kg)
                                     </h4>
-                                    <small class='font-small-2'> (Total 8 items)</small>
+                                    <small class='font-small-2'> (Total <?=$count?> items)</small>
                                     <div class="heading-elements">
                                         <button type="button" class="btn btn-sm btn-light-primary" data-toggle="modal" data-target="#stockModal">
                                             Update stock
@@ -39,40 +39,14 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body px-2">
-                                        <small>Last updated: 19-06-2020</small>
+                                        <small>Last updated: <?=$time?></small>
                                         <div class="row">
+                                        <?php foreach($stock as $s){?>
                                             <div class="col-sm-6 p-0 pt-1  d-flex">
-                                                <div class="col-6">Potato -</div>
-                                                <div class="col-5">8kg</div>
+                                                <div class="col-6"><?=$s->item_name?> -</div>
+                                                <div class="col-5"><?=$s->qty?><?=$s->unit_short_name?></div>
                                             </div>
-                                            <div class="col-sm-6 p-0 pt-1  d-flex">
-                                                <div class="col-6">Tomato -</div>
-                                                <div class="col-4">5kg</div>
-                                            </div>
-                                            <div class="col-sm-6 p-0 pt-1  d-flex">
-                                                <div class="col-6">Ginger -</div>
-                                                <div class="col-5">3kg</div>
-                                            </div>
-                                            <div class="col-sm-6 p-0 pt-1  d-flex">
-                                                <div class="col-6">Garlic -</div>
-                                                <div class="col-4">3kg</div>
-                                            </div>
-                                            <div class="col-sm-6 p-0 pt-1  d-flex">
-                                                <div class="col-6">Cauliflower -</div>
-                                                <div class="col-5">10kg</div>
-                                            </div>
-                                            <div class="col-sm-6 p-0 pt-1  d-flex">
-                                                <div class="col-6">Pumpkin -</div>
-                                                <div class="col-4">5kg</div>
-                                            </div>
-                                            <div class="col-sm-6 p-0 pt-1  d-flex">
-                                                <div class="col-6">Coriander -</div>
-                                                <div class="col-5">1.5kg</div>
-                                            </div>
-                                            <div class="col-sm-6 p-0 pt-1  d-flex">
-                                                <div class="col-6">Chilles -</div>
-                                                <div class="col-4">2kg</div>
-                                            </div>
+                                        <?php }?>
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +120,7 @@
                         <i class="bx bx-x"></i>
                     </button>
                 </div>
-                <form action="#" method="POST">
+                <form action="<?=base_url('update-stock')?>" method="POST">
 
                 <div class="modal-body">
                     <div class="row">
@@ -157,62 +131,15 @@
                                 Remaining Stock
                             </div>
                         </div>
+                        <?php foreach($stock as $s){?>
                         <div class="form-group col-12 row align-items-center">
-                            <div class="col-md-6 modItm">Potato: </div>
-                            <div class="col-md-3 modQty">8Kg</div>
+                            <div class="col-md-6 modItm"> <input type="text" name="item_id[]" value="<?=$s->item_id?>" required hidden><?=$s->item_name?>:</div>
+                            <div class="col-md-3 modQty"><?=$s->qty?><?=$s->unit_short_name?></div>
                             <div class="input-group input-group-sm modStk col-md-3 ">
-                                <input type="text" data-bts-step="0.25" data-bts-decimals="2" min="0" max="8" decimals="0.25" class="digits touchspin touchspin-min-max" data-bts-postfix="Kg" placeholder="Remaining stock" required>
+                                <input type="number" data-bts-step="0.25" data-bts-decimals="2" min="0" max="<?=$s->qty?>" step="0.25" class="digits touchspin touchspin-min-max" data-bts-postfix="Kg" placeholder="Qty" name="remaining_qty[]" required>
                             </div>
                         </div>
-                        <div class="form-group col-12 row align-items-center">
-                            <div class="col-md-6 modItm">Tomato: </div>
-                            <div class="col-md-3 modQty">5Kg</div>
-                            <div class="input-group input-group-sm modStk col-md-3 ">
-                                <input type="text" data-bts-step="0.25" data-bts-decimals="2" min="0" max="8" decimals="0.25" class="digits touchspin touchspin-min-max" data-bts-postfix="Kg" placeholder="Remaining stock" required>
-                            </div>
-                        </div>
-                        <div class="form-group col-12 row align-items-center">
-                            <div class="col-md-6 modItm">Ginger: </div>
-                            <div class="col-md-3 modQty">3Kg</div>
-                            <div class="input-group input-group-sm modStk col-md-3 ">
-                                <input type="text" data-bts-step="0.25" data-bts-decimals="2" min="0" max="8" decimals="0.25" class="digits touchspin touchspin-min-max" data-bts-postfix="Kg" placeholder="Remaining stock" required>
-                            </div>
-                        </div>
-                        <div class="form-group col-12 row align-items-center">
-                            <div class="col-md-6 modItm">Garlic: </div>
-                            <div class="col-md-3 modQty">3Kg</div>
-                            <div class="input-group input-group-sm modStk col-md-3 ">
-                                <input type="text" data-bts-step="0.25" data-bts-decimals="2" min="0" max="8" decimals="0.25" class="digits touchspin touchspin-min-max" data-bts-postfix="Kg" placeholder="Remaining stock" required>
-                            </div>
-                        </div>
-                        <div class="form-group col-12 row align-items-center">
-                            <div class="col-md-6 modItm">Cauliflower: </div>
-                            <div class="col-md-3 modQty">10Kg</div>
-                            <div class="input-group input-group-sm modStk col-md-3 ">
-                                <input type="text" data-bts-step="0.25" data-bts-decimals="2" min="0" max="8" decimals="0.25" class="digits touchspin touchspin-min-max" data-bts-postfix="Kg" placeholder="Remaining stock" required>
-                            </div>
-                        </div>
-                        <div class="form-group col-12 row align-items-center">
-                            <div class="col-md-6 modItm">Pumpkin: </div>
-                            <div class="col-md-3 modQty">5Kg</div>
-                            <div class="input-group input-group-sm modStk col-md-3 ">
-                                <input type="text" data-bts-step="0.25" data-bts-decimals="2" min="0" max="8" decimals="0.25" class="digits touchspin touchspin-min-max" data-bts-postfix="Kg" placeholder="Remaining stock" required>
-                            </div>
-                        </div>
-                        <div class="form-group col-12 row align-items-center">
-                            <div class="col-md-6 modItm">Coriander: </div>
-                            <div class="col-md-3 modQty">1.5Kg</div>
-                            <div class="input-group input-group-sm modStk col-md-3 ">
-                                <input type="text" data-bts-step="0.25" data-bts-decimals="2" min="0" max="8" decimals="0.25" class="digits touchspin touchspin-min-max" data-bts-postfix="Kg" placeholder="Remaining stock" required>
-                            </div>
-                        </div>
-                        <div class="form-group col-12 row align-items-center mb-0">
-                            <div class="col-md-6 modItm">Chillies: </div>
-                            <div class="col-md-3 modQty">2Kg</div>
-                            <div class="input-group input-group-sm modStk col-md-3 ">
-                                <input type="text" data-bts-step="0.25" data-bts-decimals="2" min="0" max="8" decimals="0.25" class="digits touchspin touchspin-min-max" data-bts-postfix="Kg" placeholder="Remaining stock" required>
-                            </div>
-                        </div>
+                        <?php }?>
                     </div>
                 </div>
                 <div class="modal-footer">
