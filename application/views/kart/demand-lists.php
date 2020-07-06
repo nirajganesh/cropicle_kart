@@ -44,7 +44,10 @@
                                             <td><?=$d->name?></td>
                                             <td><?=$d->itemsCount?> <?=$d->itemsCount>1 ? 'items' : 'item'?></td>
                                             <td class='d-flex'>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Order now"><i class="badge-circle badge-circle-light-secondary  text-primary bx bx-truck font-medium-1"></i></a>
+
+                                                <span data-id='<?=$d->id?>' class="orderOpen">
+                                                    <a href="#" data-toggle="tooltip" title="Order now"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary bx bx-truck font-medium-1"></i></a>
+                                                </span>
 
                                                 <!-- <a href="<?=base_url()?>demand-form" class="mx-1" data-toggle="tooltip" data-placement="top" title="Edit list"><i class="badge-circle text-primary badge-circle-light-secondary bx bx-edit font-medium-1"></i></a> -->
 
@@ -72,6 +75,28 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title" id="exampleModalLongTitle">Details of the demand list</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="bx bx-x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+                        <i class="bx bx-x d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="orderModal" tabindex="-1" role="dialog" aria-labelledby="Order Modal" aria-modal="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLongTitle">Order now</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i class="bx bx-x"></i>
                     </button>

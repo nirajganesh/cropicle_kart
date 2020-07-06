@@ -118,7 +118,6 @@
 
     $('#pwd_change').validate({});
 
-
     $('.listOpen').click(function(){
         var id=$(this).data('id');
         $.ajax({
@@ -134,6 +133,25 @@
             },
             error: function(response){
                 $('#listModal .modal-body').html('Error !');
+            }
+        });
+    });
+
+    $('.orderOpen').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Home/orderDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
             }
         });
     });
