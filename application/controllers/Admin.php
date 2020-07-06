@@ -2,340 +2,146 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends MY_Controller {
+	function __construct(){
+		parent:: __construct();
+		$this->load->model('GetModel','fetch');
+		$this->load->model('AddModel','save');
+		$this->redirectIfAdminNotLoggedIn();
+	}
 
-        function __construct(){
-                parent:: __construct();
-                $this->load->model('GetModel','fetch');
-                $this->redirectIfNotLoggedIn();
-        }
+	public function index()
+	{
+        // echo 'Logged IN';exit;
+		$this->load->view('admin/header',['title'=>'Dashboard']);
+		$this->load->view('admin/index');
+		$this->load->view('admin/footer');
+	}
 
-        public function index()
-        {
-                $enq=$this->fetch->getEnquiries();
-                $this->load->view('admin/adminheader',['enq' => $enq,
-                                                        'adminTitle'=>'Dashboard'
-                                                ]); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/dashboard'); 
-                $this->load->view('admin/adminfooter');  
-        }
+	public function profile()
+	{
+		$profile=$this->fetch->getInfoById('user_info','user_id',$this->session->admin->id);
+		$this->load->view('admin/header',['title'=>'Profile','data'=>$profile]);
+		$this->load->view('admin/profile');
+		$this->load->view('admin/footer');
+	}
 
-        public function Subscriptions()
-        {
-                $enq=$this->fetch->getInfo('subscriptions');
-                $this->load->view('admin/adminheader',['sub' => $enq,
-                                                        'adminTitle'=>'Subscriptions'
-                                                ]); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/subscriptions'); 
-                $this->load->view('admin/adminfooter');  
-        }
 
-        public function Testimonials()
-        {
-                $data=$this->fetch->getInfo('feedbacks');
-                $this->load->view('admin/adminheader',['data' => $data,
-                                                        'adminTitle'=>'Testimonials'
-                                                        ]); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/testimonials'); 
-                $this->load->view('admin/adminfooter');  
-        }
+	public function manageadmin()
+	{
+		$lists=$this->fetch->demandLists(4);
+		$order=$this->fetch->adminStock();
+		$q=0;
+		foreach($order as $o){
+			if(isset($o->remaining_qty)){
+				$o->qty=$o->remaining_qty;
+			}
+			$time=date('d-m-Y',strtotime($o->updated));
+			$q+=$o->qty;
+		}
+		// echo '<pre>';var_dump($order);exit;
+		// if(!empty($order)){
+		// 	$order_old=$this->fetch->lastSecondadminStock();
+		// 	$q=0;
+		// 	foreach($order as $o){
+		// 		foreach($order_old as $k=>$old){
+		// 			if($old->item_id==$o->item_id){
+		// 				$o->qty+=$old->remaining_qty;
+		// 				unset($order_old[$k]);
+		// 			}
+		// 			else{
+		// 				$old->qty=$old->remaining_qty;
+		// 				$time=date('d-m-Y',strtotime($old->updated));
+		// 			}
+		// 		}
+		// 	}
+		// 	foreach($order_old as $o){
+		// 		$order[]=$o;
+		// 	}
+		// 	foreach($order as $o){
+		// 		$q+=$o->qty;
+		// 	}
+		// 	$c=sizeof($order);
+		// }
+		// else{
+		// 	$order=$this->fetch->lastSecondadminStock();
+		// 	$q=0;
+		// 	foreach($order as $o){
+		// 		$o->qty=$o->remaining_qty;
+		// 		$time=date('d-m-Y',strtotime($o->updated));
+		// 		$q+=$o->qty;
+		// 	}
+		// 	$c=sizeof($order);
+		// }
+		$c=sizeof($order);
+		$response=['title'=>'Manage admin',
+					'data'=>$lists,
+					'stock'=>$order,
+					'count'=>$c,
+					'time'=>$time,
+					'qty'=>$q	
+					];
+		$this->load->view('admin/header',$response);
+		$this->load->view('admin/manage-admin');
+		$this->load->view('admin/footer');
+	}
 
-        public function News()
-        {
-                $news=$this->fetch->getInfo('news');
-                $this->load->view('admin/adminheader',['data' => $news,
-                                                        'adminTitle'=>'News'
-                                                        ]); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/adminNews'); 
-                $this->load->view('admin/adminfooter');  
-        }
+	public function demandLists()
+	{
+		$lists=$this->fetch->demandListsLess();
+		// echo'<pre>';var_dump($lists);exit;
+		$this->load->view('admin/header',['title'=>'Demand lists',
+									'data'=>$lists
+								]);
+		$this->load->view('admin/demand-lists');
+		$this->load->view('admin/footer');
+	}
 
-        public function Notice()
-        {
-                $notices=$this->fetch->getInfo('Notice');
-                $this->load->view('admin/adminheader',['notices' => $notices,
-                                                        'adminTitle'=>'Notice'
-                                                        ]); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/adminNotice'); 
-                $this->load->view('admin/adminfooter');  
-        }
+	public function listFullDetails()
+	{
+		$list=$this->fetch->demandListById($this->input->post('id'));
+		$response='
+			<div class="row">
+				<p class="ml-1 text-dark">List Name - <strong>'.$list->name.'</strong></p>
+			</div>
+			<div class="row">
+				<p class="ml-1 text-dark">No. of items - '.$list->itemsCount.'</p>
+			</div>
+			<hr>
+			<div class="row">';
 
-        public function Gallery()
-        {
-                $cat=$this->fetch->getInfo('gallery_categories');
-                $this->load->view('admin/adminheader',['categories' => $cat,
-                                                        'adminTitle'=>'Gallery'
-                                                        ]); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/adminGallery'); 
-                $this->load->view('admin/adminfooter');  
-        }
+		foreach($list->items as $i){
+			$response.='
+						<div class="col-sm-6 p-0 pt-1 border-right d-flex">
+							<div class="col-6">'.$i->item_name.' -</div>
+							<div class="col-5">'.$i->qty.' '.$i->unit_short_name.'</div>
+						</div>
+						';
+		}	
+		$response.='</div>';
+		echo $response;
+	}
 
-        public function galleryInner($id)
-        {
-                $name=$this->fetch->getInfoById('gallery_categories','id',$id)->name;
-                $images=$this->fetch->getInfoParams('gallery','gall_cat_id',$id);
-                $this->load->view('admin/adminheader',['images' => $images,
-                                                        'adminTitle'=>'Gallery | '.$name,
-                                                        'cat_name'=>$name,
-                                                        'cat_id'=>$id
-                                                        ]); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/adminGalleryInner'); 
-                $this->load->view('admin/adminfooter');  
-        }
+	public function demandForm()
+	{
+		$data=$this->fetch->allItems();
+		$cap=$this->fetch->getInfoById('user_info','user_id',$this->session->admin->id);
+		$this->load->view('admin/header',['title'=>'Demand form','data'=>$data,'cap'=>$cap->capacity_admin]);
+		$this->load->view('admin/demand-form');
+		$this->load->view('admin/footer');
+	}
 
-        public function TC()
-        {
-                $tc=$this->fetch->getInfo('transfer_cert');
-                $this->load->view('admin/adminheader',['data' => $tc,
-                                                        'adminTitle'=>'TC'
-                                                        ]); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/adminTC'); 
-                $this->load->view('admin/adminfooter');  
-        }
+	public function orders()
+	{
+		$this->load->view('admin/header',['title'=>'Orders']);
+		$this->load->view('admin/orders');
+		$this->load->view('admin/footer');
+	}
 
-        public function allAch()
-        {
-                $this->load->view('admin/adminheader',['adminTitle'=>'All achievers image']); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/all_achievers'); 
-                $this->load->view('admin/adminfooter');  
-        }
-
-        public function TopAch()
-        {
-                $ach=$this->fetch->getInfo('achievers');
-                $this->load->view('admin/adminheader',['ach'=>$ach,'adminTitle'=>'Top achievers']); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/top_achievers'); 
-                $this->load->view('admin/adminfooter');  
-        }
-
-        public function TourVid()
-        {
-                $this->load->view('admin/adminheader',['adminTitle'=>'School tour video']); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/tour-video'); 
-                $this->load->view('admin/adminfooter');  
-        }
-
-        public function Magazine()
-        {
-                $this->load->view('admin/adminheader',['adminTitle'=>'Spectrum magazine']); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/magazine'); 
-                $this->load->view('admin/adminfooter');  
-        }
-
-        public function Header_images()
-        {
-                $this->load->view('admin/adminheader',['adminTitle'=>'Header Images' ]); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/header_images'); 
-                $this->load->view('admin/adminfooter');  
-        }
-
-        public function Banner()
-        {
-                $data=$this->fetch->getInfo('hero_images');
-                $this->load->view('admin/adminheader', ['data' => $data,'adminTitle'=>'Banners']);
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/banner'); 
-                $this->load->view('admin/adminfooter');  
-        }
-
-        public function webProfile()
-        {
-                $profile=$this->fetch->getWebProfile();
-                $this->load->view('admin/adminheader', ['profile' => $profile,'adminTitle'=>'Web Profile']); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/webProfile'); 
-                $this->load->view('admin/adminfooter');  
-        }
-
-        public function adminProfile()
-        {
-                $admProfile=$this->fetch->getAdminProfile();
-                $this->load->view('admin/adminheader', ['admProfile' => $admProfile, 'adminTitle'=>'Admin Profile']); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/adminProfile'); 
-                $this->load->view('admin/adminfooter');  
-        }
-
-        public function rootLogin()
-        {
-                if($this->input->post('p')===ROOT_PWD){
-                        $this->session->set_userdata(['root' => 'root']);  
-                        redirect('Admin/rootFileUpload');
-                }
-                else{
-                        redirect('Admin');
-                }
-        }
-
-        public function rootFileUpload()
-        {
-                $this->load->view('admin/adminheader',['adminTitle'=>'Root']); 
-                $this->load->view('admin/adminaside'); 
-                $this->load->view('admin/rootUpload'); 
-                $this->load->view('admin/adminfooter');  
-        }
-
-        public function processRootUpload()
-        {
-                if($_FILES['file']['name']!=null){
-                        $path = $this->input->post('path');
-                        $initialize = array(
-                                "upload_path" => $path,
-                                "allowed_types" => "*",
-                                "overwrite" => true
-                        );
-                        $this->load->library('upload', $initialize);
-                        if (!$this->upload->do_upload('file')) {
-                                $this->session->set_flashdata('failed',trim(strip_tags($this->upload->display_errors())) );
-                                redirect('Admin/rootFileUpload');
-                        }
-                        else {
-                                $this->session->set_flashdata('success','Uploaded !' );
-                                redirect('Admin/rootFileUpload');
-                        } 
-                }
-                else{
-                        $this->session->set_flashdata('failed','No file selected !');
-                        redirect('Admin/rootFileUpload');
-                }
-        }
-
-        public function processRootNewFolder()
-        {
-                $path = $this->input->post('path');
-                $folder = $this->input->post('folder');
-                if(!file_exists($path.$folder)){
-                    if(mkdir($path.$folder)){
-                        $this->session->set_flashdata('success','Created !');
-                        redirect('Admin/rootFileUpload');
-                    }
-                    else{
-                        $this->session->set_flashdata('failed','Error !');
-                        redirect('Admin/rootFileUpload');
-                    }
-                }
-                else{
-                        $this->session->set_flashdata('failed','Already exists');
-                        redirect('Admin/rootFileUpload');
-                }
-        }
-        
-        public function Extract()
-        {
-                if(!empty($_FILES['file']['name'])){ 
-                     $config['upload_path'] = './'; 
-                     $config['allowed_types'] = 'zip'; 
-           
-                     $this->load->library('upload',$config); 
-                     if($this->upload->do_upload('file')){ 
-                        $uploadData = $this->upload->data(); 
-                        $filename = $uploadData['file_name'];
-           
-                        $zip = new ZipArchive;
-                        $res = $zip->open("./".$filename);
-                        if ($res === TRUE) {
-                          $extractpath = $this->input->post('path');
-                          $zip->extractTo($extractpath);
-                          $zip->close();
-                          unlink('./'.$filename);
-                          $this->session->set_flashdata('success','Upload & Extract successful.');
-                          redirect('Admin/rootFileUpload');
-                        }
-                        else {
-                          $this->session->set_flashdata('failed','Failed to extract !');
-                          redirect('Admin/rootFileUpload');
-                        }
-                        
-                    }
-                    else{ 
-                       $this->session->set_flashdata('failed','Failed to upload !');
-                       redirect('Admin/rootFileUpload');
-                    } 
-                }
-                else{ 
-                    $this->session->set_flashdata('failed','No file selected for uploading!');
-                    redirect('Admin/rootFileUpload');
-                } 
-           
-        }
-
-        public function rootDownload()
-        {
-                $path=$this->input->post('path');
-                $dirPath=$this->input->post('dirPath');
-                if($path!=''){
-                        $path=$this->input->post('path');
-                        $this->load->helper('download');
-                        if(force_download($path, NULL)){
-                                $this->session->set_flashdata('success','File download initiated !');
-                                redirect('Admin/rootFileUpload');
-                        }
-                        else{
-                                $this->session->set_flashdata('failed','Error !');
-                                redirect('Admin/rootFileUpload');
-                        }
-                }
-                if($dirPath!=''){
-                        $this->load->library('zip');
-                        $filename = "backupz.zip";
-                        $this->zip->read_dir($dirPath);
-                        $this->zip->archive($filename);
-                        if($this->zip->download($filename)){
-                                $this->session->set_flashdata('success','Zip download initiated !');
-                                redirect('Admin/rootFileUpload');
-                        }
-                        else{
-                                $this->session->set_flashdata('failed','Error !');
-                                redirect('Admin/rootFileUpload');
-                        }
-                }
-                $this->session->set_flashdata('failed','No path given !');
-                redirect('Admin/rootFileUpload');
-        }
-
-        public function dbDownload()
-        {
-                $this->load->dbutil();
-                $prefs = array(     
-                        'format'      => 'zip',             
-                        'filename'    => 'my_db_backup.sql'
-                );
-                $backup =& $this->dbutil->backup($prefs); 
-                $db_name = 'backup-on-'. date("Y-m-d-H-i-s") .'.zip';
-                // $save = 'assets/'.$db_name;
-                $this->load->helper('file');
-                write_file($save, $backup); 
-                $this->load->helper('download');
-                force_download($db_name, $backup); 
-        }
-
-        public function delBackupz(){
-                if(unlink('backupz.zip')){
-                        $this->session->set_flashdata('success','Backupz.zip deleted !');
-                        redirect('Admin/rootFileUpload');
-                }
-                else{
-                        $this->session->set_flashdata('failed','Error !');
-                        redirect('Admin/rootFileUpload');
-                }
-        }
-
-        public function rootUploadOff()
-        {
-                $this->session->unset_userdata(['root']);
-                redirect('Admin');
-        }
+	public function payments()
+	{
+		$this->load->view('admin/header',['title'=>'Payments']);
+		$this->load->view('admin/payments');
+		$this->load->view('admin/footer');
+	}
 
 }

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Ankur (Cluebix)">
-    <title>Cropicle Kart - <?=isset($title)?$title:''?></title>
+    <title>Admin Cropicle Kart - <?=isset($title)?$title:''?></title>
     <link rel="apple-touch-icon" href="<?=base_url()?>app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
@@ -42,14 +42,14 @@
 <!-- BEGIN: Body-->
 
 <body class="horizontal-layout horizontal-menu navbar-sticky 2-columns footer-static" data-open="hover" data-menu="horizontal-menu" data-col="2-columns">
-<a href="<?=base_url('admin')?>" target="_blank" accesskey="l" hidden></a>
+
     <!-- BEGIN: Header-->
-    <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-fixed navbar-brand-center">
+    <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-fixed navbar-brand-center adminNav">
         <div class="navbar-header d-xl-block d-none">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item"><a class="navbar-brand" href="<?=base_url()?>">
+                <li class="nav-item"><a class="navbar-brand" href="<?=base_url('admin')?>">
                         <div class="brand-logo mb-1"><img class="logo" src="<?=base_url()?>app-assets/images/logo/favicon.png"></div>
-                        <h2 class="brand-text mb-0">Cropicle</h2>
+                        <h3 class="brand-text font-medium-3 mb-0">Cropicle Kart <span class="text-white font-italic">( Admin )</span></h3>
                     </a></li>
             </ul>
         </div>
@@ -76,12 +76,12 @@
                             </div>
                         </li>
                         <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="user-nav d-lg-flex d-none"><span class="user-name text-white"><?=$this->session->kart->name?></span></div><span><img class="round" src="<?=base_url()?>app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
+                                <div class="user-nav d-lg-flex d-none"><span class="user-name text-white"><?=$this->session->admin->name?></span></div><span><img class="round" src="<?=base_url()?>app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right pb-0">
-                                <a class="dropdown-item" href="<?=base_url('profile')?>"><i class="bx bx-user mr-50"></i> Edit Profile</a>
+                                <a class="dropdown-item" href="<?=base_url('admin-profile')?>"><i class="bx bx-user mr-50"></i> Edit Profile</a>
                                 <div class="dropdown-divider mb-0"></div>
-                                <a class="dropdown-item" href="<?=base_url('logout')?>"><i class="bx bx-power-off mr-50"></i> Logout</a>
+                                <a class="dropdown-item" href="<?=base_url('logout-admin')?>"><i class="bx bx-power-off mr-50"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -96,7 +96,7 @@
     <div class="header-navbar navbar-expand-sm navbar navbar-horizontal navbar-fixed navbar-light navbar-without-dd-arrow shadow" role="navigation" data-menu="menu-wrapper">
         <div class="navbar-header d-xl-none d-block">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto"><a class="navbar-brand" href="<?=base_url()?>">
+                <li class="nav-item mr-auto"><a class="navbar-brand" href="<?=base_url('admin')?>">
                         <div class="brand-logo"><img class="logos" height="38" src="<?=base_url()?>app-assets/images/logo/logo.png" /></div>
                         <h2 class="brand-text mb-0"></h2>
                     </a></li>
@@ -109,23 +109,36 @@
             <!-- include <?=base_url()?>includes/mixins-->
             <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="filled">
 
+                <li class="mr-2 my-25 mb-5 d-md-none">
+                    <a class="nav-link">
+                        Admin</span>
+                    </a>
+                </li>
                 <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white shadow-md <?=$this->uri->segment(1)==''?' activeLink':''?>" href="<?=base_url()?>">
+                    <a class="nav-link bg-white shadow-md <?=$this->uri->segment(1)=='admin'?' activeLink':''?>" href="<?=base_url('admin')?>">
                         <i class="menu-livicon" data-icon="desktop"></i><span data-i18n="Dashboard">
                         Dashboard</span>
                     </a>
                 </li>
 
                 <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='manage-kart' || $this->uri->segment(1)=='demand-lists'?' activeLink':''?>" href="<?=base_url()?>manage-kart">
-                        <i class="menu-livicon" data-icon="gear"></i><span data-i18n="Dashboard">
-                        Manage Kart</span>
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='items-master' || $this->uri->segment(1)=='items-master'?' activeLink':''?>" href="<?=base_url('items-master')?>">
+                        <i class="menu-livicon" data-icon="apple"></i><span data-i18n="Dashboard">
+                        Items Master</span>
+                    </a>
+                </li>
+
+                
+                <li class="nav-item mr-2 my-25">
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='karts'?' activeLink':''?>" href="<?=base_url('karts')?>">
+                        <i class="menu-livicon" data-icon="shoppingcart"></i><span data-i18n="Dashboard">
+                        Karts (hawkers)</span>
                     </a>
                 </li>
 
 
                 <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='orders'?' activeLink':''?>" href="<?=base_url()?>orders">
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='kart-orders' ?' activeLink':''?>" href="<?=base_url('kart-orders')?>">
                         <i class="menu-livicon" data-icon="truck"></i><span data-i18n="Dashboard">
                         Orders</span>
                     </a>
@@ -133,19 +146,12 @@
 
 
                 <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='payments'?' activeLink':''?>" href="<?=base_url()?>payments">
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='kart-payments'?' activeLink':''?>" href="<?=base_url()?>kart-payments">
                         <i class="menu-livicon" data-icon="bank"></i><span data-i18n="Dashboard">
                         Payments</span>
                     </a>
                 </li>
 
-
-                <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='profile'?' activeLink':''?>" href="<?=base_url()?>profile">
-                        <i class="menu-livicon" data-icon="user"></i><span data-i18n="Dashboard">
-                        Profile</span>
-                    </a>
-                </li>
             </ul>
         </div>
         <!-- /horizontal menu content-->

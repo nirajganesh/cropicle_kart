@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Ankur (Cluebix)">
-    <title>Kart.cropicle - Login</title>
+    <title>Kart.cropicle - Admin Login</title>
     <link rel="apple-touch-icon" href="<?=base_url()?>app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
@@ -42,7 +42,6 @@
 <!-- BEGIN: Body-->
 
 <body class="horizontal-layout horizontal-menu navbar-sticky 1-column   footer-static bg-full-screen-image  blank-page blank-page" data-open="hover" data-menu="horizontal-menu" data-col="1-column">
-<a href="<?=base_url('admin')?>" target="_blank" accesskey="l" hidden></a>
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -60,7 +59,7 @@
                                     <div class="card disable-rounded-right mb-0 p-2 h-100 d-flex justify-content-center">
                                         <div class="card-header p-0 pt-1">
                                             <div class="card-title">
-                                                <h4 class="text-center">Welcome Back</h4>
+                                                <h4 class="text-center">Welcome Admin</h4>
                                             </div>
                                         </div>
                                         <div class="card-content">
@@ -73,10 +72,10 @@
                                                 </div> -->
                                                 <div class="divider">
                                                     <div class="divider-text text-uppercase text-muted"><small>Login with
-                                                            Mobile no.</small>
+                                                    Mobile no.</small>
                                                     </div>
                                                 </div>
-                                                <form action="<?=base_url('Login/authenticate')?>" method="POST">
+                                                <form action="<?=base_url('AdminLogin/authenticate')?>" method="POST">
                                                     <div class="form-group">
                                                         <label class="text-bold-600">Registered mobile no.</label>
                                                         <input type="text" name="mobile_no" class="form-control" placeholder="10 digit mobile no. " ></div>
@@ -87,25 +86,13 @@
                                                     <?php if(isset($errors)){?>
                                                         <div class="alert alert-danger my-1 py-25"><?=$errors?></div>
                                                     <?php }?>
-                                                    <div class="form-group d-flex flex-md-row flex-column justify-content-between align-items-center">
-                                                        <!-- <div class="text-left">
-                                                            <div class="checkbox checkbox-sm">
-                                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                                <label class="checkboxsmall" for="exampleCheck1"><small>Keep me logged
-                                                                        in</small></label>
-                                                            </div>
-                                                        </div> -->
-                                                        <div class="text-right ml-auto"><a href="<?=base_url()?>forgot-password" class="card-link"><small>Forgot Password?</small></a></div>
-                                                    </div>
                                                     <button type="submit" class="btn btn-primary glow w-100 position-relative">Login<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
                                                 </form>
-                                                <hr>
-                                                <div class="text-center"><span class="mr-25">Don't have an account?</span><a href="<?=base_url()?>sign-up"><span>Sign up</span></a></div>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <small class="brand-name d-flex align-items-center text-muted" style="position: absolute; bottom: 5px; left: 15px;">Kart.cropicle</small>
+                                    <small class="brand-name d-flex align-items-center text-muted" style="position: absolute; bottom: 5px; left: 15px;">Kart.cropicle Admin</small>
                                 </div>
                                 <!-- right section image -->
                                 <div class="col-md-6 d-md-block d-none text-center align-self-center p-3">
@@ -144,24 +131,6 @@
     <script src="<?=base_url()?>app-assets/js/scripts/components.js"></script>
     <script src="<?=base_url()?>app-assets/js/scripts/footer.js"></script>
     <!-- END: Theme JS-->
-
-    <!-- BEGIN: Page JS-->
-    <!-- Toastr -->
-    <script>
-          <?php if($this->session->flashdata('success') || $message = $this->session->flashdata('failed')):
-              $class = $this->session->flashdata('success') ? 'success' : 'error';
-              if($class=='success'){
-            ?>
-                toastr.success('<?=$this->session->flashdata('success')?>', 'Congratulations !', { positionClass: 'toast-top-full-width', "timeOut": 50000 });
-              <?php } else{?>
-                toastr.error('<?=$this->session->flashdata('failed')?>', 'Error !', { positionClass: 'toast-top-full-width', "timeOut": 50000 });
-              <?php }?>
-          <?php 
-              endif;
-          ?>
-          
-    </script>
-    <!-- END: Page JS-->
 
 </body>
 <!-- END: Body-->

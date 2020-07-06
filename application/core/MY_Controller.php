@@ -28,6 +28,29 @@ class MY_Controller extends CI_Controller
         }
     }
 
+
+    public function adminLoggedIn(){
+        if(isset($this->session->admin->id)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
+    public function redirectIfAdminNotLoggedIn($uri = 'AdminLogin'){
+        if(!$this->adminLoggedIn()){
+            redirect($uri);
+        }
+    }
+
+    public function redirectIfAdminLoggedIn($uri = 'Admin'){
+        if($this->adminLoggedIn()){
+            redirect($uri);
+        }
+    }
+
     
     protected function getPaginitionConfig($uri, $total_count, $rows =10){
         // for creating paginition configuration

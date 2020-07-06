@@ -1,6 +1,21 @@
 <?php
 class EditModel extends CI_Model{
 
+
+    public function updateStock($data,$itemid,$orderkid)
+    {
+        $this->db->where('item_id',$itemid);
+        $this->db->where('order_id',$orderkid);
+        $wpflag = $this->db->update('order_details',$data);
+        if($wpflag){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
     // Update Website Profile
     public function updateWebProfile($data)
     {

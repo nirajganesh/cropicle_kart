@@ -26,6 +26,9 @@ label.error{
 nav{
 	background-color:#FEC007 !important ;
 }
+nav.adminNav{
+	background-color:#079bfef3 !important ;
+}
 
 @media(max-width:450px){
 	.cards .card-body{

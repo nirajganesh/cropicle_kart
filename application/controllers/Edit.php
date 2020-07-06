@@ -51,6 +51,38 @@ class Edit extends MY_Controller {
             }
         }
 
+        
+        public function updateStock()
+        {
+
+            $data=$this->input->post();
+            $stockId=$this->fetch->getStockToUpdate();
+            if($stockId){
+                $this->db->trans_start();
+                $arr['updated_by_hawker']='1';
+                $this->edit->updateInfoById('orders', $arr , 'id', $stockId);
+                for($i=0;$i<sizeof($data['item_id']);$i++){
+                    $info['remaining_qty']= $data['remaining_qty'][$i];
+                    $this->edit->updateStock($info, $data['item_id'][$i], $stockId);
+                }
+                $this->db->trans_complete();
+
+                if ($this->db->trans_status() === FALSE)
+                {
+                    $this->session->set_flashdata('failed','some error occured');
+                    redirect('manage-kart');
+                }
+                else{
+                    $this->session->set_flashdata('success','Kart stock updated !');
+                    redirect('manage-kart');
+                }
+            }
+            else{
+                $this->session->set_flashdata('info','Kart already up-to-date. Make an order to refill your kart !');
+                redirect('manage-kart');
+            }
+        }
+
         public function img_upload()
         {
             $path ='assets/images';

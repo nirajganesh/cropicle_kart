@@ -41,7 +41,7 @@
 <!-- BEGIN: Body-->
 
 <body class="horizontal-layout horizontal-menu navbar-sticky 2-columns   footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="2-columns">
-
+<a href="<?=base_url('admin')?>" target="_blank" accesskey="l" hidden></a>
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>

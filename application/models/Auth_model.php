@@ -10,7 +10,7 @@ class Auth_model extends CI_Model {
 
     public function authenticate($data) 
     {
-        $this->db->where(['mobile_no' => $data['mobile_no'] , 'is_active' => 1]);
+        $this->db->where(['mobile_no' => $data['mobile_no'] , 'is_active' => 1, 'role_id' => 2]);
         $query = $this->db->get('users');
         if($query->num_rows() == 0)
             return false;
@@ -22,15 +22,18 @@ class Auth_model extends CI_Model {
         return password_verify($data['password'], $user->password) ? $user : FALSE;
     }
     
-    public function authenticateUser($data) 
+    public function authenticateAdmin($data) 
     {
-        $this->db->where(['email' => $data['email'] , 'status' => 1, 'role' => 'user' ]);
+        $this->db->where(['mobile_no' => $data['mobile_no'] , 'is_active' => 1, 'role_id' => 1]);
         $query = $this->db->get('users');
         if($query->num_rows() == 0)
             return false;
 
         $user = $query->row();
-        return password_verify($data['pwd'], $user->pwd) ? $user : FALSE;
+        // echo password_hash($data['password'], PASSWORD_DEFAULT);
+        // echo "<br>".$data['uname'];
+        // exit;
+        return password_verify($data['password'], $user->password) ? $user : FALSE;
     }
 
 
@@ -45,8 +48,8 @@ class Auth_model extends CI_Model {
         }
     }
 
-    public function changeTPassword($h, $user_id) {
-		$this->db->where('user_id', $user_id);
+    public function changeAdminPassword($h, $user_id) {
+		$this->db->where('id', $user_id);
 		$flag=$this->db->update('users', $h);
 		if($flag){
             return true;
@@ -55,6 +58,7 @@ class Auth_model extends CI_Model {
             return false;
         }
     }
+
     
     
 }

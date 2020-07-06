@@ -71,6 +71,58 @@ class GetModel extends CI_Model{
         return $items;
     }
 
+    public function kartStock()
+    {
+        $latest_order=$this->db->limit(1)
+                ->order_by('id','desc')
+                ->where('user_id',$this->session->kart->id)
+                ->where('status','DELIVERED')
+                ->get('orders')
+                ->row();
+
+        if($latest_order->updated_by_hawker=='1'){
+            $latest_order=$latest_order->id;
+            $order=$this->db->select('od.remaining_qty, od.updated, od.item_id, i.item_name, u.unit_short_name')
+                            ->from('order_details od')
+                            ->join('items_master i', 'i.id = od.item_id', 'LEFT')
+                            ->join('units u', 'u.id = od.unit_id', 'LEFT')
+                            ->where('od.order_id',$latest_order)
+                            ->order_by('od.id','desc')
+                            ->get()
+                            ->result();
+            return $order;
+        }
+        else{
+            $latest_order=$latest_order->id;
+            $order=$this->db->select('od.qty, od.updated, od.item_id, i.item_name, u.unit_short_name')
+                            ->from('order_details od')
+                            ->join('items_master i', 'i.id = od.item_id', 'LEFT')
+                            ->join('units u', 'u.id = od.unit_id', 'LEFT')
+                            ->where('od.order_id',$latest_order)
+                            ->order_by('od.id','desc')
+                            ->get()
+                            ->result();
+            return $order;
+        }
+    }
+
+    public function getStockToUpdate()
+    {
+        $latest_order=$this->db->limit(1)
+                ->order_by('id','desc')
+                ->where('user_id',$this->session->kart->id)
+                ->where('status','DELIVERED')
+                ->where('updated_by_hawker','0')
+                ->get('orders');
+
+        if($latest_order->num_rows()==0){
+            return false;
+        }
+        else{
+            return $latest_order->row()->id;
+        }
+    }
+
     public function lastKartStock()
     {
         $latest_order=$this->db->limit(1)
