@@ -44,7 +44,7 @@ stepsValidation.steps({
                     },
       url         : "Login/regKart",
       success: function(data) {
-        if(data==1){
+        if(data=='1'){
           $(location).attr('href','registered');
         }
         else{

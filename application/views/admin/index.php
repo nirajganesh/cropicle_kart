@@ -24,7 +24,7 @@
                                             <i class="bx bx-data font-medium-5"></i>
                                         </div>
                                         <p class="text-muted mb-0 line-ellipsis">No. of items</p>
-                                        <h2 class="mb-0">40</h2>
+                                        <h2 class="mb-0"><?=$items?></h2>
                                     </div>
                                 </div>
                             </a>
@@ -37,7 +37,7 @@
                                             <i class="bx bx-cart font-medium-5"></i>
                                         </div>
                                         <p class="text-muted mb-0 line-ellipsis">Kart users</p>
-                                        <h2 class="mb-0">05</h2>
+                                        <h2 class="mb-0"><?=$karts?></h2>
                                     </div>
                                 </div>
                             </a>
@@ -50,7 +50,7 @@
                                             <i class="bx bx-shopping-bag font-medium-5"></i>
                                         </div>
                                         <p class="text-muted mb-0 line-ellipsis">Total orders</p>
-                                        <h2 class="mb-0">04</h2>
+                                        <h2 class="mb-0"><?=$orders?></h2>
                                     </div>
                                 </div>
                             </a>
@@ -63,7 +63,7 @@
                                             <i class="bx bx-tag font-medium-5"></i>
                                         </div>
                                         <p class="text-muted mb-0 line-ellipsis">Payments done</p>
-                                        <h2 class="mb-0">03</h2>
+                                        <h2 class="mb-0"><?=$payments?></h2>
                                     </div>
                                 </div>
                             </a>
@@ -76,7 +76,7 @@
                                             <i class="bx bx-money font-medium-5"></i>
                                         </div>
                                         <p class="text-muted mb-0 line-ellipsis">Latest payment</p>
-                                        <h2 class="mb-0">₹ 10,500/-</h2>
+                                        <h2 class="mb-0"><?=$last_payment?>/-</h2>
                                     </div>
                                 </div>
                             </a>

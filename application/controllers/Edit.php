@@ -51,7 +51,6 @@ class Edit extends MY_Controller {
             }
         }
 
-        
         public function updateStock()
         {
 

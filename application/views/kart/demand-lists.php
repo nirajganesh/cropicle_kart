@@ -17,7 +17,7 @@
                             </div>
                         </div>
                         <div class="col-md-3 text-sm-right">
-                            <a href="<?=base_url()?>demand-form" type="button" class="btn btn-sm btn-primary">Create new demand list</a>
+                            <a href="<?=base_url()?>demand-form" type="button" class="btn btn-sm btn-primary">+ Create new demand list</a>
                         </div>
                     </div>
                 </div>

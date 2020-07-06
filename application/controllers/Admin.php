@@ -11,8 +11,22 @@ class Admin extends MY_Controller {
 
 	public function index()
 	{
-        // echo 'Logged IN';exit;
-		$this->load->view('admin/header',['title'=>'Dashboard']);
+		$inactiveItems=$this->fetch->record_count('items_master','is_active','0');
+		$activeItems=$this->fetch->record_count('items_master','is_active','1');
+		$items=$this->fetch->record_count('items_master');
+		$karts=$this->fetch->record_count('users','role_id','2');
+		$orders=$this->fetch->record_count('orders');
+		$payments=$this->fetch->record_count('payment_details');
+		$last_payment='0';
+		$this->load->view('admin/header',['title'=>'Dashboard',
+										'inactiveItems'=>$inactiveItems,
+										'activeItems'=>$activeItems,
+										'items'=>$items,
+										'karts'=>$karts,
+										'orders'=>$orders,
+										'payments'=>$payments,
+										'last_payment'=>$last_payment
+										]);
 		$this->load->view('admin/index');
 		$this->load->view('admin/footer');
 	}
@@ -25,6 +39,38 @@ class Admin extends MY_Controller {
 		$this->load->view('admin/footer');
 	}
 
+	public function kartUsers()
+	{
+		$karts=$this->fetch->getInfoParams('users','role_id','2');
+		$this->load->view('admin/header',['title'=>'Karts (hawkers)','data'=>$karts]);
+		$this->load->view('admin/karts');
+		$this->load->view('admin/footer');
+	}
+
+	public function itemsMaster()
+	{
+		$items=$this->fetch->getInfo('items_master');
+		$this->load->view('admin/header',['title'=>'Items Master list','data'=>$items]);
+		$this->load->view('admin/items-master');
+		$this->load->view('admin/footer');
+	}
+
+	public function addItem()
+	{
+		$units=$this->fetch->getInfo('units');
+		$this->load->view('admin/header',['title'=>'Add item','units'=>$units,'submissionPath'=>base_url('AddAdm/item')]);
+		$this->load->view('admin/item-form');
+		$this->load->view('admin/footer');
+	}
+
+	public function editItem($id)
+	{
+		$item=$this->fetch->getInfoById('items_master','id',$id);
+		$units=$this->fetch->getInfo('units');
+		$this->load->view('admin/header',['title'=>'Edit item','data'=>$item, 'units'=>$units, 'submissionPath'=>base_url('EditAdm/item/').$id]);
+		$this->load->view('admin/item-form');
+		$this->load->view('admin/footer');
+	}
 
 	public function manageadmin()
 	{
@@ -119,15 +165,6 @@ class Admin extends MY_Controller {
 		}	
 		$response.='</div>';
 		echo $response;
-	}
-
-	public function demandForm()
-	{
-		$data=$this->fetch->allItems();
-		$cap=$this->fetch->getInfoById('user_info','user_id',$this->session->admin->id);
-		$this->load->view('admin/header',['title'=>'Demand form','data'=>$data,'cap'=>$cap->capacity_admin]);
-		$this->load->view('admin/demand-form');
-		$this->load->view('admin/footer');
 	}
 
 	public function orders()

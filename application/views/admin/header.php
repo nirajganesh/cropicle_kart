@@ -49,7 +49,7 @@
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item"><a class="navbar-brand" href="<?=base_url('admin')?>">
                         <div class="brand-logo mb-1"><img class="logo" src="<?=base_url()?>app-assets/images/logo/favicon.png"></div>
-                        <h3 class="brand-text font-medium-3 mb-0">Cropicle Kart <span class="text-white font-italic">( Admin )</span></h3>
+                        <h3 class="brand-text font-medium-3 mb-0">Cropicle <span class="text-white font-italic">( Admin )</span></h3>
                     </a></li>
             </ul>
         </div>

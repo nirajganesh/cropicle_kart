@@ -60,7 +60,13 @@ class Login extends MY_Controller {
 
         $data2['user_id']=$id;
         $status=$this->add->saveInfo('user_info', $data2);
-        echo $status;
+        if($status){
+            echo '1';
+        }
+        else{
+            echo '0';
+        }
+        
     }
 
     public function regSuccess(){

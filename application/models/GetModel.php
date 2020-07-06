@@ -224,9 +224,14 @@ class GetModel extends CI_Model{
                         ->result();
     }
 
-    public function record_count($table,$col,$id) 
+    public function record_count($table,$col=NULL,$id=NULL) 
     {
-        return $this->db->where($col,$id)->get($table)->num_rows();
+        if($col!=NULL){
+            return $this->db->where($col,$id)->get($table)->num_rows();
+        }
+        else{
+            return $this->db->get($table)->num_rows();
+        }
     }
 
 
