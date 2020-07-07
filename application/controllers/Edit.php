@@ -161,62 +161,6 @@ class Edit extends MY_Controller {
             }
         }
 
-        public function approveOrder($oid)
-        {
-            $user_id=$this->fetch->getInfoById('orders','id',$oid)->user_id;
-            $last_delivered=$this->fetch->getLastDelivered($user_id);
-
-            $data=$this->input->post();
-            for($i=0;$i<sizeof($data['item_id']);$i++){
-                $arr[] = (object) [
-                    'item_id' => $data['item_id'][$i],
-                    'qty' => $data['qty'][$i]
-                ];
-            }
-
-            if(!empty($last_delivered)){
-                foreach($arr as $o){
-                    foreach($last_delivered as $k=>$old){
-                        if($old->item_id==$o->item_id){
-                            $o->qty+=$old->remaining_qty;
-                            unset($last_delivered[$k]);
-                        }
-                        else{
-                            $old->qty=$old->remaining_qty;
-                        }
-                    }
-                }
-                foreach($last_delivered as $o){
-                    $arr[]=$o;
-                }
-                $c=sizeof($arr);
-            }
-            else{
-                $order=$this->fetch->lastSecondKartStock();
-                $q=0;
-                foreach($order as $o){
-                    $o->qty=$o->remaining_qty;
-                    $time=date('d-m-Y',strtotime($o->updated));
-                    $q+=$o->qty;
-                }
-                $c=sizeof($order);
-            }
-            echo'<pre>';var_dump($arr);exit;
-
-
-            $status= $this->edit->updateInfoById('user_info',$data,'user_id', $this->session->kart->id);
-
-            if($status){
-                $this->session->set_flashdata('success','Profile updated !' );
-                redirect('profile');
-            }
-            else{
-                $this->session->set_flashdata('failed','Error !');
-                redirect('profile');
-            }
-        }
-
-
         function generate_url_slug($string,$table,$field='slug',$key=NULL,$value=NULL){
             $t =& get_instance();
             $slug = url_title($string);

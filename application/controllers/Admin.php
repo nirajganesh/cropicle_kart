@@ -189,7 +189,7 @@ class Admin extends MY_Controller {
 				<p class="ml-1 text-dark">No. of items - '.sizeof($list).'</p>
 			</div>
 			<hr>
-			<form method="POST" action="Edit/approveOrder/'.$this->input->post('id').'">
+			<form method="POST" action="EditAdm/approveOrder/'.$this->input->post('id').'">
 				<div class="row">';
 		foreach($list as $i){
 			$amt+=$i->qty*$i->item_price_kart;

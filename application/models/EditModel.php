@@ -15,6 +15,17 @@ class EditModel extends CI_Model{
         }
     }
 
+    public function updateInfoByParams($tbl,$data,$where)
+    {
+       
+        if( $this->db->where($where)->update($tbl,$data) ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
     // Update Website Profile
     public function updateWebProfile($data)
