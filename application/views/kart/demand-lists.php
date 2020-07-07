@@ -104,12 +104,6 @@
                 <div class="modal-body">
                 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                </div>
             </div>
         </div>
     </div>

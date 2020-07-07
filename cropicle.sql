@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2020 at 03:02 PM
+-- Generation Time: Jul 07, 2020 at 03:24 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -130,7 +130,7 @@ CREATE TABLE `items_master` (
 --
 
 INSERT INTO `items_master` (`id`, `category_id`, `max_order_qty`, `item_name`, `item_img`, `unit_id`, `item_price_kart`, `item_price_customer`, `is_active`, `created`, `modified`) VALUES
-(1, 1, '8', 'Apple', 'defaultItem.jpg', 1, '140', '145', 0, '2020-06-30 07:41:52', '2020-07-06 08:31:20'),
+(1, 1, '8', 'Apple', 'defaultItem.jpg', 1, '140', '145', 1, '2020-06-30 07:41:52', '2020-07-06 08:31:20'),
 (2, 1, '8', 'Potato', 'defaultItem.jpg', 1, '20', '30', 1, '2020-06-30 07:41:52', '2020-06-30 07:41:52'),
 (3, 1, '8', 'Tomato', 'defaultItem.jpg', 1, '25', '40', 1, '2020-06-30 07:42:30', '2020-06-30 07:42:30'),
 (4, 1, '8', 'Pumpkin', 'defaultItem.jpg', 1, '10', '15', 1, '2020-06-30 07:42:30', '2020-06-30 07:42:30'),
@@ -167,7 +167,8 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `user_id`, `total_qty`, `total_amt`, `date`, `payment_type`, `status`, `updated_by_hawker`, `is_deleted`) VALUES
 (1, 25, '50', '2500', '2020-07-01', 'CASH', 'DELIVERED', 1, 0),
-(2, 25, '80', '3000', '2020-07-04', 'CASH', 'DELIVERED', 1, 0);
+(2, 25, '80', '3000', '2020-07-04', 'CASH', 'DELIVERED', 1, 0),
+(10, 25, '7', '510', '2020-07-07', 'CASH', 'ORDERED', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -179,7 +180,7 @@ CREATE TABLE `order_details` (
   `id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `unit_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL DEFAULT 1,
   `qty` varchar(100) NOT NULL,
   `remaining_qty` varchar(100) NOT NULL,
   `item_price_kart` varchar(100) NOT NULL,
@@ -197,7 +198,11 @@ INSERT INTO `order_details` (`id`, `order_id`, `item_id`, `unit_id`, `qty`, `rem
 (3, 2, 1, 1, '4', '1', '40', '2020-07-04 05:59:29', '2020-07-04 05:59:29'),
 (4, 2, 2, 1, '3', '0', '45', '2020-07-04 06:00:03', '2020-07-04 06:00:03'),
 (5, 2, 3, 1, '5', '1', '50', '2020-07-04 06:00:03', '2020-07-04 06:00:03'),
-(6, 2, 4, 1, '3', '1', '20', '2020-07-04 06:00:28', '2020-07-04 06:00:28');
+(6, 2, 5, 1, '3', '1', '20', '2020-07-04 06:00:28', '2020-07-04 06:00:28'),
+(15, 10, 5, 1, '1', '', '140', '2020-07-07 07:36:33', '2020-07-07 07:36:33'),
+(16, 10, 7, 1, '2', '', '80', '2020-07-07 07:36:33', '2020-07-07 07:36:33'),
+(17, 10, 11, 1, '1', '', '90', '2020-07-07 07:36:33', '2020-07-07 07:36:33'),
+(18, 10, 10, 1, '3', '', '40', '2020-07-07 07:36:33', '2020-07-07 07:36:33');
 
 -- --------------------------------------------------------
 
@@ -365,7 +370,13 @@ INSERT INTO `user_sessions` (`id`, `user_id`, `role_id`, `login_time`, `logout_t
 (31, 1, 1, '2020-07-06 07:51:55', NULL, 1, 0, 0, 0, 0, 0, 0),
 (32, 32, 2, '2020-07-06 08:05:06', '2020-07-06 08:05:10', 0, 0, 0, 0, 0, 0, 0),
 (33, 1, 1, '2020-07-06 08:05:20', '2020-07-06 08:39:20', 0, 0, 0, 0, 0, 0, 0),
-(34, 25, 2, '2020-07-06 08:39:38', NULL, 1, 0, 0, 0, 0, 0, 0);
+(34, 25, 2, '2020-07-06 08:39:38', '2020-07-06 09:40:03', 0, 0, 0, 0, 0, 0, 0),
+(35, 25, 2, '2020-07-06 09:40:13', NULL, 1, 0, 0, 0, 0, 0, 0),
+(36, 25, 2, '2020-07-07 01:32:10', '2020-07-07 04:14:16', 0, 0, 0, 0, 0, 0, 0),
+(37, 1, 1, '2020-07-07 04:14:26', NULL, 1, 0, 0, 0, 0, 0, 0),
+(38, 25, 2, '2020-07-07 06:50:01', '2020-07-07 07:32:12', 0, 0, 0, 0, 0, 0, 0),
+(39, 1, 1, '2020-07-07 07:32:26', NULL, 1, 0, 0, 0, 0, 0, 0),
+(40, 25, 2, '2020-07-07 07:38:08', NULL, 1, 0, 0, 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -463,13 +474,13 @@ ALTER TABLE `items_master`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `units`
@@ -493,7 +504,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

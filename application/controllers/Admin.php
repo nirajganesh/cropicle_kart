@@ -55,6 +55,15 @@ class Admin extends MY_Controller {
 		$this->load->view('admin/footer');
 	}
 
+	public function kartOrders()
+	{
+		$pending=$this->fetch->orders('ORDERED');
+		$delivered=$this->fetch->orders('DELIVERED');
+		$this->load->view('admin/header',['title'=>'Kart orders','pending'=>$pending,'delivered'=>$delivered]);
+		$this->load->view('admin/orders');
+		$this->load->view('admin/footer');
+	}
+
 	public function addItem()
 	{
 		$units=$this->fetch->getInfo('units');
@@ -164,6 +173,46 @@ class Admin extends MY_Controller {
 						';
 		}	
 		$response.='</div>';
+		echo $response;
+	}
+
+	public function pOrderDetails()
+	{
+		$list=$this->fetch->orderDetailsById($this->input->post('id'));
+		$amt=0;
+		// echo'<pre>';var_dump($list);exit;
+		$response='
+			<div class="row">
+				<p class="ml-1 text-dark">Order no. - <strong>'.$this->input->post('id').'</strong></p>
+			</div>
+			<div class="row">
+				<p class="ml-1 text-dark">No. of items - '.sizeof($list).'</p>
+			</div>
+			<hr>
+			<form method="POST" action="Edit/approveOrder/'.$this->input->post('id').'">
+				<div class="row">';
+		foreach($list as $i){
+			$amt+=$i->qty*$i->item_price_kart;
+			$response.='
+						<div class="col-sm-6 p-0 pt-1 border-right d-flex">
+							<div class="col">'.$i->item_name.' -</div>
+							<input type="text" value="'.$i->item_id.'" class="form-control" name="item_id[]" hidden required>
+                            <div class="input-group input-group-sm col-7 ">
+                                <input type="number" value="'.$i->qty.'" data-bts-step="0.25" data-bts-decimals="2" min="0"  step="0.25" class="form-control digits touchspin touchspin-min-max" data-bts-postfix="Kg" placeholder="Qty" name="qty[]" required>
+                            </div>
+						</div>';
+		}	
+		$response.='
+					<div class="col-12 p-0 mt-2">
+						<mark class="col py-1">Amount: Rs.'.$amt.'/-</mark> <br>
+						<div class="col mt-2">Payment mode: <span class="text-dark">Cash</span> </div>
+					</div>
+				</div>
+				<div class="modal-footer px-0">
+					<a href="'.base_url('Edit/cancelOrder/').$this->input->post('id').'" class="btn btn-danger">Reject</a>
+					<button type="submit" class="btn btn-success">Approve</button>
+				</div>
+			</form>';
 		echo $response;
 	}
 

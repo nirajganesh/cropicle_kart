@@ -1,4 +1,9 @@
 /* PLACE HERE YOUR OWN CSS CODES */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  height:auto !important;
+}
+
 label.error{
 	color: red !important;
 }

@@ -38,19 +38,29 @@
     <!-- END: Page JS-->
 
     <script>
-          <?php if($this->session->flashdata('success') || $message = $this->session->flashdata('failed')|| $this->session->flashdata('info')):
-              $class = $this->session->flashdata('success') ? 'success' : 'error';
-              if($class=='success'){
-            ?>
-                toastr.success('<?=$this->session->flashdata('success')?>', 'Done !', {"showMethod": "slideDown","timeOut": 5000 });
-              <?php } elseif($class=='failed'){?>
-                toastr.error('<?=$this->session->flashdata('failed')?>', 'Error !', {"showMethod": "slideDown","timeOut": 0,"closeButton": true});
-              <?php }else{?>
-                toastr.info('<?=$this->session->flashdata('info')?>', 'Info !', {"showMethod": "slideDown","timeOut": 0,"closeButton": true});
-              <?php }?>
           <?php 
-              endif;
-          ?>
+          if($this->session->flashdata('success') || $message = $this->session->flashdata('failed')|| $this->session->flashdata('info')):
+                if($this->session->flashdata('success')){
+                  $class ='success';
+                }
+                elseif($this->session->flashdata('failed')){
+                  $class ='failed';
+                }
+                else{
+                  $class ='info';
+                }
+
+                if($class=='success'){
+                ?>
+                    toastr.success('<?=$this->session->flashdata('success')?>', 'Done !', {"showMethod": "slideDown","timeOut": 0,"closeButton": true });
+                <?php } elseif($class=='failed'){?>
+                    toastr.error('<?=$this->session->flashdata('failed')?>', 'Error !', {"showMethod": "slideDown","timeOut": 0,"closeButton": true});
+                <?php }else{?>
+                    toastr.info('<?=$this->session->flashdata('info')?>', 'Info !', {"showMethod": "slideDown","timeOut": 0,"closeButton": true});
+                <?php }?>
+        <?php 
+          endif;
+        ?>
           
     </script>
 

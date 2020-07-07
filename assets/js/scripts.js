@@ -156,6 +156,30 @@
         });
     });
 
+    $('.pendingOrderOpen').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/pOrderDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+                $(".touchspin").TouchSpin({
+                    buttondown_class: "btn btn-primary",
+                    buttonup_class: "btn btn-primary",
+                  });
+                
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
 
 
 

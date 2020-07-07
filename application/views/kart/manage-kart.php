@@ -88,9 +88,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="row justify-content-end">
-                                                    <a href="" class="badge-circle badge-circle badge-circle-light-primary mr-md-1 mr-0 my-1"  data-toggle="tooltip" data-placement="top"  title="Order now">
-                                                        <i class="bx bx-truck font-small-5"></i>
+                                                    <span data-id='<?=$d->id?>' class="orderOpen mr-md-1 mr-0 my-1">
+                                                        <a href="#" data-toggle="tooltip" class="badge-circle badge-circle badge-circle-light-primary" title="Order now"><i class="bx bx-truck font-small-5"></i></a>
                                                     </a>
+                                                    </span>
                                                     <span data-id='<?=$d->id?>' class="listOpen">
                                                         <a class="badge-circle badge-circle badge-circle-light-warning my-1 cpointer"  data-toggle="tooltip" title="See list">
                                                             <i class="bx bx-info-circle font-small-5 text-warning"></i>
@@ -176,6 +177,22 @@
                         <i class="bx bx-x d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Close</span>
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="orderModal" tabindex="-1" role="dialog" aria-labelledby="Order Modal" aria-modal="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLongTitle">Order now</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="bx bx-x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                
                 </div>
             </div>
         </div>

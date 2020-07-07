@@ -45,7 +45,7 @@ class GetModel extends CI_Model{
 
     public function demandListItems($listId)
     {
-        $items=$this->db->select('dd.qty, i.item_name, u.unit_short_name')
+        $items=$this->db->select('dd.qty,dd.item_id, i.item_name, i.item_price_kart, u.unit_short_name')
                 ->from('demand_lists_details dd')
                 ->join('items_master i', 'i.id = dd.item_id', 'LEFT')
                 ->join('units u', 'u.id = i.unit_id', 'LEFT')
@@ -121,6 +121,48 @@ class GetModel extends CI_Model{
         else{
             return $latest_order->row()->id;
         }
+    }
+
+    public function orders($status)
+    {
+        $orders=$this->db->select('o.id, o.date, o.total_qty, o.total_amt, u.name')
+                        ->from('orders o')
+                        ->join('users u', 'u.id = o.user_id', 'LEFT')
+                        ->order_by('o.id','desc')
+                        ->where('o.status',$status)
+                        ->get()
+                        ->result();
+        return $orders;
+    }
+
+    public function getLastDelivered($uid)
+    {
+        $last_order=$this->db->where('user_id',$uid)
+                ->where('status','DELIVERED')
+                ->order_by('id','desc')
+                ->limit(1)
+                ->get('orders')
+                ->row()->id;
+        $order=$this->orderDetailsById($last_order);
+        if(!empty($order)){
+            return $order;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    public function orderDetailsById($id)
+    {
+        $items=$this->db->select('od.qty, od.remaining_qty, od.item_id, i.item_name, i.item_price_kart')
+                        ->from('order_details od')
+                        ->join('items_master i', 'i.id = od.item_id', 'LEFT')
+                        ->where('i.is_active','1')
+                        ->where('od.order_id',$id)
+                        ->order_by('od.id','desc')
+                        ->get()
+                        ->result();
+        return $items;
     }
 
     public function lastKartStock()

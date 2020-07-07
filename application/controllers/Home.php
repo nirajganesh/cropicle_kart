@@ -39,40 +39,6 @@ class Home extends MY_Controller {
 			$time=date('d-m-Y',strtotime($o->updated));
 			$q+=$o->qty;
 		}
-		// echo '<pre>';var_dump($order);exit;
-		// if(!empty($order)){
-		// 	$order_old=$this->fetch->lastSecondKartStock();
-		// 	$q=0;
-		// 	foreach($order as $o){
-		// 		foreach($order_old as $k=>$old){
-		// 			if($old->item_id==$o->item_id){
-		// 				$o->qty+=$old->remaining_qty;
-		// 				unset($order_old[$k]);
-		// 			}
-		// 			else{
-		// 				$old->qty=$old->remaining_qty;
-		// 				$time=date('d-m-Y',strtotime($old->updated));
-		// 			}
-		// 		}
-		// 	}
-		// 	foreach($order_old as $o){
-		// 		$order[]=$o;
-		// 	}
-		// 	foreach($order as $o){
-		// 		$q+=$o->qty;
-		// 	}
-		// 	$c=sizeof($order);
-		// }
-		// else{
-		// 	$order=$this->fetch->lastSecondKartStock();
-		// 	$q=0;
-		// 	foreach($order as $o){
-		// 		$o->qty=$o->remaining_qty;
-		// 		$time=date('d-m-Y',strtotime($o->updated));
-		// 		$q+=$o->qty;
-		// 	}
-		// 	$c=sizeof($order);
-		// }
 		$c=sizeof($order);
 		$response=['title'=>'Manage Kart',
 					'data'=>$lists,
@@ -132,18 +98,49 @@ class Home extends MY_Controller {
 			<div class="row">
 				<p class="ml-1 text-dark">No. of items - '.$list->itemsCount.'</p>
 			</div>
-			<hr>
+			<hr class="mt-0">
 			<div class="row">';
-
+		$total_cost=0;
+		$total_qty=0;
 		foreach($list->items as $i){
+			$total_qty+=$i->qty;
+			$total_cost+=$i->qty*$i->item_price_kart;
 			$response.='
 						<div class="col-sm-6 p-0 pt-1 border-right d-flex">
 							<div class="col-6">'.$i->item_name.' -</div>
-							<div class="col-5">'.$i->qty.' '.$i->unit_short_name.'</div>
+							<div class="col-5">'.$i->qty.' '.$i->unit_short_name.' (₹'.$i->qty*$i->item_price_kart.'/-)</div>
 						</div>
 						';
 		}	
 		$response.='</div>';
+		$response.='
+					<div class="row mt-2">
+						<mark class="p-1"><span class="">Total amt. = ₹'.$total_cost.'/-</span></mark>
+					</div>
+					<form action="'.base_url("Add/newOrder").'" class="mt-2" method="POST">
+						<h6>Payment mode:</h6>
+						<div class="row">
+							<div class="col-sm-6 mb-1 mb-sm-0">
+								<input id="cash" type="radio" name="payment_type" value="CASH" required>
+								<label for="cash">Cash</label>
+							</div>
+							<!--<div class="col-sm-6">
+								<input id="online" type="radio" name="payment_type" value="ONLINE">
+								<label for="online">Online</label>
+							</div>-->
+							<input type="text" name="total_amt" value="'.$total_cost.'" hidden required>
+							<input type="text" name="total_qty" value="'.$total_qty.'" hidden required>
+							<input type="text" name="demand_list_id" value="'.$this->input->post('id').'" hidden required>
+						</div>
+						<div class="modal-footer px-0">
+							<button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+								<i class="bx bx-x d-block d-sm-none"></i>
+								<span class="d-none d-sm-block">Cancel</span>
+							</button>
+							<button type="submit" class="btn btn-primary">Place order</button>
+						</div>
+                	</form>
+					';
 		echo $response;
 	}
 
