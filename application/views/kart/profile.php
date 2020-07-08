@@ -112,6 +112,14 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <div class="controls">
+                                                                            <label>Aadhaar no. / License no.</label>
+                                                                            <input type="text" class="form-control" placeholder="12-digit aadhaar no. OR 13-characters license no." value="<?=$data->aadhaar_license?>" name="aadhaar_license" maxlength="13" minlength="12">    
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                                                     <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1">Save
                                                                         changes</button>
@@ -195,13 +203,24 @@
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="form-group">
-                                                                        <label>Capacity of kart</label>
+                                                                        <label>Kart location</label>
+                                                                        <select name="location_id" class="form-control" required>
+                                                                                <option value="">-- Select Location --</option>
+                                                                            <?php foreach($loc as $l){?>
+                                                                                <option value="<?=$l->id?>" <?=$data->location_id==$l->id?' selected':''?>><?=$l->area.', '.$l->city.' ('.$l->pin_code.')'?></option>
+                                                                            <?php }?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label>Capacity of kart (in Kg)</label>
                                                                         <input type="text" class="form-control" placeholder="capacity in kg" value="<?=$data->capacity_kart?>" name="capacity_kart" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="form-group">
-                                                                        <label>Sales qty per day</label>
+                                                                        <label>Sales qty per day (in Kg)</label>
                                                                         <input type="text" value="<?=$data->sales_qty_daily?>" class="form-control" name="sales_qty_daily" value="<?=$data->sales_qty_daily?>">
                                                                     </div>
                                                                 </div>
@@ -211,7 +230,7 @@
                                                                         <input value="<?=$data->source_purchase?>" name="source_purchase" type="text" class="form-control" placeholder="Example: ">
                                                                     </div>
                                                                 </div>
-                                                                <a href="#" class="ml-1 link link-info">See account ledger</a>
+                                                                <!-- <a href="#" class="ml-1 mb-1 mb-sm-0 link link-info">See account ledger →</a> -->
                                                                 
                                                                 <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                                                     <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1">Save

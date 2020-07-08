@@ -79,31 +79,36 @@ class GetModel extends CI_Model{
                 ->where('status','DELIVERED')
                 ->get('orders')
                 ->row();
-
-        if($latest_order->updated_by_hawker=='1'){
-            $latest_order=$latest_order->id;
-            $order=$this->db->select('od.remaining_qty, od.updated, od.item_id, i.item_name, u.unit_short_name')
-                            ->from('order_details od')
-                            ->join('items_master i', 'i.id = od.item_id', 'LEFT')
-                            ->join('units u', 'u.id = od.unit_id', 'LEFT')
-                            ->where('od.order_id',$latest_order)
-                            ->order_by('od.id','desc')
-                            ->get()
-                            ->result();
-            return $order;
+        if($latest_order){
+            if($latest_order->updated_by_hawker=='1'){
+                $latest_order=$latest_order->id;
+                $order=$this->db->select('od.remaining_qty, od.updated, od.item_id, i.item_name, u.unit_short_name')
+                                ->from('order_details od')
+                                ->join('items_master i', 'i.id = od.item_id', 'LEFT')
+                                ->join('units u', 'u.id = od.unit_id', 'LEFT')
+                                ->where('od.order_id',$latest_order)
+                                ->order_by('od.id','desc')
+                                ->get()
+                                ->result();
+                return $order;
+            }
+            else{
+                $latest_order=$latest_order->id;
+                $order=$this->db->select('od.qty, od.updated, od.item_id, i.item_name, u.unit_short_name')
+                                ->from('order_details od')
+                                ->join('items_master i', 'i.id = od.item_id', 'LEFT')
+                                ->join('units u', 'u.id = od.unit_id', 'LEFT')
+                                ->where('od.order_id',$latest_order)
+                                ->order_by('od.id','desc')
+                                ->get()
+                                ->result();
+                return $order;
+            }
         }
         else{
-            $latest_order=$latest_order->id;
-            $order=$this->db->select('od.qty, od.updated, od.item_id, i.item_name, u.unit_short_name')
-                            ->from('order_details od')
-                            ->join('items_master i', 'i.id = od.item_id', 'LEFT')
-                            ->join('units u', 'u.id = od.unit_id', 'LEFT')
-                            ->where('od.order_id',$latest_order)
-                            ->order_by('od.id','desc')
-                            ->get()
-                            ->result();
-            return $order;
+            return false;
         }
+
     }
 
     public function getStockToUpdate()
@@ -135,6 +140,19 @@ class GetModel extends CI_Model{
         return $orders;
     }
 
+    public function kartOrders($status)
+    {
+        $orders=$this->db->select('o.id, o.date, o.total_qty, o.total_amt, u.name')
+                        ->from('orders o')
+                        ->join('users u', 'u.id = o.user_id', 'LEFT')
+                        ->order_by('o.id','desc')
+                        ->where('o.status',$status)
+                        ->where('o.user_id',$this->session->kart->id)
+                        ->get()
+                        ->result();
+        return $orders;
+    }
+
     public function getLastDelivered($uid)
     {
         $last_order=$this->db->where('user_id',$uid)
@@ -157,59 +175,29 @@ class GetModel extends CI_Model{
         $items=$this->db->select('od.qty, od.remaining_qty, od.item_id, i.item_name, i.item_price_kart')
                         ->from('order_details od')
                         ->join('items_master i', 'i.id = od.item_id', 'LEFT')
-                        ->where('i.is_active','1')
+                        // ->where('i.is_active','1')
                         ->where('od.order_id',$id)
                         ->order_by('od.id','desc')
                         ->get()
                         ->result();
         return $items;
     }
-
-    public function lastKartStock()
+    
+    public function getBeforeOrder($id)
     {
-        $latest_order=$this->db->limit(1)
-                ->order_by('id','desc')
-                ->where('user_id',$this->session->kart->id)
-                ->where('updated_by_hawker','0')
-                ->get('orders')
-                ->row();
-        if(!empty($latest_order)){
-            $latest_order=$latest_order->id;
-            $order=$this->db->select('od.qty, od.updated, od.item_id, i.item_name, u.unit_short_name')
-                            ->from('orders o')
-                            ->join('order_details od', 'od.order_id = o.id', 'LEFT')
-                            ->join('items_master i', 'i.id = od.item_id', 'LEFT')
-                            ->join('units u', 'u.id = od.unit_id', 'LEFT')
-                            ->where('o.is_deleted','0')
-                            ->where('od.order_id',$latest_order)
-                            ->order_by('o.id','desc')
-                            ->get()
-                            ->result();
-            return $order;
+        $uid=$this->getInfoById('orders','id', $id)->user_id;
+        $lid=$this->db->where('id <',$id)
+                        ->where('user_id',$uid)
+                        ->order_by('id','desc')
+                        ->limit(1)
+                        ->get('orders')
+                        ->row();
+        if($lid){
+            return $lid->id;
         }
         else{
             return false;
         }
-    }
-
-    public function lastSecondKartStock()
-    {
-        $last_second_order=$this->db->limit(1)
-                ->order_by('id','desc')
-                ->where('user_id',$this->session->kart->id)
-                ->where('updated_by_hawker','1')
-                ->get('orders')
-                ->row()->id;
-
-        $lsorder=$this->db->select('od.item_id, od.remaining_qty, od.updated, i.item_name, u.unit_short_name')
-                ->from('order_details od')
-                ->join('items_master i', 'i.id = od.item_id', 'LEFT')
-                ->join('units u', 'u.id = od.unit_id', 'LEFT')
-                ->where('od.order_id',$last_second_order)
-                ->where('od.order_id',$last_second_order)
-                ->get()
-                ->result();
-        return $lsorder;
     }
 
     public function getPhone($phn)
@@ -220,11 +208,13 @@ class GetModel extends CI_Model{
         return $query->num_rows();
     }
 
+    public function checkPendingOrders($user_id) 
+    {
+            return $this->db->where('status','ORDERED')->where('user_id',$user_id)->get('orders')->num_rows();
+    }
 
-    
 
-    //  -----------------------------------------------------------
-    //  -----------------------------------------------------------
+
     //  -----------------------------------------------------------
 
 
@@ -302,6 +292,54 @@ class GetModel extends CI_Model{
         }
         return false;
     }
+
+
+       // public function lastKartStock()
+    // {
+    //     $latest_order=$this->db->limit(1)
+    //             ->order_by('id','desc')
+    //             ->where('user_id',$this->session->kart->id)
+    //             ->where('updated_by_hawker','0')
+    //             ->get('orders')
+    //             ->row();
+    //     if(!empty($latest_order)){
+    //         $latest_order=$latest_order->id;
+    //         $order=$this->db->select('od.qty, od.updated, od.item_id, i.item_name, u.unit_short_name')
+    //                         ->from('orders o')
+    //                         ->join('order_details od', 'od.order_id = o.id', 'LEFT')
+    //                         ->join('items_master i', 'i.id = od.item_id', 'LEFT')
+    //                         ->join('units u', 'u.id = od.unit_id', 'LEFT')
+    //                         ->where('o.is_deleted','0')
+    //                         ->where('od.order_id',$latest_order)
+    //                         ->order_by('o.id','desc')
+    //                         ->get()
+    //                         ->result();
+    //         return $order;
+    //     }
+    //     else{
+    //         return false;
+    //     }
+    // }
+
+    // public function lastSecondKartStock()
+    // {
+    //     $last_second_order=$this->db->limit(1)
+    //             ->order_by('id','desc')
+    //             ->where('user_id',$this->session->kart->id)
+    //             ->where('updated_by_hawker','1')
+    //             ->get('orders')
+    //             ->row()->id;
+
+    //     $lsorder=$this->db->select('od.item_id, od.remaining_qty, od.updated, i.item_name, u.unit_short_name')
+    //             ->from('order_details od')
+    //             ->join('items_master i', 'i.id = od.item_id', 'LEFT')
+    //             ->join('units u', 'u.id = od.unit_id', 'LEFT')
+    //             ->where('od.order_id',$last_second_order)
+    //             ->where('od.order_id',$last_second_order)
+    //             ->get()
+    //             ->result();
+    //     return $lsorder;
+    // }
 
     
 

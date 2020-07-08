@@ -118,6 +118,7 @@ class Edit extends MY_Controller {
             $this->session->kart->name=$data['name'];
             unset($data['name']);
             unset($data['mobile_no']);
+            $data['modified'] = date('Y-m-d H:i:s');
             $status= $this->edit->updateInfoById('user_info',$data,'user_id', $this->session->kart->id);
 
             if($status){
@@ -133,6 +134,7 @@ class Edit extends MY_Controller {
         public function kart_profile()
         {
             $data=$this->input->post();
+            $data['modified'] = date('Y-m-d H:i:s');
             $status= $this->edit->updateInfoById('user_info',$data,'user_id', $this->session->kart->id);
 
             if($status){
@@ -148,6 +150,7 @@ class Edit extends MY_Controller {
         public function bank_info()
         {
             $data=$this->input->post();
+            $data['modified'] = date('Y-m-d H:i:s');
             // var_dump($data);exit;
             $status= $this->edit->updateInfoById('user_info',$data,'user_id', $this->session->kart->id);
 

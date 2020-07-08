@@ -69,7 +69,6 @@
                                             <div class="row mt-1">
                                                 <div class="col-md-4 text-dark">Total no. of items: <span id="total_items">1</span></div>
                                                 <div class="col-md-4 text-dark my-1 my-sm-0">Total Qty: <span id="total_qty">0</span> Kg</div>
-                                                <div class="col-md-4 text-dark">Total Amt: Rs.<span id="total_amt">0</span> /-</div>
                                             </div>
                                             <hr>
                                             <div class="row mt-2">

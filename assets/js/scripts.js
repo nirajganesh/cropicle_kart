@@ -180,6 +180,68 @@
         });
     });
 
+    $('.deliveredOrderOpen').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/dOrderDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
+    $('.kartPendingOrderOpen').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Home/pOrderDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+                $(".touchspin").TouchSpin({
+                    buttondown_class: "btn btn-primary",
+                    buttonup_class: "btn btn-primary",
+                  });
+                
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
+    $('.kartDeliveredOrderOpen').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Home/dOrderDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
 
 
 

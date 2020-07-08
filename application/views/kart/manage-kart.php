@@ -32,21 +32,38 @@
                                     </h4>
                                     <small class='font-small-2'> (Total <?=$count?> items)</small>
                                     <div class="heading-elements">
-                                        <button type="button" class="btn btn-sm btn-light-primary" data-toggle="modal" data-target="#stockModal">
-                                            Update stock
-                                        </button>
+                                        <?php if(!empty($stock)){?>
+                                            <?php if($kart_up_to_date==0){?>
+
+                                                <?php date_default_timezone_set("Asia/Kolkata"); $t=time();
+                                                    $hour=date('H', $t);
+                                                    if(($hour >=18) && ($hour <=22)) {?>
+                                                        <button type="button" class="btn btn-sm btn-light-primary" data-toggle="modal" data-target="#stockModal">
+                                                            Update stock
+                                                        </button>
+                                                <?php } ?>
+                                               
+                                        <?php }
+                                        else{?>
+                                            <span class="text-success">✔ Kart Up-to-date</span>
+                                       <?php }
+                                    }?>
                                     </div>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body px-2">
                                         <small>Last updated: <?=$time?></small>
                                         <div class="row">
-                                        <?php foreach($stock as $s){?>
-                                            <div class="col-sm-6 p-0 pt-1  d-flex">
-                                                <div class="col-6"><?=$s->item_name?> -</div>
-                                                <div class="col-5"><?=$s->qty?><?=$s->unit_short_name?></div>
-                                            </div>
-                                        <?php }?>
+                                        <?php if(!empty($stock)){ 
+                                                foreach($stock as $s){
+                                                    if($s->qty>0){
+                                                    ?>
+                                                    <div class="col-sm-6 p-0 pt-1  d-flex">
+                                                        <div class="col-6"><?=$s->item_name?> -</div>
+                                                        <div class="col-5"><?=$s->qty?><?=$s->unit_short_name?></div>
+                                                    </div>
+                                        <?php   }}
+                                            }?>
                                         </div>
                                     </div>
                                 </div>
@@ -112,6 +129,7 @@
         </div>
     </div>
 
+    <?php if($kart_up_to_date==0){?>
     <div class="modal fade " id="stockModal" tabindex="-1" role="dialog" aria-labelledby="stockModal" aria-modal="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -159,6 +177,7 @@
             </div>
         </div>
     </div>
+    <?php }?>
 
     <div class="modal fade " id="listModal" tabindex="-1" role="dialog" aria-labelledby="Demand List Modal" aria-modal="true">
         <div class="modal-dialog modal-lg" role="document">

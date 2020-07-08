@@ -70,13 +70,22 @@ $route['update-stock'] = 'Edit/updateStock';
 $route['admin'] = 'Admin';
 $route['logout-admin'] = 'AdminLogin/logout';
 $route['admin-profile'] = 'Admin/profile';
+
 $route['items-master'] = 'Admin/itemsMaster';
+$route['add-item'] = 'Admin/addItem';
 $route['edit-item/(:num)'] = 'Admin/editItem/$1';
 $route['toggle-item-status/(:num)/(:num)'] = 'EditAdm/itemStatus/$1/$2';
-$route['toggle-kart-status/(:num)/(:num)'] = 'EditAdm/kartStatus/$1/$2';
 $route['delete-item/(:num)'] = 'DeleteAdm/item/$1';
-$route['delete-kart/(:num)'] = 'DeleteAdm/kart/$1';
-$route['add-item'] = 'Admin/addItem';
+
+$route['locations-master'] = 'Admin/locationsMaster';
+$route['add-loc'] = 'Admin/addLoc';
+$route['edit-loc/(:num)'] = 'Admin/editLoc/$1';
+$route['toggle-loc-status/(:num)/(:num)'] = 'EditAdm/locStatus/$1/$2';
+$route['delete-loc/(:num)'] = 'DeleteAdm/location/$1';
+
 $route['karts'] = 'Admin/kartUsers';
+$route['toggle-kart-status/(:num)/(:num)'] = 'EditAdm/kartStatus/$1/$2';
+$route['delete-kart/(:num)'] = 'DeleteAdm/kart/$1';
+
 $route['kart-orders'] = 'Admin/kartOrders';
 $route['kart-payments'] = 'Admin/kartPayments';

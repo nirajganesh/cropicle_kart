@@ -128,6 +128,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item mr-2 my-25">
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='locations-master' || $this->uri->segment(1)=='locations-master'?' activeLink':''?>" href="<?=base_url('locations-master')?>">
+                        <i class="menu-livicon" data-icon="location"></i><span data-i18n="Dashboard">
+                        Locations Master</span>
+                    </a>
+                </li>
+
                 
                 <li class="nav-item mr-2 my-25">
                     <a class="nav-link bg-white <?=$this->uri->segment(1)=='karts'?' activeLink':''?>" href="<?=base_url('karts')?>">

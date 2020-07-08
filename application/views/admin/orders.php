@@ -87,8 +87,8 @@
                                                 <td><?=date('d-M-Y',strtotime($d->date))?></td>
                                                 <td>Rs. <?=$d->total_amt?>/-</td>
                                                 <td class='d-flex'>
-                                                    <span data-toggle="modal" data-target="#orderModal">
-                                                        <a href="#" data-toggle="tooltip" title="See order details"><i class="badge-circle border badge-circle-light-primary bx bx-info-circle text-dark font-medium-1"></i></a>
+                                                    <span data-id='<?=$d->id?>' class="deliveredOrderOpen">
+                                                        <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
                                                     </span>
                                                 </td>
                                             </tr>

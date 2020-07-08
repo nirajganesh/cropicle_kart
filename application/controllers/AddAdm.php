@@ -54,6 +54,31 @@ class AddAdm extends MY_Controller {
                 redirect('add-item');
             }
         }
+
+        public function location()
+        {
+            // echo'<pre>';var_dump($this->input->post(),$_FILES);exit;
+            $this->form_validation->set_rules('area', 'Area', 'required');
+            $this->form_validation->set_rules('city', 'City', 'required');
+            $this->form_validation->set_rules('state', 'State', 'required');
+            $this->form_validation->set_rules('pin_code', 'Pincode', 'required|numeric');
+            if($this->form_validation->run() == true){
+                $data=$this->input->post();
+                $status= $this->save->saveInfo('locations_master',$data);
+                if($status){
+                    $this->session->set_flashdata('success','Location added !' );
+                    redirect('locations-master');
+                }
+                else{
+                    $this->session->set_flashdata('failed','Error !');
+                    redirect('add-loc');
+                }
+            }
+            else{
+                $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
+                redirect('add-loc');
+            }
+        }
    
         function generate_url_slug($string,$table,$field='slug',$key=NULL,$value=NULL){
             $t =& get_instance();

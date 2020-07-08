@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2020 at 03:24 PM
+-- Generation Time: Jul 08, 2020 at 02:34 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -64,8 +64,9 @@ CREATE TABLE `demand_lists` (
 --
 
 INSERT INTO `demand_lists` (`id`, `user_id`, `name`, `is_active`, `is_deleted`, `created`, `modified`, `created_by`, `modified_by`) VALUES
-(1, 25, 'Regular list', 1, 0, '2020-06-30 09:49:38', '2020-06-30 09:49:38', '', ''),
-(18, 25, 'Special List', 1, 0, '2020-07-03 12:37:01', '2020-07-03 12:37:01', '', '');
+(22, 25, 'New list', 1, 0, '2020-07-08 11:22:21', '2020-07-08 11:22:21', '', ''),
+(23, 25, 'New', 1, 0, '2020-07-08 11:52:17', '2020-07-08 11:52:17', '', ''),
+(24, 25, 'Latest', 1, 0, '2020-07-08 11:56:13', '2020-07-08 11:56:13', '', '');
 
 -- --------------------------------------------------------
 
@@ -92,18 +93,19 @@ CREATE TABLE `demand_lists_details` (
 --
 
 INSERT INTO `demand_lists_details` (`id`, `demand_list_id`, `item_id`, `qty`, `unit_id`, `is_active`, `is_deleted`, `created`, `modified`, `created_by`, `modified_by`) VALUES
-(1, 1, '1', 20, 1, 1, 0, '2020-06-30 09:50:21', '2020-06-30 09:50:21', '', ''),
-(2, 1, '2', 4, 1, 1, 0, '2020-06-30 09:50:21', '2020-06-30 09:50:21', '', ''),
-(3, 1, '4', 6, 1, 1, 0, '2020-06-30 09:50:50', '2020-06-30 09:50:50', '', ''),
-(4, 2, '1', 2, 1, 1, 0, '2020-06-30 09:50:50', '2020-06-30 09:50:50', '', ''),
-(30, 17, '12', 1, 1, 1, 0, '2020-07-03 11:59:24', '2020-07-03 11:59:24', '', ''),
-(31, 18, '10', 3, 1, 1, 0, '2020-07-03 12:37:01', '2020-07-03 12:37:01', '', ''),
-(32, 18, '11', 1, 1, 1, 0, '2020-07-03 12:37:01', '2020-07-03 12:37:01', '', ''),
-(33, 18, '7', 2, 1, 1, 0, '2020-07-03 12:37:01', '2020-07-03 12:37:01', '', ''),
-(34, 18, '5', 1, 1, 1, 0, '2020-07-03 12:37:01', '2020-07-03 12:37:01', '', ''),
-(35, 19, '4', 4, 1, 1, 0, '2020-07-03 12:37:18', '2020-07-03 12:37:18', '', ''),
-(36, 20, '10', 1, 1, 1, 0, '2020-07-03 12:48:36', '2020-07-03 12:48:36', '', ''),
-(37, 21, '11', 4, 1, 1, 0, '2020-07-03 12:48:47', '2020-07-03 12:48:47', '', '');
+(38, 22, '12', 1, 1, 1, 0, '2020-07-08 11:22:21', '2020-07-08 11:22:21', '', ''),
+(39, 22, '11', 1, 1, 1, 0, '2020-07-08 11:22:21', '2020-07-08 11:22:21', '', ''),
+(40, 22, '10', 3, 1, 1, 0, '2020-07-08 11:22:21', '2020-07-08 11:22:21', '', ''),
+(41, 22, '9', 3, 1, 1, 0, '2020-07-08 11:22:21', '2020-07-08 11:22:21', '', ''),
+(42, 22, '2', 5, 1, 1, 0, '2020-07-08 11:22:21', '2020-07-08 11:22:21', '', ''),
+(43, 22, '1', 1, 1, 1, 0, '2020-07-08 11:22:21', '2020-07-08 11:22:21', '', ''),
+(44, 22, '3', 3, 1, 1, 0, '2020-07-08 11:22:21', '2020-07-08 11:22:21', '', ''),
+(45, 22, '6', 2, 1, 1, 0, '2020-07-08 11:22:21', '2020-07-08 11:22:21', '', ''),
+(46, 23, '3', 3, 1, 1, 0, '2020-07-08 11:52:17', '2020-07-08 11:52:17', '', ''),
+(47, 24, '10', 5, 1, 1, 0, '2020-07-08 11:56:13', '2020-07-08 11:56:13', '', ''),
+(48, 24, '4', 3, 1, 1, 0, '2020-07-08 11:56:13', '2020-07-08 11:56:13', '', ''),
+(49, 24, '5', 0.5, 1, 1, 0, '2020-07-08 11:56:13', '2020-07-08 11:56:13', '', ''),
+(50, 24, '8', 2, 1, 1, 0, '2020-07-08 11:56:13', '2020-07-08 11:56:13', '', '');
 
 -- --------------------------------------------------------
 
@@ -146,6 +148,33 @@ INSERT INTO `items_master` (`id`, `category_id`, `max_order_qty`, `item_name`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `locations_master`
+--
+
+CREATE TABLE `locations_master` (
+  `id` int(11) NOT NULL,
+  `area` varchar(100) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `state` varchar(100) NOT NULL,
+  `pin_code` varchar(15) NOT NULL,
+  `is_active` int(11) NOT NULL DEFAULT 1,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `modified` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `locations_master`
+--
+
+INSERT INTO `locations_master` (`id`, `area`, `city`, `state`, `pin_code`, `is_active`, `created`, `modified`) VALUES
+(1, 'Budhapara', 'Raipur', 'CG', '492001', 1, '2020-07-08 07:29:24', '2020-07-08 06:14:46'),
+(2, 'Shankar nagar', 'Raipur', 'CG', '492007', 1, '2020-07-08 07:29:24', '2020-07-08 07:29:24'),
+(4, 'Avanti', 'Raipur', 'CG', '492003', 1, '2020-07-08 09:41:14', '2020-07-08 06:14:37'),
+(5, 'VIP Road', 'Raipur', 'CG', '492000', 1, '2020-07-08 09:42:23', '2020-07-08 09:42:23');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -166,9 +195,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `total_qty`, `total_amt`, `date`, `payment_type`, `status`, `updated_by_hawker`, `is_deleted`) VALUES
-(1, 25, '50', '2500', '2020-07-01', 'CASH', 'DELIVERED', 1, 0),
-(2, 25, '80', '3000', '2020-07-04', 'CASH', 'DELIVERED', 1, 0),
-(10, 25, '7', '510', '2020-07-07', 'CASH', 'ORDERED', 0, 0);
+(15, 25, '19', '835', '2020-07-08', 'CASH', 'DELIVERED', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -193,16 +220,14 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `order_id`, `item_id`, `unit_id`, `qty`, `remaining_qty`, `item_price_kart`, `created`, `updated`) VALUES
-(1, 1, 1, 1, '8', '2', '40', '2020-07-04 05:28:40', '2020-07-04 05:28:40'),
-(2, 1, 2, 1, '5', '3', '50', '2020-07-04 05:28:40', '2020-07-04 05:28:40'),
-(3, 2, 1, 1, '4', '1', '40', '2020-07-04 05:59:29', '2020-07-04 05:59:29'),
-(4, 2, 2, 1, '3', '0', '45', '2020-07-04 06:00:03', '2020-07-04 06:00:03'),
-(5, 2, 3, 1, '5', '1', '50', '2020-07-04 06:00:03', '2020-07-04 06:00:03'),
-(6, 2, 5, 1, '3', '1', '20', '2020-07-04 06:00:28', '2020-07-04 06:00:28'),
-(15, 10, 5, 1, '1', '', '140', '2020-07-07 07:36:33', '2020-07-07 07:36:33'),
-(16, 10, 7, 1, '2', '', '80', '2020-07-07 07:36:33', '2020-07-07 07:36:33'),
-(17, 10, 11, 1, '1', '', '90', '2020-07-07 07:36:33', '2020-07-07 07:36:33'),
-(18, 10, 10, 1, '3', '', '40', '2020-07-07 07:36:33', '2020-07-07 07:36:33');
+(60, 15, 6, 1, '2.00', '0.00', '40', '2020-07-08 12:20:35', '2020-07-08 08:50:47'),
+(61, 15, 3, 1, '3.00', '0.00', '25', '2020-07-08 12:20:35', '2020-07-08 08:50:47'),
+(62, 15, 1, 1, '1.00', '0.00', '140', '2020-07-08 12:20:35', '2020-07-08 08:50:47'),
+(63, 15, 2, 1, '5.00', '0.00', '20', '2020-07-08 12:20:35', '2020-07-08 08:50:47'),
+(64, 15, 9, 1, '3.00', '0.00', '60', '2020-07-08 12:20:35', '2020-07-08 08:50:47'),
+(65, 15, 10, 1, '3.00', '0.00', '40', '2020-07-08 12:20:35', '2020-07-08 08:50:47'),
+(66, 15, 11, 1, '1.00', '0.00', '90', '2020-07-08 12:20:35', '2020-07-08 08:50:47'),
+(67, 15, 12, 1, '1.00', '0.00', '50', '2020-07-08 12:20:35', '2020-07-08 08:50:47');
 
 -- --------------------------------------------------------
 
@@ -289,6 +314,7 @@ CREATE TABLE `user_info` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `aadhaar_license` varchar(100) NOT NULL,
   `capacity_kart` int(11) NOT NULL,
   `sales_qty_daily` float NOT NULL,
   `source_purchase` varchar(500) NOT NULL,
@@ -299,6 +325,7 @@ CREATE TABLE `user_info` (
   `latitude` varchar(50) NOT NULL,
   `longitude` varchar(50) NOT NULL,
   `profile_img` varchar(500) NOT NULL,
+  `location_id` int(11) NOT NULL,
   `is_active` int(11) NOT NULL,
   `is_deleted` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -311,8 +338,8 @@ CREATE TABLE `user_info` (
 -- Dumping data for table `user_info`
 --
 
-INSERT INTO `user_info` (`id`, `user_id`, `email`, `capacity_kart`, `sales_qty_daily`, `source_purchase`, `bank_name`, `holder_name`, `acc_no`, `ifsc_code`, `latitude`, `longitude`, `profile_img`, `is_active`, `is_deleted`, `created`, `modified`, `created_by`, `modified_by`) VALUES
-(2, 25, '', 200, 200, '', 'SBI', 'asas', '78946542300', 'asasadf4465', '', '', '', 0, 0, '2020-06-29 09:55:01', '2020-06-29 09:34:00', '', '');
+INSERT INTO `user_info` (`id`, `user_id`, `email`, `aadhaar_license`, `capacity_kart`, `sales_qty_daily`, `source_purchase`, `bank_name`, `holder_name`, `acc_no`, `ifsc_code`, `latitude`, `longitude`, `profile_img`, `location_id`, `is_active`, `is_deleted`, `created`, `modified`, `created_by`, `modified_by`) VALUES
+(2, 25, '', '', 200, 200, '', 'SBI', 'asas', '78946542300', 'asasadf4465', '', '', '', 1, 0, 0, '2020-06-29 09:55:01', '2020-07-08 04:22:42', '', '');
 
 -- --------------------------------------------------------
 
@@ -376,7 +403,19 @@ INSERT INTO `user_sessions` (`id`, `user_id`, `role_id`, `login_time`, `logout_t
 (37, 1, 1, '2020-07-07 04:14:26', NULL, 1, 0, 0, 0, 0, 0, 0),
 (38, 25, 2, '2020-07-07 06:50:01', '2020-07-07 07:32:12', 0, 0, 0, 0, 0, 0, 0),
 (39, 1, 1, '2020-07-07 07:32:26', NULL, 1, 0, 0, 0, 0, 0, 0),
-(40, 25, 2, '2020-07-07 07:38:08', NULL, 1, 0, 0, 0, 0, 0, 0);
+(40, 25, 2, '2020-07-07 07:38:08', NULL, 1, 0, 0, 0, 0, 0, 0),
+(41, 1, 1, '2020-07-08 01:50:24', NULL, 1, 0, 0, 0, 0, 0, 0),
+(42, 25, 2, '2020-07-08 01:51:02', '2020-07-08 03:06:17', 0, 0, 0, 0, 0, 0, 0),
+(43, 1, 1, '2020-07-08 03:06:38', '2020-07-08 06:41:44', 0, 0, 0, 0, 0, 0, 0),
+(44, 25, 2, '2020-07-08 04:01:27', NULL, 1, 0, 0, 0, 0, 0, 0),
+(45, 25, 2, '2020-07-08 06:41:56', NULL, 1, 0, 0, 0, 0, 0, 0),
+(46, 1, 1, '2020-07-08 07:00:27', '2020-07-08 07:04:07', 0, 0, 0, 0, 0, 0, 0),
+(47, 25, 2, '2020-07-08 07:04:13', NULL, 1, 0, 0, 0, 0, 0, 0),
+(48, 1, 1, '2020-07-08 07:12:31', '2020-07-08 07:12:50', 0, 0, 0, 0, 0, 0, 0),
+(49, 25, 2, '2020-07-08 07:12:56', NULL, 1, 0, 0, 0, 0, 0, 0),
+(50, 25, 2, '2020-07-08 07:48:53', NULL, 1, 0, 0, 0, 0, 0, 0),
+(51, 25, 2, '2020-07-08 08:07:01', NULL, 1, 0, 0, 0, 0, 0, 0),
+(52, 1, 1, '2020-07-08 08:18:59', NULL, 1, 0, 0, 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -404,6 +443,12 @@ ALTER TABLE `demand_lists_details`
 -- Indexes for table `items_master`
 --
 ALTER TABLE `items_master`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `locations_master`
+--
+ALTER TABLE `locations_master`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -456,13 +501,13 @@ ALTER TABLE `categories_master`
 -- AUTO_INCREMENT for table `demand_lists`
 --
 ALTER TABLE `demand_lists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `demand_lists_details`
 --
 ALTER TABLE `demand_lists_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `items_master`
@@ -471,16 +516,22 @@ ALTER TABLE `items_master`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `locations_master`
+--
+ALTER TABLE `locations_master`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `units`
@@ -504,7 +555,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

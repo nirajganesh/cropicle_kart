@@ -63,6 +63,32 @@ class EditAdm extends MY_Controller {
             }
         }
 
+        public function location($id)
+        {
+            // echo'<pre>';var_dump($this->input->post(),$_FILES);exit;
+            $this->form_validation->set_rules('area', 'Area', 'required');
+            $this->form_validation->set_rules('city', 'City', 'required');
+            $this->form_validation->set_rules('state', 'State', 'required');
+            $this->form_validation->set_rules('pin_code', 'Pincode', 'required|numeric');
+            if($this->form_validation->run() == true){
+                $data=$this->input->post();
+                $data['modified']=date('Y-m-d H:i:s');
+                $status= $this->edit->updateInfoById('locations_master',$data,'id', $id);
+                if($status){
+                    $this->session->set_flashdata('success','Location updated !' );
+                    redirect('locations-master');
+                }
+                else{
+                    $this->session->set_flashdata('failed','Error !');
+                    redirect('locations-master');
+                }
+            }
+            else{
+                $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
+                redirect('locations-master');
+            }
+        }
+
         public function itemStatus($id,$current_stat)
         {
             if($current_stat==0){
@@ -81,6 +107,27 @@ class EditAdm extends MY_Controller {
             else{
                 $this->session->set_flashdata('failed','Error !');
                 redirect('items-master');
+            }
+        }
+
+        public function locStatus($id,$current_stat)
+        {
+            if($current_stat==0){
+                $data['is_active']=1;
+                $data['modified']=date('Y-m-d H:i:s');
+            }
+            else{
+                $data['is_active']=0;
+                $data['modified']=date('Y-m-d H:i:s');
+            }
+            $status= $this->edit->updateInfoById('locations_master',$data,'id', $id);
+            if($status){
+                $this->session->set_flashdata('success','Location status updated !' );
+                redirect('locations-master');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('locations-master');
             }
         }
 
