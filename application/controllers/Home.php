@@ -87,6 +87,30 @@ class Home extends MY_Controller {
 		$this->load->view('kart/footer');
 	}
 
+	public function editDemand($id)
+	{
+		$list=(object)[
+					'info'=>$this->fetch->getInfoById('demand_lists','id',$id),
+					'items'=>$this->fetch->getInfoParams('demand_lists_details','demand_list_id',$id)
+					];
+		// echo'<pre>';var_dump($list->info);exit;
+		if(!empty($list->info)){
+			if($list->info->user_id==$this->session->kart->id){
+				$data=$this->fetch->allItems();
+				$cap=$this->fetch->getInfoById('user_info','user_id',$this->session->kart->id);
+				$this->load->view('kart/header',['title'=>'Edit demand','data'=>$data, 'list'=>$list, 'cap'=>$cap->capacity_kart]);
+				$this->load->view('kart/edit-demand-form');
+				$this->load->view('kart/footer');
+			}
+			else{
+				echo '<h3>Invalid user !</h3>';
+			}
+		}
+		else{
+				echo '<h4>Demand list does not exist!<h4>';
+		}
+	}
+
 	public function orders()
 	{
 		$ordered=$this->fetch->kartOrders('ORDERED');

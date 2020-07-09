@@ -63,6 +63,7 @@ $route['profile'] = 'Home/profile';
 $route['manage-kart'] = 'Home/manageKart';
 $route['demand-lists'] = 'Home/demandLists';
 $route['demand-form'] = 'Home/demandForm';
+$route['demand-form/(:num)'] = 'Home/editDemand/$1';
 $route['orders'] = 'Home/orders';
 $route['payments'] = 'Home/payments';
 $route['update-stock'] = 'Edit/updateStock';
