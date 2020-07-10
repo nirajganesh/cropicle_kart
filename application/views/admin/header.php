@@ -35,6 +35,10 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
     <!-- END: Custom CSS-->
     <script src="<?=base_url()?>app-assets/js/core/libraries/jquery.min.js"></script>
+    
+    <script>
+		var loc = `<?=base_url()?>`;
+    </script>
 
 </head>
 <!-- END: Head-->
