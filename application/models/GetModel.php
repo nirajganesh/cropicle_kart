@@ -213,6 +213,11 @@ class GetModel extends CI_Model{
             return $this->db->where('status','ORDERED')->where('user_id',$user_id)->get('orders')->num_rows();
     }
 
+    public function checkDayEnd($user_id) 
+    {
+            return $this->db->where('status','ORDERED')->where('user_id',$user_id)->get('orders')->num_rows();
+    }
+
 
 
     //  -----------------------------------------------------------

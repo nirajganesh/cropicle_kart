@@ -30,7 +30,12 @@
                                     <h4 class="card-title d-flex align-items-center">
                                         <i class='bx bx-cart font-medium-4 mr-1'></i>Kart stock (<?=$qty ?> Kg)
                                     </h4>
-                                    <small class='font-small-2'> (Total <?=$count?> items)</small>
+                                    <?php $tc=0; if(!empty($stock)){ 
+                                            foreach($stock as $s){
+                                                    if($s->qty>0){$tc++;}
+                                            }
+                                    }?>
+                                    <small class='font-small-2'> (Total <?=$tc?> items)</small>
                                     <div class="heading-elements">
                                         <?php if(!empty($stock)){?>
                                             <?php if($kart_up_to_date==0){?>
@@ -39,13 +44,16 @@
                                                     $hour=date('H', $t);
                                                     if(($hour >=18) && ($hour <=22)) {?>
                                                         <button type="button" class="btn btn-sm btn-light-primary" data-toggle="modal" data-target="#stockModal">
-                                                            Update stock
+                                                            End of Day
                                                         </button>
+                                                <?php }else{ ?>
+                                                    <span class="text-dark" data-toggle="tooltip" title="You can do EOD (End of Day) only between 6pm to 10pm.">EOD between 6 to 10 PM</span>
                                                 <?php } ?>
                                                
                                         <?php }
                                         else{?>
-                                            <span class="text-success">✔ Kart Up-to-date</span>
+                                            <span class="text-success" data-toggle="tooltip" title="You have already done End of Day. Your kart is up-to-date. Place an order to refill your kart.">✔ EOD done</span> <br>
+                                            <a href="demand-lists" class="mt-1 btn btn-sm btn-light-primary">Order to refill</a>
                                        <?php }
                                     }?>
                                     </div>

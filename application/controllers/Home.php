@@ -172,6 +172,21 @@ class Home extends MY_Controller {
 				';
 			echo $response;
 		}
+		elseif($this->fetch->getStockToUpdate()){
+			$response='
+						<h4 class="text-dark mb-1">Cannot order !</h4>
+						<h6 class="text-dark">Order can be placed only after EOD (End of Day).</h6>
+						<h6 class="text-dark">You can do EOD between 6pm to 10pm.</h6>
+				</div>
+					
+				<div class="modal-footer px-0 mt-2">
+						<button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+							<i class="bx bx-x d-block d-sm-none"></i>
+							<span class="d-none d-sm-block">Close</span>
+						</button>
+				';
+			echo $response;
+		}
 		else{
 			$list=$this->fetch->demandListById($this->input->post('id'));
 			$response='
