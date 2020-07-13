@@ -34,6 +34,9 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
     <!-- END: Custom CSS-->
+    <script>
+		var loc = `<?=base_url()?>`;
+    </script>
 
 </head>
 <!-- END: Head-->
