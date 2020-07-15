@@ -42,7 +42,7 @@
 
                                                 <?php date_default_timezone_set("Asia/Kolkata"); $t=time();
                                                     $hour=date('H', $t);
-                                                    if(($hour >=18) && ($hour <=22)) {?>
+                                                    if(($hour >=00) && ($hour <=22)) {?>
                                                         <button type="button" class="btn btn-sm btn-light-primary" data-toggle="modal" data-target="#stockModal">
                                                             End of Day
                                                         </button>
