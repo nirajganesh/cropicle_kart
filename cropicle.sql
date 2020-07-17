@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2020 at 03:20 PM
+-- Generation Time: Jul 17, 2020 at 03:29 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -40,6 +40,58 @@ CREATE TABLE `categories_master` (
 
 INSERT INTO `categories_master` (`id`, `category_name`, `created`, `modified`) VALUES
 (1, 'Fruits & vegetables', '2020-06-30 09:55:48', '2020-06-30 09:55:48');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_demands`
+--
+
+CREATE TABLE `customer_demands` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `demand_amount` varchar(100) NOT NULL,
+  `customer_remarks` varchar(500) NOT NULL,
+  `admin_remarks` varchar(500) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `modified` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customer_demands`
+--
+
+INSERT INTO `customer_demands` (`id`, `user_id`, `demand_amount`, `customer_remarks`, `admin_remarks`, `status`, `created`, `modified`) VALUES
+(6, 11, '1345', 'sddsds', '', 'PENDING', '2020-07-17 08:12:12', '2020-07-17 08:12:12'),
+(7, 11, '760', '', '', 'PENDING', '2020-07-17 11:54:33', '2020-07-17 11:54:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_demand_details`
+--
+
+CREATE TABLE `customer_demand_details` (
+  `id` int(11) NOT NULL,
+  `customer_demand_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `item_price_customer` varchar(100) NOT NULL,
+  `item_quantity` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customer_demand_details`
+--
+
+INSERT INTO `customer_demand_details` (`id`, `customer_demand_id`, `item_id`, `item_price_customer`, `item_quantity`) VALUES
+(16, 6, 2, '30', '1'),
+(17, 6, 1, '145', '3'),
+(18, 6, 9, '80', '5'),
+(19, 6, 5, '160', '3'),
+(20, 7, 1, '145', '1'),
+(21, 7, 12, '80', '6'),
+(22, 7, 6, '45', '3');
 
 -- --------------------------------------------------------
 
@@ -137,18 +189,18 @@ CREATE TABLE `items_master` (
 --
 
 INSERT INTO `items_master` (`id`, `category_id`, `max_order_qty`, `item_name`, `item_img`, `unit_id`, `item_price_kart`, `item_price_customer`, `is_active`, `created`, `modified`) VALUES
-(1, 1, '8', 'Apple', 'defaultItem.jpg', 1, '140', '145', 1, '2020-06-30 07:41:52', '2020-07-06 08:31:20'),
-(2, 1, '8', 'Potato', 'defaultItem.jpg', 1, '20', '30', 1, '2020-06-30 07:41:52', '2020-06-30 07:41:52'),
-(3, 1, '8', 'Tomato', 'defaultItem.jpg', 1, '25', '40', 1, '2020-06-30 07:42:30', '2020-06-30 07:42:30'),
-(4, 1, '8', 'Pumpkin', 'defaultItem.jpg', 1, '10', '15', 1, '2020-06-30 07:42:30', '2020-06-30 07:42:30'),
-(5, 1, '2', 'Coriander', 'defaultItem.jpg', 1, '140', '160', 1, '2020-06-30 07:43:07', '2020-06-30 07:43:07'),
-(6, 1, '5', 'Carrot', 'defaultItem.jpg', 1, '40', '45', 1, '2020-06-30 07:43:07', '2020-06-30 07:43:07'),
-(7, 1, '4', 'Grapes', 'defaultItem.jpg', 1, '80', '90', 1, '2020-06-30 07:43:59', '2020-06-30 07:43:59'),
+(1, 1, '8', 'Apple', 'apple.jpg', 1, '140', '145', 1, '2020-06-30 07:41:52', '2020-07-17 09:44:43'),
+(2, 1, '8', 'Potato', 'potato.jpeg', 1, '20', '30', 1, '2020-06-30 07:41:52', '2020-07-17 09:39:30'),
+(3, 1, '8', 'Tomato', 'tomato.jpg', 1, '25', '40', 1, '2020-06-30 07:42:30', '2020-07-17 09:44:52'),
+(4, 1, '8', 'Pumpkin', 'pumpkin.jpg', 1, '10', '15', 1, '2020-06-30 07:42:30', '2020-07-17 09:45:01'),
+(5, 1, '2', 'Coriander', 'Coriander.jpg', 1, '140', '160', 1, '2020-06-30 07:43:07', '2020-07-17 09:40:16'),
+(6, 1, '5', 'Carrot', 'carrots.jpg', 1, '40', '45', 1, '2020-06-30 07:43:07', '2020-07-17 09:39:40'),
+(7, 1, '4', 'Grapes', 'grapes.jpg', 1, '80', '90', 1, '2020-06-30 07:43:59', '2020-07-17 09:45:20'),
 (8, 1, '5', 'Banana', 'defaultItem.jpg', 1, '30', '40', 1, '2020-06-30 07:43:59', '2020-06-30 07:43:59'),
-(9, 1, '8', 'Onion', 'defaultItem.jpg', 1, '60', '80', 1, '2020-06-30 07:44:51', '2020-06-30 07:44:51'),
+(9, 1, '8', 'Onion', 'Onion.jpg', 1, '60', '80', 1, '2020-06-30 07:44:51', '2020-07-17 09:39:51'),
 (10, 1, '5', 'Watermelon', 'watermelon.jpg', 1, '40', '45', 1, '2020-06-30 07:44:51', '2020-06-30 07:44:51'),
-(11, 1, '3', 'Ginger', 'defaultItem.jpg', 1, '90', '120', 1, '2020-06-30 07:45:29', '2020-06-30 07:45:29'),
-(12, 1, '3', 'Garlic', 'defaultItem.jpg', 1, '50', '80', 1, '2020-06-30 07:45:29', '2020-06-30 07:45:29');
+(11, 1, '3', 'Ginger', 'ginger.jpg', 1, '90', '120', 1, '2020-06-30 07:45:29', '2020-07-17 09:45:41'),
+(12, 1, '3', 'Garlic', 'garlic.jpg', 1, '50', '80', 1, '2020-06-30 07:45:29', '2020-07-17 09:45:52');
 
 -- --------------------------------------------------------
 
@@ -368,7 +420,7 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `mobile_no`, `email`, `password`, 
 (7, 2, 'Kart shankar', '7894561231', '', '$2y$10$p4ZnGS8OGei2B9GMzy/lNujJDu/PnxH2.JFpvFhn64F5/WUehDY2G', 0, '', 0, '', '0000-00-00', 1, '2020-07-13 08:08:42', '2020-07-13 04:39:10', 0, 0),
 (8, 2, 'Kart2 Shankar', '7894561232', '', '$2y$10$hfeGg7TXF0QsR6pq4.hGm.PMUWfImxXnmFrfyN/FSsSgiGCWjS7wS', 0, '', 0, '', '0000-00-00', 1, '2020-07-13 08:12:56', '2020-07-13 04:43:19', 0, 0),
 (9, 2, 'Kart3 shankar', '7894561233', '', '$2y$10$KhcYGCbwQ0JjfBqMprNU5.qQMjYf34LhwEy7aIIGyPyJYW/G0RPOO', 0, '', 0, '', '0000-00-00', 1, '2020-07-13 08:25:41', '2020-07-13 04:55:54', 0, 0),
-(11, 3, 'Vishnu', '7894561234', '', '$2y$10$A9A6f7vhoscC0l1MwBVTRu.uuHKXJNg9tdurFWGDaA9.GLGTKSTkO', 1, '', 1, '', '0000-00-00', 1, '2020-07-15 11:07:44', '2020-07-15 09:49:59', 0, 0);
+(11, 3, 'Vishnu', '7894561234', '', '$2y$10$A9A6f7vhoscC0l1MwBVTRu.uuHKXJNg9tdurFWGDaA9.GLGTKSTkO', 1, '', 1, '', '0000-00-00', 1, '2020-07-15 11:07:44', '2020-07-16 08:05:36', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -408,7 +460,7 @@ INSERT INTO `user_info` (`id`, `user_id`, `email`, `aadhaar_license`, `capacity_
 (4, 7, '', '', 30, 0, '', '', '', '', '', '', '', '', 2, '', '2020-07-13 08:08:42', '2020-07-13 04:40:27', '', ''),
 (5, 8, '', '', 40, 0, '', '', '', '', '', '', '', '', 2, '', '2020-07-13 08:12:56', '2020-07-13 04:43:42', '', ''),
 (6, 9, '', '', 30, 0, '', '', '', '', '', '', '', '', 2, '', '2020-07-13 08:25:41', '2020-07-13 04:56:15', '', ''),
-(7, 11, 'ss@ss.cpm', '', 0, 0, '', '', '', '', '', '', '', 'agri_grass1.png', 5, 'ss', '2020-07-15 11:07:49', '2020-07-15 09:49:59', '', '');
+(7, 11, 'ss@ss.cpm', '', 0, 0, '', '', '', '', '', '', '', 'agri_grass1.png', 2, 'ss', '2020-07-15 11:07:49', '2020-07-16 08:05:36', '', '');
 
 -- --------------------------------------------------------
 
@@ -496,7 +548,9 @@ INSERT INTO `user_sessions` (`id`, `user_id`, `role_id`, `login_time`, `logout_t
 (61, 8, 2, '2020-07-13 04:43:29', '2020-07-13 04:55:15', 0, 0, 0, 0, 0, 0, 0),
 (62, 1, 1, '2020-07-13 04:55:51', '2020-07-13 07:00:11', 0, 0, 0, 0, 0, 0, 0),
 (63, 9, 2, '2020-07-13 04:56:06', NULL, 1, 0, 0, 0, 0, 0, 0),
-(64, 9, 2, '2020-07-14 04:16:46', NULL, 1, 0, 0, 0, 0, 0, 0);
+(64, 9, 2, '2020-07-14 04:16:46', NULL, 1, 0, 0, 0, 0, 0, 0),
+(65, 1, 1, '2020-07-17 09:38:43', NULL, 1, 0, 0, 0, 0, 0, 0),
+(66, 1, 1, '2020-07-17 09:52:32', NULL, 1, 0, 0, 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -506,6 +560,18 @@ INSERT INTO `user_sessions` (`id`, `user_id`, `role_id`, `login_time`, `logout_t
 -- Indexes for table `categories_master`
 --
 ALTER TABLE `categories_master`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customer_demands`
+--
+ALTER TABLE `customer_demands`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customer_demand_details`
+--
+ALTER TABLE `customer_demand_details`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -579,6 +645,18 @@ ALTER TABLE `categories_master`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `customer_demands`
+--
+ALTER TABLE `customer_demands`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `customer_demand_details`
+--
+ALTER TABLE `customer_demand_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
 -- AUTO_INCREMENT for table `demand_lists`
 --
 ALTER TABLE `demand_lists`
@@ -624,7 +702,7 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_info`
@@ -636,7 +714,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
