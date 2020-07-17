@@ -155,6 +155,15 @@
                     </a>
                 </li>
 
+                <li class="dropdown nav-item mr-2 my-25 <?=$this->uri->segment(1)=='users' ?' activeLink':''?>" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white" href="" data-toggle="dropdown"><i class="menu-livicon" data-icon="user"></i><span data-i18n="Dashboard">Users</span></a>
+                    <ul class="dropdown-menu">
+                        <li data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='users' ?' activeLink':''?>" href="<?=base_url()?>users" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Registered users</a>
+                        </li>
+                        <li class="<?=$this->uri->segment(1)=='user-demands' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center" href="<?=base_url()?>user-demands" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>User demands</a>
+                        </li>
+                    </ul>
+                </li>
+
 
                 <li class="nav-item mr-2 my-25">
                     <a class="nav-link bg-white <?=$this->uri->segment(1)=='kart-payments'?' activeLink':''?>" href="<?=base_url()?>kart-payments">
