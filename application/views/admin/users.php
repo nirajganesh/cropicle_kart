@@ -8,11 +8,11 @@
                 <div class="content-header-left col-12 mb-2 mt-1">
                     <div class="row breadcrumbs-top">
                         <div class="col-md-9">
-                            <h5 class="content-header-title float-left pr-1 mb-0">Karts</h5>
+                            <h5 class="content-header-title float-left pr-1 mb-0">Users</h5>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb p-0 mb-0">
                                     <li class="breadcrumb-item"><a href="<?=base_url('admin')?>"><i class="bx bx-home-alt"></i></a></li>
-                                    <li class="breadcrumb-item active">Karts</li>
+                                    <li class="breadcrumb-item active">users</li>
                                 </ol>
                             </div>
                         </div>
@@ -24,7 +24,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header row">
-                                <h4 class="card-title col-sm-9">List of all the registered karts (hawkers)</h4>
+                                <h4 class="card-title col-sm-9">List of all the registered users</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -32,7 +32,7 @@
                                         <table class="table table-striped order-dt">
                                             <thead>
                                                 <tr>
-                                                    <th>Kart ID</th>
+                                                    <th>User ID</th>
                                                     <th>Name</th>
                                                     <th>Contact no.</th>
                                                     <th>Registered on</th>
@@ -53,9 +53,9 @@
                                                         <td class="text-warning">Inactive</td>
                                                     <?php }?>
                                                     <td class=''>
-                                                        <a href="<?=base_url('toggle-kart-status/').$d->id.'/'.$d->is_active?>"  onclick="return confirm('Change status of this kart?');" class="" data-toggle="tooltip" data-placement="top" title="Toggle status"><i class="badge-circle badge-circle-light-secondary text-info bx bx-transfer-alt font-medium-1"></i></a>
+                                                        <a href="<?=base_url('toggle-user-status/').$d->id.'/'.$d->is_active?>"  onclick="return confirm('Change status of this user?');" class="" data-toggle="tooltip" data-placement="top" title="Toggle status"><i class="badge-circle badge-circle-light-secondary text-info bx bx-transfer-alt font-medium-1"></i></a>
 
-                                                        <!-- <a href="<?=base_url('delete-kart/').$d->id?>"  onclick="return confirm('Delete this kart?');" class="" data-toggle="tooltip" data-placement="top" title="Delete kart"><i class="badge-circle badge-circle-light-secondary text-danger bx bx-trash font-medium-1"></i></a> -->
+                                                        <!-- <a href="<?=base_url('delete-user/').$d->id?>"  onclick="return confirm('Delete this user?');" class="" data-toggle="tooltip" data-placement="top" title="Delete user"><i class="badge-circle badge-circle-light-secondary text-danger bx bx-trash font-medium-1"></i></a> -->
                                                     </td>
                                                 </tr>
                                             <?php }?>

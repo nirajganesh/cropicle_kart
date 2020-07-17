@@ -55,4 +55,18 @@ class DeleteAdm extends MY_Controller {
             }
         }
 
+        public function user($id)
+        {
+            $status= $this->delete->deleteById('users','id',$id);
+            $status= $this->delete->deleteById('user_info','user_id',$id);
+            if($status){
+                $this->session->set_flashdata('success','user deleted!');
+                redirect('karts');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error!');
+                redirect('karts');
+            }
+        }
+
 }

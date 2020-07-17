@@ -115,6 +115,23 @@ class Admin extends MY_Controller {
 		$this->load->view('admin/footer');
 	}
 
+	public function Users()
+	{
+		$users=$this->fetch->getInfoParams('users','role_id','3');
+		$this->load->view('admin/header',['title'=>'Users','data'=>$users]);
+		$this->load->view('admin/users');
+		$this->load->view('admin/footer');
+	}
+
+	public function userDemands()
+	{
+		$pending=$this->fetch->userDemands('PENDING');
+		$approved=$this->fetch->userDemands('APPROVED');
+		$this->load->view('admin/header',['title'=>'User demands','pending'=>$pending,'approved'=>$approved]);
+		$this->load->view('admin/user-demands');
+		$this->load->view('admin/footer');
+	}
+
 	public function orders()
 	{
 		$this->load->view('admin/header',['title'=>'Orders']);

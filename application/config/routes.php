@@ -86,7 +86,12 @@ $route['delete-loc/(:num)'] = 'DeleteAdm/location/$1';
 
 $route['karts'] = 'Admin/kartUsers';
 $route['toggle-kart-status/(:num)/(:num)'] = 'EditAdm/kartStatus/$1/$2';
+$route['toggle-user-status/(:num)/(:num)'] = 'EditAdm/userStatus/$1/$2';
 $route['delete-kart/(:num)'] = 'DeleteAdm/kart/$1';
+$route['delete-user/(:num)'] = 'DeleteAdm/user/$1';
 
 $route['kart-orders'] = 'Admin/kartOrders';
 $route['kart-payments'] = 'Admin/kartPayments';
+
+$route['users'] = 'Admin/Users';
+$route['user-demands'] = 'Admin/userDemands';

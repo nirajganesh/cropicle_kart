@@ -128,6 +128,18 @@ class GetModel extends CI_Model{
         }
     }
 
+    public function userDemands($status)
+    {
+        $demands=$this->db->select('c.id, c.created, c.demand_amount, c.customer_remarks, u.name')
+                        ->from('customer_demands c')
+                        ->join('users u', 'u.id = c.user_id', 'LEFT')
+                        ->order_by('c.id','desc')
+                        ->where('c.status',$status)
+                        ->get()
+                        ->result();
+        return $demands;
+    }
+
     public function orders($status)
     {
         $orders=$this->db->select('o.id, o.date, o.total_qty, o.total_amt, u.name')

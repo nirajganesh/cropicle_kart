@@ -152,6 +152,27 @@ class EditAdm extends MY_Controller {
             }
         }
 
+        public function userStatus($id,$current_stat)
+        {
+            if($current_stat==0){
+                $data['is_active']=1;
+                $data['modified']=date('Y-m-d H:i:s');
+            }
+            else{
+                $data['is_active']=0;
+                $data['modified']=date('Y-m-d H:i:s');
+            }
+            $status= $this->edit->updateInfoById('users',$data,'id', $id);
+            if($status){
+                $this->session->set_flashdata('success','User status updated !' );
+                redirect('users');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('users');
+            }
+        }
+
         
         public function approveOrder($oid)
         {
