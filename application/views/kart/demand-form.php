@@ -45,13 +45,13 @@
 															<div class="col-md-6 col-5 pr-0 px-md-1 mb-1">
 																<select name="item_id[]" class="select form-control" onchange="checkSelects()" required>
 																	<option value="">Items</option>
-																	<?php foreach($data as $d){?>
-																		<option value="<?=$d->id?>"><?=$d->item_name.'&nbsp;(Rs. '.$d->item_price_kart.'/'.$d->unit_short_name.')'.'&nbsp;(max:'.$d->max_order_qty.' '.$d->unit_short_name.')'?></option>
+																	<?php $c=100; foreach($data as $d){?>
+																		<option value="<?=$d->id?>" data-max="<?=$d->max_order_qty?>" data-row="<?=$c?>" ><?=$d->item_name.'&nbsp;(Rs. '.$d->item_price_kart.'/'.$d->unit_short_name.')'.'&nbsp;(max:'.$d->max_order_qty.' '.$d->unit_short_name.')'?></option>
 																	<?php }?>
 																</select>
 															</div>
 															<div class="input-group col-md-3 col-5 mb-1">
-																<input type="number" name="qty[]" step="0.25" min="0" class="digits form-control" placeholder="Qty" aria-describedby="basic-addon2" required>
+																<input type="number" name="qty[]" step="0.25" min="0" class="digits form-control maxQty<?=$c?>" placeholder="Qty" aria-describedby="basic-addon2" required>
 																<div class="input-group-append">
 																	<span class="input-group-text font-small-3 " style="padding:0 5px" id="basic-addon2">kg</span>
 																</div>
@@ -102,12 +102,12 @@
                         <select name="item_id[]" class="select form-control" onchange="checkSelects()" required>
                             <option value="">Items</option>
                             <?php foreach($data as $d){?>
-                                <option value="<?=$d->id?>"><?=$d->item_name.'&nbsp;(Rs. '.$d->item_price_kart.'/'.$d->unit_short_name.')'.'&nbsp;(max:'.$d->max_order_qty.' '.$d->unit_short_name.')'?></option>
+                                <option data-max="<?=$d->max_order_qty?>" data-row="`+i+`" value="<?=$d->id?>"><?=$d->item_name.'&nbsp;(Rs. '.$d->item_price_kart.'/'.$d->unit_short_name.')'.'&nbsp;(max:'.$d->max_order_qty.' '.$d->unit_short_name.')'?></option>
                             <?php }?>
                         </select>
                     </div>
                     <div class="input-group col-md-3 col-5 mb-1">
-                        <input type="number" name="qty[]" step="0.25" min="0" class="digits form-control"  placeholder="Qty" aria-describedby="basic-addon2" required>
+                        <input type="number" name="qty[]" step="0.25" min="0" class="digits form-control maxQty`+i+`"  placeholder="Qty" aria-describedby="basic-addon2" required>
                         <div class="input-group-append">
                             <span class="input-group-text font-small-3 " style="padding:0 5px" id="basic-addon2">kg</span>
                         </div>
@@ -158,14 +158,18 @@
 
 
         // check for duplicate items
-        function checkSelects() 
+        function checkSelects(event) 
         {
+            var elem=this.event.target.selectedOptions;
+            var max=elem[0].dataset.max;
+            var row=elem[0].dataset.row;
+            $('.maxQty'+row).val(max);
+            $('.maxQty'+row).attr('max',max);
             var $elements = $('select');
             $elements
                 .removeClass('errorB')
                 .each(function () {
                     var selectedValue = this.value;
-
                     $elements
                         .not(this)
                         .filter(function() {
@@ -173,6 +177,10 @@
                         })
                         .addClass('errorB');
                 });
+        }
+
+        // Add max value rule
+        function addMaxRule(event){
         }
 
 
@@ -184,23 +192,25 @@
             else{
                 var form = $('#demand-form');
                 var url = form.attr('action');
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: form.serialize(),
-                    success: function(data)
-                    {
-                        if(data){
-                            window.location.replace('demand-lists');
+                if(form.valid()){
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: form.serialize(),
+                        success: function(data)
+                        {
+                            if(data){
+                                window.location.replace('demand-lists');
+                            }
+                            else{
+                                toastr.error('Invalid/incomplete data submitted', 'Error !', {"showMethod": "slideDown","timeOut": 0,"closeButton": true});
+                            }
+                        },
+                        error: function(){
+                            alert('error');
                         }
-                        else{
-                            toastr.error('Invalid/incomplete data submitted', 'Error !', {"showMethod": "slideDown","timeOut": 0,"closeButton": true});
-                        }
-                    },
-                    error: function(){
-                        alert('error');
-                    }
-                });
+                    });
+                }
             }
             
         });
