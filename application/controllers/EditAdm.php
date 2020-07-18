@@ -172,7 +172,6 @@ class EditAdm extends MY_Controller {
                 redirect('users');
             }
         }
-
         
         public function approveOrder($oid)
         {
@@ -247,6 +246,66 @@ class EditAdm extends MY_Controller {
             else{
                 $this->session->set_flashdata('success','Kart order approved !');
                 redirect('kart-orders');
+            }
+        }
+
+        public function cancelOrder($oid)
+        {
+            $data['status']="REJECTED";
+            $this->db->trans_start();
+                $params = array("id"=>$oid);
+                $status= $this->edit->updateInfoByParams('orders',$data,$params);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->session->set_flashdata('failed','some error occured');
+                redirect('kart-orders');
+            }
+            else{
+                $this->session->set_flashdata('success','Order rejected !');
+                redirect('kart-orders');
+            }
+        }
+        
+        public function approveDemand($did)
+        {
+            $data=$this->input->post();
+            $data['status']="APPROVED";
+            // echo '<pre>';var_dump($data);exit;
+            $this->db->trans_start();
+                $params = array("id"=>$did);
+                $status= $this->edit->updateInfoByParams('customer_demands',$data,$params);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->session->set_flashdata('failed','some error occured');
+                redirect('user-demands');
+            }
+            else{
+                $this->session->set_flashdata('success','User demand approved !');
+                redirect('user-demands');
+            }
+        }
+        
+        public function rejectDemand($did)
+        {
+            $data=$this->input->post();
+            $data['status']="REJECTED";
+            $this->db->trans_start();
+                $params = array("id"=>$did);
+                $status= $this->edit->updateInfoByParams('customer_demands',$data,$params);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->session->set_flashdata('failed','some error occured');
+                redirect('user-demands');
+            }
+            else{
+                $this->session->set_flashdata('success','User demand rejected !');
+                redirect('user-demands');
             }
         }
 

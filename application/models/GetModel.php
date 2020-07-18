@@ -140,6 +140,19 @@ class GetModel extends CI_Model{
         return $demands;
     }
 
+           
+    public function userDemandDetails($id)
+    {
+        $items=$this->db->select('dd.item_quantity, dd.item_id, i.item_name, i.item_img, dd.item_price_customer')
+                        ->from('customer_demand_details dd')
+                        ->join('items_master i', 'i.id = dd.item_id', 'LEFT')
+                        // ->where('i.is_active','1')
+                        ->where('dd.customer_demand_id',$id)
+                        ->get()
+                        ->result();
+        return $items;
+    }
+
     public function orders($status)
     {
         $orders=$this->db->select('o.id, o.date, o.total_qty, o.total_amt, u.name')

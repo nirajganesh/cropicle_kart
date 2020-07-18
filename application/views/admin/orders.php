@@ -22,7 +22,7 @@
         </div>
         <div class="content-body">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title text-warning">Pending orders list</h4>
@@ -61,7 +61,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+
+                <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title text-success">Delivered orders list</h4>
@@ -88,6 +89,46 @@
                                                 <td>Rs. <?=$d->total_amt?>/-</td>
                                                 <td class='d-flex'>
                                                     <span data-id='<?=$d->id?>' class="deliveredOrderOpen">
+                                                        <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        <?php }?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title text-danger">Rejected orders list</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body card-dashboard">
+                                <div class="table-responsive">
+                                    <table class="table table-striped order-dt">
+                                        <thead>
+                                            <tr>
+                                                <th>Order no.</th>
+                                                <th>Ordered by</th>
+                                                <th>Order Date</th>
+                                                <th>Order Amount</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach($rejected as $r){?>
+                                            <tr>
+                                                <td><?=$r->id?></td>
+                                                <td><?=$r->name?></td>
+                                                <td><?=date('d-M-Y',strtotime($r->date))?></td>
+                                                <td>Rs. <?=$r->total_amt?>/-</td>
+                                                <td class='d-flex'>
+                                                    <span data-id='<?=$r->id?>' class="rejectedOrderOpen">
                                                         <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
                                                     </span>
                                                 </td>

@@ -115,7 +115,8 @@ class Home extends MY_Controller {
 	{
 		$ordered=$this->fetch->kartOrders('ORDERED');
 		$delivered=$this->fetch->kartOrders('DELIVERED');
-		$this->load->view('kart/header',['title'=>'Orders', 'ordered'=>$ordered, 'delivered'=>$delivered]);
+		$rejected=$this->fetch->kartOrders('REJECTED');
+		$this->load->view('kart/header',['title'=>'Orders', 'ordered'=>$ordered, 'delivered'=>$delivered, 'rejected'=>$rejected]);
 		$this->load->view('kart/orders');
 		$this->load->view('kart/footer');
 	}
@@ -282,6 +283,45 @@ class Home extends MY_Controller {
 				</div>';
 		echo $response;
 	}
+
+	// Rejected order details (AJAX Modal)
+	public function rOrderDetails()
+	{
+		$list=$this->fetch->orderDetailsById($this->input->post('id'));
+		$info=$this->fetch->getInfoById('orders','id',$this->input->post('id'));
+		$amt=0;
+		// echo'<pre>';var_dump($list);exit;
+		$response='
+			<div class="row">
+				<p class="text-dark col-5">Order no. : <strong>'.$this->input->post('id').'</strong></p>
+				<p class="text-dark col-7 text-right">Order date : '.date('d-M-Y',strtotime($info->date)).'</p>
+			</div>
+			<div class="row">
+				<p class="ml-1 text-dark">Status : <strong class="text-danger">REJECTED</strong></p>
+			</div>
+			<div class="row">
+				<p class="ml-1 text-dark">No. of items - '.sizeof($list).'</p>
+			</div>
+			<hr>
+				<div class="row">';
+		foreach($list as $i){
+			$amt+=$i->qty*$i->item_price_kart;
+			$response.='
+						<div class="col-sm-6 p-0 pt-1 border-right d-flex">
+							<div class="col-6">'.$i->item_name.'</div>
+							<div class="col-6">'.$i->qty.' Kg</div>
+						</div>';
+		}	
+		$response.='
+					<div class="col-12 p-0 mt-2">
+						<mark class="col py-1">Amount: Rs.'.$amt.'/-</mark>
+					</div>
+				</div>
+				<div class="modal-footer px-0">
+					<button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+				</div>';
+		echo $response;
+	}
 	
 	// Delivered order details (AJAX Modal)
 	public function dOrderDetails()
@@ -341,8 +381,6 @@ class Home extends MY_Controller {
 		echo $response;
 	}
 
-
-	
 	public function Mail()
 	{
 		$this->form_validation->set_rules('name', 'Name', 'required');

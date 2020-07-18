@@ -67,7 +67,8 @@ class Admin extends MY_Controller {
 	{
 		$pending=$this->fetch->orders('ORDERED');
 		$delivered=$this->fetch->orders('DELIVERED');
-		$this->load->view('admin/header',['title'=>'Kart orders','pending'=>$pending,'delivered'=>$delivered]);
+		$rejected=$this->fetch->orders('REJECTED');
+		$this->load->view('admin/header',['title'=>'Kart orders','pending'=>$pending,'delivered'=>$delivered,'rejected'=>$rejected]);
 		$this->load->view('admin/orders');
 		$this->load->view('admin/footer');
 	}
@@ -127,7 +128,8 @@ class Admin extends MY_Controller {
 	{
 		$pending=$this->fetch->userDemands('PENDING');
 		$approved=$this->fetch->userDemands('APPROVED');
-		$this->load->view('admin/header',['title'=>'User demands','pending'=>$pending,'approved'=>$approved]);
+		$rejected=$this->fetch->userDemands('REJECTED');
+		$this->load->view('admin/header',['title'=>'User demands','pending'=>$pending,'approved'=>$approved,'rejected'=>$rejected]);
 		$this->load->view('admin/user-demands');
 		$this->load->view('admin/footer');
 	}
@@ -181,7 +183,7 @@ class Admin extends MY_Controller {
 					</div>
 				</div>
 				<div class="modal-footer px-0">
-					<a href="'.base_url('Edit/cancelOrder/').$this->input->post('id').'" class="btn btn-danger">Reject</a>
+					<a href="'.base_url('EditAdm/cancelOrder/').$this->input->post('id').'" class="btn btn-danger">Reject</a>
 					<button type="submit" class="btn btn-success">Approve</button>
 				</div>
 			</form>';
@@ -244,6 +246,262 @@ class Admin extends MY_Controller {
 					<button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
 				</div>';
 		echo $response;
+	}
+
+	// Rejected order details (AJAX Modal)
+	public function rOrderDetails()
+	{
+		$list=$this->fetch->orderDetailsById($this->input->post('id'));
+		$amt=0;
+		// echo'<pre>';var_dump($list);exit;
+		$response='
+			<div class="row">
+				<p class="ml-1 text-dark">Order no. - <strong>'.$this->input->post('id').'</strong></p>
+			</div>
+			<div class="row">
+				<p class="ml-1 text-dark">Status : <strong class="text-danger">Rejected</strong></p>
+			</div>
+			<div class="row">
+				<p class="ml-1 text-dark">No. of items - '.sizeof($list).'</p>
+			</div>
+			<hr>
+				<div class="row">';
+		foreach($list as $i){
+			$amt+=$i->qty*$i->item_price_kart;
+			$response.='
+						<div class="col-sm-6 p-0 pt-1 border-right d-flex">
+							<div class="col-6">'.$i->item_name.' -</div>
+							<div class="col-6">'.$i->qty.' Kg</div>
+						</div>';
+		}	
+		$response.='
+					<div class="col-12 p-0 mt-2">
+						<mark class="col py-1">Amount: Rs.'.$amt.'/-</mark>
+					</div>
+				</div>
+				<div class="modal-footer px-0">
+					<button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+				</div>';
+		echo $response;
+	}
+
+	
+	// Pending user demand details for approval (AJAX Modal)
+	public function pDemandApprove()
+	{
+		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
+		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		// echo'<pre>';var_dump($list);exit;
+		$response='
+		<div class="row mx-0">
+			<p class="text-dark col-sm-5 pl-1"> Demand id. : <strong>'.$this->input->post('id').'</strong></p>
+			<p class="text-dark col-sm-7 text-sm-right pl-1 pl-sm-0">Demand date : '.date('d-M-Y',strtotime($info->created)).'</p>
+		</div>
+		<div class="row mx-0">
+			<p class="ml-1 text-dark">Status : <strong class="text-warning">'.$info->status.'</strong></p>
+		</div>
+		<div class="row mx-0 pb-0 mb-0">
+			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
+		</div>
+		<hr class="my-0">
+			<div class="row">
+				<div class="col-12 p-0 my-2 d-flex bg-dark py-1">
+					<div class="col-3 text-white"><strong>Item</strong></div>
+					<div class="col-4 text-white pl-sm-1 pl-0"><strong>Price</strong></div>
+					<div class="col-2 text-white pl-sm-1 pl-0"><strong>Qty</strong></div>
+					<div class="col-3 text-white"><strong>Total</strong></div>
+				</div>';
+		foreach($demand as $i){
+			$response.='
+						<div class="col-12 p-0 mb-1 d-flex">
+							<div class="col-3">'.$i->item_name.' -</div>
+							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/Kg</div>
+							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' Kg</div>
+							<div class="col-3">₹'.$i->item_price_customer*$i->item_quantity.'</div>
+						</div>';
+		}	
+		$response.='
+				</div>
+				<div class="row mt-0 mx-0">
+					<mark class="col-sm-3 col-12 py-1">Amount: ₹'.$info->demand_amount.'/-</mark> 
+				</div>
+				<div class="row mt-1 px-0 mx-0">
+					<div class="col py-1">Customer remarks: '.$info->customer_remarks.'</div>
+				</div>
+				<form method="POST" action="EditAdm/approveDemand/'.$this->input->post('id').'">
+					<div class="row border mt-1 px-0 mx-0">
+						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter your remarks for this demand"></textarea>
+					</div>
+					<div class="modal-footer px-0">
+						<button type="submit" class="btn btn-success">Approve</button>
+					</div>
+				<form>
+				
+				';
+		echo $response;
+	}
+	
+	// Pending user demand details for rejection (AJAX Modal)
+	public function pDemandReject()
+	{
+		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
+		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		// echo'<pre>';var_dump($list);exit;
+		$response='
+		<div class="row mx-0">
+			<p class="text-dark col-sm-5 pl-1"> Demand id. : <strong>'.$this->input->post('id').'</strong></p>
+			<p class="text-dark col-sm-7 text-sm-right pl-1 pl-sm-0">Demand date : '.date('d-M-Y',strtotime($info->created)).'</p>
+		</div>
+		<div class="row mx-0">
+			<p class="ml-1 text-dark">Status : <strong class="text-warning">'.$info->status.'</strong></p>
+		</div>
+		<div class="row mx-0 pb-0 mb-0">
+			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
+		</div>
+		<hr class="my-0">
+			<div class="row">
+				<div class="col-12 p-0 my-2 d-flex bg-dark py-1">
+					<div class="col-3 text-white"><strong>Item</strong></div>
+					<div class="col-4 text-white pl-sm-1 pl-0"><strong>Price</strong></div>
+					<div class="col-2 text-white pl-sm-1 pl-0"><strong>Qty</strong></div>
+					<div class="col-3 text-white"><strong>Total</strong></div>
+				</div>';
+		foreach($demand as $i){
+			$response.='
+						<div class="col-12 p-0 mb-1 d-flex">
+							<div class="col-3">'.$i->item_name.' -</div>
+							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/Kg</div>
+							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' Kg</div>
+							<div class="col-3">₹'.$i->item_price_customer*$i->item_quantity.'</div>
+						</div>';
+		}	
+		$response.='
+				</div>
+				<div class="row mt-0 mx-0">
+					<mark class="col-sm-3 col-12 py-1">Amount: ₹'.$info->demand_amount.'/-</mark> 
+				</div>
+				<div class="row mt-1 px-0 mx-0">
+					<div class="col py-1">Customer remarks: '.$info->customer_remarks.'</div>
+				</div>
+				<form method="POST" action="EditAdm/rejectDemand/'.$this->input->post('id').'">
+					<div class="row border mt-1 px-0 mx-0">
+						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter your remarks for this demand"></textarea>
+					</div>
+					<div class="modal-footer px-0">
+						<button type="submit" class="btn btn-danger">Reject</button>
+					</div>
+				<form>
+				
+				';
+		echo $response;
+	}
+	
+	// Approved user demand details (AJAX Modal)
+	public function dDemandDetails()
+	{
+		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
+		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		// echo'<pre>';var_dump($list);exit;
+		$response='
+		<div class="row mx-0">
+			<p class="text-dark col-sm-5 pl-1"> Demand id. : <strong>'.$this->input->post('id').'</strong></p>
+			<p class="text-dark col-sm-7 text-sm-right pl-1 pl-sm-0">Demand date : '.date('d-M-Y',strtotime($info->created)).'</p>
+		</div>
+		<div class="row mx-0">
+			<p class="ml-1 text-dark">Status : <strong class="text-success">'.$info->status.'</strong></p>
+		</div>
+		<div class="row mx-0 pb-0 mb-0">
+			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
+		</div>
+		<hr class="my-0">
+			<div class="row">
+				<div class="col-12 p-0 my-2 d-flex bg-dark py-1">
+					<div class="col-3 text-white"><strong>Item</strong></div>
+					<div class="col-4 text-white pl-sm-1 pl-0"><strong>Price</strong></div>
+					<div class="col-2 text-white pl-sm-1 pl-0"><strong>Qty</strong></div>
+					<div class="col-3 text-white"><strong>Total</strong></div>
+				</div>';
+		foreach($demand as $i){
+			$response.='
+						<div class="col-12 p-0 mb-1 d-flex">
+							<div class="col-3">'.$i->item_name.' -</div>
+							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/Kg</div>
+							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' Kg</div>
+							<div class="col-3">₹'.$i->item_price_customer*$i->item_quantity.'</div>
+						</div>';
+		}	
+		$response.='
+				</div>
+				<div class="row mt-0 mx-0">
+					<mark class="col-sm-3 col-12 py-1">Amount: ₹'.$info->demand_amount.'/-</mark> 
+				</div>
+				<div class="row mt-1 px-0 mx-0">
+					<div class="col py-1">Customer remarks: '.$info->customer_remarks.'</div>
+				</div>
+				<div class="row mt-1 px-0 mx-0">
+					<div class="col py-1">Admin remarks: '.$info->admin_remarks.'</div>
+				</div>
+				<div class="modal-footer px-0">
+					<button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+				</div>
+				
+				';
+		echo $response;
+	
+	}
+	
+	// Rejected user demand details (AJAX Modal)
+	public function rDemandDetails()
+	{
+		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
+		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		// echo'<pre>';var_dump($list);exit;
+		$response='
+		<div class="row mx-0">
+			<p class="text-dark col-sm-5 pl-1"> Demand id. : <strong>'.$this->input->post('id').'</strong></p>
+			<p class="text-dark col-sm-7 text-sm-right pl-1 pl-sm-0">Demand date : '.date('d-M-Y',strtotime($info->created)).'</p>
+		</div>
+		<div class="row mx-0">
+			<p class="ml-1 text-dark">Status : <strong class="text-danger">'.$info->status.'</strong></p>
+		</div>
+		<div class="row mx-0 pb-0 mb-0">
+			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
+		</div>
+		<hr class="my-0">
+			<div class="row">
+				<div class="col-12 p-0 my-2 d-flex bg-dark py-1">
+					<div class="col-3 text-white"><strong>Item</strong></div>
+					<div class="col-4 text-white pl-sm-1 pl-0"><strong>Price</strong></div>
+					<div class="col-2 text-white pl-sm-1 pl-0"><strong>Qty</strong></div>
+					<div class="col-3 text-white"><strong>Total</strong></div>
+				</div>';
+		foreach($demand as $i){
+			$response.='
+						<div class="col-12 p-0 mb-1 d-flex">
+							<div class="col-3">'.$i->item_name.' -</div>
+							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/Kg</div>
+							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' Kg</div>
+							<div class="col-3">₹'.$i->item_price_customer*$i->item_quantity.'</div>
+						</div>';
+		}	
+		$response.='
+				</div>
+				<div class="row mt-0 mx-0">
+					<mark class="col-sm-3 col-12 py-1">Amount: ₹'.$info->demand_amount.'/-</mark> 
+				</div>
+				<div class="row mt-1 px-0 mx-0">
+					<div class="col py-1">Customer remarks: '.$info->customer_remarks.'</div>
+				</div>
+				<div class="row mt-1 px-0 mx-0">
+					<div class="col py-1">Admin remarks: '.$info->admin_remarks.'</div>
+				</div>
+				<div class="modal-footer px-0">
+					<button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+				</div>
+				
+				';
+		echo $response;
+	
 	}
 
 

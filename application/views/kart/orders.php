@@ -67,6 +67,19 @@
                                                 </td>
                                             </tr>
                                         <?php }?>
+                                        <?php foreach($rejected as $r){?>
+                                            <tr>
+                                                <td><?=$r->id?></td>
+                                                <td><?=date('d-M-Y',strtotime($r->date))?></td>
+                                                <td>Rs. <?=$r->total_amt?>/-</td>
+                                                <td class="text-danger">Rejected</td>
+                                                <td class='d-flex'>
+                                                    <span data-id='<?=$r->id?>' class="kartRejectedOrderOpen">
+                                                        <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        <?php }?>
                                         </tbody>
                                     </table>
                                 </div>

@@ -22,7 +22,7 @@
         </div>
         <div class="content-body">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title text-warning">Pending User demands list</h4>
@@ -50,8 +50,11 @@
                                                 <td>Rs. <?=$p->demand_amount?>/-</td>
                                                 <td><?=$p->customer_remarks?></td>
                                                 <td class='d-flex'>
-                                                    <span data-id='<?=$p->id?>' class="pendingOrderOpen">
-                                                        <a href="#" data-toggle="tooltip" title="Approve/Reject"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
+                                                    <span data-id='<?=$p->id?>' class="pendingDemandReject mr-1">
+                                                        <a href="#" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-secondary bx bx-x-circle text-primary font-medium-5"></i></a>
+                                                    </span>
+                                                    <span data-id='<?=$p->id?>' class="pendingDemandApprove">
+                                                        <a href="#" data-toggle="tooltip" title="Approve"><i class="badge-circle badge-circle-light-secondary bx bx-check-circle text-primary font-medium-5"></i></a>
                                                     </span>
                                                 </td>
                                             </tr>
@@ -63,7 +66,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+
+                <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title text-success">Approved User demands list</h4>
@@ -91,8 +95,50 @@
                                                 <td>Rs. <?=$d->demand_amount?>/-</td>
                                                 <td><?=$d->customer_remarks?></td>
                                                 <td class='d-flex'>
-                                                    <span data-id='<?=$d->id?>' class="deliveredOrderOpen">
-                                                        <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
+                                                    <span data-id='<?=$d->id?>' class="approvedDemandDetails">
+                                                        <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        <?php }?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title text-danger">Rejected User demands list</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body card-dashboard">
+                                <div class="table-responsive">
+                                    <table class="table table-striped order-dt">
+                                        <thead>
+                                            <tr>
+                                                <th>Demand no.</th>
+                                                <th>Demanded by</th>
+                                                <th>Date</th>
+                                                <th>Total Amount</th>
+                                                <th>Remarks</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach($rejected as $r){?>
+                                            <tr>
+                                                <td><?=$r->id?></td>
+                                                <td><?=$r->name?></td>
+                                                <td><?=date('d-M-Y',strtotime($r->created))?></td>
+                                                <td>Rs. <?=$r->demand_amount?>/-</td>
+                                                <td><?=$r->customer_remarks?></td>
+                                                <td class='d-flex'>
+                                                    <span data-id='<?=$r->id?>' class="rejectedDemandDetails">
+                                                        <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
                                                     </span>
                                                 </td>
                                             </tr>
@@ -109,7 +155,7 @@
     </div>
 </div>
 
-<div class="modal fade " id="orderModal" tabindex="-1" role="dialog" aria-labelledby="Order Modal" aria-modal="true">
+<div class="modal fade " id="orderModal" tabindex="-1" role="dialog" aria-labelledby="Demand Modal" aria-modal="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">

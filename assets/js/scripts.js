@@ -199,6 +199,25 @@
         });
     });
 
+    $('.rejectedOrderOpen').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/rOrderDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
     $('.kartPendingOrderOpen').click(function(){
         var id=$(this).data('id');
         $.ajax({
@@ -227,6 +246,103 @@
         var id=$(this).data('id');
         $.ajax({
             url: 'Home/dOrderDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
+    $('.kartRejectedOrderOpen').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Home/rOrderDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
+    $('.pendingDemandApprove').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/pDemandApprove',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+                $('#orderModal .modal-body textarea').focus();
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
+    $('.pendingDemandReject').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/pDemandReject',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+                $('#orderModal .modal-body textarea').focus();
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
+    $('.approvedDemandDetails').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/dDemandDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
+    $('.rejectedDemandDetails').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/rDemandDetails',
             type:'post',
             data: {id: id},
             beforeSend : function(){
