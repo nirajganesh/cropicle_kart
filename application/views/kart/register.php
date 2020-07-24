@@ -11,7 +11,7 @@
     <meta name="author" content="Ankur (Cluebix)">
     <title>Kart.cropicle - Register</title>
     <link rel="apple-touch-icon" href="<?=base_url()?>app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -52,11 +52,12 @@
             <div class="content-body">
                 <!-- Form wizard with step validation section start -->
                 <section id="validation row border border-success">
-                    <div class="row row-flex col-10 mx-auto align-items-stretch pb-5">
+                    <div class="row row-flex col-11 col-sm-10 mx-auto align-items-stretch pb-5 px-0">
                         <div class="col-md-7 bg-white shadow-lg col-12 px-0 m-0">
-                            <div class="cards mb-0 px-1">
+                            <div class="car mb-0 px-1">
                                 <div class="card-header pb-0">
-                                    <div class="card-title mb-1">
+                                    <div class="card-title mb-1 text-center">
+                                        <img src="<?=base_url('app-assets/images/logo/logo.png')?>" class="d-md-none" alt="logo" height="40">
                                         <h4 class="text-center pt-2">Sign Up</h4>
                                     </div>
                                 </div>
@@ -152,6 +153,7 @@
                             <small class="brand-name d-flex align-items-center text-muted" style="position: absolute; bottom: 5px; left: 15px;">Kart.cropicle</small>
                         </div>
                         <div class="col-md-5 d-md-block d-none text-center p-3 shadow-lg" style="z-index: -1;">
+                            <img class="img-float" src="<?=base_url()?>app-assets/images/logo/badge-logo.png" height="40" alt="logo"  style="position:absolute;top:0;right:0;">
                             <img class="img-fluid" src="<?=base_url()?>app-assets/images/pages/register.png" alt="branding logo">
                         </div>
                     </div>

@@ -11,7 +11,7 @@
     <meta name="author" content="Ankur (Cluebix)">
     <title>Kart.cropicle - Admin Login</title>
     <link rel="apple-touch-icon" href="<?=base_url()?>app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -59,10 +59,11 @@
                             <div class="row m-0">
                                 <!-- left section-login -->
                                 <div class="col-md-6 col-12 px-0">
-                                    <div class="card disable-rounded-right mb-0 p-2 h-100 d-flex justify-content-center">
-                                        <div class="card-header p-0 pt-1">
-                                            <div class="card-title">
-                                                <h4 class="text-center">Welcome Admin</h4>
+                                    <div class="card disable-rounded-right mb-0 p-2 pt-0 h-100 d-flex justify-content-center">
+                                        <div class="card-header p-0 ">
+                                            <div class="card-title text-center">
+                                                <img src="<?=base_url('app-assets/images/logo/logo.png')?>" class="d-md-none mb-2" alt="logo" height="40">
+                                                <h4 class="text-center mt-2">Welcome Admin</h4>
                                             </div>
                                         </div>
                                         <div class="card-content">
@@ -94,13 +95,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <small class="brand-name d-flex align-items-center text-muted" style="position: absolute; bottom: 5px; left: 15px;">Kart.cropicle Admin</small>
                                 </div>
                                 <!-- right section image -->
-                                <div class="col-md-6 d-md-block d-none text-center align-self-center p-3">
-                                    <div class="card-content">
-                                        <img class="img-fluid" src="<?=base_url()?>app-assets/images/pages/login.png" alt="branding logo">
+                                <div class="col-md-6 d-md-block d-none text-center p-0">
+                                    <div class="card-content" style="position:relative">
+                                        <img class="img-fluid" src="<?=base_url()?>app-assets/images/pages/login-admin.png" alt="branding logo">
                                     </div>
                                 </div>
                             </div>
