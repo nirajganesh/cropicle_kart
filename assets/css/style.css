@@ -4,6 +4,12 @@ input[type="number"]::-webkit-inner-spin-button {
   height:auto !important;
 }
 
+.text-black{
+	color: black !important;
+}
+.badge-black{
+	background-color: black !important;
+}
 label.error{
 	color: red !important;
 }
@@ -29,10 +35,11 @@ label.error{
 }
 
 nav{
-	background-color:#FEC007 !important ;
+	background-color:#FFCC00 !important ;
 }
 nav.adminNav{
-	background-color:#079bfef3 !important ;
+	background-color:#A4DA21 !important ;
+	/* background-color:#079bfef3 !important ; */
 }
 
 @media(max-width:450px){

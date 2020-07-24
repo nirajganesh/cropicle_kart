@@ -11,7 +11,7 @@
     <meta name="author" content="Ankur (Cluebix)">
     <title>Cropicle Kart - <?=isset($title)?$title:''?></title>
     <link rel="apple-touch-icon" href="<?=base_url()?>app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -50,8 +50,8 @@
         <div class="navbar-header d-xl-block d-none">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item"><a class="navbar-brand" href="<?=base_url()?>">
-                        <div class="brand-logo mb-1"><img class="logo" src="<?=base_url()?>app-assets/images/logo/favicon.png"></div>
-                        <h2 class="brand-text mb-0">Cropicle</h2>
+                        <div class="brand-logo"><img class="logo" src="<?=base_url()?>app-assets/images/logo/favicon.png"></div>
+                        <!-- <h2 class="brand-text mb-0"></h2> -->
                     </a></li>
             </ul>
         </div>
@@ -60,16 +60,16 @@
                 <div class="navbar-collapse" id="navbar-mobile">
                     <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
                         <ul class="nav navbar-nav">
-                            <li class="nav-item mobile-menu mr-auto"><a class="nav-link nav-menu-main menu-toggle" href="#"><i class="text-white bx bx-menu"></i></a></li>
+                            <li class="nav-item mobile-menu mr-auto"><a class="nav-link nav-menu-main menu-toggle" href="#"><i class="text-black bx bx-menu"></i></a></li>
                         </ul>
                     </div>
                     <ul class="nav navbar-nav float-right d-flex align-items-center">
-                        <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span class="selected-language text-white d-lg-inline d-none">English</span></a>
+                        <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span class="selected-language text-black d-lg-inline d-none">English</span></a>
                             <div class="dropdown-menu" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="#" data-language="en"><i class="flag-icon flag-icon-us mr-50"></i>English</a>
                             </div>
                         </li>
-                        <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon text-white bx bx-fullscreen"></i></a></li>
-                        <li class="nav-item nav-search"><a class="nav-link nav-link-search pt-2"><i class="ficon text-white bx bx-search"></i></a>
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon text-black bx bx-fullscreen"></i></a></li>
+                        <li class="nav-item nav-search"><a class="nav-link nav-link-search pt-2"><i class="ficon text-black bx bx-search"></i></a>
                             <div class="search-input">
                                 <div class="search-input-icon"><i class="bx bx-search primary"></i></div>
                                 <input class="input" type="text" placeholder="Explore Kart.cropicle..." tabindex="-1" data-search="template-search">
@@ -78,7 +78,7 @@
                             </div>
                         </li>
                         <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="user-nav d-lg-flex d-none"><span class="user-name text-white"><?=$this->session->kart->name?></span></div><span><img class="round" src="<?=base_url()?>app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
+                                <div class="user-nav d-lg-flex d-none"><span class="user-name text-black"><?=$this->session->kart->name?></span></div><span><img class="round" src="<?=base_url()?>app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right pb-0">
                                 <a class="dropdown-item" href="<?=base_url('profile')?>"><i class="bx bx-user mr-50"></i> Edit Profile</a>
@@ -106,6 +106,7 @@
             </ul>
         </div>
         <div class="shadow-bottom"></div>
+        <hr class="my-1 mb-2">
         <!-- Horizontal menu content-->
         <div class="navbar-container main-menu-content mx-auto" data-menu="menu-container">
             <!-- include <?=base_url()?>includes/mixins-->
