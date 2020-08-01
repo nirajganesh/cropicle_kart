@@ -586,7 +586,7 @@ class Admin extends MY_Controller {
 					<p class="text-dark">Location : <strong class="text-dark"> '.$loc_info->area.', '.$loc_info->city.', '.$loc_info->state.' ('.$loc_info->pin_code.')</strong></p>
 				</div>';
 		}
-		if($user->login_oauth_uid==NULL){
+		if($user->login_oauth_uid!=NULL){
 			$response.='
 			<div class="row mx-0">
 				<p class="text-dark">Google signup</p>
