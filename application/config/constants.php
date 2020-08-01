@@ -88,5 +88,5 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 // CUSTOM CONSTANTS
 
-defined('MAIN_DOMAIN')      OR define('MAIN_DOMAIN', 'https://cropicle.com/');
-defined('KART_DOMAIN')      OR define('KART_DOMAIN', 'https://kart.cropicle.com/');
+defined('MAIN_DOMAIN')      OR define('MAIN_DOMAIN', 'http://localhost/cropicle/');
+defined('KART_DOMAIN')      OR define('KART_DOMAIN', 'http://localhost/kart.cropicle/');
