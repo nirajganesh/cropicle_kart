@@ -45,7 +45,7 @@
                                         <?php foreach($pending as $p){?>
                                             <tr>
                                                 <td><?=$p->id?></td>
-                                                <td><?=$p->name?></td>
+                                                <td><?=$p->name?> (Id: <?=$p->user_id?>)</td>
                                                 <td><?=date('d-M-Y',strtotime($p->created))?></td>
                                                 <td>Rs. <?=$p->demand_amount?>/-</td>
                                                 <td><?=$p->customer_remarks?></td>
@@ -90,7 +90,7 @@
                                         <?php foreach($approved as $d){?>
                                             <tr>
                                                 <td><?=$d->id?></td>
-                                                <td><?=$d->name?></td>
+                                                <td><?=$p->name?> (Id: <?=$p->user_id?>)</td>
                                                 <td><?=date('d-M-Y',strtotime($d->created))?></td>
                                                 <td>Rs. <?=$d->demand_amount?>/-</td>
                                                 <td><?=$d->customer_remarks?></td>
@@ -132,7 +132,7 @@
                                         <?php foreach($rejected as $r){?>
                                             <tr>
                                                 <td><?=$r->id?></td>
-                                                <td><?=$r->name?></td>
+                                                <td><?=$p->name?> (Id: <?=$p->user_id?>)</td>
                                                 <td><?=date('d-M-Y',strtotime($r->created))?></td>
                                                 <td>Rs. <?=$r->demand_amount?>/-</td>
                                                 <td><?=$r->customer_remarks?></td>

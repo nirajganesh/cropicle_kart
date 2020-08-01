@@ -130,7 +130,7 @@ class GetModel extends CI_Model{
 
     public function userDemands($status)
     {
-        $demands=$this->db->select('c.id, c.created, c.demand_amount, c.customer_remarks, u.name')
+        $demands=$this->db->select('c.id, c.created, c.demand_amount, c.customer_remarks, c.user_id, u.name')
                         ->from('customer_demands c')
                         ->join('users u', 'u.id = c.user_id', 'LEFT')
                         ->order_by('c.id','desc')
@@ -296,7 +296,6 @@ class GetModel extends CI_Model{
         }
     }
 
-
     public function getAdminProfile()
     {
         return $this->db->get('users')->row();
@@ -322,6 +321,29 @@ class GetModel extends CI_Model{
         }
         return false;
     }
+
+    public function getInfoQuery($table,$conds)
+    {
+        $this->db->where($conds);
+        return $this->db->get($table)->result();
+    }
+
+    public function getLastPayment($uid)
+    {
+        $last_order=$this->db->where('user_id',$uid)
+                ->where('status','DELIVERED')
+                ->order_by('id','desc')
+                ->limit(1)
+                ->get('orders')
+                ->row()->total_amt;
+        if(!empty($last_order)){
+            return $last_order;
+        }
+        else{
+            return false;
+        }
+    }
+
 
 
        // public function lastKartStock()

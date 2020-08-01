@@ -358,6 +358,25 @@
         });
     });
 
+    $('.userDetails').click(function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/userDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
 
 
 

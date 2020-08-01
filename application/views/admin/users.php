@@ -35,6 +35,7 @@
                                                     <th>User ID</th>
                                                     <th>Name</th>
                                                     <th>Contact no.</th>
+                                                    <th>E-mail</th>
                                                     <th>Registered on</th>
                                                     <th>Status</th>
                                                     <th>Actions</th>
@@ -46,15 +47,19 @@
                                                     <td><?=$d->id?></td>
                                                     <td><?=$d->name?></td>
                                                     <td><?=$d->mobile_no?></td>
+                                                    <td><?=$d->email?></td>
                                                     <td><?=date('d-M-Y',strtotime($d->created))?></td>
                                                     <?php if($d->is_active==1){?>
                                                         <td class="text-success">Active</td>
                                                     <?php } else {?>
                                                         <td class="text-warning">Inactive</td>
                                                     <?php }?>
-                                                    <td class=''>
+                                                    <td class='d-flex'>
                                                         <a href="<?=base_url('toggle-user-status/').$d->id.'/'.$d->is_active?>"  onclick="return confirm('Change status of this user?');" class="" data-toggle="tooltip" data-placement="top" title="Toggle status"><i class="badge-circle badge-circle-light-secondary text-info bx bx-transfer-alt font-medium-1"></i></a>
 
+                                                        <span data-id='<?=$d->id?>' class="userDetails ml-1">
+                                                            <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
+                                                        </span>
                                                         <!-- <a href="<?=base_url('delete-user/').$d->id?>"  onclick="return confirm('Delete this user?');" class="" data-toggle="tooltip" data-placement="top" title="Delete user"><i class="badge-circle badge-circle-light-secondary text-danger bx bx-trash font-medium-1"></i></a> -->
                                                     </td>
                                                 </tr>
@@ -71,7 +76,25 @@
         </div>
     </div>
 
-    <!-- END: Content-->
+    
+    <div class="modal fade " id="orderModal" tabindex="-1" role="dialog" aria-labelledby="User Modal" aria-modal="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLongTitle">User details</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="bx bx-x"></i>
+                    </button>
+                </div>
+                <div class="modal-body px-md-2 px-1">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- END: Content-->
+
 
     <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
     <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>

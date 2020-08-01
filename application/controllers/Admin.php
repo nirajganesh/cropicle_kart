@@ -14,17 +14,21 @@ class Admin extends MY_Controller {
 		$inactiveItems=$this->fetch->record_count('items_master','is_active','0');
 		$activeItems=$this->fetch->record_count('items_master','is_active','1');
 		$items=$this->fetch->record_count('items_master');
+		$locations=$this->fetch->record_count('locations_master');
 		$karts=$this->fetch->record_count('users','role_id','2');
+		$customers=$this->fetch->record_count('users','role_id','3');
 		$orders=$this->fetch->record_count('orders');
-		$payments=$this->fetch->record_count('payment_details');
+		$customer_demands=$this->fetch->record_count('customer_demands');
 		$last_payment='0';
 		$this->load->view('admin/header',['title'=>'Dashboard',
 										'inactiveItems'=>$inactiveItems,
 										'activeItems'=>$activeItems,
 										'items'=>$items,
+										'locations'=>$locations,
 										'karts'=>$karts,
+										'customers'=>$customers,
 										'orders'=>$orders,
-										'payments'=>$payments,
+										'customer_demands'=>$customer_demands,
 										'last_payment'=>$last_payment
 										]);
 		$this->load->view('admin/index');
@@ -291,6 +295,7 @@ class Admin extends MY_Controller {
 	{
 		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
 		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		$loc_info=$this->fetch->getInfoById('locations_master','id',$info->location_id);
 		// echo'<pre>';var_dump($list);exit;
 		$response='
 		<div class="row mx-0">
@@ -302,7 +307,16 @@ class Admin extends MY_Controller {
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
 			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
-		</div>
+		</div>';
+		if($loc_info){
+			$response.='	<div class="row mx-0 pb-0 mb-0">
+					<p class="ml-1 text-dark">For location : '.$loc_info->area.', '.$loc_info->city.', '.$loc_info->state.' ('.$loc_info->pin_code.')</p>
+				</div>
+				<div class="row mx-0 pb-0 mb-0">
+					<p class="ml-1 text-dark">For address : '.$info->address.'</p>
+				</div>';
+		}
+		$response.='
 		<hr class="my-0">
 			<div class="row">
 				<div class="col-12 p-0 my-2 d-flex bg-dark py-1">
@@ -346,6 +360,7 @@ class Admin extends MY_Controller {
 	{
 		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
 		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		$loc_info=$this->fetch->getInfoById('locations_master','id',$info->location_id);
 		// echo'<pre>';var_dump($list);exit;
 		$response='
 		<div class="row mx-0">
@@ -357,7 +372,16 @@ class Admin extends MY_Controller {
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
 			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
-		</div>
+		</div>';
+		if($loc_info){
+			$response.='	<div class="row mx-0 pb-0 mb-0">
+					<p class="ml-1 text-dark">For location : '.$loc_info->area.', '.$loc_info->city.', '.$loc_info->state.' ('.$loc_info->pin_code.')</p>
+				</div>
+				<div class="row mx-0 pb-0 mb-0">
+					<p class="ml-1 text-dark">For address : '.$info->address.'</p>
+				</div>';
+		}
+		$response.='
 		<hr class="my-0">
 			<div class="row">
 				<div class="col-12 p-0 my-2 d-flex bg-dark py-1">
@@ -401,6 +425,7 @@ class Admin extends MY_Controller {
 	{
 		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
 		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		$loc_info=$this->fetch->getInfoById('locations_master','id',$info->location_id);
 		// echo'<pre>';var_dump($list);exit;
 		$response='
 		<div class="row mx-0">
@@ -412,7 +437,16 @@ class Admin extends MY_Controller {
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
 			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
-		</div>
+		</div>';
+		if($loc_info){
+			$response.='	<div class="row mx-0 pb-0 mb-0">
+					<p class="ml-1 text-dark">For location : '.$loc_info->area.', '.$loc_info->city.', '.$loc_info->state.' ('.$loc_info->pin_code.')</p>
+				</div>
+				<div class="row mx-0 pb-0 mb-0">
+					<p class="ml-1 text-dark">For address : '.$info->address.'</p>
+				</div>';
+		}
+		$response.='
 		<hr class="my-0">
 			<div class="row">
 				<div class="col-12 p-0 my-2 d-flex bg-dark py-1">
@@ -455,6 +489,7 @@ class Admin extends MY_Controller {
 	{
 		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
 		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		$loc_info=$this->fetch->getInfoById('locations_master','id',$info->location_id);
 		// echo'<pre>';var_dump($list);exit;
 		$response='
 		<div class="row mx-0">
@@ -466,7 +501,16 @@ class Admin extends MY_Controller {
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
 			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
-		</div>
+		</div>';
+		if($loc_info){
+			$response.='	<div class="row mx-0 pb-0 mb-0">
+					<p class="ml-1 text-dark">For location : '.$loc_info->area.', '.$loc_info->city.', '.$loc_info->state.' ('.$loc_info->pin_code.')</p>
+				</div>
+				<div class="row mx-0 pb-0 mb-0">
+					<p class="ml-1 text-dark">For address : '.$info->address.'</p>
+				</div>';
+		}
+		$response.='
 		<hr class="my-0">
 			<div class="row">
 				<div class="col-12 p-0 my-2 d-flex bg-dark py-1">
@@ -495,6 +539,66 @@ class Admin extends MY_Controller {
 				<div class="row mt-1 px-0 mx-0">
 					<div class="col py-1">Admin remarks: '.$info->admin_remarks.'</div>
 				</div>
+				<div class="modal-footer px-0">
+					<button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+				</div>
+				
+				';
+		echo $response;
+	
+	}
+	
+	// User details (AJAX Modal)
+	public function userDetails()
+	{
+		$user=$this->fetch->getInfoById('users','id',$this->input->post('id'));
+		$user_info=$this->fetch->getInfoById('user_info','user_id',$this->input->post('id'));
+		$loc_info=$this->fetch->getInfoById('locations_master','id',$user_info->location_id);
+		// echo'<pre>';var_dump($list);exit;
+		$response='
+		<div class="row mx-0">
+			<img clas="pl-1" src="'.MAIN_DOMAIN.'assets/images/'.$user_info->profile_img.'" height="60" width="60" style="object-fit:cover;">
+		</div>
+		<div class="row mx-0 mt-2">
+			<p class="">User id : <strong class="text-dark">'.$user->id.'</strong></p>
+		</div>
+		<div class="row mx-0">
+			<p class="">Name : <strong class="text-dark">'.$user->name.'</strong></p>
+		</div>
+		';
+		$response.='
+			<div class="row mx-0">
+				<p class="">Contact no. : <strong class="text-dark">'.$user->mobile_no.'</strong></p>
+			</div>
+			<div class="row mx-0">
+				<p class="">Email : <strong class="text-dark">'.$user->email.'</strong></p>
+			</div>
+			<div class="row mx-0">
+				<p class="">Registered address : <strong class="text-dark">'.$user_info->address.'</strong></p>
+			</div>
+			<div class="row mx-0">
+				<p class="text-dark">Created : <strong class="text-dark"> '.date('d-M-Y',strtotime($user->created)).'</strong></p>
+			</div>
+		';
+		if($loc_info){
+			$response.='
+				<div class="row mx-0 pb-0 mb-0">
+					<p class="text-dark">Location : <strong class="text-dark"> '.$loc_info->area.', '.$loc_info->city.', '.$loc_info->state.' ('.$loc_info->pin_code.')</strong></p>
+				</div>';
+		}
+		if($user->login_oauth_uid==NULL){
+			$response.='
+			<div class="row mx-0">
+				<p class="text-dark">Google signup</p>
+			</div>';
+		}
+		else{
+			$response.='
+			<div class="row mx-0">
+						<p class="text-dark">Normal signup</p>
+			</div>';
+		}
+		$response.='
 				<div class="modal-footer px-0">
 					<button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
 				</div>

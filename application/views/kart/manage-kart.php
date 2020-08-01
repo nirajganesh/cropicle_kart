@@ -84,7 +84,7 @@
                                     <h4 class="card-title d-flex align-items-center">
                                         <i class='bx bx-notepad font-medium-4 mr-1'></i>List of demands
                                     </h4>
-                                    <small class='font-small-2'> (Total <?=sizeof($data)?> lists)</small>
+                                    <small class='font-small-2'> (Total <?=$total_demands?> lists)</small>
                                     <div class="heading-elements">
                                         <a href="<?=base_url()?>demand-lists" type="button" class="btn btn-sm btn-light-primary">See All</a>
                                     </div>

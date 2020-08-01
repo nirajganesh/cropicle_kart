@@ -23,8 +23,9 @@
                                         <div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto my-1">
                                             <i class="bx bx-cart font-medium-5"></i>
                                         </div>
-                                        <p class="text-muted mb-0 line-ellipsis">Current Stock Qty</p>
-                                        <h2 class="mb-0">20Kg</h2>
+                                        <p class="text-muted mb-0 line-ellipsis">Current Stock</p>
+                                        <h2 class="mb-0"><?=$qty?> Kg</h2>
+                                        <!-- <p class="text-muted mb-0 line-ellipsis">Total items: <?=$count?></p> -->
                                     </div>
                                 </div>
                             </a>
@@ -37,7 +38,7 @@
                                             <i class="bx bx-notepad font-medium-5"></i>
                                         </div>
                                         <p class="text-muted mb-0 line-ellipsis">Demand lists</p>
-                                        <h2 class="mb-0">05</h2>
+                                        <h2 class="mb-0"><?=$total_demands?></h2>
                                     </div>
                                 </div>
                             </a>
@@ -50,7 +51,7 @@
                                             <i class="bx bx-shopping-bag font-medium-5"></i>
                                         </div>
                                         <p class="text-muted mb-0 line-ellipsis">Total orders</p>
-                                        <h2 class="mb-0">04</h2>
+                                        <h2 class="mb-0"><?=$total_orders?></h2>
                                     </div>
                                 </div>
                             </a>
@@ -63,7 +64,7 @@
                                             <i class="bx bx-tag font-medium-5"></i>
                                         </div>
                                         <p class="text-muted mb-0 line-ellipsis">Payments done</p>
-                                        <h2 class="mb-0">03</h2>
+                                        <h2 class="mb-0"><?=$total_payments?></h2>
                                     </div>
                                 </div>
                             </a>
@@ -76,7 +77,7 @@
                                             <i class="bx bx-money font-medium-5"></i>
                                         </div>
                                         <p class="text-muted mb-0 line-ellipsis">Latest payment</p>
-                                        <h2 class="mb-0">₹ 10,500/-</h2>
+                                        <h2 class="mb-0">₹ <?=$last_payment?>/-</h2>
                                     </div>
                                 </div>
                             </a>

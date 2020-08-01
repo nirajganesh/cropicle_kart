@@ -30,14 +30,40 @@
                             </a>
                         </div>
                         <div class="col-xl-2 col-md-4 col-sm-6">
+                            <a href="<?=base_url('locations-master')?>" class="card text-center">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="badge-circle badge-circle-lg badge-circle-light-primary mx-auto my-1">
+                                            <i class="bx bx-map font-medium-5"></i>
+                                        </div>
+                                        <p class="text-muted mb-0 line-ellipsis">No. of Locations</p>
+                                        <h2 class="mb-0"><?=$locations?></h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-6">
                             <a href="<?=base_url('karts')?>" class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="badge-circle badge-circle-lg badge-circle-light-info mx-auto my-1">
                                             <i class="bx bx-cart font-medium-5"></i>
                                         </div>
-                                        <p class="text-muted mb-0 line-ellipsis">Kart users</p>
+                                        <p class="text-muted mb-0 line-ellipsis">Regd. Karts</p>
                                         <h2 class="mb-0"><?=$karts?></h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xl-2 col-md-4 col-sm-6">
+                            <a href="<?=base_url('users')?>" class="card text-center">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto my-1">
+                                            <i class="bx bx-user font-medium-5"></i>
+                                        </div>
+                                        <p class="text-muted mb-0 line-ellipsis">Regd. Users</p>
+                                        <h2 class="mb-0"><?=$customers?></h2>
                                     </div>
                                 </div>
                             </a>
@@ -49,26 +75,26 @@
                                         <div class="badge-circle badge-circle-lg badge-circle-light-danger mx-auto my-1">
                                             <i class="bx bx-shopping-bag font-medium-5"></i>
                                         </div>
-                                        <p class="text-muted mb-0 line-ellipsis">Total orders</p>
+                                        <p class="text-muted mb-0 line-ellipsis">Kart orders</p>
                                         <h2 class="mb-0"><?=$orders?></h2>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-xl-2 col-md-4 col-sm-6">
-                            <a href="<?=base_url('kart-payments')?>" class="card text-center">
+                            <a href="<?=base_url('user-demands')?>" class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="badge-circle badge-circle-lg badge-circle-light-primary mx-auto my-1">
                                             <i class="bx bx-tag font-medium-5"></i>
                                         </div>
-                                        <p class="text-muted mb-0 line-ellipsis">Payments done</p>
-                                        <h2 class="mb-0"><?=$payments?></h2>
+                                        <p class="text-muted mb-0 line-ellipsis">User demands</p>
+                                        <h2 class="mb-0"><?=$customer_demands?></h2>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xl-3 col-md-4 col-sm-6">
+                        <!-- <div class="col-xl-3 col-md-4 col-sm-6">
                             <a href="<?=base_url('kart-payments')?>payments" class="card text-center">
                                 <div class="card-content">
                                     <div class="card-body">
@@ -80,7 +106,7 @@
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </section>
                 <!-- Dashboard Analytics end -->

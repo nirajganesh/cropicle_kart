@@ -11,37 +11,7 @@ class Home extends MY_Controller {
 
 	public function index()
 	{
-		$order=$this->fetch->kartStock();
-		$total_demands=$this->fetch->record_count('demand_lists','user_id',$this->session->kart->id);
-		$total_orders=$this->fetch->record_count('orders','user_id',$this->session->kart->id);
-		$total_payments=$this->fetch->getInfoQuery('orders',['user_id'=>$this->session->kart->id, 'status'=>'DELIVERED']);
-		$last_payment=0;
-		$amt=$this->fetch->getLastPayment($this->session->kart->id);
-		if($amt){
-			$last_payment=$amt;
-		}
-		$q=0;
-		$tc=0;
-		if($order){
-			foreach($order as $o){
-				if(isset($o->remaining_qty)){
-					$o->qty=$o->remaining_qty;
-				}
-				$time=date('d-m-Y',strtotime($o->updated));
-				$q+=$o->qty;
-
-				if($o->qty>0) { $tc++; }
-			}
-		}
-		$response=['title'=>'Dashboard',
-					'total_demands'=>$total_demands,
-					'total_orders'=>$total_orders,
-					'total_payments'=>sizeof($total_payments),
-					'last_payment'=>$last_payment,
-					'count'=>$tc,
-					'qty'=>$q	
-					];
-		$this->load->view('kart/header',$response);
+		$this->load->view('kart/header',['title'=>'Dashboard']);
 		$this->load->view('kart/index');
 		$this->load->view('kart/footer');
 	}
@@ -62,7 +32,6 @@ class Home extends MY_Controller {
 	public function manageKart()
 	{
 		$lists=$this->fetch->demandLists(4);
-		$total_demands=$this->fetch->record_count('demand_lists','user_id',$this->session->kart->id);
 		$order=$this->fetch->kartStock();
 		$stockId=$this->fetch->getStockToUpdate();
 		if($stockId){
@@ -88,7 +57,6 @@ class Home extends MY_Controller {
 		$response=['title'=>'Manage Kart',
 					'data'=>$lists,
 					'stock'=>$order,
-					'total_demands'=>$total_demands,
 					'count'=>$c,
 					'time'=>$time,
 					'kart_up_to_date'=>$kart_up_to_date,

@@ -3,7 +3,7 @@
 
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        <p class="clearfix mb-0"><span class="float-left d-inline-block">2020 &copy; Cluebix Softwares</span><span class="float-right d-sm-inline-block d-none">Powered by : <a class="text-uppercase" href="https://cluebix.com" target="_blank">Cluebix Softwares</a></span>
+        <p class="clearfix mb-0"><span class="float-left d-inline-block">&copy; 2020 | All rights reserved with Cropicle</span><span class="float-right d-sm-inline-block d-none">Powered by : <a class="text-uppercase" href="https://digikraftsocial.in/" target="_blank">Digikraft Social</a></span>
             <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
         </p>
     </footer>

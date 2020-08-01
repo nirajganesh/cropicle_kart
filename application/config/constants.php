@@ -88,8 +88,5 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 // CUSTOM CONSTANTS
 
-defined('RZP_ID')      OR define('RZP_ID', 'rzp_test_pUsYRQLxIb9Qjm');
-defined('RZP_SECRET')      OR define('RZP_SECRET', 'AWFH0ZeTuMCLmJggcGUI8NUi');
-defined('USERNAME')      OR define('USERNAME', 'academic.gismp@gmail.com');
-defined('PWD')      OR define('PWD', 'gis@73372');
-defined('ROOT_PWD')      OR define('ROOT_PWD', '502Ank');
+defined('MAIN_DOMAIN')      OR define('MAIN_DOMAIN', 'https://cropicle.com/');
+defined('KART_DOMAIN')      OR define('KART_DOMAIN', 'https://kart.cropicle.com/');
