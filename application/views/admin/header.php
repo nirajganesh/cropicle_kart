@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/bootstrap-extended.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/colors.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/charts/apexcharts.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/extensions/toastr.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
     <!-- END: Theme CSS-->
@@ -127,11 +128,14 @@
                     </a>
                 </li>
 
-                <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='items-master' || $this->uri->segment(1)=='items-master'?' activeLink':''?>" href="<?=base_url('items-master')?>">
-                        <i class="menu-livicon" data-icon="apple"></i><span data-i18n="Dashboard">
-                        Items Master</span>
-                    </a>
+
+                <li class="dropdown nav-item mr-2 my-25" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white <?=$this->uri->segment(1)=='items-master' || $this->uri->segment(1)=='price-manager' ?' activeLink':''?>" href="" data-toggle="dropdown"><i class="menu-livicon" data-icon="apple"></i><span data-i18n="Dashboard">Items master</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="<?=$this->uri->segment(1)=='items-master' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='items-master' ?' activeLink':''?>" href="<?=base_url()?>items-master" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>All Items List</a>
+                        </li>
+                        <li class="<?=$this->uri->segment(1)=='price-manager' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='price-manager' ?' activeLink':''?>" href="<?=base_url()?>price-manager" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Price manager</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item mr-2 my-25">
@@ -141,20 +145,15 @@
                     </a>
                 </li>
 
-                
-                <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='karts'?' activeLink':''?>" href="<?=base_url('karts')?>">
-                        <i class="menu-livicon" data-icon="shoppingcart"></i><span data-i18n="Dashboard">
-                        Karts (hawkers)</span>
-                    </a>
-                </li>
+           
 
-
-                <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='kart-orders' ?' activeLink':''?>" href="<?=base_url('kart-orders')?>">
-                        <i class="menu-livicon" data-icon="truck"></i><span data-i18n="Dashboard">
-                        Orders</span>
-                    </a>
+                <li class="dropdown nav-item mr-2 my-25" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white <?=$this->uri->segment(1)=='karts' || $this->uri->segment(1)=='kart-orders' ?' activeLink':''?>" href="" data-toggle="dropdown"><i class="menu-livicon" data-icon="shoppingcart"></i><span data-i18n="Dashboard">Karts (hawkers)</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="<?=$this->uri->segment(1)=='karts' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='karts' ?' activeLink':''?>" href="<?=base_url()?>karts" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Registered Karts</a>
+                        </li>
+                        <li class="<?=$this->uri->segment(1)=='kart-orders' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='kart-orders' ?' activeLink':''?>" href="<?=base_url()?>kart-orders" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Kart orders</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="dropdown nav-item mr-2 my-25" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white <?=$this->uri->segment(1)=='users' || $this->uri->segment(1)=='user-demands' ?' activeLink':''?>" href="" data-toggle="dropdown"><i class="menu-livicon" data-icon="user"></i><span data-i18n="Dashboard">Users</span></a>

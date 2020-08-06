@@ -11,17 +11,17 @@
                     <div class="col-sm-5">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb p-0 mb-0">
-                                <li class="breadcrumb-item"><a href="<?=base_url('Admin')?>"><i class="bx bx-home-alt"></i></a></li>
-                                <li class="breadcrumb-item active">Pending user demands</li>
+                                <li class="breadcrumb-item"><a href="<?=base_url('admin')?>"><i class="bx bx-home-alt"></i></a></li>
+                                <li class="breadcrumb-item active">Rejected Orders</li>
                             </ol>
                         </div>
                     </div>
                     <div class="col-sm-7 text-sm-right mt-sm-0 mt-2 text-center">
-                        <a href="<?=base_url()?>approved-user-demands" class="btn btn-sm btn-light-secondary mr-1">
-                            <i class="bullet bullet-xs bullet-success"></i> See approved demands
+                        <a href="<?=base_url()?>kart-orders" class="btn btn-sm btn-light-secondary mr-1">
+                            <i class="bullet bullet-xs bullet-warning"></i> See pending orders
                         </a>
-                        <a href="<?=base_url()?>rejected-user-demands" class="btn btn-sm btn-light-secondary">
-                            <i class="bullet bullet-xs bullet-danger"></i> See rejected demands
+                        <a href="<?=base_url()?>delivered-kart-orders" class="btn btn-sm btn-light-secondary">
+                            <i class="bullet bullet-xs bullet-success"></i> See delivered orders
                         </a>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title text-warning">Pending User demands list</h4>
+                            <h4 class="card-title text-danger">Rejected orders list</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body card-dashboard">
@@ -40,28 +40,23 @@
                                     <table class="table table-striped order-dt">
                                         <thead>
                                             <tr>
-                                                <th>Demand no.</th>
-                                                <th>Demanded by</th>
-                                                <th>Date</th>
-                                                <th>Total Amount</th>
-                                                <th>Remarks</th>
+                                                <th>Order no.</th>
+                                                <th>Ordered by</th>
+                                                <th>Order Date</th>
+                                                <th>Order Amount</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php foreach($pending as $p){?>
+                                        <?php foreach($rejected as $r){?>
                                             <tr>
-                                                <td><?=$p->id?></td>
-                                                <td><?=$p->name?> (Id: <?=$p->user_id?>)</td>
-                                                <td><?=date('d-M-Y',strtotime($p->created))?></td>
-                                                <td>Rs. <?=$p->demand_amount?>/-</td>
-                                                <td><?=$p->customer_remarks?></td>
+                                                <td><?=$r->id?></td>
+                                                <td><?=$r->name?></td>
+                                                <td><?=date('d-M-Y',strtotime($r->date))?></td>
+                                                <td>Rs. <?=$r->total_amt?>/-</td>
                                                 <td class='d-flex'>
-                                                    <span data-id='<?=$p->id?>' class="pendingDemandReject mr-1">
-                                                        <a href="#" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-secondary bx bx-x-circle text-primary font-medium-5"></i></a>
-                                                    </span>
-                                                    <span data-id='<?=$p->id?>' class="pendingDemandApprove">
-                                                        <a href="#" data-toggle="tooltip" title="Approve"><i class="badge-circle badge-circle-light-secondary bx bx-check-circle text-primary font-medium-5"></i></a>
+                                                    <span data-id='<?=$r->id?>' class="rejectedOrderOpen">
+                                                        <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
                                                     </span>
                                                 </td>
                                             </tr>
@@ -78,11 +73,11 @@
     </div>
 </div>
 
-<div class="modal fade " id="orderModal" tabindex="-1" role="dialog" aria-labelledby="Demand Modal" aria-modal="true">
+<div class="modal fade " id="orderModal" tabindex="-1" role="dialog" aria-labelledby="Order Modal" aria-modal="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="exampleModalLongTitle">Demand details</h6>
+                <h6 class="modal-title" id="exampleModalLongTitle">Order details</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="bx bx-x"></i>
                 </button>

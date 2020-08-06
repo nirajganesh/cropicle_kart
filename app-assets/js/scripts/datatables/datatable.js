@@ -69,3 +69,5 @@
             }
         ]
     });
+
+    $('.pricemanager-dt').DataTable();

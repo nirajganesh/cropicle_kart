@@ -8,14 +8,21 @@
         <div class="content-header row">
             <div class="content-header-left col-12 mb-2 mt-1">
                 <div class="row breadcrumbs-top">
-                    <div class="col-md-9">
-                        <h5 class="content-header-title float-left pr-1 mb-0">Orders</h5>
+                    <div class="col-sm-5">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb p-0 mb-0">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="bx bx-home-alt"></i></a></li>
-                                <li class="breadcrumb-item active">Orders</li>
+                                <li class="breadcrumb-item"><a href="<?=base_url('admin')?>"><i class="bx bx-home-alt"></i></a></li>
+                                <li class="breadcrumb-item active">Pending Orders</li>
                             </ol>
                         </div>
+                    </div>
+                    <div class="col-sm-7 text-sm-right mt-sm-0 mt-2 text-center">
+                        <a href="<?=base_url()?>delivered-kart-orders" class="btn btn-sm btn-light-secondary mr-1">
+                            <i class="bullet bullet-xs bullet-success"></i> See delivered orders
+                        </a>
+                        <a href="<?=base_url()?>rejected-kart-orders" class="btn btn-sm btn-light-secondary">
+                            <i class="bullet bullet-xs bullet-danger"></i> See rejected orders
+                        </a>
                     </div>
                 </div>
             </div>
@@ -50,86 +57,6 @@
                                                 <td class='d-flex'>
                                                     <span data-id='<?=$p->id?>' class="pendingOrderOpen">
                                                         <a href="#" data-toggle="tooltip" title="Approve/Reject"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        <?php }?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title text-success">Delivered orders list</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body card-dashboard">
-                                <div class="table-responsive">
-                                    <table class="table table-striped order-dt">
-                                        <thead>
-                                            <tr>
-                                                <th>Order no.</th>
-                                                <th>Ordered by</th>
-                                                <th>Order Date</th>
-                                                <th>Order Amount</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach($delivered as $d){?>
-                                            <tr>
-                                                <td><?=$d->id?></td>
-                                                <td><?=$d->name?></td>
-                                                <td><?=date('d-M-Y',strtotime($d->date))?></td>
-                                                <td>Rs. <?=$d->total_amt?>/-</td>
-                                                <td class='d-flex'>
-                                                    <span data-id='<?=$d->id?>' class="deliveredOrderOpen">
-                                                        <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        <?php }?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title text-danger">Rejected orders list</h4>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body card-dashboard">
-                                <div class="table-responsive">
-                                    <table class="table table-striped order-dt">
-                                        <thead>
-                                            <tr>
-                                                <th>Order no.</th>
-                                                <th>Ordered by</th>
-                                                <th>Order Date</th>
-                                                <th>Order Amount</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach($rejected as $r){?>
-                                            <tr>
-                                                <td><?=$r->id?></td>
-                                                <td><?=$r->name?></td>
-                                                <td><?=date('d-M-Y',strtotime($r->date))?></td>
-                                                <td>Rs. <?=$r->total_amt?>/-</td>
-                                                <td class='d-flex'>
-                                                    <span data-id='<?=$r->id?>' class="rejectedOrderOpen">
-                                                        <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
                                                     </span>
                                                 </td>
                                             </tr>

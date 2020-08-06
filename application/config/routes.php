@@ -73,6 +73,7 @@ $route['logout-admin'] = 'AdminLogin/logout';
 $route['admin-profile'] = 'Admin/profile';
 
 $route['items-master'] = 'Admin/itemsMaster';
+$route['price-manager'] = 'Admin/priceManager';
 $route['add-item'] = 'Admin/addItem';
 $route['edit-item/(:num)'] = 'Admin/editItem/$1';
 $route['toggle-item-status/(:num)/(:num)'] = 'EditAdm/itemStatus/$1/$2';
@@ -91,7 +92,11 @@ $route['delete-kart/(:num)'] = 'DeleteAdm/kart/$1';
 $route['delete-user/(:num)'] = 'DeleteAdm/user/$1';
 
 $route['kart-orders'] = 'Admin/kartOrders';
+$route['delivered-kart-orders'] = 'Admin/delvKartOrders';
+$route['rejected-kart-orders'] = 'Admin/rejKartOrders';
 $route['kart-payments'] = 'Admin/kartPayments';
 
 $route['users'] = 'Admin/Users';
 $route['user-demands'] = 'Admin/userDemands';
+$route['approved-user-demands'] = 'Admin/apprUserDemands';
+$route['rejected-user-demands'] = 'Admin/rejUserDemands';

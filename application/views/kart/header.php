@@ -23,7 +23,6 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/bootstrap-extended.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/colors.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/extensions/toastr.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
     <!-- END: Theme CSS-->
 

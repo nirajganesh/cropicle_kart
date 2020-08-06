@@ -12,13 +12,13 @@
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb p-0 mb-0">
                                 <li class="breadcrumb-item"><a href="<?=base_url('Admin')?>"><i class="bx bx-home-alt"></i></a></li>
-                                <li class="breadcrumb-item active">Pending user demands</li>
+                                <li class="breadcrumb-item active">Approved user demands</li>
                             </ol>
                         </div>
                     </div>
                     <div class="col-sm-7 text-sm-right mt-sm-0 mt-2 text-center">
-                        <a href="<?=base_url()?>approved-user-demands" class="btn btn-sm btn-light-secondary mr-1">
-                            <i class="bullet bullet-xs bullet-success"></i> See approved demands
+                        <a href="<?=base_url()?>user-demands" class="btn btn-sm btn-light-secondary mr-1">
+                            <i class="bullet bullet-xs bullet-warning"></i> See pending demands
                         </a>
                         <a href="<?=base_url()?>rejected-user-demands" class="btn btn-sm btn-light-secondary">
                             <i class="bullet bullet-xs bullet-danger"></i> See rejected demands
@@ -32,7 +32,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title text-warning">Pending User demands list</h4>
+                            <h4 class="card-title text-success">Approved User demands list</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body card-dashboard">
@@ -49,19 +49,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php foreach($pending as $p){?>
+                                        <?php foreach($approved as $d){?>
                                             <tr>
-                                                <td><?=$p->id?></td>
-                                                <td><?=$p->name?> (Id: <?=$p->user_id?>)</td>
-                                                <td><?=date('d-M-Y',strtotime($p->created))?></td>
-                                                <td>Rs. <?=$p->demand_amount?>/-</td>
-                                                <td><?=$p->customer_remarks?></td>
+                                                <td><?=$d->id?></td>
+                                                <td><?=$d->name?> (Id: <?=$d->user_id?>)</td>
+                                                <td><?=date('d-M-Y',strtotime($d->created))?></td>
+                                                <td>Rs. <?=$d->demand_amount?>/-</td>
+                                                <td><?=$d->customer_remarks?></td>
                                                 <td class='d-flex'>
-                                                    <span data-id='<?=$p->id?>' class="pendingDemandReject mr-1">
-                                                        <a href="#" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-secondary bx bx-x-circle text-primary font-medium-5"></i></a>
-                                                    </span>
-                                                    <span data-id='<?=$p->id?>' class="pendingDemandApprove">
-                                                        <a href="#" data-toggle="tooltip" title="Approve"><i class="badge-circle badge-circle-light-secondary bx bx-check-circle text-primary font-medium-5"></i></a>
+                                                    <span data-id='<?=$d->id?>' class="approvedDemandDetails">
+                                                        <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
                                                     </span>
                                                 </td>
                                             </tr>

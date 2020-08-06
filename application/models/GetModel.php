@@ -295,7 +295,14 @@ class GetModel extends CI_Model{
             return $this->db->get($table)->num_rows();
         }
     }
+    
+    
+    public function record_count_arr($table,$arr) 
+    {
+        return $this->db->where($arr)->get($table)->num_rows();
+    }
 
+    
     public function getAdminProfile()
     {
         return $this->db->get('users')->row();

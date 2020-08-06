@@ -11,24 +11,55 @@ class Admin extends MY_Controller {
 
 	public function index()
 	{
-		$inactiveItems=$this->fetch->record_count('items_master','is_active','0');
-		$activeItems=$this->fetch->record_count('items_master','is_active','1');
 		$items=$this->fetch->record_count('items_master');
+		$activeItems=$this->fetch->record_count('items_master','is_active','1');
+		$inactiveItems=$this->fetch->record_count('items_master','is_active','0');
+		
 		$locations=$this->fetch->record_count('locations_master');
+		$activeLoc=$this->fetch->record_count('locations_master','is_active','1');
+		$inactiveLoc=$this->fetch->record_count('locations_master','is_active','0');
+
 		$karts=$this->fetch->record_count('users','role_id','2');
+		$activeKarts=$this->fetch->record_count_arr('users',['is_active'=>'1','role_id'=>'2']);
+		$inactiveKarts=$this->fetch->record_count_arr('users',['is_active'=>'0','role_id'=>'2']);
+
 		$customers=$this->fetch->record_count('users','role_id','3');
-		$orders=$this->fetch->record_count('orders');
+		$activeCust=$this->fetch->record_count_arr('users',['is_active'=>'1','role_id'=>'3']);
+		$inactiveCust=$this->fetch->record_count_arr('users',['is_active'=>'0','role_id'=>'3']);
+		
 		$customer_demands=$this->fetch->record_count('customer_demands');
+		$new_demands=$this->fetch->record_count_arr('customer_demands',['status'=>'PENDING']);
+		$appr_demands=$this->fetch->record_count_arr('customer_demands',['status'=>'APPROVED']);
+		$rej_demands=$this->fetch->record_count_arr('customer_demands',['status'=>'REJECTED']);
+
+		$orders=$this->fetch->record_count('orders');
+		$new_orders=$this->fetch->record_count_arr('orders',['status'=>'PENDING']);
+		$appr_orders=$this->fetch->record_count_arr('orders',['status'=>'DELIVERED']);
+		$rej_orders=$this->fetch->record_count_arr('orders',['status'=>'REJECTED']);
+
 		$last_payment='0';
+
 		$this->load->view('admin/header',['title'=>'Dashboard',
-										'inactiveItems'=>$inactiveItems,
-										'activeItems'=>$activeItems,
 										'items'=>$items,
+										'activeItems'=>$activeItems,
+										'inactiveItems'=>$inactiveItems,
 										'locations'=>$locations,
+										'activeLoc'=>$activeLoc,
+										'inactiveLoc'=>$inactiveLoc,
 										'karts'=>$karts,
+										'activeKarts'=>$activeKarts,
+										'inactiveKarts'=>$inactiveKarts,
 										'customers'=>$customers,
-										'orders'=>$orders,
+										'activeCust'=>$activeCust,
+										'inactiveCust'=>$inactiveCust,
 										'customer_demands'=>$customer_demands,
+										'new_demands'=>$new_demands,
+										'appr_demands'=>$appr_demands,
+										'rej_demands'=>$rej_demands,
+										'orders'=>$orders,
+										'new_orders'=>$new_orders,
+										'appr_orders'=>$appr_orders,
+										'rej_orders'=>$rej_orders,
 										'last_payment'=>$last_payment
 										]);
 		$this->load->view('admin/index');
@@ -59,6 +90,14 @@ class Admin extends MY_Controller {
 		$this->load->view('admin/footer');
 	}
 
+	public function priceManager()
+	{
+		$items=$this->fetch->getInfo('items_master');
+		$this->load->view('admin/header',['title'=>'Price manager','data'=>$items]);
+		$this->load->view('admin/price-manager');
+		$this->load->view('admin/footer');
+	}
+
 	public function locationsMaster()
 	{
 		$loc=$this->fetch->getInfo('locations_master');
@@ -70,10 +109,24 @@ class Admin extends MY_Controller {
 	public function kartOrders()
 	{
 		$pending=$this->fetch->orders('ORDERED');
-		$delivered=$this->fetch->orders('DELIVERED');
-		$rejected=$this->fetch->orders('REJECTED');
-		$this->load->view('admin/header',['title'=>'Kart orders','pending'=>$pending,'delivered'=>$delivered,'rejected'=>$rejected]);
+		$this->load->view('admin/header',['title'=>'Pending Kart orders','pending'=>$pending]);
 		$this->load->view('admin/orders');
+		$this->load->view('admin/footer');
+	}
+
+	public function delvKartOrders()
+	{
+		$delivered=$this->fetch->orders('DELIVERED');
+		$this->load->view('admin/header',['title'=>'Delivered Kart orders','delivered'=>$delivered]);
+		$this->load->view('admin/delvOrders');
+		$this->load->view('admin/footer');
+	}
+
+	public function rejKartOrders()
+	{
+		$rejected=$this->fetch->orders('REJECTED');
+		$this->load->view('admin/header',['title'=>'Rejected Kart orders','rejected'=>$rejected]);
+		$this->load->view('admin/rejOrders');
 		$this->load->view('admin/footer');
 	}
 
@@ -131,10 +184,24 @@ class Admin extends MY_Controller {
 	public function userDemands()
 	{
 		$pending=$this->fetch->userDemands('PENDING');
-		$approved=$this->fetch->userDemands('APPROVED');
-		$rejected=$this->fetch->userDemands('REJECTED');
-		$this->load->view('admin/header',['title'=>'User demands','pending'=>$pending,'approved'=>$approved,'rejected'=>$rejected]);
+		$this->load->view('admin/header',['title'=>'Pending User demands','pending'=>$pending]);
 		$this->load->view('admin/user-demands');
+		$this->load->view('admin/footer');
+	}
+
+	public function apprUserDemands()
+	{
+		$approved=$this->fetch->userDemands('APPROVED');
+		$this->load->view('admin/header',['title'=>'Approved User demands','approved'=>$approved]);
+		$this->load->view('admin/appr-user-demands');
+		$this->load->view('admin/footer');
+	}
+
+	public function rejUserDemands()
+	{
+		$rejected=$this->fetch->userDemands('REJECTED');
+		$this->load->view('admin/header',['title'=>'Rejected User demands','rejected'=>$rejected]);
+		$this->load->view('admin/rej-user-demands');
 		$this->load->view('admin/footer');
 	}
 

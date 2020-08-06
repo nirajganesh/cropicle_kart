@@ -173,6 +173,34 @@ class EditAdm extends MY_Controller {
             }
         }
         
+        public function batchUpdatePrice()
+        {
+            $updateArray = array();
+            for($x = 0; $x < sizeof($this->input->post('id')); $x++){
+            
+                $updateArray[] = array(
+                    'id'=>$this->input->post('id')[$x],
+                    'item_price_kart' => $this->input->post('item_price_kart')[$x],
+                    'item_price_customer' => $this->input->post('item_price_customer')[$x]
+                );
+            }
+            // echo'<pre>';var_dump($updateArray);exit;
+            
+            $this->db->trans_start();
+            $this->db->update_batch('items_master',$updateArray, 'id');
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->session->set_flashdata('failed','some error occured');
+                redirect('price-manager');
+            }
+            else{
+                $this->session->set_flashdata('success','Changes saved');
+                redirect('price-manager');
+            }
+        }
+        
         public function approveOrder($oid)
         {
             // Getting all items from the last order delivered to add the remaining qty to current order 
