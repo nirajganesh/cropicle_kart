@@ -100,3 +100,5 @@ $route['users'] = 'Admin/Users';
 $route['user-demands'] = 'Admin/userDemands';
 $route['approved-user-demands'] = 'Admin/apprUserDemands';
 $route['rejected-user-demands'] = 'Admin/rejUserDemands';
+
+$route['reports'] = 'Reports';

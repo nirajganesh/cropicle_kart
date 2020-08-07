@@ -218,6 +218,7 @@ class Admin extends MY_Controller {
 		$this->load->view('admin/payments');
 		$this->load->view('admin/footer');
 	}
+
 	
 
 	// Pending order details (AJAX Modal)

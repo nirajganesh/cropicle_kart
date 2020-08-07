@@ -377,7 +377,18 @@
         });
     });
 
-
+    // $('#reportType').change(function() {
+    //     $(`
+    //     <label for=":">Select Item:</label>
+    //     <select name="type" class="form-control mb-1" required>
+    //         <option value="">-- Select report type --</option>
+    //         <option value="orders">User demands</option>
+    //         <option value="detailedOrders">User demands with details</option>
+    //         <option value="detailedOrders">Item wise User demands</option>
+    //         <option value="detailedOrders">Location wise user demands</option>
+    //     </select>
+    //     `).insertAfter('#reportType');
+    // });
 
 
 })(window);

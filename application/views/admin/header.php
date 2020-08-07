@@ -166,10 +166,17 @@
                 </li>
 
 
-                <li class="nav-item mr-2 my-25">
+                <!-- <li class="nav-item mr-2 my-25">
                     <a class="nav-link bg-white <?=$this->uri->segment(1)=='kart-payments'?' activeLink':''?>" href="#">
                         <i class="menu-livicon" data-icon="bank"></i><span data-i18n="Dashboard">
                         Payments</span>
+                    </a>
+                </li> -->
+
+                <li class="nav-item mr-2 my-25">
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='reports'?' activeLink':''?>" href="<?=base_url('reports')?>">
+                        <i class="menu-livicon" data-icon="notebook"></i><span data-i18n="Dashboard">
+                        Reports</span>
                     </a>
                 </li>
 
