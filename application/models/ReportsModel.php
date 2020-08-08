@@ -18,8 +18,6 @@ class Reportsmodel extends CI_Model{
 		$arr= $this->db->select('u.name, u.mobile_no, cd.id,cd.demand_amount, cd.address')
 						->from('customer_demands cd')
 						->join('users u', 'u.id = cd.user_id', 'LEFT')
-						// ->join('customer_demand_details cdd', 'cdd.customer_demand_id = cd.id', 'LEFT')
-						// ->join('items_master i', 'i.id = cdd.item_id', 'LEFT')
 						->where("cd.created >='$from'")
 						->where("cd.created <='$to'")
 						->where('cd.status','APPROVED')
@@ -31,9 +29,10 @@ class Reportsmodel extends CI_Model{
 	}
 
 	function detailedUserDemandsItems($did){
-		return $this->db->select('cdd.item_price_customer, cdd.item_quantity, i.item_name')
+		return $this->db->select('cdd.item_price_customer, cdd.item_quantity, i.item_name, ut.unit_short_name')
 						->from('customer_demand_details cdd')
 						->join('items_master i', 'i.id = cdd.item_id', 'LEFT')
+						->join('units ut', 'ut.id = i.unit_id', 'LEFT')
 						->where('cdd.customer_demand_id',$did)
 						->get()->result();
 	}

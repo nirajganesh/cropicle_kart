@@ -17,6 +17,7 @@ class AddAdm extends MY_Controller {
             $this->form_validation->set_rules('item_price_customer', 'Customer price', 'required');
             $this->form_validation->set_rules('item_price_kart', 'Hawker price', 'required');
             $this->form_validation->set_rules('max_order_qty', 'Max order qty', 'required');
+            $this->form_validation->set_rules('unit_id', 'Unit', 'required');
             if($this->form_validation->run() == true){
                 $imagename = 'defaultItem.jpg';
                 $data=$this->input->post();

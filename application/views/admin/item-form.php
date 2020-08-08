@@ -49,10 +49,10 @@
 
                                                 <div class="col-sm-6 form-group">
                                                     <label for="basicInputFile">Select Unit:</label>
-                                                    <select name="unit_id" class="select form-control" required disabled>
-                                                        <option value="">Unit</option>
+                                                    <select name="unit_id" class="select form-control" required>
+                                                        <option value="">-- Choose one unit --</option>
                                                         <?php foreach($units as $u){?>
-                                                            <option value="<?=$u->id?>" <?=$u->id==1?' selected':''?>><?=$u->unit_name?> (disabled for this phase)</option>
+                                                            <option value="<?=$u->id?>" <?=isset($data)?($data->unit_id==$u->id?' selected':''):''?>><?=$u->unit_name?></option>
                                                         <?php }?>
                                                     </select>
                                                 </div>
@@ -63,12 +63,12 @@
                                                 </div>
 
                                                 <div class="col-sm-6 form-group">
-                                                    <label>Price for hawker:</label>
+                                                    <label>Price for hawker per unit:</label>
                                                     <input type="number" name="item_price_kart" value="<?=isset($data)?$data->item_price_kart:''?>" step="0.01" class="form-control" required>
                                                 </div>
 
                                                 <div class="col-sm-6 form-group">
-                                                    <label>Price for customer:</label>
+                                                    <label>Price for customer per unit:</label>
                                                     <input type="number" name="item_price_customer" value="<?=isset($data)?$data->item_price_customer:''?>" step="0.01" class="form-control" required>
                                                 </div>
                                             </div>

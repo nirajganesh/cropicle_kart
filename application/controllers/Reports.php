@@ -56,7 +56,7 @@ class Reports extends MY_Controller {
 					unset($r->id);
 					unset($r->demand_amount);
 					foreach($r->items as $i){
-						$r->products[]=$i->item_name.' ('.$i->item_quantity.'kg) (₹'.$i->item_quantity*$i->item_price_customer.')';
+						$r->products[]=$i->item_name.' ('.$i->item_quantity.' '.$i->unit_short_name.') (₹'.$i->item_quantity*$i->item_price_customer.')';
 					}
 					unset($r->items);
 					$r->items='';

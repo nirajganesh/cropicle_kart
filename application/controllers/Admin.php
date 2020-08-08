@@ -84,7 +84,7 @@ class Admin extends MY_Controller {
 
 	public function itemsMaster()
 	{
-		$items=$this->fetch->getInfo('items_master');
+		$items=$this->fetch->getAllItems();
 		$this->load->view('admin/header',['title'=>'Items Master list','data'=>$items]);
 		$this->load->view('admin/items-master');
 		$this->load->view('admin/footer');
@@ -397,8 +397,8 @@ class Admin extends MY_Controller {
 			$response.='
 						<div class="col-12 p-0 mb-1 d-flex">
 							<div class="col-3">'.$i->item_name.' -</div>
-							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/Kg</div>
-							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' Kg</div>
+							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/'.$i->unit_short_name.'</div>
+							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' '.$i->unit_short_name.' </div>
 							<div class="col-3">₹'.$i->item_price_customer*$i->item_quantity.'</div>
 						</div>';
 		}	
@@ -462,8 +462,8 @@ class Admin extends MY_Controller {
 			$response.='
 						<div class="col-12 p-0 mb-1 d-flex">
 							<div class="col-3">'.$i->item_name.' -</div>
-							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/Kg</div>
-							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' Kg</div>
+							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/'.$i->unit_short_name.'</div>
+							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' '.$i->unit_short_name.' </div>
 							<div class="col-3">₹'.$i->item_price_customer*$i->item_quantity.'</div>
 						</div>';
 		}	
@@ -527,8 +527,8 @@ class Admin extends MY_Controller {
 			$response.='
 						<div class="col-12 p-0 mb-1 d-flex">
 							<div class="col-3">'.$i->item_name.' -</div>
-							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/Kg</div>
-							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' Kg</div>
+							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/'.$i->unit_short_name.'</div>
+							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' '.$i->unit_short_name.' </div>
 							<div class="col-3">₹'.$i->item_price_customer*$i->item_quantity.'</div>
 						</div>';
 		}	
@@ -591,8 +591,8 @@ class Admin extends MY_Controller {
 			$response.='
 						<div class="col-12 p-0 mb-1 d-flex">
 							<div class="col-3">'.$i->item_name.' -</div>
-							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/Kg</div>
-							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' Kg</div>
+							<div class="col-4 pl-sm-1 pl-0">₹'.$i->item_price_customer.'/'.$i->unit_short_name.'</div>
+							<div class="col-2 pl-sm-1 pl-0">'.$i->item_quantity.' '.$i->unit_short_name.' </div>
 							<div class="col-3">₹'.$i->item_price_customer*$i->item_quantity.'</div>
 						</div>';
 		}	
