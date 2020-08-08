@@ -118,6 +118,7 @@
 
     $('#pwd_change').validate({});
 
+    
     $('.listOpen').click(function(){
         var id=$(this).data('id');
         $.ajax({
@@ -137,7 +138,7 @@
         });
     });
 
-    $('.orderOpen').click(function(){
+    $(".order-dt").on("click", ".orderOpen", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Home/orderDetails',
@@ -156,7 +157,7 @@
         });
     });
 
-    $('.pendingOrderOpen').click(function(){
+    $(".order-dt").on("click", ".pendingOrderOpen", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Admin/pOrderDetails',
@@ -180,7 +181,7 @@
         });
     });
 
-    $('.deliveredOrderOpen').click(function(){
+    $(".order-dt").on("click", ".deliveredOrderOpen", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Admin/dOrderDetails',
@@ -199,7 +200,7 @@
         });
     });
 
-    $('.rejectedOrderOpen').click(function(){
+    $(".order-dt").on("click", ".rejectedOrderOpen", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Admin/rOrderDetails',
@@ -218,7 +219,7 @@
         });
     });
 
-    $('.kartPendingOrderOpen').click(function(){
+    $(".order-dt").on("click", ".kartPendingOrderOpen", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Home/pOrderDetails',
@@ -242,7 +243,7 @@
         });
     });
 
-    $('.kartDeliveredOrderOpen').click(function(){
+    $(".order-dt").on("click", ".kartDeliveredOrderOpen", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Home/dOrderDetails',
@@ -261,7 +262,7 @@
         });
     });
 
-    $('.kartRejectedOrderOpen').click(function(){
+    $(".order-dt").on("click", ".kartRejectedOrderOpen", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Home/rOrderDetails',
@@ -280,7 +281,8 @@
         });
     });
 
-    $('.pendingDemandApprove').click(function(){
+
+    $(".order-dt").on("click", ".pendingDemandApprove", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Admin/pDemandApprove',
@@ -300,7 +302,7 @@
         });
     });
 
-    $('.pendingDemandReject').click(function(){
+    $(".order-dt").on("click", ".pendingDemandReject", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Admin/pDemandReject',
@@ -320,7 +322,7 @@
         });
     });
 
-    $('.approvedDemandDetails').click(function(){
+    $(".order-dt").on("click", ".approvedDemandDetails", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Admin/dDemandDetails',
@@ -339,7 +341,7 @@
         });
     });
 
-    $('.rejectedDemandDetails').click(function(){
+    $(".order-dt").on("click", ".rejectedDemandDetails", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Admin/rDemandDetails',
@@ -358,7 +360,7 @@
         });
     });
 
-    $('.userDetails').click(function(){
+    $(".order-dt").on("click", ".userDetails", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Admin/userDetails',

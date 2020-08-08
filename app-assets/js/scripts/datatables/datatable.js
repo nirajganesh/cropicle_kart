@@ -1,7 +1,7 @@
 
 
     $('.order-dt').DataTable( {
-        dom: 'Bfrtip',
+        dom: 'Bflrtip',
         buttons: [
             {
                 extend: 'copyHtml5',
@@ -34,6 +34,7 @@
             }
         ]
     });
+    
 
     $('.payment-dt').DataTable( {
         dom: 'Bfrtip',
@@ -70,7 +71,7 @@
         ]
     });
 
-    
+
     $('.report-dt').DataTable( {
         dom: 'lBrtip',
         buttons: [
@@ -99,6 +100,3 @@
             }
         ]
     });
-
-
-    $('.pricemanager-dt').DataTable();

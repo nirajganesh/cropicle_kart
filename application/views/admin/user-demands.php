@@ -57,7 +57,7 @@
                                                 <td>Rs. <?=$p->demand_amount?>/-</td>
                                                 <td><?=$p->customer_remarks?></td>
                                                 <td class='d-flex'>
-                                                    <span data-id='<?=$p->id?>' class="pendingDemandReject mr-1">
+                                                    <span onclick="pendingDemandReject(<?=$p->id?>)" data-id='<?=$p->id?>' class="pendingDemandReject mr-1">
                                                         <a href="#" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-secondary bx bx-x-circle text-primary font-medium-5"></i></a>
                                                     </span>
                                                     <span data-id='<?=$p->id?>' class="pendingDemandApprove">
