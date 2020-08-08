@@ -76,24 +76,21 @@
         dom: 'lBrtip',
         buttons: [
             {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible',
+                    stripHtml: false
+                }
+            },
+            {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: ':visible'
+                    columns: ':visible',
+                    stripNewlines: false
                 }
             },
             {
-                text: 'JSON',
-                action: function ( e, dt, button, config ) {
-                    var data = dt.buttons.exportData();
-
-                    $.fn.dataTable.fileSave(
-                        new Blob( [ JSON.stringify( data ) ] ),
-                        'Export.json'
-                    );
-                }
-            },
-            {
-                extend: 'print',
+                extend: 'excel',
                 exportOptions: {
                     columns: ':visible'
                 }

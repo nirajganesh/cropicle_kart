@@ -9,7 +9,11 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Ankur (Cluebix)">
-    <title>Admin Cropicle Kart - <?=isset($title)?$title:''?></title>
+    <?php if(isset($reportTitle)){?>
+        <title><?=$reportTitle?></title>
+    <?php } else {?>
+        <title>Admin Cropicle Kart<?=isset($title)? ' - '.$title :''?></title>
+    <?php }?>
     <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 

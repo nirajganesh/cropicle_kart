@@ -4,8 +4,38 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Reportsmodel extends CI_Model{
 
 	function userDemands($from,$to){
-		return $this->db->where("created BETWEEN '$from' AND '$to'")
-						->get('customer_demands')->result();
+		return $this->db->select('u.name, u.mobile_no, cd.demand_amount, l.area, l.city, l.state, l.pin_code, cd.address, cd.created')
+						->from('customer_demands cd')
+						->join('users u', 'u.id = cd.user_id', 'LEFT')
+						->join('locations_master l', 'l.id = cd.location_id', 'LEFT')
+						->where("cd.created >='$from'")
+						->where("cd.created <='$to'")
+						->where('cd.status','APPROVED')
+						->get()->result();
+	}
+
+	function detailedUserDemands($from,$to){
+		$arr= $this->db->select('u.name, u.mobile_no, cd.id,cd.demand_amount, cd.address')
+						->from('customer_demands cd')
+						->join('users u', 'u.id = cd.user_id', 'LEFT')
+						// ->join('customer_demand_details cdd', 'cdd.customer_demand_id = cd.id', 'LEFT')
+						// ->join('items_master i', 'i.id = cdd.item_id', 'LEFT')
+						->where("cd.created >='$from'")
+						->where("cd.created <='$to'")
+						->where('cd.status','APPROVED')
+						->get()->result();
+		foreach($arr as $a){
+			$a->items=$this->detailedUserDemandsItems($a->id);
+		}
+		return $arr;
+	}
+
+	function detailedUserDemandsItems($did){
+		return $this->db->select('cdd.item_price_customer, cdd.item_quantity, i.item_name')
+						->from('customer_demand_details cdd')
+						->join('items_master i', 'i.id = cdd.item_id', 'LEFT')
+						->where('cdd.customer_demand_id',$did)
+						->get()->result();
 	}
 
 	function expenseBetweenDates($from,$to){

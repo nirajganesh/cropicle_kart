@@ -677,34 +677,6 @@ class Admin extends MY_Controller {
 	}
 
 
-
-	
-	// public function listFullDetails()
-	// {
-	// 	$list=$this->fetch->demandListById($this->input->post('id'));
-	// 	$response='
-	// 		<div class="row">
-	// 			<p class="ml-1 text-dark">List Name - <strong>'.$list->name.'</strong></p>
-	// 		</div>
-	// 		<div class="row">
-	// 			<p class="ml-1 text-dark">No. of items - '.$list->itemsCount.'</p>
-	// 		</div>
-	// 		<hr>
-	// 		<div class="row">';
-
-	// 	foreach($list->items as $i){
-	// 		$response.='
-	// 					<div class="col-sm-6 p-0 pt-1 border-right d-flex">
-	// 						<div class="col-6">'.$i->item_name.' -</div>
-	// 						<div class="col-5">'.$i->qty.' '.$i->unit_short_name.'</div>
-	// 					</div>
-	// 					';
-	// 	}	
-	// 	$response.='</div>';
-	// 	echo $response;
-	// }
-
-
 		// public function manageadmin()
 	// {
 	// 	$lists=$this->fetch->demandLists(4);

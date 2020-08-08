@@ -2,6 +2,11 @@
 
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/pickers/pickadate/pickadate.css">
 
+<style>
+    .report-dt td p,.report-dt td{
+        color:black !important;
+    }
+</style>
     
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -17,12 +22,12 @@
                             <div class="mb-1">
                                 <h4>Reports:</h4>
                             </div>
-                            <form action="Reports/showReport" method="POST">
+                            <form action="<?=base_url()?>Reports/showReport" method="POST">
                                 <label for=":">Report type:</label>
                                 <select name="type" class="form-control mb-1" id="reportType" required>
                                     <option value="">-- Select report type --</option>
-                                    <option value="userDemands">User demands</option>
-                                    <option value="detailedUserDemands">User demands with details</option>
+                                    <option value="userDemands">Approved user demands</option>
+                                    <option value="detailedUserDemands">Approved user demands with details</option>
                                     <!-- <option value="detailedOrders">Item wise User demands</option>
                                     <option value="detailedOrders">Location wise user demands</option> -->
                                 </select>
@@ -62,22 +67,49 @@
                                 </fieldset>
 
                                 <button type="submit" class="btn btn-primary">Get report</button>
+                                <?php if (isset($result)){?>
+                                 <p class="mt-3 font-medium-2">
+                                    Showing results for: <br><code><?=$result?></code>
+                                 </p>
+                                <?php }?>
                             </form>
                         </div>
                         <div class="col-sm-9">
                                 <div class="table-responsive">
                                     <table class="table table-striped report-dt">
+                                      
+                                        <?php if (isset($response)){?>
                                         <thead>
                                             <tr>
-                                                <th>Demand no.</th>
-                                                <th>Demanded by</th>
-                                                <th>Date</th>
-                                                <th>Total Amount</th>
-                                                <th>Remarks</th>
-                                                <th>Actions</th>
+                                            <?php $keys = array_keys((array)$response[0]);
+                                                    foreach($keys as $k){
+                                            ?>
+                                                <th><?=$k?></th>
+                                            <?php }?>
                                             </tr>
                                         </thead>
+                                        <?php } else{?>
+                                        <thead>
+                                            <tr>
+                                                <th>No data</th>
+                                            </tr>
+                                        </thead>
+                                        <?php } ?>
                                         <tbody>
+                                            <?php if (isset($response)){
+                                                    foreach($response as $r){
+                                                    $values = array_values((array)$r);?>
+                                            <tr>
+                                                    <?php
+                                                    foreach($values as $v){
+                                            ?>
+                                                    <td class="text-dark"><?=$v?></td>
+
+                                            <?php }?>
+                                            </tr>
+                                            <?php }
+                                                }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -106,6 +138,7 @@
 <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
 <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
 <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js" integrity="sha512-y3o0Z5TJF1UsKjs/jS2CDkeHN538bWsftxO9nctODL5W40nyXIbs0Pgyu7//icrQY9m6475gLaVr39i/uh/nLA==" crossorigin="anonymous"></script>
 
 <script src="<?=base_url()?>app-assets/js/scripts/datatables/datatable.js"></script>
 
