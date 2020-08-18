@@ -28,20 +28,20 @@
                                     <option value="">-- Select report type --</option>
                                     <option value="userDemands">Approved user demands</option>
                                     <option value="detailedUserDemands">Approved user demands with details</option>
+                                    <option value="itemWiseDemands">Item wise demands</option>
                                     <!-- <option value="detailedOrders">Item wise User demands</option>
                                     <option value="detailedOrders">Location wise user demands</option> -->
                                 </select>
                                 
-                                <!-- <label for=":">Select Item:</label>
-                                <select name="type" class="form-control mb-1" required>
-                                    <option value="">-- Select report type --</option>
-                                    <option value="orders">User demands</option>
-                                    <option value="detailedOrders">User demands with details</option>
-                                    <option value="detailedOrders">Item wise User demands</option>
-                                    <option value="detailedOrders">Location wise user demands</option>
-                                </select>
+                               <!-- <label for="item_id">Select Item:</label>
+                                <select name="item_id" class="form-control mb-1" required>
+                                    <option value="">-- Select Item --</option>
+                                    <?php foreach($loc as $l){?>
+                                        <option value="<?=$l->id?>"><?=$i->item_name?></option>
+                                    <?php }?>
+                                </select> -->
                                 
-                                <label for=":">Select Location:</label>
+                                 <!-- <label for=":">Select Location:</label>
                                 <select name="type" class="form-control mb-1" required>
                                     <option value="">-- Select report type --</option>
                                     <option value="orders">User demands</option>

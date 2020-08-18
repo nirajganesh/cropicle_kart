@@ -20,7 +20,7 @@
                         <a href="<?=base_url()?>approved-user-demands" class="btn btn-sm btn-light-secondary mr-1">
                             <i class="bullet bullet-xs bullet-success"></i> See approved demands
                         </a>
-                        <a href="<?=base_url()?>rejected-user-demands" class="btn btn-sm btn-light-secondary">
+                        <a href="<?=base_url()?>rejected-user-demands" class="btn btn-sm btn-light-secondary mr-1 mt-1 mt-sm-0">
                             <i class="bullet bullet-xs bullet-danger"></i> See rejected demands
                         </a>
                     </div>
@@ -57,7 +57,7 @@
                                                 <td>Rs. <?=$p->demand_amount?>/-</td>
                                                 <td><?=$p->customer_remarks?></td>
                                                 <td class='d-flex'>
-                                                    <span onclick="pendingDemandReject(<?=$p->id?>)" data-id='<?=$p->id?>' class="pendingDemandReject mr-1">
+                                                    <span data-id='<?=$p->id?>' class="pendingDemandReject mr-1">
                                                         <a href="#" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-secondary bx bx-x-circle text-primary font-medium-5"></i></a>
                                                     </span>
                                                     <span data-id='<?=$p->id?>' class="pendingDemandApprove">

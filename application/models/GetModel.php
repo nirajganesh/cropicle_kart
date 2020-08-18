@@ -140,6 +140,25 @@ class GetModel extends CI_Model{
         return $demands;
     }
 
+    public function todaysDemands($status=NULL)
+    {
+        $date=date('Y-m-d');
+		$your_date = strtotime("1 day", strtotime($date));
+		$dateto = date("Y-m-d 00:00:00", $your_date);
+        $demands=$this->db->select('c.id, c.address, c.demand_amount, c.status, u.name, u.mobile_no')
+                        ->from('customer_demands c')
+                        ->join('users u', 'u.id = c.user_id', 'LEFT')
+                        ->order_by('c.id','desc')
+						->where("c.created >='$date'")
+						->where("c.created <='$dateto'");
+        if($status!=NULL){
+            $demands=$this->db->where('c.status',$status);
+        }
+        $demands=$this->db->get()->result();
+        // echo'<pre>';var_dump($demands);exit;
+        return $demands;
+    }
+
            
     public function userDemandDetails($id)
     {

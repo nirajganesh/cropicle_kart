@@ -20,7 +20,7 @@
                         <a href="<?=base_url()?>user-demands" class="btn btn-sm btn-light-secondary mr-1">
                             <i class="bullet bullet-xs bullet-warning"></i> See pending demands
                         </a>
-                        <a href="<?=base_url()?>rejected-user-demands" class="btn btn-sm btn-light-secondary">
+                        <a href="<?=base_url()?>rejected-user-demands" class="btn btn-sm btn-light-secondary mr-1 mt-1 mt-sm-0">
                             <i class="bullet bullet-xs bullet-danger"></i> See rejected demands
                         </a>
                     </div>

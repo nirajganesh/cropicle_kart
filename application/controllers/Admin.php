@@ -37,6 +37,8 @@ class Admin extends MY_Controller {
 		$appr_orders=$this->fetch->record_count_arr('orders',['status'=>'DELIVERED']);
 		$rej_orders=$this->fetch->record_count_arr('orders',['status'=>'REJECTED']);
 
+		$demands=$this->fetch->todaysDemands();
+
 		$last_payment='0';
 
 		$this->load->view('admin/header',['title'=>'Dashboard',
@@ -60,6 +62,7 @@ class Admin extends MY_Controller {
 										'new_orders'=>$new_orders,
 										'appr_orders'=>$appr_orders,
 										'rej_orders'=>$rej_orders,
+										'demands'=>$demands,
 										'last_payment'=>$last_payment
 										]);
 		$this->load->view('admin/index');

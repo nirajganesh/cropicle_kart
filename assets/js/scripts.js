@@ -379,6 +379,86 @@
         });
     });
 
+    
+    $(".recent-dt").on("click", ".pendingDemandApprove", function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/pDemandApprove',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+                $('#orderModal .modal-body textarea').focus();
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
+    $(".recent-dt").on("click", ".pendingDemandReject", function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/pDemandReject',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+                $('#orderModal .modal-body textarea').focus();
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
+    
+    $(".recent-dt").on("click", ".approvedDemandDetails", function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/dDemandDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
+    $(".recent-dt").on("click", ".rejectedDemandDetails", function(){
+        var id=$(this).data('id');
+        $.ajax({
+            url: 'Admin/rDemandDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function(){
+                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal').modal('show');
+            },
+            success: function(response){
+                $('#orderModal .modal-body').html(response);
+            },
+            error: function(response){
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+
     // $('#reportType').change(function() {
     //     $(`
     //     <label for=":">Select Item:</label>

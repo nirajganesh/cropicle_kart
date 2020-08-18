@@ -12,7 +12,8 @@ class Reports extends MY_Controller {
 
 	public function index()
 	{
-		$this->load->view('admin/header',['reportTitle'=>'Reports']);
+		$loc=$this->fetch->getInfo('locations_master');
+		$this->load->view('admin/header',['reportTitle'=>'Reports','loc'=>$loc]);
 		$this->load->view('admin/reports');
 		$this->load->view('admin/footer');
 	}
@@ -68,6 +69,21 @@ class Reports extends MY_Controller {
 				// echo '<pre>';var_dump($response);exit;
 				$result='"Detailed user demands" <br> From:'.date('d-M-Y',strtotime($_POST['from'])).'<br>To:'.date('d-M-Y',strtotime($_POST['to']));
 				$title='User demands: '.date('d-m-y',strtotime($_POST['from'])).' to '.date('d-m-y',strtotime($_POST['to']));
+			break;
+
+			case 'itemWiseDemands':
+				$response= $this->report->itemWiseDemands($from , $to);
+				$veg=$response;
+				$response=array();
+				$f=0;
+				foreach($veg as $r){
+					$response[$f]['Item']=$r['name'];
+					$response[$f]['Quantity']=$r['qty'].' '.$r['unit'];
+					$f++;
+				}
+				// echo '<pre>';var_dump($response);exit;
+				$result='"Item wise demands" <br> From:'.date('d-M-Y',strtotime($_POST['from'])).'<br>To:'.date('d-M-Y',strtotime($_POST['to']));
+				$title='Item wise demands: '.date('d-m-y',strtotime($_POST['from'])).' to '.date('d-m-y',strtotime($_POST['to']));
 			break;
 
 			default:

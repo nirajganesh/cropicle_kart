@@ -20,7 +20,7 @@
                         <a href="<?=base_url()?>kart-orders" class="btn btn-sm btn-light-secondary mr-1">
                             <i class="bullet bullet-xs bullet-warning"></i> See pending orders
                         </a>
-                        <a href="<?=base_url()?>delivered-kart-orders" class="btn btn-sm btn-light-secondary">
+                        <a href="<?=base_url()?>delivered-kart-orders" class="btn btn-sm btn-light-secondary mr-1 mt-1 mt-sm-0">
                             <i class="bullet bullet-xs bullet-success"></i> See delivered orders
                         </a>
                     </div>

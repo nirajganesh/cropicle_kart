@@ -15,7 +15,8 @@
                             <hr>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
+                    <div class="row">
+
                         <div class="col-xl-2 col-md-4 col-sm-6">
                             <a href="<?=base_url('user-demands')?>" class="card text-center">
                                 <div class="card-content">
@@ -187,19 +188,65 @@
                             </a>
                         </div>
 
-                        <!-- <div class="col-xl-3 col-md-4 col-sm-6">
-                            <a href="<?=base_url('kart-payments')?>payments" class="card text-center">
+                        
+                        <div class="col-xl-8 col-md-10 col-sm-12">
+                            <div class="card">
+                                <div class="card-header d-flex flex-row justify-content-between">
+                                    <h4 class="card-title">Today's demands &nbsp;<small class="text-muted">(<?= date('d-M-y')?>)</small> </h4>
+                                    <a href="user-demands" class="btn btn-light-primary btn-sm">See all</a>
+                                </div>
                                 <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="badge-circle badge-circle-lg badge-circle-light-success mx-auto my-1">
-                                            <i class="bx bx-money font-medium-5"></i>
+                                    <div class="card-body card-dashboard">
+                                        <div class="table-responsive">
+                                            <table class="table recent-dt">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Info</th>
+                                                        <th>Amount</th>
+                                                        <th>Address</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php foreach($demands as $de){?>
+                                                    <tr>
+                                                        <td><?=$de->name?> <br> (<?=$de->mobile_no?>)</td>
+                                                        <td>₹<?=$de->demand_amount?>/- </td>
+                                                        <td><?=$de->address?> </td>
+                                                        <td><?=$de->status?> </td>
+                                                    <?php if($de->status=='PENDING'){?>
+                                                        <td class='d-flex'>
+                                                            <span data-id='<?=$de->id?>' class="pendingDemandReject mr-1">
+                                                                <a href="javascript:;" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-secondary bx bx-x-circle text-primary font-medium-5"></i></a>
+                                                            </span>
+                                                            <span data-id='<?=$de->id?>' class="pendingDemandApprove">
+                                                                <a href="javascript:;" data-toggle="tooltip" title="Approve"><i class="badge-circle badge-circle-light-secondary bx bx-check-circle text-primary font-medium-5"></i></a>
+                                                            </span>
+                                                        </td>
+                                                    <?php } else if($de->status=='APPROVED'){?>
+                                                        <td class='d-flex'>
+                                                            <span data-id='<?=$de->id?>' class="approvedDemandDetails">
+                                                                <a href="javascript:;" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
+                                                            </span>
+                                                        </td>
+                                                    <?php } else{?>
+                                                        <td class='d-flex'>
+                                                            <span data-id='<?=$de->id?>' class="rejectedDemandDetails">
+                                                                <a href="javascript:;" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
+                                                            </span>
+                                                        </td>
+                                                    <?php }?>
+                                                    </tr>
+                                                    <?php }?>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        <p class="text-muted mb-0 line-ellipsis">Latest payment</p>
-                                        <h2 class="mb-0"><?=$last_payment?>/-</h2>
                                     </div>
                                 </div>
-                            </a>
-                        </div> -->
+                            </div>
+                        </div>
+
                     </div>
                 </section>
                 <!-- Dashboard Analytics end -->
@@ -208,3 +255,31 @@
         </div>
     </div>
     <!-- END: Content-->
+
+    
+<div class="modal fade " id="orderModal" tabindex="-1" role="dialog" aria-labelledby="Demand Modal" aria-modal="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLongTitle">Demand details</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body px-md-2 px-1">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+<script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+<script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
+<script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+<script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+<script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
+<script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+<script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+
+<script src="<?=base_url()?>app-assets/js/scripts/datatables/datatable.js"></script>

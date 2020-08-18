@@ -27,7 +27,6 @@ class Reportsmodel extends CI_Model{
 		}
 		return $arr;
 	}
-
 	function detailedUserDemandsItems($did){
 		return $this->db->select('cdd.item_price_customer, cdd.item_quantity, i.item_name, ut.unit_short_name')
 						->from('customer_demand_details cdd')
@@ -37,57 +36,42 @@ class Reportsmodel extends CI_Model{
 						->get()->result();
 	}
 
-	function expenseBetweenDates($from,$to){
-		$q=$this->db->query("SELECT * FROM transactions,sub_accounts WHERE transactions_dr_cr = 'Cr' AND transactions_type='EXPENSE' AND transactions_account=sub_accounts_id AND transactions_date BETWEEN '$from' AND '$to'");
-		return $q->result();
-	}
-
-	function itemSalesCustomerWiseBetweenDates($from,$to,$item){
-		$q=$this->db->query("SELECT transactions_date,transactions_no,transactions_account,transactions_items_items_id,transactions_items_qty , transactions_items_name,items_code,sub_accounts_name FROM transactions,transactions_items,items,sub_accounts WHERE transactions_items_txn_no=transactions_no AND `transactions_items_items_id`=items_id AND transactions_type='SALES' AND transactions_dr_cr='Dr' AND transactions_type=transactions_items_txn_type AND sub_accounts_id=transactions_account AND `transactions_items_items_id`=$item AND transactions_date BETWEEN '$from' AND '$to'");
-		return $q->result();
-		
-	}
-
-	function itemSalesBetweenDates($from,$to){
-		$q=$this->db->query("SELECT DISTINCT (transactions_items_items_id),transactions_items_name,items_code FROM transactions,transactions_items,items WHERE transactions_items_txn_no=transactions_no AND `transactions_items_items_id`=items_id AND transactions_type='SALES' AND transactions_dr_cr='Dr' AND transactions_type=transactions_items_txn_type AND transactions_date BETWEEN '$from' AND '$to'");
-		if($q->result()){
-			$q=$q->result();
-
-			$size=count($q);
-			$i=0;
-			while ($size > $i) {
-				//var_dump($q[$i]);exit;
-				$id=$q[$i]->transactions_items_items_id;
-				$q2=$this->db->query("SELECT SUM(`transactions_items_qty`)as qty FROM `transactions_items`,transactions WHERE `transactions_items_items_id`=$id AND transactions_items_txn_no=transactions_no AND transactions_type=transactions_items_txn_type AND transactions_type='SALES' AND transactions_dr_cr='Dr' AND transactions_date BETWEEN '$from' AND '$to'");
-				$q2=$q2->row();
-				
-				$q[$i]->qty=$q2->qty;
-				
-				$i++;
+	function itemWiseDemands($from,$to){
+		$arr= $this->db->select('cd.id')
+						->from('customer_demands cd')
+						->where("cd.created >='$from'")
+						->where("cd.created <='$to'")
+						->where('cd.status','APPROVED')
+						->get()->result();
+		foreach($arr as $a){
+			$a->items=$this->itemWiseDemandsItems($a->id);
+		}
+		$veg=array();
+		foreach($arr as $a){
+			foreach($a->items as $it){
+				if(isset($veg[$it->id])){
+					$veg[$it->id]['qty']+=$it->item_quantity;
+				}
+				else{
+					$veg[$it->id]['qty']=$it->item_quantity;
+					$veg[$it->id]['name']=$it->item_name;
+					$veg[$it->id]['unit']=$it->unit_short_name;
+				}
 			}
 		}
-		
-		return $q;
-		
+		// echo'<pre>';var_dump($arr, $veg);exit;
+		return $veg;
+	}
+	function itemWiseDemandsItems($did){
+		return $this->db->select('cdd.item_quantity, i.id, i.item_name, ut.unit_short_name')
+						->from('customer_demand_details cdd')
+						->join('items_master i', 'i.id = cdd.item_id', 'LEFT')
+						->join('units ut', 'ut.id = i.unit_id', 'LEFT')
+						->where('cdd.customer_demand_id',$did)
+						->get()->result();
 	}
 
-	function purchasesBetweenDates($from,$to){
-		$q=$this->db->query("SELECT * FROM transactions,sub_accounts WHERE transactions_type='PURCHASE' AND  transactions_account=sub_accounts_id AND transactions_dr_cr='Cr' AND transactions_date BETWEEN '$from' AND '$to'");
-	
-		return $q=$q->result();
-	}
 
-	function receiptBetweenDates($from,$to){
-		$q=$this->db->query("SELECT * FROM transactions,sub_accounts WHERE transactions_type='RECEIPT' AND  transactions_account=sub_accounts_id AND transactions_dr_cr='Cr' AND transactions_date BETWEEN '$from' AND '$to'");
-	
-		return $q=$q->result();
-	}
-
-	function paymentBetweenDates($from,$to){
-		$q=$this->db->query("SELECT * FROM transactions,sub_accounts WHERE transactions_type='PAYMENT' AND  transactions_account=sub_accounts_id AND transactions_dr_cr='Dr' AND transactions_date BETWEEN '$from' AND '$to'");
-	
-		return $q=$q->result();
-	}
 
 }
 ?>

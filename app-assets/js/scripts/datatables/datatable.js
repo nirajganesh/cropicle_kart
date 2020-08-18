@@ -97,3 +97,17 @@
             }
         ]
     });
+
+    $('.recent-dt').DataTable( {
+        dom: 'rtip',
+        buttons: [
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible',
+                    stripHtml: false
+                },
+                text: 'Export'
+            }
+        ]
+    });
