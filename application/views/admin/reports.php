@@ -52,7 +52,7 @@
 
                                 <label for=":">From:</label>
                                 <fieldset class="form-group position-relative has-icon-left">
-                                    <input type="date" name="from" class="form-control pickadate" id="from" placeholder="From Date">
+                                    <input type="date" name="from" class="form-control pickadate" id="from" placeholder="From Date" data-value="<?=date('Y-m-d')?>">
                                     <div class="form-control-position">
                                         <i class='bx bx-calendar'></i>
                                     </div>
@@ -60,7 +60,7 @@
         
                                 <label for=":">To:</label>
                                 <fieldset class="form-group position-relative has-icon-left">
-                                    <input type="date" name="to" class="form-control pickadate" placeholder="To Date">
+                                    <input type="date" name="to" data-value="<?=date('Y-m-d')?>" class="form-control pickadate" placeholder="To Date">
                                     <div class="form-control-position">
                                         <i class='bx bx-calendar'></i>
                                     </div>
