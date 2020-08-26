@@ -49,12 +49,13 @@ class Reports extends MY_Controller {
 			case 'detailedUserDemands':
 				$response= $this->report->detailedUserDemands($from , $to);
 				foreach($response as $r){
+					$r->order_no=$r->id;
 					$r->demand_amount='₹'.$r->demand_amount.'/-';
-					$r->info= $r->name.'<br>('.$r->mobile_no.')<br> <mark> Bill amt. :'.$r->demand_amount.'</mark><br>Address: '.$r->address;
+					$r->info= $r->name.'<br>('.$r->mobile_no.')</mark><br>Address: '.$r->address.'<br> <mark> Bill amt. :'.$r->demand_amount;
+					unset($r->id);
 					unset($r->name);
 					unset($r->address);
 					unset($r->mobile_no);
-					unset($r->id);
 					unset($r->demand_amount);
 					foreach($r->items as $i){
 						$r->products[]=$i->item_name.' ('.$i->item_quantity.' '.$i->unit_short_name.') (₹'.$i->item_quantity*$i->item_price_customer.')';
@@ -65,6 +66,8 @@ class Reports extends MY_Controller {
 						$r->items.=$p.'<br>';
 					}
 					unset($r->products);
+					$r->cust_remarks=$r->customer_remarks;
+					unset($r->customer_remarks);
 				}
 				// echo '<pre>';var_dump($response);exit;
 				$result='"Detailed user demands" <br> From:'.date('d-M-Y',strtotime($_POST['from'])).'<br>To:'.date('d-M-Y',strtotime($_POST['to']));

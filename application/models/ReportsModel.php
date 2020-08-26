@@ -15,7 +15,7 @@ class Reportsmodel extends CI_Model{
 	}
 
 	function detailedUserDemands($from,$to){
-		$arr= $this->db->select('u.name, u.mobile_no, cd.id,cd.demand_amount, cd.address')
+		$arr= $this->db->select('cd.id,u.name, u.mobile_no,cd.demand_amount, cd.customer_remarks, cd.address')
 						->from('customer_demands cd')
 						->join('users u', 'u.id = cd.user_id', 'LEFT')
 						->where("cd.created >='$from'")
