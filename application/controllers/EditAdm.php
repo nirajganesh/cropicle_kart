@@ -301,6 +301,7 @@ class EditAdm extends MY_Controller {
         {
             $data=$this->input->post();
             $data['status']="APPROVED";
+            $data['notify']=1;
             // echo '<pre>';var_dump($data);exit;
             $this->db->trans_start();
                 $params = array("id"=>$did);
@@ -322,6 +323,7 @@ class EditAdm extends MY_Controller {
         {
             $data=$this->input->post();
             $data['status']="REJECTED";
+            $data['notify']=1;
             $this->db->trans_start();
                 $params = array("id"=>$did);
                 $status= $this->edit->updateInfoByParams('customer_demands',$data,$params);
