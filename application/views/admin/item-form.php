@@ -38,6 +38,16 @@
                                                 </div>
 
                                                 <div class="col-sm-6 form-group">
+                                                    <label for="basicInputFile">Category:</label>
+                                                    <select name="category_id" class="select form-control" required>
+                                                        <option value="">-- Choose one category --</option>
+                                                        <?php foreach($cats as $cat){?>
+                                                            <option value="<?=$cat->id?>" <?=isset($data)?($data->category_id==$cat->id?' selected':''):''?>><?=$cat->category_name?></option>
+                                                        <?php }?>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-sm-6 form-group">
                                                     <fieldset class="form-group">
                                                         <label for="basicInputFile">Item image: </label>
                                                         <div class="custom-file">

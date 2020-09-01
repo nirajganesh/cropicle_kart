@@ -109,6 +109,29 @@ class Admin extends MY_Controller {
 		$this->load->view('admin/footer');
 	}
 
+	public function categoriesMaster()
+	{
+		$loc=$this->fetch->getInfo('categories_master');
+		$this->load->view('admin/header',['title'=>'Category Master list','data'=>$loc]);
+		$this->load->view('admin/categories-master');
+		$this->load->view('admin/footer');
+	}
+
+	public function addCat()
+	{
+		$this->load->view('admin/header',['title'=>'Add Category','submissionPath'=>base_url('AddAdm/category')]);
+		$this->load->view('admin/category-form');
+		$this->load->view('admin/footer');
+	}
+
+	public function editCat($id)
+	{
+		$item=$this->fetch->getInfoById('categories_master','id',$id);
+		$this->load->view('admin/header',['title'=>'Edit Category','data'=>$item, 'submissionPath'=>base_url('EditAdm/category/').$id]);
+		$this->load->view('admin/category-form');
+		$this->load->view('admin/footer');
+	}
+
 	public function kartOrders()
 	{
 		$pending=$this->fetch->orders('ORDERED');
@@ -136,7 +159,8 @@ class Admin extends MY_Controller {
 	public function addItem()
 	{
 		$units=$this->fetch->getInfo('units');
-		$this->load->view('admin/header',['title'=>'Add item','units'=>$units,'submissionPath'=>base_url('AddAdm/item')]);
+		$cats=$this->fetch->getInfo('categories_master');
+		$this->load->view('admin/header',['title'=>'Add item','units'=>$units,'cats'=>$cats,'submissionPath'=>base_url('AddAdm/item')]);
 		$this->load->view('admin/item-form');
 		$this->load->view('admin/footer');
 	}
@@ -145,7 +169,8 @@ class Admin extends MY_Controller {
 	{
 		$item=$this->fetch->getInfoById('items_master','id',$id);
 		$units=$this->fetch->getInfo('units');
-		$this->load->view('admin/header',['title'=>'Edit item','data'=>$item, 'units'=>$units, 'submissionPath'=>base_url('EditAdm/item/').$id]);
+		$cats=$this->fetch->getInfo('categories_master');
+		$this->load->view('admin/header',['title'=>'Edit item','data'=>$item, 'units'=>$units,'cats'=>$cats, 'submissionPath'=>base_url('EditAdm/item/').$id]);
 		$this->load->view('admin/item-form');
 		$this->load->view('admin/footer');
 	}

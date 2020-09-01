@@ -28,6 +28,19 @@ class DeleteAdm extends MY_Controller {
             }
         }
 
+        public function category($id)
+        {
+            $status= $this->delete->deleteById('categories_master','id',$id);
+            if($status){
+                $this->session->set_flashdata('success','Category deleted!');
+                redirect('categories-master');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error!');
+                redirect('categories-master');
+            }
+        }
+
         public function location($id)
         {
             $status= $this->delete->deleteById('locations_master','id',$id);

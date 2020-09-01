@@ -132,6 +132,12 @@
                     </a>
                 </li>
 
+                <li class="nav-item mr-2 my-25">
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='categories-master' ? ' activeLink':''?>" href="<?=base_url('categories-master')?>">
+                        <i class="menu-livicon" data-icon="list"></i><span data-i18n="Dashboard">
+                        Categories Master</span>
+                    </a>
+                </li>
 
                 <li class="dropdown nav-item mr-2 my-25" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white <?=$this->uri->segment(1)=='items-master' || $this->uri->segment(1)=='price-manager' ?' activeLink':''?>" href="" data-toggle="dropdown"><i class="menu-livicon" data-icon="apple"></i><span data-i18n="Dashboard">Items master</span></a>
                     <ul class="dropdown-menu">

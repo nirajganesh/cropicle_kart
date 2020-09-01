@@ -19,6 +19,7 @@ class EditAdm extends MY_Controller {
             $this->form_validation->set_rules('item_price_kart', 'Hawker price', 'required');
             $this->form_validation->set_rules('max_order_qty', 'Max order qty', 'required');
             $this->form_validation->set_rules('unit_id', 'Unit', 'required');
+            $this->form_validation->set_rules('category_id', 'Category', 'required');
             if($this->form_validation->run() == true){
                 $unlink="";
                 $data=$this->input->post();
@@ -61,6 +62,29 @@ class EditAdm extends MY_Controller {
             else{
                 $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
                 redirect('items-master');
+            }
+        }
+
+        public function category($id)
+        {
+            // echo'<pre>';var_dump($this->input->post(),$_FILES);exit;
+            $this->form_validation->set_rules('category_name', 'Name', 'required');
+            if($this->form_validation->run() == true){
+                $data=$this->input->post();
+                $data['modified']=date('Y-m-d H:i:s');
+                $status= $this->edit->updateInfoById('categories_master',$data,'id', $id);
+                if($status){
+                    $this->session->set_flashdata('success','Category updated !' );
+                    redirect('categories-master');
+                }
+                else{
+                    $this->session->set_flashdata('failed','Error !');
+                    redirect('categories-master');
+                }
+            }
+            else{
+                $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
+                redirect('categories-master');
             }
         }
 
@@ -129,6 +153,27 @@ class EditAdm extends MY_Controller {
             else{
                 $this->session->set_flashdata('failed','Error !');
                 redirect('locations-master');
+            }
+        }
+
+        public function catStatus($id,$current_stat)
+        {
+            if($current_stat==0){
+                $data['is_active']=1;
+                $data['modified']=date('Y-m-d H:i:s');
+            }
+            else{
+                $data['is_active']=0;
+                $data['modified']=date('Y-m-d H:i:s');
+            }
+            $status= $this->edit->updateInfoById('categories_master',$data,'id', $id);
+            if($status){
+                $this->session->set_flashdata('success','Category status updated !' );
+                redirect('categories-master');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('categories-master');
             }
         }
 

@@ -18,6 +18,7 @@ class AddAdm extends MY_Controller {
             $this->form_validation->set_rules('item_price_kart', 'Hawker price', 'required');
             $this->form_validation->set_rules('max_order_qty', 'Max order qty', 'required');
             $this->form_validation->set_rules('unit_id', 'Unit', 'required');
+            $this->form_validation->set_rules('category_id', 'Category', 'required');
             if($this->form_validation->run() == true){
                 $imagename = 'defaultItem.jpg';
                 $data=$this->input->post();
@@ -53,6 +54,28 @@ class AddAdm extends MY_Controller {
             else{
                 $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
                 redirect('add-item');
+            }
+        }
+
+        public function category()
+        {
+            // echo'<pre>';var_dump($this->input->post(),$_FILES);exit;
+            $this->form_validation->set_rules('category_name', 'Name', 'required');
+            if($this->form_validation->run() == true){
+                $data=$this->input->post();
+                $status= $this->save->saveInfo('categories_master',$data);
+                if($status){
+                    $this->session->set_flashdata('success','category added !' );
+                    redirect('categories-master');
+                }
+                else{
+                    $this->session->set_flashdata('failed','Error !');
+                    redirect('add-cat');
+                }
+            }
+            else{
+                $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
+                redirect('add-cat');
             }
         }
 

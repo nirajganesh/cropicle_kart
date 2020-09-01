@@ -79,6 +79,12 @@ $route['edit-item/(:num)'] = 'Admin/editItem/$1';
 $route['toggle-item-status/(:num)/(:num)'] = 'EditAdm/itemStatus/$1/$2';
 $route['delete-item/(:num)'] = 'DeleteAdm/item/$1';
 
+$route['categories-master'] = 'Admin/categoriesMaster';
+$route['add-cat'] = 'Admin/addCat';
+$route['edit-cat/(:num)'] = 'Admin/editCat/$1';
+$route['toggle-cat-status/(:num)/(:num)'] = 'EditAdm/catStatus/$1/$2';
+$route['delete-cat/(:num)'] = 'DeleteAdm/category/$1';
+
 $route['locations-master'] = 'Admin/locationsMaster';
 $route['add-loc'] = 'Admin/addLoc';
 $route['edit-loc/(:num)'] = 'Admin/editLoc/$1';
