@@ -161,12 +161,17 @@ class EditAdm extends MY_Controller {
             if($current_stat==0){
                 $data['is_active']=1;
                 $data['modified']=date('Y-m-d H:i:s');
+                $data2['category_active']=1;
+                $data2['modified']=date('Y-m-d H:i:s');
             }
             else{
                 $data['is_active']=0;
                 $data['modified']=date('Y-m-d H:i:s');
+                $data2['category_active']=0;
+                $data2['modified']=date('Y-m-d H:i:s');
             }
             $status= $this->edit->updateInfoById('categories_master',$data,'id', $id);
+            $status= $this->edit->updateInfoById('items_master',$data2,'category_id', $id);
             if($status){
                 $this->session->set_flashdata('success','Category status updated !' );
                 redirect('categories-master');
