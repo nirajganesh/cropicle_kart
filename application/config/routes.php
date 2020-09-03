@@ -108,3 +108,8 @@ $route['approved-user-demands'] = 'Admin/apprUserDemands';
 $route['rejected-user-demands'] = 'Admin/rejUserDemands';
 
 $route['reports'] = 'Reports';
+
+$route['banner'] = 'Admin/Banner';
+$route['add-banner'] = 'Admin/addBanner';
+$route['edit-banner/(:num)'] = 'Admin/editBanner/$1';
+$route['del-banner/(:num)'] = 'DeleteAdm/delBanner/$1';

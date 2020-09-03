@@ -30,14 +30,33 @@ class DeleteAdm extends MY_Controller {
 
         public function category($id)
         {
+            $itm= $this->fetch->getInfoById('categories_master','id',$id);
             $status= $this->delete->deleteById('categories_master','id',$id);
             if($status){
+                $path= 'assets/images/'.$itm->img_src;
+                unlink($path);
                 $this->session->set_flashdata('success','Category deleted!');
                 redirect('categories-master');
             }
             else{
                 $this->session->set_flashdata('failed','Error!');
                 redirect('categories-master');
+            }
+        }
+
+        public function delBanner($id)
+        {
+            $itm= $this->fetch->getInfoById('banner','id',$id);
+            $status= $this->delete->deleteById('banner','id',$id);
+            if($status){
+                $path= 'assets/images/'.$itm->img_src;
+                unlink($path);
+                $this->session->set_flashdata('success','Banner deleted!');
+                redirect('banner');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error!');
+                redirect('banner');
             }
         }
 

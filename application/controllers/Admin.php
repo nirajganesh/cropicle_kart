@@ -77,6 +77,14 @@ class Admin extends MY_Controller {
 		$this->load->view('admin/footer');
 	}
 
+	public function Banner()
+	{
+		$items=$this->fetch->getInfo('banner');
+		$this->load->view('admin/header',['title'=>'Frontend banners','data'=>$items]);
+		$this->load->view('admin/banners');
+		$this->load->view('admin/footer');
+	}
+
 	public function kartUsers()
 	{
 		$karts=$this->fetch->getInfoParams('users','role_id','2');
@@ -187,6 +195,21 @@ class Admin extends MY_Controller {
 		$item=$this->fetch->getInfoById('locations_master','id',$id);
 		$this->load->view('admin/header',['title'=>'Edit Location','data'=>$item, 'submissionPath'=>base_url('EditAdm/location/').$id]);
 		$this->load->view('admin/location-form');
+		$this->load->view('admin/footer');
+	}
+
+	public function addBanner()
+	{
+		$this->load->view('admin/header',['title'=>'Add banner','submissionPath'=>base_url('AddAdm/addBanner')]);
+		$this->load->view('admin/banner-form');
+		$this->load->view('admin/footer');
+	}
+
+	public function editBanner($id)
+	{
+		$item=$this->fetch->getInfoById('banner','id',$id);
+		$this->load->view('admin/header',['title'=>'Edit banner','data'=>$item, 'submissionPath'=>base_url('EditAdm/editBanner/').$id]);
+		$this->load->view('admin/banner-form');
 		$this->load->view('admin/footer');
 	}
 

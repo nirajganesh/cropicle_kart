@@ -70,10 +70,33 @@ class EditAdm extends MY_Controller {
             // echo'<pre>';var_dump($this->input->post(),$_FILES);exit;
             $this->form_validation->set_rules('category_name', 'Name', 'required');
             if($this->form_validation->run() == true){
+                $unlink="";
                 $data=$this->input->post();
                 $data['modified']=date('Y-m-d H:i:s');
+                if( $_FILES['img']['name']!=null ){
+                    $path ='assets/images';
+                    $initialize = array(
+                        "upload_path" => $path,
+                        "allowed_types" => "jpg|jpeg|png|bmp",
+                        "remove_spaces" => TRUE
+                    );
+                    $this->load->library('upload', $initialize);
+                    if (!$this->upload->do_upload('img')) {
+                        $this->session->set_flashdata('failed',trim(strip_tags($this->upload->display_errors())));
+                        redirect('categories-master');
+                    }
+                    else {
+                        $imgdata = $this->upload->data();
+                        $data['img_src']= $imgdata['file_name'];
+                        $catarr= $this->fetch->getInfoById('categories_master','id',$id);
+                        $unlink= 'assets/images/'.$catarr->img_src;
+                    } 
+                }
                 $status= $this->edit->updateInfoById('categories_master',$data,'id', $id);
                 if($status){
+                    if($unlink!=''){
+                        unlink($unlink);
+                    }
                     $this->session->set_flashdata('success','Category updated !' );
                     redirect('categories-master');
                 }
@@ -85,6 +108,51 @@ class EditAdm extends MY_Controller {
             else{
                 $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
                 redirect('categories-master');
+            }
+        }
+
+        public function editBanner($id)
+        {
+            // echo'<pre>';var_dump($this->input->post(),$_FILES);exit;
+            $this->form_validation->set_rules('text', 'Text', 'required');
+            if($this->form_validation->run() == true){
+                $unlink="";
+                $data=$this->input->post();
+                if( $_FILES['img']['name']!=null ){
+                    $path ='assets/images';
+                    $initialize = array(
+                        "upload_path" => $path,
+                        "allowed_types" => "jpg|jpeg|png|bmp",
+                        "remove_spaces" => TRUE
+                    );
+                    $this->load->library('upload', $initialize);
+                    if (!$this->upload->do_upload('img')) {
+                        $this->session->set_flashdata('failed',trim(strip_tags($this->upload->display_errors())));
+                        redirect('banner');
+                    }
+                    else {
+                        $imgdata = $this->upload->data();
+                        $data['img_src']= $imgdata['file_name'];
+                        $catarr= $this->fetch->getInfoById('banner','id',$id);
+                        $unlink= 'assets/images/'.$catarr->img_src;
+                    } 
+                }
+                $status= $this->edit->updateInfoById('banner',$data,'id', $id);
+                if($status){
+                    if($unlink!=''){
+                        unlink($unlink);
+                    }
+                    $this->session->set_flashdata('success','Banner updated !' );
+                    redirect('banner');
+                }
+                else{
+                    $this->session->set_flashdata('failed','Error !');
+                    redirect('banner');
+                }
+            }
+            else{
+                $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
+                redirect('banner');
             }
         }
 

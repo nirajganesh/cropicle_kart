@@ -63,6 +63,24 @@ class AddAdm extends MY_Controller {
             $this->form_validation->set_rules('category_name', 'Name', 'required');
             if($this->form_validation->run() == true){
                 $data=$this->input->post();
+                if( $_FILES['img']['name']!=null ){
+                    $path ='assets/images';
+                    $initialize = array(
+                        "upload_path" => $path,
+                        "allowed_types" => "jpg|jpeg|png|bmp",
+                        "remove_spaces" => TRUE
+                    );
+                    $this->load->library('upload', $initialize);
+                    if (!$this->upload->do_upload('img')) {
+                        $this->session->set_flashdata('failed',trim(strip_tags($this->upload->display_errors())));
+                        redirect('add-item');
+                    }
+                    else {
+                        $imgdata = $this->upload->data();
+                        $imagename = $imgdata['file_name'];
+                    } 
+                }
+                $data['img_src']=$imagename;
                 $status= $this->save->saveInfo('categories_master',$data);
                 if($status){
                     $this->session->set_flashdata('success','category added !' );
@@ -76,6 +94,46 @@ class AddAdm extends MY_Controller {
             else{
                 $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
                 redirect('add-cat');
+            }
+        }
+
+        public function addBanner()
+        {
+            // echo'<pre>';var_dump($this->input->post(),$_FILES);exit;
+            $this->form_validation->set_rules('text', 'Text', 'required');
+            if($this->form_validation->run() == true){
+                $data=$this->input->post();
+                if( $_FILES['img']['name']!=null ){
+                    $path ='assets/images';
+                    $initialize = array(
+                        "upload_path" => $path,
+                        "allowed_types" => "jpg|jpeg|png|bmp",
+                        "remove_spaces" => TRUE
+                    );
+                    $this->load->library('upload', $initialize);
+                    if (!$this->upload->do_upload('img')) {
+                        $this->session->set_flashdata('failed',trim(strip_tags($this->upload->display_errors())));
+                        redirect('add-banner');
+                    }
+                    else {
+                        $imgdata = $this->upload->data();
+                        $imagename = $imgdata['file_name'];
+                    } 
+                }
+                $data['img_src']=$imagename;
+                $status= $this->save->saveInfo('banner',$data);
+                if($status){
+                    $this->session->set_flashdata('success','Banner added !' );
+                    redirect('banner');
+                }
+                else{
+                    $this->session->set_flashdata('failed','Error !');
+                    redirect('banner');
+                }
+            }
+            else{
+                $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
+                redirect('add-banner');
             }
         }
 

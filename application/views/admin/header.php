@@ -132,15 +132,11 @@
                     </a>
                 </li>
 
-                <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='categories-master' ? ' activeLink':''?>" href="<?=base_url('categories-master')?>">
-                        <i class="menu-livicon" data-icon="list"></i><span data-i18n="Dashboard">
-                        Categories Master</span>
-                    </a>
-                </li>
 
-                <li class="dropdown nav-item mr-2 my-25" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white <?=$this->uri->segment(1)=='items-master' || $this->uri->segment(1)=='price-manager' ?' activeLink':''?>" href="" data-toggle="dropdown"><i class="menu-livicon" data-icon="apple"></i><span data-i18n="Dashboard">Items master</span></a>
+                <li class="dropdown nav-item mr-2 my-25" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white <?=$this->uri->segment(1)=='items-master' || $this->uri->segment(1)=='price-manager' || $this->uri->segment(1)=='categories-master' ?' activeLink':''?>" href="" data-toggle="dropdown"><i class="menu-livicon" data-icon="apple"></i><span data-i18n="Dashboard">Items master</span></a>
                     <ul class="dropdown-menu">
+                        <li class="<?=$this->uri->segment(1)=='categories-master' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='categories-master' ?' activeLink':''?>" href="<?=base_url()?>categories-master" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Categories list</a>
+                        </li>
                         <li class="<?=$this->uri->segment(1)=='items-master' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='items-master' ?' activeLink':''?>" href="<?=base_url()?>items-master" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>All Items List</a>
                         </li>
                         <li class="<?=$this->uri->segment(1)=='price-manager' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='price-manager' ?' activeLink':''?>" href="<?=base_url()?>price-manager" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Price manager</a>
@@ -188,6 +184,13 @@
                         <i class="menu-livicon" data-icon="notebook"></i><span data-i18n="Dashboard">
                         Reports</span>
                     </a>
+                </li>
+                
+                <li class="dropdown nav-item mr-0 my-25" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white <?=$this->uri->segment(1)=='banner' || $this->uri->segment(1)=='banner' ?' activeLink':''?>" href="javascript:;" data-toggle="dropdown"><i class="menu-livicon" data-icon="magic"></i><span data-i18n="Dashboard">Frontend</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="<?=$this->uri->segment(1)=='banner' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='banner' ?' activeLink':''?>" href="<?=base_url()?>banner" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Banner images</a>
+                        </li>
+                    </ul>
                 </li>
 
             </ul>
