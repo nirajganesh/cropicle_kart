@@ -14,6 +14,26 @@ class Reportsmodel extends CI_Model{
 						->get()->result();
 	}
 
+	function custRates(){
+		return $this->db->select('i.item_name, i.item_price_customer, u.unit_short_name')
+						->from('items_master i')
+						->join('units u', 'u.id = i.unit_id', 'LEFT')
+						->where("i.is_active",'1')
+						->where("i.category_active",'1')
+						->where("i.admin_item",'0')
+						->get()->result();
+	}
+
+	function hawkerRates(){
+		return $this->db->select('i.item_name, i.item_price_kart, u.unit_short_name')
+						->from('items_master i')
+						->join('units u', 'u.id = i.unit_id', 'LEFT')
+						->where("i.is_active",'1')
+						->where("i.category_active",'1')
+						->where("i.admin_item",'0')
+						->get()->result();
+	}
+
 	function detailedUserDemands($from,$to){
 		$arr= $this->db->select('cd.id,u.name, u.mobile_no,cd.demand_amount, cd.customer_remarks, cd.address')
 						->from('customer_demands cd')

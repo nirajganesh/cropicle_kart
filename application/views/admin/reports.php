@@ -23,12 +23,14 @@
                                 <h4>Reports:</h4>
                             </div>
                             <form action="<?=base_url()?>Reports/showReport" method="POST">
-                                <label for=":">Report type:</label>
+                                <label for="reportType">Report type:</label>
                                 <select name="type" class="form-control mb-1" id="reportType" required>
                                     <option value="">-- Select report type --</option>
                                     <option value="userDemands">Approved user demands</option>
                                     <option value="detailedUserDemands">Approved user demands with details</option>
                                     <option value="itemWiseDemands">Item wise demands</option>
+                                    <option value="custRates">Rate list for customers</option>
+                                    <option value="hawkerRates">Rate list for hawkers</option>
                                     <!-- <option value="detailedOrders">Item wise User demands</option>
                                     <option value="detailedOrders">Location wise user demands</option> -->
                                 </select>
@@ -50,7 +52,7 @@
                                     <option value="detailedOrders">Location wise user demands</option>
                                 </select> -->
 
-                                <label for=":">From:</label>
+                                <label for=":" class="dateLabel">From:</label>
                                 <fieldset class="form-group position-relative has-icon-left">
                                     <input type="date" name="from" class="form-control pickadate" id="from" placeholder="From Date" data-value="<?=date('Y-m-d')?>">
                                     <div class="form-control-position">
@@ -58,7 +60,7 @@
                                     </div>
                                 </fieldset>
         
-                                <label for=":">To:</label>
+                                <label for=":" class="dateLabel">To:</label>
                                 <fieldset class="form-group position-relative has-icon-left">
                                     <input type="date" name="to" data-value="<?=date('Y-m-d')?>" class="form-control pickadate" placeholder="To Date">
                                     <div class="form-control-position">
@@ -156,3 +158,16 @@
             width:60px !important;
         }
     </style>
+
+<script>
+    $( "#reportType" ).change(function() {
+        if($(this).val()=='custRates' || $(this).val()=='hawkerRates'){
+            $('.dateLabel').hide();
+            $('fieldset').hide();
+        }
+        else{
+            $('.dateLabel').show();
+            $('fieldset').show();
+        }
+    });
+</script>

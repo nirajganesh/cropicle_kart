@@ -89,6 +89,28 @@ class Reports extends MY_Controller {
 				$title='Item wise demands: '.date('d-m-y',strtotime($_POST['from'])).' to '.date('d-m-y',strtotime($_POST['to']));
 			break;
 
+			case 'custRates':
+				$response= $this->report->custRates();
+				foreach($response as $r){
+					$r->price='₹'.$r->item_price_customer.'/'.$r->unit_short_name;
+					unset($r->item_price_customer);
+					unset($r->unit_short_name);
+				}
+				$result='"Items rate list for customers"';
+				$title='Rate list as on '.date('d-m-y');
+			break;
+
+			case 'hawkerRates':
+				$response= $this->report->hawkerRates();
+				foreach($response as $r){
+					$r->price='₹'.$r->item_price_kart.'/'.$r->unit_short_name;
+					unset($r->item_price_kart);
+					unset($r->unit_short_name);
+				}
+				$result='"Items rate list for hawkers"';
+				$title='Rate list for hawkers as on '.date('d-m-y');
+			break;
+
 			default:
 				$response=false;
 			break;
