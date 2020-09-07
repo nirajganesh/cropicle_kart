@@ -117,14 +117,14 @@
                     <div class="input-group col-md-3 col-5 mb-1">
                         <input type="number" name="qty[]" step="0.01" min="0" class=" form-control maxQty`+i+`"  placeholder="Qty" aria-describedby="basic-addon2" required>
                     </div>
-                    <div class="input-group col-md-3 col-2 mb-1">
-                        <input type="number" name="price[]" step="0.01" min="0" class="form-control prc price`+i+`"  placeholder="price" aria-describedby="basic-addon2" required hidden style="display:none">
-                    </div>
                     <div class="col-md-2 col-1 pl-0 px-md-1 ">
                         <button type="button" id="`+i+`" class="btn btn-icon btn-light-danger btn_remove">
                             <i class="bx bx-x"></i>
                             <span class="d-lg-inline-block d-none">Delete</span>
                         </button>
+                    </div>
+                    <div class="input-group col-md-3 col-2 mb-1">
+                        <input type="number" name="price[]" step="0.01" min="0" class="form-control prc price`+i+`"  placeholder="price" aria-describedby="basic-addon2" required hidden style="display:none">
                     </div>
                 </div>
             `);
