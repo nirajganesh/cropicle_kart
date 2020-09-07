@@ -79,7 +79,7 @@
                                             </div>
                                             <hr>
                                             <div class="row mt-2">
-                                                <a href="<?=base_url()?>" class="mx-1 btn btn-secondary">cancel</a>
+                                                <a href="<?=base_url()?>admin" class="mx-1 btn btn-secondary">cancel</a>
                                                 <button type="button" id="submit" class="mx-1 btn btn-primary">Create</button>
                                                 <button type="submit" id="realSubmit" class="hidden" style="display:none" hidden></button>
                                             </div>
