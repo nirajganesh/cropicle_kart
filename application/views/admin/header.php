@@ -168,6 +168,8 @@
                         </li>
                         <li class="<?=$this->uri->segment(1)=='user-demands' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='user-demands' ?' activeLink':''?>" href="<?=base_url()?>user-demands" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>User demands</a>
                         </li>
+                        <li class="<?=$this->uri->segment(1)=='new-demand' ?' active':''?>" data-menu=""><a class="dropdown-item text-primary align-items-center <?=$this->uri->segment(1)=='new-demand' ?' activeLink':''?>" href="<?=base_url()?>new-demand" data-toggle="dropdown"><i class="bx bx-plus text-primary"></i>Create new demand</a>
+                        </li>
                     </ul>
                 </li>
 

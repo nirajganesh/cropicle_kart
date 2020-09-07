@@ -232,6 +232,15 @@ class Admin extends MY_Controller {
 		$this->load->view('admin/footer');
 	}
 
+	public function createUserDemand()
+	{
+		
+		$data=$this->fetch->allItemsCust();
+		$this->load->view('admin/header',['title'=>'Create new demand','data'=>$data]);
+		$this->load->view('admin/new-demand');
+		$this->load->view('admin/footer');
+	}
+
 	public function userDemands()
 	{
 		$pending=$this->fetch->userDemands('PENDING');

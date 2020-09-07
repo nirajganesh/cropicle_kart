@@ -103,6 +103,7 @@ $route['rejected-kart-orders'] = 'Admin/rejKartOrders';
 $route['kart-payments'] = 'Admin/kartPayments';
 
 $route['users'] = 'Admin/Users';
+$route['new-demand'] = 'Admin/createUserDemand';
 $route['user-demands'] = 'Admin/userDemands';
 $route['approved-user-demands'] = 'Admin/apprUserDemands';
 $route['rejected-user-demands'] = 'Admin/rejUserDemands';

@@ -97,6 +97,54 @@ class AddAdm extends MY_Controller {
             }
         }
 
+        
+        public function saveDemand()
+        {
+            $this->form_validation->set_rules('name', 'Customer name', 'required');
+            $this->form_validation->set_rules('phone', 'Customer contact no. ', 'required');
+            $this->form_validation->set_rules('address', 'Delivery address', 'required');
+            $this->form_validation->set_rules('item_id[]', 'Item', 'required');
+            $this->form_validation->set_rules('qty[]', 'Item qty', 'required');
+            if($this->form_validation->run() == true){
+                $arr=$this->input->post();
+                $data['address']=$this->input->post('address');
+                $data['customer_remarks']='Customer name & no. : '.$this->input->post('name').' ('.$this->input->post('phone').')';
+                $data['status']='PENDING';
+                $data['location_id']=0;
+                $data['user_id']=1;
+                $data['demand_amount']=0;
+                for($d=0;$d<sizeof($arr['item_id']);$d++){
+                    $data['demand_amount']+=$arr['qty'][$d]*$arr['price'][$d];
+                }
+                // echo'<pre>';var_dump($data);exit;
+
+                $this->db->trans_start();
+                $demand_id=$this->save->saveInfo('customer_demands',$data);
+                for($d=0;$d<sizeof($arr['item_id']);$d++){
+                    $data2['customer_demand_id']=$demand_id;
+                    $data2['item_id']=$arr['item_id'][$d];
+                    $data2['item_quantity']=$arr['qty'][$d];
+                    $data2['item_price_customer']=$arr['price'][$d];
+                    $this->save->saveInfo('customer_demand_details',$data2);
+                }
+                $this->db->trans_complete();
+
+                if ($this->db->trans_status() === FALSE)
+                {
+                    $this->session->set_flashdata('failed','Some error occured');
+                    redirect('new-demand');
+                }
+                else{
+                    $this->session->set_flashdata('success','Demand created !');
+                    redirect('new-demand');
+                }
+            }
+            else{
+                $this->session->set_flashdata('failed','Invalid input');
+                redirect('new-demand');
+            }
+        }
+
         public function addBanner()
         {
             // echo'<pre>';var_dump($this->input->post(),$_FILES);exit;

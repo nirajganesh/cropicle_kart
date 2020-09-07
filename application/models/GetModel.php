@@ -64,6 +64,21 @@ class GetModel extends CI_Model{
                 ->from('items_master i')
                 ->join('units u', 'u.id = i.unit_id', 'LEFT')
                 ->where('i.is_active','1')
+                ->where('i.category_active','1')
+                ->limit($lim)
+                ->order_by('i.id','desc')
+                ->get()
+                ->result();
+        return $items;
+    }
+
+    public function allItemsCust($lim=NULL)
+    {
+        $items=$this->db->select('i.id, i.item_name, i.item_price_customer, u.unit_short_name')
+                ->from('items_master i')
+                ->join('units u', 'u.id = i.unit_id', 'LEFT')
+                ->where('i.is_active','1')
+                ->where('i.category_active','1')
                 ->limit($lim)
                 ->order_by('i.id','desc')
                 ->get()
