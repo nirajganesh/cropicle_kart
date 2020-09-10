@@ -56,6 +56,38 @@ class Reportsmodel extends CI_Model{
 						->get()->result();
 	}
 
+
+	function approvedUserDemands($from,$to){
+		$arr= $this->db->select('cd.id,u.name, u.mobile_no,cd.demand_amount, cd.customer_remarks, cd.address')
+						->from('customer_demands cd')
+						->join('users u', 'u.id = cd.user_id', 'LEFT')
+						->where("cd.created >='$from'")
+						->where("cd.created <='$to'")
+						->where('cd.status','APPROVED')
+						->where('cd.is_processed',0)
+						->get()->result();
+		foreach($arr as $a){
+			$a->items=$this->detailedUserDemandsItems($a->id);
+			$this->db->where('id',$a->id)->update('customer_demands',['is_processed'=>1]);
+		}
+		return $arr;
+	}
+
+	function processedUserDemands($from,$to){
+		$arr= $this->db->select('cd.id,u.name, u.mobile_no,cd.demand_amount, cd.customer_remarks, cd.address')
+						->from('customer_demands cd')
+						->join('users u', 'u.id = cd.user_id', 'LEFT')
+						->where("cd.created >='$from'")
+						->where("cd.created <='$to'")
+						->where('cd.status','APPROVED')
+						->where('cd.is_processed',1)
+						->get()->result();
+		foreach($arr as $a){
+			$a->items=$this->detailedUserDemandsItems($a->id);
+		}
+		return $arr;
+	}
+
 	function itemWiseDemands($from,$to){
 		$arr= $this->db->select('cd.id')
 						->from('customer_demands cd')

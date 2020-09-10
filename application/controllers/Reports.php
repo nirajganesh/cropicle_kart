@@ -70,8 +70,64 @@ class Reports extends MY_Controller {
 					unset($r->customer_remarks);
 				}
 				// echo '<pre>';var_dump($response);exit;
-				$result='"Detailed user demands" <br> From:'.date('d-M-Y',strtotime($_POST['from'])).'<br>To:'.date('d-M-Y',strtotime($_POST['to']));
-				$title='User demands: '.date('d-m-y',strtotime($_POST['from'])).' to '.date('d-m-y',strtotime($_POST['to']));
+				$result='"All user demands" <br> From:'.date('d-M-Y',strtotime($_POST['from'])).'<br>To:'.date('d-M-Y',strtotime($_POST['to']));
+				$title='All User demands: '.date('d-m-y',strtotime($_POST['from'])).' to '.date('d-m-y',strtotime($_POST['to']));
+			break;
+
+			case 'approvedUserDemands':
+				$response= $this->report->approvedUserDemands($from , $to);
+				foreach($response as $r){
+					$r->order_no=$r->id;
+					$r->demand_amount='₹'.$r->demand_amount.'/-';
+					$r->info= $r->name.'<br>('.$r->mobile_no.')</mark><br>Address: '.$r->address.'<br> <mark> Bill amt. :'.$r->demand_amount;
+					unset($r->id);
+					unset($r->name);
+					unset($r->address);
+					unset($r->mobile_no);
+					unset($r->demand_amount);
+					foreach($r->items as $i){
+						$r->products[]=$i->item_name.' ('.$i->item_quantity.' '.$i->unit_short_name.') (₹'.$i->item_quantity*$i->item_price_customer.')';
+					}
+					unset($r->items);
+					$r->items='';
+					foreach($r->products as $p){
+						$r->items.=$p.'<br>';
+					}
+					unset($r->products);
+					$r->cust_remarks=$r->customer_remarks;
+					unset($r->customer_remarks);
+				}
+				// echo '<pre>';var_dump($response);exit;
+				$result='"Un-processed user demands" <br> From:'.date('d-M-Y',strtotime($_POST['from'])).'<br>To:'.date('d-M-Y',strtotime($_POST['to']));
+				$title='Approved User demands: '.date('d-m-y',strtotime($_POST['from'])).' to '.date('d-m-y',strtotime($_POST['to']));
+			break;
+
+			case 'processedUserDemands':
+				$response= $this->report->processedUserDemands($from , $to);
+				foreach($response as $r){
+					$r->order_no=$r->id;
+					$r->demand_amount='₹'.$r->demand_amount.'/-';
+					$r->info= $r->name.'<br>('.$r->mobile_no.')</mark><br>Address: '.$r->address.'<br> <mark> Bill amt. :'.$r->demand_amount;
+					unset($r->id);
+					unset($r->name);
+					unset($r->address);
+					unset($r->mobile_no);
+					unset($r->demand_amount);
+					foreach($r->items as $i){
+						$r->products[]=$i->item_name.' ('.$i->item_quantity.' '.$i->unit_short_name.') (₹'.$i->item_quantity*$i->item_price_customer.')';
+					}
+					unset($r->items);
+					$r->items='';
+					foreach($r->products as $p){
+						$r->items.=$p.'<br>';
+					}
+					unset($r->products);
+					$r->cust_remarks=$r->customer_remarks;
+					unset($r->customer_remarks);
+				}
+				// echo '<pre>';var_dump($response);exit;
+				$result='"Processed user demands" <br> From:'.date('d-M-Y',strtotime($_POST['from'])).'<br>To:'.date('d-M-Y',strtotime($_POST['to']));
+				$title='Processed User demands: '.date('d-m-y',strtotime($_POST['from'])).' to '.date('d-m-y',strtotime($_POST['to']));
 			break;
 
 			case 'itemWiseDemands':
@@ -118,6 +174,9 @@ class Reports extends MY_Controller {
 
 		if($response){
 			// echo '<pre>';var_dump($response);exit;
+			if($_POST['type']=='approvedUserDemands'){
+				$this->session->set_flashdata('info','The status of the below demands has now been updated as "Processed"');
+			}
 			$this->load->view('admin/header',['reportTitle'=>$title, 'response'=>$response, 'result'=>$result]);
 			$this->load->view('admin/reports');
 			$this->load->view('admin/footer');

@@ -26,8 +26,10 @@
                                 <label for="reportType">Report type:</label>
                                 <select name="type" class="form-control mb-1" id="reportType" required>
                                     <option value="">-- Select report type --</option>
-                                    <option value="userDemands">Approved user demands</option>
-                                    <option value="detailedUserDemands">Approved user demands with details</option>
+                                    <!-- <option value="userDemands">Approved user demands</option> -->
+                                    <option value="approvedUserDemands">Un-processed user demands with details</option>
+                                    <option value="processedUserDemands">Processed user demands with details</option>
+                                    <option value="detailedUserDemands">All user demands with details</option>
                                     <option value="itemWiseDemands">Item wise demands</option>
                                     <option value="custRates">Rate list for customers</option>
                                     <option value="hawkerRates">Rate list for hawkers</option>
