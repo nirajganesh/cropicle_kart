@@ -203,6 +203,21 @@ class EditAdm extends MY_Controller {
             }
         }
 
+        public function setDelivered($id)
+        {
+            $data['is_delivered']=1;
+            $data['modified']=date('Y-m-d H:i:s');
+            $status= $this->edit->updateInfoById('customer_demands',$data,'id', $id);
+            if($status){
+                $this->session->set_flashdata('success','Demand status marked as delivered !' );
+                redirect('approved-user-demands');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('approved-user-demands');
+            }
+        }
+
         public function locStatus($id,$current_stat)
         {
             if($current_stat==0){

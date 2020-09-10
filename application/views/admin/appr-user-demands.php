@@ -45,6 +45,9 @@
                                                 <th>Date</th>
                                                 <th>Total Amount</th>
                                                 <th>Remarks</th>
+                                                <?php if($this->uri->segment(1)=='approved-user-demands'){ ?>
+                                                <th>Delivery status</th>
+                                                <?php }?>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -56,10 +59,19 @@
                                                 <td><?=date('d-M-Y',strtotime($d->created))?></td>
                                                 <td>Rs. <?=$d->demand_amount?>/-</td>
                                                 <td><?=$d->customer_remarks?></td>
+                                                <?php if($this->uri->segment(1)=='approved-user-demands'){ ?>
+                                                    <?php if($d->is_delivered==1){ ?>
+                                                    <td><i data-toggle="tooltip" title="Delivered" class="font-medium-5 bx bx-check text-success"></i> </td>
+                                                    <?php } else{ ?>
+                                                    <td><i data-toggle="tooltip" title="Not delivered" class="font-medium-5 bx bx-x text-warning"></i></td>
+                                                <?php } }?>
                                                 <td class='d-flex'>
-                                                    <span data-id='<?=$d->id?>' class="approvedDemandDetails">
+                                                    <span data-id='<?=$d->id?>' class="approvedDemandDetails mr-1">
                                                         <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
                                                     </span>
+                                                    <?php if($d->is_delivered==0){ ?>
+                                                        <a href="<?=base_url()?>set-delivered/<?=$d->id?>" data-toggle="tooltip" title="Mark as delivered"><i class="badge-circle badge-circle-light-secondary bx bx-truck text-primary font-medium-5"></i></a>
+                                                    <?php } ?>
                                                 </td>
                                             </tr>
                                         <?php }?>
