@@ -148,8 +148,8 @@ class AddAdm extends MY_Controller {
         public function addBanner()
         {
             // echo'<pre>';var_dump($this->input->post(),$_FILES);exit;
-            $this->form_validation->set_rules('text', 'Text', 'required');
-            if($this->form_validation->run() == true){
+            // $this->form_validation->set_rules('text', 'Text', 'required');
+            // if($this->form_validation->run() == true){
                 $data=$this->input->post();
                 if( $_FILES['img']['name']!=null ){
                     $path ='assets/images';
@@ -158,17 +158,38 @@ class AddAdm extends MY_Controller {
                         "allowed_types" => "jpg|jpeg|png|bmp",
                         "remove_spaces" => TRUE
                     );
-                    $this->load->library('upload', $initialize);
-                    if (!$this->upload->do_upload('img')) {
-                        $this->session->set_flashdata('failed',trim(strip_tags($this->upload->display_errors())));
+                    $this->load->library('upload', $initialize, 'imgupload');
+                    $this->imgupload->initialize($initialize);
+                    if (!$this->imgupload->do_upload('img')) {
+                        $this->session->set_flashdata('failed',trim(strip_tags($this->imgupload->display_errors())));
                         redirect('add-banner');
                     }
                     else {
-                        $imgdata = $this->upload->data();
+                        $imgdata = $this->imgupload->data();
                         $imagename = $imgdata['file_name'];
                     } 
                 }
                 $data['img_src']=$imagename;
+
+                if( $_FILES['img2']['name']!=null ){
+                    $path ='assets/images';
+                    $initialize = array(
+                        "upload_path" => $path,
+                        "allowed_types" => "jpg|jpeg|png|bmp",
+                        "remove_spaces" => TRUE
+                    );
+                    $this->load->library('upload', $initialize, 'imgupload2');
+                    $this->imgupload2->initialize($initialize);
+                    if (!$this->imgupload2->do_upload('img2')) {
+                        $this->session->set_flashdata('failed',trim(strip_tags($this->imgupload2->display_errors())));
+                        redirect('add-banner');
+                    }
+                    else {
+                        $imgdata = $this->imgupload2->data();
+                        $imagename = $imgdata['file_name'];
+                    } 
+                }
+                $data['img_src480w']=$imagename;
                 $status= $this->save->saveInfo('banner',$data);
                 if($status){
                     $this->session->set_flashdata('success','Banner added !' );
@@ -178,11 +199,11 @@ class AddAdm extends MY_Controller {
                     $this->session->set_flashdata('failed','Error !');
                     redirect('banner');
                 }
-            }
-            else{
-                $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
-                redirect('add-banner');
-            }
+            // }
+            // else{
+            //     $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
+            //     redirect('add-banner');
+            // }
         }
 
         public function location()
@@ -230,9 +251,6 @@ class AddAdm extends MY_Controller {
             }
                 return $slug;
         }
-          
-
-        
 
 
 }

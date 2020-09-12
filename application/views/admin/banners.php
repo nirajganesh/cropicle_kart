@@ -36,6 +36,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Banner</th>
+                                                    <th>Banner (Mobile fit)</th>
                                                     <th>Text</th>
                                                     <th>Actions</th>
                                                 </tr>
@@ -43,7 +44,8 @@
                                             <tbody>
                                             <?php foreach($data as $d){?>
                                                 <tr>
-                                                    <td><img src="<?=base_url('assets/images/').$d->img_src?>" alt="banner" width="80"></td>
+                                                    <td><img src="<?=base_url('assets/images/').$d->img_src?>" alt="banner" height="100"></td>
+                                                    <td><img src="<?=base_url('assets/images/').$d->img_src480w?>" alt="banner" height="100"></td>
                                                     <td><?=$d->text?></td>
                                                     <td class=''>
 

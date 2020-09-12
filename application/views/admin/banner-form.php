@@ -44,8 +44,19 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-6 form-group">
-                                                    <label class="dFormLabel">Text:</label>
-                                                    <input type="text" name="text" value="<?=isset($data)?$data->text:''?>" class="form-control" required>
+                                                    <fieldset class="form-group">
+                                                        <label for="basicInputFile">Upload banner image for mobile:</label>
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" name="img2" id="img2" accept=".jpg, .jpeg, .png" <?=isset($data)?'':' required'?>>
+                                                            <label class="custom-file-label" for="img2">Choose file</label>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6 form-group">
+                                                    <label>Text:</label>
+                                                    <input type="text" name="text" value="<?=isset($data)?$data->text:''?>" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row mt-2 px-1">

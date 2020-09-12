@@ -114,9 +114,10 @@ class EditAdm extends MY_Controller {
         public function editBanner($id)
         {
             // echo'<pre>';var_dump($this->input->post(),$_FILES);exit;
-            $this->form_validation->set_rules('text', 'Text', 'required');
-            if($this->form_validation->run() == true){
+            // $this->form_validation->set_rules('text', 'Text', 'required');
+            // if($this->form_validation->run() == true){
                 $unlink="";
+                $unlink2="";
                 $data=$this->input->post();
                 if( $_FILES['img']['name']!=null ){
                     $path ='assets/images';
@@ -125,22 +126,46 @@ class EditAdm extends MY_Controller {
                         "allowed_types" => "jpg|jpeg|png|bmp",
                         "remove_spaces" => TRUE
                     );
-                    $this->load->library('upload', $initialize);
-                    if (!$this->upload->do_upload('img')) {
-                        $this->session->set_flashdata('failed',trim(strip_tags($this->upload->display_errors())));
+                    $this->load->library('upload', $initialize, 'imgupload');
+                    $this->imgupload->initialize($initialize);
+                    if (!$this->imgupload->do_upload('img')) {
+                        $this->session->set_flashdata('failed',trim(strip_tags($this->imgupload->display_errors())));
                         redirect('banner');
                     }
                     else {
-                        $imgdata = $this->upload->data();
+                        $imgdata = $this->imgupload->data();
                         $data['img_src']= $imgdata['file_name'];
                         $catarr= $this->fetch->getInfoById('banner','id',$id);
                         $unlink= 'assets/images/'.$catarr->img_src;
+                    } 
+                }
+                if( $_FILES['img2']['name']!=null ){
+                    $path ='assets/images';
+                    $initialize = array(
+                        "upload_path" => $path,
+                        "allowed_types" => "jpg|jpeg|png|bmp",
+                        "remove_spaces" => TRUE
+                    );
+                    $this->load->library('upload', $initialize, 'imgupload2');
+                    $this->imgupload2->initialize($initialize);
+                    if (!$this->imgupload2->do_upload('img2')) {
+                        $this->session->set_flashdata('failed',trim(strip_tags($this->imgupload2->display_errors())));
+                        redirect('banner');
+                    }
+                    else {
+                        $imgdata = $this->imgupload2->data();
+                        $data['img_src480w']= $imgdata['file_name'];
+                        $catarr= $this->fetch->getInfoById('banner','id',$id);
+                        $unlink2= 'assets/images/'.$catarr->img_src480w;
                     } 
                 }
                 $status= $this->edit->updateInfoById('banner',$data,'id', $id);
                 if($status){
                     if($unlink!=''){
                         unlink($unlink);
+                    }
+                    if($unlink2!=''){
+                        unlink($unlink2);
                     }
                     $this->session->set_flashdata('success','Banner updated !' );
                     redirect('banner');
@@ -149,11 +174,11 @@ class EditAdm extends MY_Controller {
                     $this->session->set_flashdata('failed','Error !');
                     redirect('banner');
                 }
-            }
-            else{
-                $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
-                redirect('banner');
-            }
+            // }
+            // else{
+            //     $this->session->set_flashdata('failed',trim(strip_tags(validation_errors())));
+            //     redirect('banner');
+            // }
         }
 
         public function location($id)

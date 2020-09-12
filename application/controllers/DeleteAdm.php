@@ -50,7 +50,9 @@ class DeleteAdm extends MY_Controller {
             $status= $this->delete->deleteById('banner','id',$id);
             if($status){
                 $path= 'assets/images/'.$itm->img_src;
+                $path2= 'assets/images/'.$itm->img_src480w;
                 unlink($path);
+                unlink($path2);
                 $this->session->set_flashdata('success','Banner deleted!');
                 redirect('banner');
             }
