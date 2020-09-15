@@ -130,6 +130,62 @@ class Reports extends MY_Controller {
 				$title='Processed User demands: '.date('d-m-y',strtotime($_POST['from'])).' to '.date('d-m-y',strtotime($_POST['to']));
 			break;
 
+			case 'deliveredUserDemands':
+				$response= $this->report->deliveredUserDemands($from , $to);
+				foreach($response as $r){
+					$r->order_no=$r->id;
+					$r->demand_amount='₹'.$r->demand_amount.'/-';
+					$r->info= $r->name.'<br>('.$r->phone_no.')</mark><br>Address: '.$r->address.'<br> <mark> Bill amt. :'.$r->demand_amount;
+					unset($r->id);
+					unset($r->name);
+					unset($r->address);
+					unset($r->phone_no);
+					unset($r->demand_amount);
+					foreach($r->items as $i){
+						$r->products[]=$i->item_name.' ('.$i->item_quantity.' '.$i->unit_short_name.') (₹'.$i->item_quantity*$i->item_price_customer.')';
+					}
+					unset($r->items);
+					$r->items='';
+					foreach($r->products as $p){
+						$r->items.=$p.'<br>';
+					}
+					unset($r->products);
+					$r->cust_remarks=$r->customer_remarks;
+					unset($r->customer_remarks);
+				}
+				// echo '<pre>';var_dump($response);exit;
+				$result='"Delivered user demands" <br> From:'.date('d-M-Y',strtotime($_POST['from'])).'<br>To:'.date('d-M-Y',strtotime($_POST['to']));
+				$title='Delivered User demands: '.date('d-m-y',strtotime($_POST['from'])).' to '.date('d-m-y',strtotime($_POST['to']));
+			break;
+
+			case 'rejectedUserDemands':
+				$response= $this->report->rejectedUserDemands($from , $to);
+				foreach($response as $r){
+					$r->order_no=$r->id;
+					$r->demand_amount='₹'.$r->demand_amount.'/-';
+					$r->info= $r->name.'<br>('.$r->phone_no.')</mark><br>Address: '.$r->address.'<br> <mark> Bill amt. :'.$r->demand_amount;
+					unset($r->id);
+					unset($r->name);
+					unset($r->address);
+					unset($r->phone_no);
+					unset($r->demand_amount);
+					foreach($r->items as $i){
+						$r->products[]=$i->item_name.' ('.$i->item_quantity.' '.$i->unit_short_name.') (₹'.$i->item_quantity*$i->item_price_customer.')';
+					}
+					unset($r->items);
+					$r->items='';
+					foreach($r->products as $p){
+						$r->items.=$p.'<br>';
+					}
+					unset($r->products);
+					$r->cust_remarks=$r->customer_remarks;
+					unset($r->customer_remarks);
+				}
+				// echo '<pre>';var_dump($response);exit;
+				$result='"Rejected user demands" <br> From:'.date('d-M-Y',strtotime($_POST['from'])).'<br>To:'.date('d-M-Y',strtotime($_POST['to']));
+				$title='Rejected User demands: '.date('d-m-y',strtotime($_POST['from'])).' to '.date('d-m-y',strtotime($_POST['to']));
+			break;
+
 			case 'itemWiseDemands':
 				$response= $this->report->itemWiseDemands($from , $to);
 				$veg=$response;

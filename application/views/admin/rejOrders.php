@@ -56,7 +56,7 @@
                                                 <td>Rs. <?=$r->total_amt?>/-</td>
                                                 <td class='d-flex'>
                                                     <span data-id='<?=$r->id?>' class="rejectedOrderOpen">
-                                                        <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
+                                                        <a href="javascript:;" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-1"></i></a>
                                                     </span>
                                                 </td>
                                             </tr>

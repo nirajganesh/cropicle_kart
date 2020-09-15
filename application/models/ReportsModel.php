@@ -79,8 +79,38 @@ class Reportsmodel extends CI_Model{
 						->join('users u', 'u.id = cd.user_id', 'LEFT')
 						->where("cd.created >='$from'")
 						->where("cd.created <='$to'")
+						->where('cd.is_delivered',0)
 						->where('cd.status','APPROVED')
 						->where('cd.is_processed',1)
+						->get()->result();
+		foreach($arr as $a){
+			$a->items=$this->detailedUserDemandsItems($a->id);
+		}
+		return $arr;
+	}
+
+	function deliveredUserDemands($from,$to){
+		$arr= $this->db->select('cd.id,u.name, cd.phone_no,cd.demand_amount, cd.customer_remarks, cd.address')
+						->from('customer_demands cd')
+						->join('users u', 'u.id = cd.user_id', 'LEFT')
+						->where("cd.created >='$from'")
+						->where("cd.created <='$to'")
+						->where('cd.is_delivered',1)
+						->where('cd.status','APPROVED')
+						->get()->result();
+		foreach($arr as $a){
+			$a->items=$this->detailedUserDemandsItems($a->id);
+		}
+		return $arr;
+	}
+
+	function rejectedUserDemands($from,$to){
+		$arr= $this->db->select('cd.id,u.name, cd.phone_no,cd.demand_amount, cd.customer_remarks, cd.address')
+						->from('customer_demands cd')
+						->join('users u', 'u.id = cd.user_id', 'LEFT')
+						->where("cd.created >='$from'")
+						->where("cd.created <='$to'")
+						->where('cd.status','REJECTED')
 						->get()->result();
 		foreach($arr as $a){
 			$a->items=$this->detailedUserDemandsItems($a->id);

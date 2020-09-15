@@ -58,10 +58,10 @@
                                                 <td><?=$p->customer_remarks?></td>
                                                 <td class='d-flex'>
                                                     <span data-id='<?=$p->id?>' class="pendingDemandReject mr-1">
-                                                        <a href="#" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-secondary bx bx-x-circle text-primary font-medium-5"></i></a>
+                                                        <a href="javascript:;" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-secondary bx bx-x-circle text-primary font-medium-5"></i></a>
                                                     </span>
                                                     <span data-id='<?=$p->id?>' class="pendingDemandApprove">
-                                                        <a href="#" data-toggle="tooltip" title="Approve"><i class="badge-circle badge-circle-light-secondary bx bx-check-circle text-primary font-medium-5"></i></a>
+                                                        <a href="javascript:;" data-toggle="tooltip" title="Approve"><i class="badge-circle badge-circle-light-secondary bx bx-check-circle text-primary font-medium-5"></i></a>
                                                     </span>
                                                 </td>
                                             </tr>

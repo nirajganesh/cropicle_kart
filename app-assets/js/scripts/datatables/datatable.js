@@ -32,7 +32,9 @@
                     columns: ':visible'
                 }
             }
-        ]
+        ],
+        "ordering": true,
+        order: [[ 0, "desc" ]]
     });
     
 

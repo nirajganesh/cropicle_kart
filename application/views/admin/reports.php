@@ -29,7 +29,9 @@
                                     <!-- <option value="userDemands">Approved user demands</option> -->
                                     <option value="approvedUserDemands">Un-processed user demands with details</option>
                                     <option value="processedUserDemands">Processed user demands with details</option>
-                                    <option value="detailedUserDemands">All user demands with details</option>
+                                    <option value="deliveredUserDemands">Delivered user demands with details</option>
+                                    <option value="detailedUserDemands">All approved user demands with details</option>
+                                    <option value="rejectedUserDemands">Rejected user demands with details</option>
                                     <option value="itemWiseDemands">Item wise demands</option>
                                     <option value="custRates">Rate list for customers</option>
                                     <option value="hawkerRates">Rate list for hawkers</option>
