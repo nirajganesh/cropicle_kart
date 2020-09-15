@@ -189,7 +189,7 @@
                         </div>
 
                         
-                        <div class="col-xl-8 col-md-10 col-sm-12">
+                        <div class="col-xl-10 col-md-10 col-sm-12">
                             <div class="card">
                                 <div class="card-header d-flex flex-row justify-content-between">
                                     <h4 class="card-title">Today's demands &nbsp;<small class="text-muted">(<?= date('d-M-y')?>)</small> </h4>
