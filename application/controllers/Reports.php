@@ -51,11 +51,11 @@ class Reports extends MY_Controller {
 				foreach($response as $r){
 					$r->order_no=$r->id;
 					$r->demand_amount='₹'.$r->demand_amount.'/-';
-					$r->info= $r->name.'<br>('.$r->mobile_no.')</mark><br>Address: '.$r->address.'<br> <mark> Bill amt. :'.$r->demand_amount;
+					$r->info= $r->name.'<br>('.$r->phone_no.')</mark><br>Address: '.$r->address.'<br> <mark> Bill amt. :'.$r->demand_amount;
 					unset($r->id);
 					unset($r->name);
 					unset($r->address);
-					unset($r->mobile_no);
+					unset($r->phone_no);
 					unset($r->demand_amount);
 					foreach($r->items as $i){
 						$r->products[]=$i->item_name.' ('.$i->item_quantity.' '.$i->unit_short_name.') (₹'.$i->item_quantity*$i->item_price_customer.')';
@@ -79,11 +79,11 @@ class Reports extends MY_Controller {
 				foreach($response as $r){
 					$r->order_no=$r->id;
 					$r->demand_amount='₹'.$r->demand_amount.'/-';
-					$r->info= $r->name.'<br>('.$r->mobile_no.')</mark><br>Address: '.$r->address.'<br> <mark> Bill amt. :'.$r->demand_amount;
+					$r->info= $r->name.'<br>('.$r->phone_no.')</mark><br>Address: '.$r->address.'<br> <mark> Bill amt. :'.$r->demand_amount;
 					unset($r->id);
 					unset($r->name);
 					unset($r->address);
-					unset($r->mobile_no);
+					unset($r->phone_no);
 					unset($r->demand_amount);
 					foreach($r->items as $i){
 						$r->products[]=$i->item_name.' ('.$i->item_quantity.' '.$i->unit_short_name.') (₹'.$i->item_quantity*$i->item_price_customer.')';
@@ -107,11 +107,11 @@ class Reports extends MY_Controller {
 				foreach($response as $r){
 					$r->order_no=$r->id;
 					$r->demand_amount='₹'.$r->demand_amount.'/-';
-					$r->info= $r->name.'<br>('.$r->mobile_no.')</mark><br>Address: '.$r->address.'<br> <mark> Bill amt. :'.$r->demand_amount;
+					$r->info= $r->name.'<br>('.$r->phone_no.')</mark><br>Address: '.$r->address.'<br> <mark> Bill amt. :'.$r->demand_amount;
 					unset($r->id);
 					unset($r->name);
 					unset($r->address);
-					unset($r->mobile_no);
+					unset($r->phone_no);
 					unset($r->demand_amount);
 					foreach($r->items as $i){
 						$r->products[]=$i->item_name.' ('.$i->item_quantity.' '.$i->unit_short_name.') (₹'.$i->item_quantity*$i->item_price_customer.')';

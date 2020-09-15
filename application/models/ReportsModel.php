@@ -35,7 +35,7 @@ class Reportsmodel extends CI_Model{
 	}
 
 	function detailedUserDemands($from,$to){
-		$arr= $this->db->select('cd.id,u.name, u.mobile_no,cd.demand_amount, cd.customer_remarks, cd.address')
+		$arr= $this->db->select('cd.id,u.name, cd.phone_no, cd.demand_amount, cd.customer_remarks, cd.address')
 						->from('customer_demands cd')
 						->join('users u', 'u.id = cd.user_id', 'LEFT')
 						->where("cd.created >='$from'")
@@ -58,7 +58,7 @@ class Reportsmodel extends CI_Model{
 
 
 	function approvedUserDemands($from,$to){
-		$arr= $this->db->select('cd.id,u.name, u.mobile_no,cd.demand_amount, cd.customer_remarks, cd.address')
+		$arr= $this->db->select('cd.id,u.name, cd.phone_no, cd.demand_amount, cd.customer_remarks, cd.address')
 						->from('customer_demands cd')
 						->join('users u', 'u.id = cd.user_id', 'LEFT')
 						->where("cd.created >='$from'")
@@ -74,7 +74,7 @@ class Reportsmodel extends CI_Model{
 	}
 
 	function processedUserDemands($from,$to){
-		$arr= $this->db->select('cd.id,u.name, u.mobile_no,cd.demand_amount, cd.customer_remarks, cd.address')
+		$arr= $this->db->select('cd.id,u.name, cd.phone_no,cd.demand_amount, cd.customer_remarks, cd.address')
 						->from('customer_demands cd')
 						->join('users u', 'u.id = cd.user_id', 'LEFT')
 						->where("cd.created >='$from'")

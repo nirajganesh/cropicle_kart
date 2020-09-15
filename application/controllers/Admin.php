@@ -434,7 +434,7 @@ class Admin extends MY_Controller {
 			<p class="ml-1 text-dark">Status : <strong class="text-warning">'.$info->status.'</strong></p>
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
-			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
+			<p class="ml-1 text-dark">Contact no. : '.$info->phone_no.'</p>
 		</div>';
 		if($loc_info){
 			$response.='	<div class="row mx-0 pb-0 mb-0">
@@ -499,7 +499,7 @@ class Admin extends MY_Controller {
 			<p class="ml-1 text-dark">Status : <strong class="text-warning">'.$info->status.'</strong></p>
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
-			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
+		<p class="ml-1 text-dark">Contact no. : '.$info->phone_no.'</p>
 		</div>';
 		if($loc_info){
 			$response.='	<div class="row mx-0 pb-0 mb-0">
@@ -564,7 +564,7 @@ class Admin extends MY_Controller {
 			<p class="ml-1 text-dark">Status : <strong class="text-success">'.$info->status.'</strong></p>
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
-			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
+			<p class="ml-1 text-dark">Contact no. : '.$info->phone_no.'</p>
 		</div>';
 		if($loc_info){
 			$response.='	<div class="row mx-0 pb-0 mb-0">
@@ -628,7 +628,7 @@ class Admin extends MY_Controller {
 			<p class="ml-1 text-dark">Status : <strong class="text-danger">'.$info->status.'</strong></p>
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
-			<p class="ml-1 text-dark">No. of items : '.sizeof($demand).'</p>
+			<p class="ml-1 text-dark">Contact no. : '.$info->phone_no.'</p>
 		</div>';
 		if($loc_info){
 			$response.='	<div class="row mx-0 pb-0 mb-0">

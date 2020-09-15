@@ -201,7 +201,7 @@
                                             <table class="table recent-dt">
                                                 <thead>
                                                     <tr>
-                                                        <th>Info</th>
+                                                        <th>Order by</th>
                                                         <th>Amount</th>
                                                         <th>Address</th>
                                                         <th>Status</th>
