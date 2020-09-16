@@ -103,7 +103,7 @@ class Admin extends MY_Controller {
 
 	public function priceManager()
 	{
-		$items=$this->fetch->getInfo('items_master');
+		$items=$this->fetch->getAllItems();
 		$this->load->view('admin/header',['title'=>'Price manager','data'=>$items]);
 		$this->load->view('admin/price-manager');
 		$this->load->view('admin/footer');

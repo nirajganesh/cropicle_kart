@@ -63,8 +63,33 @@
                                                         <input type="number" name="id[]" class="form-control" value="<?=$d->id?>" readonly required hidden>
                                                     </td>
                                                     <td><?=$d->item_name?></td>
-                                                    <td><input type="number" class="form-control number d-inline" step="0.5" name="item_price_kart[]" value="<?=$d->item_price_kart?>" required></td>
-                                                    <td><input type="number" class="form-control number d-inline" step="0.5" name="item_price_customer[]" value="<?=$d->item_price_customer?>" required></td>
+                                                    <td>
+                                                        <fieldset class="px-2">
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">₹</span>
+                                                                </div>
+                                                                <input type="number" class="form-control number" step="0.5" name="item_price_kart[]" value="<?=$d->item_price_kart?>" required>
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text">/<?=$d->unit_short_name?></span>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset class="px-2">
+                                                    </td>
+                                                    <td>
+                                                        <fieldset>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">₹</span>
+                                                                </div>
+                                                                <input type="number" class="form-control number d-inline" step="0.5" name="item_price_customer[]" value="<?=$d->item_price_customer?>" required>
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text">/<?=$d->unit_short_name?></span>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                        <!-- <input type="number" class="form-control number d-inline" step="0.5" name="item_price_customer[]" value="<?=$d->item_price_customer?>" required> /<?=$d->unit_short_name?> -->
+                                                    </td>
                                                 </tr>
                                             <?php }?>
                                             </tbody>
