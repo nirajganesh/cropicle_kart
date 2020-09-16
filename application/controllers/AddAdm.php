@@ -110,6 +110,7 @@ class AddAdm extends MY_Controller {
                 $data['address']=$this->input->post('address');
                 $data['customer_remarks']='Customer name & no. : '.$this->input->post('name').' ('.$this->input->post('phone').')';
                 $data['status']='PENDING';
+                $data['phone_no']=$this->input->post('phone');
                 $data['location_id']=0;
                 $data['user_id']=1;
                 $data['demand_amount']=0;
