@@ -32,7 +32,8 @@
                                     <option value="deliveredUserDemands">Delivered user demands with details</option>
                                     <option value="detailedUserDemands">All approved user demands with details</option>
                                     <option value="rejectedUserDemands">Rejected user demands with details</option>
-                                    <option value="itemWiseDemands">Item wise demands</option>
+                                    <option value="undeliveredItemWiseDemands">Item wise demands (Un-delivered)</option>
+                                    <option value="itemWiseDemands">Item wise demands (Overall)</option>
                                     <option value="custRates">Rate list for customers</option>
                                     <option value="hawkerRates">Rate list for hawkers</option>
                                     <!-- <option value="detailedOrders">Item wise User demands</option>
@@ -143,6 +144,7 @@
 <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
 <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
 <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+<script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/buttons.colVis.min.js"></script>
 <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js" integrity="sha512-y3o0Z5TJF1UsKjs/jS2CDkeHN538bWsftxO9nctODL5W40nyXIbs0Pgyu7//icrQY9m6475gLaVr39i/uh/nLA==" crossorigin="anonymous"></script>
 

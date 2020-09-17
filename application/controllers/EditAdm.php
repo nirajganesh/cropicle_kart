@@ -231,6 +231,7 @@ class EditAdm extends MY_Controller {
         public function setDelivered($id)
         {
             $data['is_delivered']=1;
+            $data['is_processed']=1;
             $data['modified']=date('Y-m-d H:i:s');
             $status= $this->edit->updateInfoById('customer_demands',$data,'id', $id);
             if($status){

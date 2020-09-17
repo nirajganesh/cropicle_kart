@@ -118,6 +118,34 @@ class Reportsmodel extends CI_Model{
 		return $arr;
 	}
 
+	function undeliveredItemWiseDemands($from,$to){
+		$arr= $this->db->select('cd.id')
+						->from('customer_demands cd')
+						->where("cd.created >='$from'")
+						->where("cd.created <='$to'")
+						->where('cd.status','APPROVED')
+						->where('cd.is_delivered',0)
+						->get()->result();
+		foreach($arr as $a){
+			$a->items=$this->itemWiseDemandsItems($a->id);
+		}
+		$veg=array();
+		foreach($arr as $a){
+			foreach($a->items as $it){
+				if(isset($veg[$it->id])){
+					$veg[$it->id]['qty']+=$it->item_quantity;
+				}
+				else{
+					$veg[$it->id]['qty']=$it->item_quantity;
+					$veg[$it->id]['name']=$it->item_name;
+					$veg[$it->id]['unit']=$it->unit_short_name;
+				}
+			}
+		}
+		// echo'<pre>';var_dump($arr, $veg);exit;
+		return $veg;
+	}
+
 	function itemWiseDemands($from,$to){
 		$arr= $this->db->select('cd.id')
 						->from('customer_demands cd')

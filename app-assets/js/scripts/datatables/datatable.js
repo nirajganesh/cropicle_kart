@@ -75,31 +75,39 @@
 
 
     $('.report-dt').DataTable( {
-        dom: 'lBrtip',
+        dom: 'flBrtip',
+        select: true,
         buttons: [
             {
                 extend: 'print',
+                // autoPrint: false,
                 exportOptions: {
                     columns: ':visible',
                     stripHtml: false
+                },
+                customize: function ( win ) {
+                    $(win.document.body).find( 'h1' ).addClass( 'text-center mb-3' ).css( 'font-size', '18px' );
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
                     columns: ':visible',
+                    stripHtml: false,
                     stripNewlines: false
                 }
             },
             {
-                extend: 'excel',
+                text:'Colums',
+                extend: 'colvis',
                 exportOptions: {
                     columns: ':visible'
-                }
+                } 
             }
         ]
     });
 
+    
     $('.recent-dt').DataTable( {
         dom: 'rtip',
         buttons: [

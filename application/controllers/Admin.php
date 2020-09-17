@@ -280,7 +280,7 @@ class Admin extends MY_Controller {
 	}
 
 	
-
+	// ---- FOR KARTS ----
 	// Pending order details (AJAX Modal)
 	public function pOrderDetails()
 	{
@@ -418,11 +418,12 @@ class Admin extends MY_Controller {
 	}
 
 	
+	// ---- FOR USERS ----
 	// Pending user demand details for approval (AJAX Modal)
 	public function pDemandApprove()
 	{
 		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
-		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		$info=$this->fetch->getDemandInfo($this->input->post('id'));
 		$loc_info=$this->fetch->getInfoById('locations_master','id',$info->location_id);
 		// echo'<pre>';var_dump($list);exit;
 		$response='
@@ -432,6 +433,9 @@ class Admin extends MY_Controller {
 		</div>
 		<div class="row mx-0">
 			<p class="ml-1 text-dark">Status : <strong class="text-warning">'.$info->status.'</strong></p>
+		</div>
+		<div class="row mx-0 pb-0 mb-0">
+			<p class="ml-1 text-dark">Name : '.$info->name.'</p>
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
 			<p class="ml-1 text-dark">Contact no. : '.$info->phone_no.'</p>
@@ -487,7 +491,7 @@ class Admin extends MY_Controller {
 	public function pDemandReject()
 	{
 		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
-		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		$info=$this->fetch->getDemandInfo($this->input->post('id'));
 		$loc_info=$this->fetch->getInfoById('locations_master','id',$info->location_id);
 		// echo'<pre>';var_dump($list);exit;
 		$response='
@@ -497,6 +501,9 @@ class Admin extends MY_Controller {
 		</div>
 		<div class="row mx-0">
 			<p class="ml-1 text-dark">Status : <strong class="text-warning">'.$info->status.'</strong></p>
+		</div>
+		<div class="row mx-0 pb-0 mb-0">
+			<p class="ml-1 text-dark">Name : '.$info->name.'</p>
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
 		<p class="ml-1 text-dark">Contact no. : '.$info->phone_no.'</p>
@@ -552,7 +559,7 @@ class Admin extends MY_Controller {
 	public function dDemandDetails()
 	{
 		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
-		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		$info=$this->fetch->getDemandInfo($this->input->post('id'));
 		$loc_info=$this->fetch->getInfoById('locations_master','id',$info->location_id);
 		// echo'<pre>';var_dump($list);exit;
 		$response='
@@ -562,6 +569,9 @@ class Admin extends MY_Controller {
 		</div>
 		<div class="row mx-0">
 			<p class="ml-1 text-dark">Status : <strong class="text-success">'.$info->status.'</strong></p>
+		</div>
+		<div class="row mx-0 pb-0 mb-0">
+			<p class="ml-1 text-dark">Name : '.$info->name.'</p>
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
 			<p class="ml-1 text-dark">Contact no. : '.$info->phone_no.'</p>
@@ -616,7 +626,7 @@ class Admin extends MY_Controller {
 	public function rDemandDetails()
 	{
 		$demand=$this->fetch->userDemandDetails($this->input->post('id'));
-		$info=$this->fetch->getInfoById('customer_demands','id',$this->input->post('id'));
+		$info=$this->fetch->getDemandInfo($this->input->post('id'));
 		$loc_info=$this->fetch->getInfoById('locations_master','id',$info->location_id);
 		// echo'<pre>';var_dump($list);exit;
 		$response='
@@ -626,6 +636,9 @@ class Admin extends MY_Controller {
 		</div>
 		<div class="row mx-0">
 			<p class="ml-1 text-dark">Status : <strong class="text-danger">'.$info->status.'</strong></p>
+		</div>
+		<div class="row mx-0 pb-0 mb-0">
+			<p class="ml-1 text-dark">Name : '.$info->name.'</p>
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
 			<p class="ml-1 text-dark">Contact no. : '.$info->phone_no.'</p>

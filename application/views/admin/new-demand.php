@@ -60,15 +60,15 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 col-sm-12 form-group">
-                                                    <label class="dFormLabel">Customer Name :</label>
+                                                    <label class="">Customer Name :</label>
                                                     <input type="text" class="form-control" name="name" required>
                                                 </div>
                                                 <div class="col-md-6 col-sm-12 form-group">
-                                                    <label class="dFormLabel">Customer Contact no. :</label>
-                                                    <input type="number" max="9999999999" min="5999999999" class="form-control" name="phone" required>
+                                                    <label class="">Customer Contact no. :</label>
+                                                    <input type="text" maxlength="10" minlength="10" class="form-control digits" name="phone" required>
                                                 </div>
                                                 <div class="col-md-6 col-sm-12 form-group">
-                                                    <label class="dFormLabel">Delivery address:</label>
+                                                    <label class="">Delivery address:</label>
                                                     <textarea class="form-control" name="address" rows="3" required></textarea>
                                                 </div>
                                                 

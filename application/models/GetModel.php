@@ -143,6 +143,18 @@ class GetModel extends CI_Model{
         }
     }
 
+    
+    public function getDemandInfo($id)
+    {
+        $demands=$this->db->select('c.id, c.created, c.status, c.location_id, c.demand_amount, c.customer_remarks, c.admin_remarks, c.phone_no, c.address, u.name')
+                        ->from('customer_demands c')
+                        ->join('users u', 'u.id = c.user_id', 'LEFT')
+                        ->where('c.id',$id)
+                        ->get()
+                        ->row();
+        return $demands;
+    }
+
     public function userDemands($status)
     {
         $demands=$this->db->select('c.id, c.created, c.demand_amount, c.is_delivered, c.customer_remarks, c.user_id, u.name')
