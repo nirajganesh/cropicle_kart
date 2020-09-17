@@ -70,8 +70,11 @@
                                                         <a href="javascript:;" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
                                                     </span>
                                                     <?php if($d->is_delivered==0){ ?>
-                                                        <a onclick="return confirm('Mark this demand as delivered?');" href="<?=base_url()?>set-delivered/<?=$d->id?>" data-toggle="tooltip" title="Mark as delivered"><i class="badge-circle badge-circle-light-secondary bx bx-truck text-primary font-medium-5"></i></a>
+                                                        <a onclick="return confirm('Mark this demand as delivered?');" href="<?=base_url()?>set-delivered/<?=$d->id?>" data-toggle="tooltip" class="mr-1" title="Mark as delivered"><i class="badge-circle badge-circle-light-secondary bx bx-truck text-primary font-medium-5"></i></a>
                                                     <?php } ?>
+                                                    <span data-id='<?=$d->id?>' data-undo='reject' class="pendingDemandReject">
+                                                        <a href="javascript:;" data-toggle="tooltip" title="Reject demand"><i class="badge-circle badge-circle-light-secondary bx bx-x text-primary font-medium-5"></i></a>
+                                                    </span>
                                                 </td>
                                             </tr>
                                         <?php }?>

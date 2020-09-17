@@ -284,10 +284,11 @@
 
     $(".order-dt").on("click", ".pendingDemandApprove", function(){
         var id=$(this).data('id');
+        var undo=$(this).data('undo');
         $.ajax({
             url: 'Admin/pDemandApprove',
             type:'post',
-            data: {id: id},
+            data: {id: id, undo: undo},
             beforeSend : function(){
                 $('#orderModal .modal-body').html('Loading...');
                 $('#orderModal').modal('show');
@@ -304,10 +305,11 @@
 
     $(".order-dt").on("click", ".pendingDemandReject", function(){
         var id=$(this).data('id');
+        var undo=$(this).data('undo');
         $.ajax({
             url: 'Admin/pDemandReject',
             type:'post',
-            data: {id: id},
+            data: {id: id, undo: undo},
             beforeSend : function(){
                 $('#orderModal .modal-body').html('Loading...');
                 $('#orderModal').modal('show');

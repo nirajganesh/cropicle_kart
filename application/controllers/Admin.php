@@ -430,10 +430,26 @@ class Admin extends MY_Controller {
 		<div class="row mx-0">
 			<p class="text-dark col-sm-5 pl-1"> Demand id. : <strong>'.$this->input->post('id').'</strong></p>
 			<p class="text-dark col-sm-7 text-sm-right pl-1 pl-sm-0">Demand date : '.date('d-M-Y',strtotime($info->created)).'</p>
-		</div>
-		<div class="row mx-0">
-			<p class="ml-1 text-dark">Status : <strong class="text-warning">'.$info->status.'</strong></p>
-		</div>
+		</div>';
+		if($this->input->post('undo')=='approve'){
+			$response.='
+			<div class="row mx-0">
+				<p class="ml-1 text-dark">Status : <strong class="text-danger">'.$info->status.'</strong></p>
+			</div>';
+		}
+		elseif($this->input->post('undo')=='reject'){
+			$response.='
+			<div class="row mx-0">
+				<p class="ml-1 text-dark">Status : <strong class="text-success">'.$info->status.'</strong></p>
+			</div>';
+		}
+		else{
+			$response.='
+			<div class="row mx-0">
+				<p class="ml-1 text-dark">Status : <strong class="text-warning">'.$info->status.'</strong></p>
+			</div>';
+		}
+		$response.='
 		<div class="row mx-0 pb-0 mb-0">
 			<p class="ml-1 text-dark">Name : '.$info->name.'</p>
 		</div>
@@ -475,9 +491,18 @@ class Admin extends MY_Controller {
 					<div class="col py-1">Customer remarks: '.$info->customer_remarks.'</div>
 				</div>
 				<form method="POST" action="EditAdm/approveDemand/'.$this->input->post('id').'">
-					<div class="row border mt-1 px-0 mx-0">
+					<div class="row border mt-1 px-0 mx-0">';
+					if($this->input->post('undo')=='approve' || $this->input->post('undo')=='reject'){
+						$response.='
+						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter your remarks for this demand" required></textarea>
+						';
+					}
+					else{
+						$response.='
 						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter your remarks for this demand"></textarea>
-					</div>
+						';
+					}
+					$response.='</div>
 					<div class="modal-footer px-0">
 						<button type="submit" class="btn btn-success">Approve</button>
 					</div>
@@ -498,11 +523,26 @@ class Admin extends MY_Controller {
 		<div class="row mx-0">
 			<p class="text-dark col-sm-5 pl-1"> Demand id. : <strong>'.$this->input->post('id').'</strong></p>
 			<p class="text-dark col-sm-7 text-sm-right pl-1 pl-sm-0">Demand date : '.date('d-M-Y',strtotime($info->created)).'</p>
-		</div>
-		<div class="row mx-0">
-			<p class="ml-1 text-dark">Status : <strong class="text-warning">'.$info->status.'</strong></p>
-		</div>
-		<div class="row mx-0 pb-0 mb-0">
+		</div>';
+		if($this->input->post('undo')=='approve'){
+			$response.='
+			<div class="row mx-0">
+				<p class="ml-1 text-dark">Status : <strong class="text-danger">'.$info->status.'</strong></p>
+			</div>';
+		}
+		elseif($this->input->post('undo')=='reject'){
+			$response.='
+			<div class="row mx-0">
+				<p class="ml-1 text-dark">Status : <strong class="text-success">'.$info->status.'</strong></p>
+			</div>';
+		}
+		else{
+			$response.='
+			<div class="row mx-0">
+				<p class="ml-1 text-dark">Status : <strong class="text-warning">'.$info->status.'</strong></p>
+			</div>';
+		}
+		$response.='<div class="row mx-0 pb-0 mb-0">
 			<p class="ml-1 text-dark">Name : '.$info->name.'</p>
 		</div>
 		<div class="row mx-0 pb-0 mb-0">
@@ -543,9 +583,18 @@ class Admin extends MY_Controller {
 					<div class="col py-1">Customer remarks: '.$info->customer_remarks.'</div>
 				</div>
 				<form method="POST" action="EditAdm/rejectDemand/'.$this->input->post('id').'">
-					<div class="row border mt-1 px-0 mx-0">
+					<div class="row border mt-1 px-0 mx-0">';
+					if($this->input->post('undo')=='approve' || $this->input->post('undo')=='reject'){
+						$response.='
+						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter your remarks for this demand" required></textarea>
+						';
+					}
+					else{
+						$response.='
 						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter your remarks for this demand"></textarea>
-					</div>
+						';
+					}
+					$response.='</div>
 					<div class="modal-footer px-0">
 						<button type="submit" class="btn btn-danger">Reject</button>
 					</div>
