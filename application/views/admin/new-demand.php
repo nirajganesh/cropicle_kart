@@ -39,12 +39,13 @@
 																<select name="item_id[]" class="select form-control" onchange="checkSelects()" required>
 																	<option value="">Items</option>
 																	<?php $c=100; foreach($data as $d){?>
-																		<option data-price="<?=$d->item_price_customer?>" value="<?=$d->id?>"  data-row="<?=$c?>" ><?=$d->item_name.'&nbsp;(Rs. '.$d->item_price_customer.'/'.$d->unit_short_name.')'?></option>
+																		<option data-price="<?=$d->item_price_customer?>" value="<?=$d->id?>" data-unit="<?=$d->unit_short_name?>" data-row="<?=$c?>" ><?=$d->item_name.'&nbsp;(Rs. '.$d->item_price_customer.'/'.$d->unit_short_name.')'?></option>
 																	<?php }?>
 																</select>
 															</div>
 															<div class="input-group col-md-3 col-5 mb-1">
-																<input type="number" name="qty[]" step="0.01" min="0" class="form-control" placeholder="Qty" aria-describedby="basic-addon2" required>
+																<input type="number" name="qty[]" step="0.01" min="0" class="form-control unit<?=$c?>" placeholder="Qty" aria-describedby="basic-addon2" required>
+                                                                <span id="unitSpan<?=$c?>" style="padding-top:8px;">&nbsp;</span>
 															</div>
 															<div class="input-group col-md-3 col-2 mb-1">
 																<input type="number" name="price[]" step="0.01" min="0" class="form-control prc price<?=$c?>" placeholder="price" aria-describedby="basic-addon2" required hidden style="display:none">
@@ -110,12 +111,13 @@
                         <select name="item_id[]" class="select form-control" onchange="checkSelects()" required>
                             <option value="">Items</option>
                             <?php foreach($data as $d){?>
-                                <option data-price="<?=$d->item_price_customer?>" data-row="`+i+`" value="<?=$d->id?>"><?=$d->item_name.'&nbsp;(Rs. '.$d->item_price_customer.'/'.$d->unit_short_name.')'?></option>
+                                <option data-price="<?=$d->item_price_customer?>" data-unit="<?=$d->unit_short_name?>" data-row="`+i+`" value="<?=$d->id?>"><?=$d->item_name.'&nbsp;(Rs. '.$d->item_price_customer.'/'.$d->unit_short_name.')'?></option>
                             <?php }?>
                         </select>
                     </div>
                     <div class="input-group col-md-3 col-5 mb-1">
-                        <input type="number" name="qty[]" step="0.01" min="0" class=" form-control maxQty`+i+`"  placeholder="Qty" aria-describedby="basic-addon2" required>
+                        <input type="number" name="qty[]" step="0.01" min="0" class=" form-control unit`+i+`"  placeholder="Qty" aria-describedby="basic-addon2" required>
+                        <span id="unitSpan`+i+`" style="padding-top:8px;">&nbsp;</span>
                     </div>
                     <div class="col-md-2 col-1 pl-0 px-md-1 ">
                         <button type="button" id="`+i+`" class="btn btn-icon btn-light-danger btn_remove">
@@ -137,7 +139,6 @@
             var button_id = $(this).attr("id"); 
             $('#row'+button_id+'').remove();
             updateItemsCount();
-            updateQty();
         });
 
         // Update total no. of items
@@ -152,8 +153,9 @@
             var elem=this.event.target.selectedOptions;
             var row=elem[0].dataset.row;
             var price=elem[0].dataset.price;
-            var row=elem[0].dataset.row;
             $('.price'+row).val(price);
+            var unit=elem[0].dataset.unit;
+            $('#unitSpan'+row).html('&nbsp;'+unit).addClass('badge badge-light-secondary rounded-0 pt-1');
             var $elements = $('select');
             $elements
                 .removeClass('errorB')

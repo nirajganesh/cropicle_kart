@@ -17,6 +17,67 @@
                     </div>
                     <div class="row">
 
+                        
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header d-flex flex-row justify-content-between">
+            <h4 class="card-title">Today's demands &nbsp;<small class="text-muted">(<?= date('d-M-y')?>)</small> </h4>
+            <a href="user-demands" class="btn btn-light-primary btn-sm">See all</a>
+        </div>
+        <div class="card-content">
+            <div class="card-body card-dashboard">
+                <div class="table-responsive">
+                    <table class="table recent-dt">
+                        <thead>
+                            <tr>
+                                <th>Order by</th>
+                                <th>Amount</th>
+                                <th>Address</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($demands as $de){?>
+                            <tr>
+                                <td><?=$de->name?> <br> (<?=$de->mobile_no?>)</td>
+                                <td>₹<?=$de->demand_amount?>/- </td>
+                                <td><?=$de->address?> </td>
+                                <td><?=$de->status?> </td>
+                            <?php if($de->status=='PENDING'){?>
+                                <td class='d-flex'>
+                                    <span data-id='<?=$de->id?>' data-undo='normal' class="pendingDemandReject mr-1">
+                                        <a href="javascript:;" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-danger bx bx-x font-medium-5"></i></a>
+                                    </span>
+                                    <span data-id='<?=$de->id?>' data-undo='normal' class="pendingDemandApprove">
+                                        <a href="javascript:;" data-toggle="tooltip" title="Approve"><i class="badge-circle badge-circle-light-success bx bx-check font-medium-5"></i></a>
+                                    </span>
+                                </td>
+                            <?php } else if($de->status=='APPROVED'){?>
+                                <td class='d-flex'>
+                                    <span data-id='<?=$de->id?>' class="approvedDemandDetails">
+                                        <a href="javascript:;" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
+                                    </span>
+                                </td>
+                            <?php } else{?>
+                                <td class='d-flex'>
+                                    <span data-id='<?=$de->id?>' class="rejectedDemandDetails">
+                                        <a href="javascript:;" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
+                                    </span>
+                                </td>
+                            <?php }?>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
                         <div class="col-xl-2 col-md-4 col-sm-6">
                             <a href="<?=base_url('user-demands')?>" class="card text-center">
                                 <div class="card-content">
@@ -186,65 +247,6 @@
                                     </div>
                                 </div>
                             </a>
-                        </div>
-
-                        
-                        <div class="col-xl-10 col-md-10 col-sm-12">
-                            <div class="card">
-                                <div class="card-header d-flex flex-row justify-content-between">
-                                    <h4 class="card-title">Today's demands &nbsp;<small class="text-muted">(<?= date('d-M-y')?>)</small> </h4>
-                                    <a href="user-demands" class="btn btn-light-primary btn-sm">See all</a>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        <div class="table-responsive">
-                                            <table class="table recent-dt">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Order by</th>
-                                                        <th>Amount</th>
-                                                        <th>Address</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                <?php foreach($demands as $de){?>
-                                                    <tr>
-                                                        <td><?=$de->name?> <br> (<?=$de->mobile_no?>)</td>
-                                                        <td>₹<?=$de->demand_amount?>/- </td>
-                                                        <td><?=$de->address?> </td>
-                                                        <td><?=$de->status?> </td>
-                                                    <?php if($de->status=='PENDING'){?>
-                                                        <td class='d-flex'>
-                                                            <span data-id='<?=$de->id?>' data-undo='normal' class="pendingDemandReject mr-1">
-                                                                <a href="javascript:;" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-danger bx bx-x font-medium-5"></i></a>
-                                                            </span>
-                                                            <span data-id='<?=$de->id?>' data-undo='normal' class="pendingDemandApprove">
-                                                                <a href="javascript:;" data-toggle="tooltip" title="Approve"><i class="badge-circle badge-circle-light-success bx bx-check font-medium-5"></i></a>
-                                                            </span>
-                                                        </td>
-                                                    <?php } else if($de->status=='APPROVED'){?>
-                                                        <td class='d-flex'>
-                                                            <span data-id='<?=$de->id?>' class="approvedDemandDetails">
-                                                                <a href="javascript:;" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
-                                                            </span>
-                                                        </td>
-                                                    <?php } else{?>
-                                                        <td class='d-flex'>
-                                                            <span data-id='<?=$de->id?>' class="rejectedDemandDetails">
-                                                                <a href="javascript:;" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
-                                                            </span>
-                                                        </td>
-                                                    <?php }?>
-                                                    </tr>
-                                                    <?php }?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
