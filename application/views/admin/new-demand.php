@@ -122,7 +122,7 @@
                     <div class="col-md-2 col-1 pl-0 px-md-1 ">
                         <button type="button" id="`+i+`" class="btn btn-icon btn-light-danger btn_remove">
                             <i class="bx bx-x"></i>
-                            <span class="d-lg-inline-block d-none">Delete</span>
+                            <span class="d-lg-inline-block d-none">Remove</span>
                         </button>
                     </div>
                     <div class="input-group col-md-3 col-2 mb-1">
