@@ -494,7 +494,7 @@ class Admin extends MY_Controller {
 					<div class="row border mt-1 px-0 mx-0">';
 					if($this->input->post('undo')=='approve' || $this->input->post('undo')=='reject'){
 						$response.='
-						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter your remarks for this demand" required></textarea>
+						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter reason for approving this demand" required></textarea>
 						';
 					}
 					else{
@@ -586,7 +586,7 @@ class Admin extends MY_Controller {
 					<div class="row border mt-1 px-0 mx-0">';
 					if($this->input->post('undo')=='approve' || $this->input->post('undo')=='reject'){
 						$response.='
-						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter your remarks for this demand" required></textarea>
+						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter reason for rejecting this demand" required></textarea>
 						';
 					}
 					else{

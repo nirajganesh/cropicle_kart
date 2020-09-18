@@ -126,7 +126,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#listModal .modal-body').html('Loading...');
+                $('#listModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#listModal').modal('show');
             },
             success: function(response){
@@ -145,7 +145,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -164,7 +164,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -188,7 +188,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -207,7 +207,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -226,7 +226,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -250,7 +250,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -269,7 +269,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -290,7 +290,7 @@
             type:'post',
             data: {id: id, undo: undo},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -311,7 +311,7 @@
             type:'post',
             data: {id: id, undo: undo},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -331,7 +331,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -350,7 +350,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -369,7 +369,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -389,7 +389,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -409,7 +409,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -430,7 +430,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){
@@ -449,7 +449,7 @@
             type:'post',
             data: {id: id},
             beforeSend : function(){
-                $('#orderModal .modal-body').html('Loading...');
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
             success: function(response){

@@ -60,9 +60,9 @@
                                                 <span data-id='<?=$r->id?>' class="rejectedDemandDetails mr-1">
                                                     <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
                                                 </span>
-                                                <!-- <span data-id='<?=$r->id?>' data-undo='approve' class="pendingDemandApprove">
-                                                    <a href="javascript:;" data-toggle="tooltip" title="Approve demand"><i class="badge-circle badge-circle-light-secondary bx bx-check-circle text-primary font-medium-5"></i></a>
-                                                </span> -->
+                                                <span data-id='<?=$r->id?>' data-undo='approve' class="pendingDemandApprove">
+                                                    <a href="javascript:;" data-toggle="tooltip" title="Approve demand"><i class="badge-circle badge-circle-light-success bx bx-check font-medium-5"></i></a>
+                                                </span>
                                             </td>
                                         </tr>
                                     <?php }?>
