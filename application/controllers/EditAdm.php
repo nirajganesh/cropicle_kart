@@ -23,6 +23,9 @@ class EditAdm extends MY_Controller {
             if($this->form_validation->run() == true){
                 $unlink="";
                 $data=$this->input->post();
+                $data['buying_qtys']=explode(',',$data['buying_qtys']);
+                sort($data['buying_qtys']);
+                $data['buying_qtys']=implode('|',$data['buying_qtys']);
                 $data['modified']=date('Y-m-d H:i:s');
                 if( $_FILES['img']['name']!=null ){
                     $path ='assets/images/items';

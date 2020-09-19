@@ -29,6 +29,7 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/charts/apexcharts.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/extensions/toastr.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/tags/bootstrap-tagsinput.css">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->

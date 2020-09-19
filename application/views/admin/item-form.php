@@ -42,7 +42,7 @@
                                                     <select name="category_id" class="select form-control" required>
                                                         <option value="">-- Choose one category --</option>
                                                         <?php foreach($cats as $cat){?>
-                                                            <option value="<?=$cat->id?>" <?=isset($data)?($data->category_id==$cat->id?' selected':''):''?>><?=$cat->category_name?></option>
+                                                            <option value="<?=$cat->id?>" <?=isset($data)?($data->category_id==$cat->id?' selected':''):''?>><?=$cat->category_name?> <?=$cat->is_active==0?'(inactive)':''?></option>
                                                         <?php }?>
                                                     </select>
                                                 </div>
@@ -68,17 +68,22 @@
                                                 </div>
 
                                                 <div class="col-sm-6 form-group">
+                                                    <label>Buying qtys:</label>
+                                                    <input name="buying_qtys" id="tags-input" data-role="tagsinput" class="form-control" required>
+                                                </div>
+
+                                                <div class="col-sm-6 form-group">
                                                     <label>Max order qty:</label>
                                                     <input type="number" name="max_order_qty" value="<?=isset($data)?$data->max_order_qty:''?>" class="form-control" step="0.01" required>
                                                 </div>
 
                                                 <div class="col-sm-6 form-group">
-                                                    <label>Price for hawker per unit:</label>
+                                                    <label>Price per unit (for hawker):</label>
                                                     <input type="number" name="item_price_kart" value="<?=isset($data)?$data->item_price_kart:''?>" step="0.01" class="form-control" required>
                                                 </div>
 
                                                 <div class="col-sm-6 form-group">
-                                                    <label>Price for customer per unit:</label>
+                                                    <label>Price per unit (for customer):</label>
                                                     <input type="number" name="item_price_customer" value="<?=isset($data)?$data->item_price_customer:''?>" step="0.01" class="form-control" required>
                                                 </div>
                                             </div>
@@ -99,5 +104,25 @@
     </div>
     <!-- END: Content-->
 
-
-
+    <script src="<?=base_url()?>app-assets/vendors/js/tags/bootstrap-tagsinput.js"></script>
+    <script>
+        $('#tags-input').tagsinput({
+            confirmKeys: [13, 188]
+        });
+        <?php if(isset($data)){?>
+            var js_array =<?php echo json_encode(explode('|',$data->buying_qtys))?>;
+            js_array.forEach(myFunction);
+            function myFunction(item, index) {
+                $('#tags-input').tagsinput('add', item);
+            }
+        <?php } else{?>
+            $('#tags-input').tagsinput('add', '0.25');
+            $('#tags-input').tagsinput('add', '0.5');
+            $('#tags-input').tagsinput('add', '0.75');
+            $('#tags-input').tagsinput('add', '1');
+            $('#tags-input').tagsinput('add', '2');
+            $('#tags-input').tagsinput('add', '3');
+            $('#tags-input').tagsinput('add', '4');
+            $('#tags-input').tagsinput('add', '5');
+        <?php }?>
+    </script>

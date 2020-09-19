@@ -129,7 +129,7 @@
                         <input type="number" name="price[]" step="0.01" min="0" class="form-control prc price`+i+`"  placeholder="price" aria-describedby="basic-addon2" required hidden style="display:none">
                     </div>
                 </div>
-            `);
+            `).hide().fadeIn();
             updateItemsCount();
         });
 
