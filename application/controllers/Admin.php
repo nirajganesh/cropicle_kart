@@ -232,6 +232,22 @@ class Admin extends MY_Controller {
 		$this->load->view('admin/footer');
 	}
 
+	public function Notice()
+	{
+		$data=$this->fetch->getNotice();
+		$this->load->view('admin/header',['title'=>'Notice ribbon','data'=>$data]);
+		$this->load->view('admin/notice');
+		$this->load->view('admin/footer');
+	}
+
+	public function editNotice($id)
+	{
+		$data=$this->fetch->getNotice();
+		$this->load->view('admin/header',['title'=>'Edit Notice','data'=>$data, 'submissionPath'=>base_url('EditAdm/notice/').$id]);
+		$this->load->view('admin/notice-form');
+		$this->load->view('admin/footer');
+	}
+
 	public function createUserDemand()
 	{
 		

@@ -189,9 +189,10 @@
                     </a>
                 </li>
                 
-                <li class="dropdown nav-item mr-2 my-25" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white <?=$this->uri->segment(1)=='banner' || $this->uri->segment(1)=='banner' ?' activeLink':''?>" href="javascript:;" data-toggle="dropdown"><i class="menu-livicon" data-icon="magic"></i><span data-i18n="Dashboard">Frontend</span></a>
+                <li class="dropdown nav-item mr-2 my-25" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white <?=$this->uri->segment(1)=='banner' || $this->uri->segment(1)=='notice' ?' activeLink':''?>" href="javascript:;" data-toggle="dropdown"><i class="menu-livicon" data-icon="magic"></i><span data-i18n="Dashboard">Frontend</span></a>
                     <ul class="dropdown-menu">
                         <li class="<?=$this->uri->segment(1)=='banner' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='banner' ?' activeLink':''?>" href="<?=base_url()?>banner" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Banner images</a>
+                        <li class="<?=$this->uri->segment(1)=='banner' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='notice' ?' activeLink':''?>" href="<?=base_url()?>notice" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Notice ribbon</a>
                         </li>
                     </ul>
                 </li>

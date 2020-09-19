@@ -115,3 +115,7 @@ $route['banner'] = 'Admin/Banner';
 $route['add-banner'] = 'Admin/addBanner';
 $route['edit-banner/(:num)'] = 'Admin/editBanner/$1';
 $route['del-banner/(:num)'] = 'DeleteAdm/delBanner/$1';
+
+$route['notice'] = 'Admin/Notice';
+$route['edit-notice/(:num)'] = 'Admin/editNotice/$1';
+$route['toggle-notice-status/(:num)/(:num)'] = 'EditAdm/noticeStatus/$1/$2';

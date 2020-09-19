@@ -301,6 +301,11 @@ class GetModel extends CI_Model{
         return $this->db->get($table)->result();
     }
 
+    public function getNotice()
+    {
+        return $this->db->get('notice_ribbon')->row();
+    }
+
     public function getAllItems()
     {
         return $this->db->select('i.*, u.unit_short_name ')

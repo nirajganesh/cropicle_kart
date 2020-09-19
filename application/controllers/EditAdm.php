@@ -335,6 +335,39 @@ class EditAdm extends MY_Controller {
                 redirect('users');
             }
         }
+
+        public function noticeStatus($id,$current_stat)
+        {
+            if($current_stat==0){
+                $data['is_active']=1;
+            }
+            else{
+                $data['is_active']=0;
+            }
+            $status= $this->edit->updateInfoById('notice_ribbon',$data,'id', $id);
+            if($status){
+                $this->session->set_flashdata('success','Notice status updated !' );
+                redirect('notice');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('notice');
+            }
+        }
+
+        public function notice($id)
+        {
+            $data=$this->input->post();
+            $status= $this->edit->updateInfoById('notice_ribbon',$data,'id', $id);
+            if($status){
+                $this->session->set_flashdata('success','Notice updated !' );
+                redirect('notice');
+            }
+            else{
+                $this->session->set_flashdata('failed','Error !');
+                redirect('notice');
+            }
+        }
         
         public function batchUpdatePrice()
         {
