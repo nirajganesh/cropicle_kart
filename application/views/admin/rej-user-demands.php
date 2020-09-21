@@ -56,7 +56,7 @@
                                             <td><?=date('d-M-Y',strtotime($r->created))?></td>
                                             <td>Rs. <?=$r->demand_amount?>/-</td>
                                             <td><?=$r->customer_remarks?></td>
-                                            <td class='d-flex'>
+                                            <td class='d-flex px-0 py-1'>
                                                 <span data-id='<?=$r->id?>' class="rejectedDemandDetails mr-1">
                                                     <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
                                                 </span>

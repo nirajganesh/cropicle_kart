@@ -45,7 +45,7 @@
                                 <td><?=$de->address?> </td>
                                 <td><?=$de->status?> </td>
                             <?php if($de->status=='PENDING'){?>
-                                <td class='d-flex'>
+                                <td class='d-flex pr-0 pl-1 py-1'>
                                     <span data-id='<?=$de->id?>' data-undo='normal' class="pendingDemandReject mr-1">
                                         <a href="javascript:;" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-danger bx bx-x font-medium-5"></i></a>
                                     </span>
@@ -54,13 +54,13 @@
                                     </span>
                                 </td>
                             <?php } else if($de->status=='APPROVED'){?>
-                                <td class='d-flex'>
+                                <td class='d-flex pr-0 pl-1 py-1'>
                                     <span data-id='<?=$de->id?>' class="approvedDemandDetails">
                                         <a href="javascript:;" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
                                     </span>
                                 </td>
                             <?php } else{?>
-                                <td class='d-flex'>
+                                <td class='d-flex pr-0 pl-1 py-1    '>
                                     <span data-id='<?=$de->id?>' class="rejectedDemandDetails">
                                         <a href="javascript:;" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary font-medium-5"></i></a>
                                     </span>

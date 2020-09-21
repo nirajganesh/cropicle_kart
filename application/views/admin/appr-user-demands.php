@@ -65,7 +65,7 @@
                                                     <?php } else{ ?>
                                                     <td><i data-toggle="tooltip" title="Not delivered" class="font-medium-5 bx bx-x text-warning"></i></td>
                                                 <?php } }?>
-                                                <td class='d-flex'>
+                                                <td class='d-flex px-0 py-1'>
                                                     <span data-id='<?=$d->id?>' class="approvedDemandDetails mr-1">
                                                         <a href="javascript:;" data-toggle="tooltip" title="See details"><i class="badge-circle badge-circle-light-primary bx bx-info-circle font-medium-5"></i></a>
                                                     </span>

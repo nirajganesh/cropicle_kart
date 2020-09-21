@@ -45,10 +45,10 @@
                                                     <?php } else {?>
                                                         <td class="text-warning">Inactive</td>
                                                     <?php }?>
-                                                    <td class=''>
+                                                    <td class='px-0 py-1'>
                                                         <a href="<?=base_url('toggle-notice-status/').$data->id.'/'.$data->is_active?>"  onclick="return confirm('Change status of the notice?');" class="" data-toggle="tooltip" data-placement="top" title="Toggle status"><i class="badge-circle badge-circle-light-secondary text-info bx bx-transfer-alt font-medium-1"></i></a>
 
-                                                        <a href="<?=base_url('edit-notice/').$data->id?>" class="mx-md-1 mx-0 my-1 my-md-0" data-toggle="tooltip" data-placement="top" title="Edit Notice"><i class="badge-circle badge-circle-light-secondary text-primary bx bx-edit font-medium-1"></i></a>
+                                                        <a href="<?=base_url('edit-notice/').$data->id?>" class="ml-md-1 mx-0 mt-1 my-md-0" data-toggle="tooltip" data-placement="top" title="Edit Notice"><i class="badge-circle badge-circle-light-secondary text-primary bx bx-edit font-medium-1"></i></a>
                                                     </td>
                                                 </tr>
                                             <?php }?>

@@ -56,7 +56,7 @@
                                                 <td><?=date('d-M-Y',strtotime($p->created))?></td>
                                                 <td>Rs. <?=$p->demand_amount?>/-</td>
                                                 <td><?=$p->customer_remarks?></td>
-                                                <td class='d-flex'>
+                                                <td class='d-flex px-0 py-1'>
                                                     <span data-id='<?=$p->id?>' data-undo='normal' class="pendingDemandReject mr-1">
                                                         <a href="javascript:;" data-toggle="tooltip" title="Reject"><i class="badge-circle badge-circle-light-danger bx bx-x font-medium-5"></i></a>
                                                     </span>
