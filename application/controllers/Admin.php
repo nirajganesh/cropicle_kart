@@ -288,11 +288,163 @@ class Admin extends MY_Controller {
 		$this->load->view('admin/footer');
 	}
 
+	public function ordersPending()
+	{
+		$pending=$this->fetch->order_customer('PENDING');
+		$this->load->view('admin/header',['title'=>'Pending Orders','data'=>$pending]);
+		$this->load->view('admin/order_customer');
+		$this->load->view('admin/footer');
+	}
+	
+	public function ordersApproved()
+	{
+		$approved=$this->fetch->order_customer('APPROVED');
+		$this->load->view('admin/header',['title'=>'Approved Orders','data'=>$approved]);
+		$this->load->view('admin/order_customer');
+		$this->load->view('admin/footer');
+	}
+
+	public function ordersRejected()
+	{
+		$rejected=$this->fetch->order_customer('REJECTED');
+		$this->load->view('admin/header',['title'=>'Rejected Orders','data'=>$rejected]);
+		$this->load->view('admin/order_customer');
+		$this->load->view('admin/footer');
+	}
+
 	public function payments()
 	{
 		$this->load->view('admin/header',['title'=>'Payments']);
 		$this->load->view('admin/payments');
 		$this->load->view('admin/footer');
+	}
+
+	//--------for Customer--------
+
+	public function pOrderApprove()
+	{
+		$demand=$this->fetch->orderDetails($this->input->post('id'));
+		$info=$this->fetch->orderInfo($this->input->post('id'));
+		// echo'<pre>';var_dump($list);exit;
+		$response='
+		<div class="row mx-0">
+			<div class="col-sm-5">
+				<p class="text-dark"> Order id : <strong>'.$this->input->post('id').'</strong></p>
+				<p class="text-dark">Name : '.$info->name.'</p>
+				<p class="text-dark">Contact no. : '.$info->mobile_no.'</p>
+			</div>
+			<div class="col-sm-7">
+				<p class="text-dark">Order date : '.date('d-M-Y',strtotime($info->date)).'</p>
+				<p class="text-dark">
+					Address : '.$info->house_no.', '.$info->landmark.', '.$info->city.', '.$info->state.' (pincode - '.$info->pincode.')
+				</p>
+			</div>
+		</div>
+		
+		<hr class="mt-0 mb-3">';
+		foreach($demand as $i){
+			$response.='
+			<div class="row ">
+				<div class="col-8 d-flex align-items-center pr-0">
+					<img clas="" src="'.LOCAL_DOMAIN.'assets/images/items/'.$i->item_img.'" height="60" width="60" alt="img" style="object-fit:cover;">
+					<p class="pl-1 text-black">'.$i->item_name.' apple with some more text in a row <br> <small class="text-secondary">(₹ '.$i->item_price_customer.'/-)</small></p>
+				</div>
+				<div class="col-2 text-black">
+					<p class="">x '.$i->qty.' </p>
+				</div>
+				<div class="col-2 pl-0 text-black">
+					<p class="">₹'.$i->item_price_customer*$i->qty.'</p>
+				</div>
+			</div>
+			<br>';
+		}
+		$response.='
+				</div>
+				<div class="row mt-0 mx-0">
+					<mark class="col-sm-3 col-12 py-1">Order amount: ₹'.$info->payable_amt.'/-</mark> 
+				</div>
+				<div class="row mt-1 px-0 mx-0">
+					<div class="col py-1">Additional notes: <span class="text-black">'.$info->additional_notes.'</span></div>
+				</div>
+				<form method="POST" action="'.base_url().'EditAdm/approveOrder_customer/'.$this->input->post('id').'">
+					<div class="modal-footer px-0">
+						<button type="submit" class="btn btn-success">Approve</button>
+					</div>
+				</form>
+				
+				';
+		echo $response;
+	}
+	
+	// Pending orders for rejection (AJAX Modal)
+	public function pOrderReject()
+	{
+		$demand=$this->fetch->orderDetails($this->input->post('id'));
+		$info=$this->fetch->orderInfo($this->input->post('id'));
+		//echo'<pre>';var_dump($info);exit;
+		//var_dump($info);
+		$response='
+		<div class="row mx-0">
+			<div class="col-sm-5">
+				<p class="text-dark"> Order id : <strong>'.$this->input->post('id').'</strong></p>
+				<p class="text-dark">Name : '.$info->name.'</p>
+				<p class="text-dark">Contact no. : '.$info->mobile_no.'</p>
+			</div>
+			<div class="col-sm-7">
+				<p class="text-dark">Order date : '.date('d-M-Y',strtotime($info->date)).'</p>
+				<p class="text-dark">
+					Address : '.$info->house_no.', '.$info->landmark.', '.$info->city.', '.$info->state.' (pincode - '.$info->pincode.')
+				</p>
+			</div>
+		</div>
+		
+		<hr class="mt-0 mb-3">';
+		foreach($demand as $i)
+		{
+			$response.='
+			<div class="row ">
+				<div class="col-8 d-flex align-items-center pr-0">
+					<img clas="" src="'.LOCAL_DOMAIN.'assets/images/items/'.$i->item_img.'" height="60" width="60" alt="img" style="object-fit:cover;">
+					<p class="pl-1 text-black">'.$i->item_name.' apple with some more text in a row <br> <small class="text-secondary">(₹ '.$i->item_price_customer.'/-)</small></p>
+				</div>
+				<div class="col-2 text-black">
+					<p class="">x '.$i->qty.' </p>
+				</div>
+				<div class="col-2 pl-0 text-black">
+					<p class="">₹'.$i->item_price_customer*$i->qty.'</p>
+				</div>
+			</div>
+			<br>';
+		}
+		$response.='
+				</div>
+				<div class="row mt-0 mx-0">
+					<mark class="col-sm-3 col-12 py-1">Order amount: ₹'.$info->payable_amt.'/-</mark> 
+				</div>
+				<div class="row mt-1 px-0 mx-0">
+					<div class="col py-1">Additional notes: <span class="text-black">'.$info->additional_notes.'</span></div>
+				</div>
+				<form method="POST" action="'.base_url().'EditAdm/rejectOrder_customer/'.$this->input->post('id').'">
+					<div class="row border mt-1 px-0 mx-0">';
+					if($this->input->post('undo')=='approve' || $this->input->post('undo')=='reject'){
+						$response.='
+						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter reason for rejecting this demand" required></textarea>
+						';
+					}
+					else{
+						$response.='
+						<textarea class="col py-1 form-control" name="admin_remarks" placeholder="Enter your remarks for rejecting this order" required></textarea>
+						';
+					}
+					$response.='</div>
+					<div class="modal-footer px-0">
+						<button type="submit" class="btn btn-danger">Reject</button>
+					</div>
+				</form>
+				
+				';
+		
+		echo $response;
 	}
 
 	
@@ -337,6 +489,7 @@ class Admin extends MY_Controller {
 			</form>';
 		echo $response;
 	}
+
 
 	// Delivered order details (AJAX Modal)
 	public function dOrderDetails()
@@ -396,6 +549,62 @@ class Admin extends MY_Controller {
 		echo $response;
 	}
 
+	public function orderDetails()
+	{
+		$demand=$this->fetch->orderDetails($this->input->post('id'));
+		$info=$this->fetch->orderInfo($this->input->post('id'));
+		// echo'<pre>';var_dump($list);exit;
+		$response='
+		<div class="row mx-0">
+			<div class="col-sm-5">
+				<p class="text-dark"> Order id : <strong>'.$this->input->post('id').'</strong></p>
+				<p class="text-dark">Name : '.$info->name.'</p>
+				<p class="text-dark">Contact no. : '.$info->mobile_no.'</p>
+			</div>
+			<div class="col-sm-7">
+				<p class="text-dark">Order date : '.date('d-M-Y',strtotime($info->date)).'</p>
+				<p class="text-dark">
+					Address : '.$info->house_no.', '.$info->landmark.', '.$info->city.', '.$info->state.' (pincode - '.$info->pincode.')
+				</p>
+			</div>
+		</div>
+		<div class="row mx-0">
+			<div class="col">
+				<p class="text-dark"> Status : <strong>'.$info->status.'</strong></p>
+			</div>
+		</div>
+		
+		<hr class="mt-0 mb-3">';
+		foreach($demand as $i){
+			$response.='
+			<div class="row ">
+				<div class="col-8 d-flex align-items-center pr-0">
+					<img clas="" src="'.MAIN_DOMAIN.'assets/images/items/'.$i->item_img.'" height="60" width="60" alt="img" style="object-fit:cover;">
+					<p class="pl-1 text-black">'.$i->item_name.' apple with some more text in a row <br> <small class="text-secondary">(₹ '.$i->item_price_customer.'/-)</small></p>
+				</div>
+				<div class="col-2 text-black">
+					<p class="">x '.$i->qty.' </p>
+				</div>
+				<div class="col-2 pl-0 text-black">
+					<p class="">₹'.$i->item_price_customer*$i->qty.'</p>
+				</div>
+			</div>
+			<br>';
+		}
+		$response.='
+				</div>
+				<div class="row mt-0 mx-0">
+					<mark class="col-sm-3 col-12 py-1">Order amount: ₹'.$info->payable_amt.'/-</mark> 
+				</div>
+				<div class="row mt-1 px-0 mx-0">
+					<div class="col py-1">Additional notes: <span class="text-black">'.$info->additional_notes.'</span></div>
+				</div>
+				<div class="modal-footer px-0">
+					<button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+				</div>
+				';
+		echo $response;
+	}
 	// Rejected order details (AJAX Modal)
 	public function rOrderDetails()
 	{

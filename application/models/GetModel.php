@@ -10,7 +10,8 @@ class GetModel extends CI_Model{
                         ->order_by('id','desc')
                         ->get('demand_lists')
                         ->result();
-        foreach($lists as $list){
+        foreach($lists as $list)
+        {
             $list->items=$this->demandListItems($list->id);
             $list->itemsCount=sizeof($list->items);
         }
@@ -25,7 +26,8 @@ class GetModel extends CI_Model{
                         ->order_by('id','desc')
                         ->get('demand_lists')
                         ->result();
-        foreach($lists as $list){
+        foreach($lists as $list)
+        {
             $list->itemsCount=$this->record_count('demand_lists_details','demand_list_id',$list->id);
         }
         return $lists;
@@ -41,6 +43,17 @@ class GetModel extends CI_Model{
         $list->items=$this->demandListItems($list->id);
         $list->itemsCount=sizeof($list->items);
         return $list;
+    }
+    public function order_customer($status)
+    {
+        $orders=$this->db->select('o.*, u.name, u.mobile_no')
+                        ->from('order_customer o')
+                        ->join('users u', 'u.id = o.user_id', 'LEFT')
+                        ->order_by('o.id','desc')
+                        ->where('o.status',$status)
+                        ->get()
+                        ->result();
+        return $orders;
     }
 
     public function demandListItems($listId)
@@ -135,10 +148,12 @@ class GetModel extends CI_Model{
                 ->where('updated_by_hawker','0')
                 ->get('orders');
 
-        if($latest_order->num_rows()==0){
+        if($latest_order->num_rows()==0)
+        {
             return false;
         }
-        else{
+        else
+        {
             return $latest_order->row()->id;
         }
     }
@@ -240,6 +255,28 @@ class GetModel extends CI_Model{
         else{
             return false;
         }
+    }
+    public function orderDetails($id)
+    {
+        $items=$this->db->select('od.qty, od.item_price_customer, i.item_name,i.item_img')
+                        ->from('order_detail_customer od')
+                        ->join('items_master i', 'i.id = od.item_id', 'LEFT')
+                        // ->where('i.is_active','1')
+                        ->where('od.order_id',$id)
+                        ->get()
+                        ->result();
+        return $items;
+    }
+
+    public function orderInfo($id)
+    {
+        $demands=$this->db->select('o.*, u.name, u.mobile_no')
+                        ->from('order_customer o')
+                        ->join('users u', 'u.id = o.user_id', 'LEFT')
+                        ->where('o.id',$id)
+                        ->get()
+                        ->row();
+        return $demands;
     }
     
     public function orderDetailsById($id)
@@ -394,7 +431,8 @@ class GetModel extends CI_Model{
         $this->db->limit($limit, $start);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
+            foreach ($query->result() as $row) 
+            {
                 $data[] = $row;
             }
             return $data;

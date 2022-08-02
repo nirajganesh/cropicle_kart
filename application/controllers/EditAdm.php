@@ -536,4 +536,45 @@ class EditAdm extends MY_Controller {
         }
 
 
+        public function approveOrder_customer($did)
+        {
+            $data=$this->input->post();
+            $data['status']="APPROVED";
+            $this->db->trans_start();
+                $params = array("id"=>$did);
+                $status= $this->edit->updateInfoByParams('order_customer',$data,$params);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->session->set_flashdata('failed','some error occured');
+                redirect('orders/pending');
+            }
+            else{
+                $this->session->set_flashdata('success','Order approved !');
+                redirect('orders/pending');
+            }
+        }
+        
+        public function rejectOrder_customer($did)
+        {
+            $data=$this->input->post();
+            $data['status']="REJECTED";
+            $this->db->trans_start();
+                $params = array("id"=>$did);
+                $status= $this->edit->updateInfoByParams('order_customer',$data,$params);
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->session->set_flashdata('failed','some error occured');
+                redirect('orders/pending');
+            }
+            else{
+                $this->session->set_flashdata('success','Order rejected !');
+                redirect('orders/pending');
+            }
+        }
+
+
 }

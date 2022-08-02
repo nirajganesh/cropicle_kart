@@ -7,7 +7,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class AdminLogin extends MY_Controller {
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('Auth_model', 'auth');
         $this->load->model('GetModel', 'fetch');
@@ -23,7 +24,8 @@ class AdminLogin extends MY_Controller {
         $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $response ['errors'] = '';
-        if($this->form_validation->run() == FALSE){
+        if($this->form_validation->run() == FALSE)
+        {
             $response[ 'errors' ]= 'Invalid inputs' ;
         }
         else{
@@ -78,7 +80,8 @@ class AdminLogin extends MY_Controller {
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         $sessId='';
         $sessId = $this->session->admin->admin_session_id;
 		if($sessId!=''){

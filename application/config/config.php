@@ -23,8 +23,8 @@ ob_start();
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/kart.cropicle/';
-
+//$config['base_url'] = 'https://kart.cropicle.com/';
+ $config['base_url']='http://localhost/kart_cropicle/';
 /*
 |--------------------------------------------------------------------------
 | Index File

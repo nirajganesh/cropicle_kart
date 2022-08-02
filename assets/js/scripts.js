@@ -381,8 +381,61 @@
         });
     });
 
+
+    //------------Admin customer------------
+
+    $(".order-dt").on("click", ".pendingOrderApprove", function(){
+        var id=$(this).data('id');
+        var undo=$(this).data('undo');
+        $.ajax({
+            url: loc+"/Admin/pOrderApprove",
+            type:'post',
+            data: {id: id, undo: undo},
+            beforeSend : function()
+            {
+                $('#orderModal1 .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
+                $('#orderModal1').modal('show');
+            },
+            success: function(res)
+            {
+                $('#orderModal1 .modal-body').html(res);
+                $('#orderModal1 .modal-body textarea').focus();
+            },
+            error: function(res){
+                $('#orderModal1 .modal-body').html('Error !');
+            }
+        });
+    });
+
+    $(".order-dt").on("click", ".pendingOrderReject", function()
+    {
+        var id=$(this).data('id');
+        var undo=$(this).data('undo');
+        $.ajax({
+            url: loc+'/Admin/pOrderReject',
+            type:'post',
+            data: {id: id, undo: undo},
+            beforeSend : function()
+            {
+                $('#orderModal1 .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
+                $('#orderModal1').modal('show');
+            },
+            success: function(res)
+            {
+                $('#orderModal1 .modal-body').html(res);
+                $('#orderModal1 .modal-body textarea').focus();
+            },
+            error: function(res)
+            {
+                console.log(res.error);
+                $('#orderModal1 .modal-body').html('Error !');
+            }
+        });
+    });
+
     
-    $(".recent-dt").on("click", ".pendingDemandApprove", function(){
+    $(".recent-dt").on("click", ".pendingDemandApprove", function()
+    {
         var id=$(this).data('id');
         $.ajax({
             url: 'Admin/pDemandApprove',

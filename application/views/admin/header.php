@@ -152,6 +152,18 @@
                     </a>
                 </li>
 
+                <li class="dropdown nav-item mr-2 my-25" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white <?=$this->uri->segment(1)=='orders' ?' activeLink':''?>" href="" data-toggle="dropdown"><i class="menu-livicon" data-icon="shoppingcart"></i><span data-i18n="Dashboard">Orders</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="<?=$this->uri->segment(1)=='orders' &&  $this->uri->segment(2)=='pending' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='orders' &&  $this->uri->segment(2)=='pending' ?' activeLink':''?>" href="<?=base_url()?>orders/pending" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Pending Orders</a>
+                        </li>
+                        <li class="<?=$this->uri->segment(1)=='orders' &&  $this->uri->segment(2)=='approved' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='orders' &&  $this->uri->segment(2)=='approved' ?' activeLink':''?>" href="<?=base_url()?>orders/approved" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Approved Orders</a>
+                        </li>
+                        <li class="<?=$this->uri->segment(1)=='orders' &&  $this->uri->segment(2)=='rejected' ?' active':''?>" data-menu=""><a class="dropdown-item align-items-center <?=$this->uri->segment(1)=='orders' &&  $this->uri->segment(2)=='rejected' ?' activeLink':''?>" href="<?=base_url()?>orders/rejected" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Rejected Orders</a>
+                        </li>
+                      
+                    </ul>
+                </li>
+
            
 
                 <li class="dropdown nav-item mr-2 my-25" data-menu="dropdown"><a class="dropdown-toggle nav-link nav-link bg-white <?=$this->uri->segment(1)=='karts' || $this->uri->segment(1)=='kart-orders' ?' activeLink':''?>" href="" data-toggle="dropdown"><i class="menu-livicon" data-icon="shoppingcart"></i><span data-i18n="Dashboard">Karts (hawkers)</span></a>

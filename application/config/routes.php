@@ -108,8 +108,15 @@ $route['user-demands'] = 'Admin/userDemands';
 $route['approved-user-demands'] = 'Admin/apprUserDemands';
 $route['rejected-user-demands'] = 'Admin/rejUserDemands';
 $route['set-delivered/(:num)'] = 'EditAdm/setDelivered/$1';
-
 $route['reports'] = 'Reports';
+
+
+
+$route['orders/pending'] = 'Admin/ordersPending';
+$route['orders/approved'] = 'Admin/ordersApproved';
+$route['orders/rejected'] = 'Admin/ordersRejected';
+
+
 
 $route['banner'] = 'Admin/Banner';
 $route['add-banner'] = 'Admin/addBanner';

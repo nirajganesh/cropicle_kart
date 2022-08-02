@@ -88,7 +88,8 @@ class Login extends MY_Controller {
         $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $response ['errors'] = '';
-        if($this->form_validation->run() == FALSE){
+        if($this->form_validation->run() == FALSE)
+        {
             // $response[ 'errors' ]= trim(strip_tags(validation_errors())) ;
             $response[ 'errors' ]= 'Invalid inputs' ;
         }
