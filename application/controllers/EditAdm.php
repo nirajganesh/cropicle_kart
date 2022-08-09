@@ -420,13 +420,17 @@ class EditAdm extends MY_Controller {
 
             // Add all the remaining qty's of the last order's items
             if(!empty($last_delivered)){
-                foreach($arr as $o){
+                foreach($arr as $o)
+                {
                     foreach($last_delivered as $k=>$old){
-                        if($old->item_id==$o->item_id){
-                            $o->qty+=$old->remaining_qty;
+                        if($old->item_id==$o->item_id)
+                        {
+                            //var_dump((int)$o->qty);exit;
+                            (float)$o->qty+=(float)$old->remaining_qty;
                             unset($last_delivered[$k]);
                         }
-                        else{
+                        else
+                        {
                             $old->qty=$old->remaining_qty;
                         }
                     }
@@ -436,25 +440,25 @@ class EditAdm extends MY_Controller {
                 }
             }
 
-            $this->load->model('AddModel','add');
-            // DB updations starts from here
-            $this->db->trans_start();
-            foreach($arr as $a){
-                // If Current order contains the same item as the last order;s remaining item then update it
-                if (in_array($a->item_id, $data['item_id'])){
-                    $price=$this->fetch->getInfoById('items_master','id',$a->item_id)->item_price_kart;
-                    $params = array("order_id"=>$oid, "item_id"=>$a->item_id);
-                    $info= array("qty"=>$a->qty, "item_id"=>$a->item_id, "item_price_kart"=>$price, "updated"=>date('Y-m-d H:i:s'),);
-                    $status= $this->edit->updateInfoByParams('order_details',$info,$params);
-                }
+            // $this->load->model('AddModel','add');
+            // // DB updations starts from here
+            // $this->db->trans_start();
+            // foreach($arr as $a){
+            //     // If Current order contains the same item as the last order;s remaining item then update it
+            //     if (in_array($a->item_id, $data['item_id'])){
+            //         $price=$this->fetch->getInfoById('items_master','id',$a->item_id)->item_price_kart;
+            //         $params = array("order_id"=>$oid, "item_id"=>$a->item_id);
+            //         $info= array("qty"=>$a->qty, "item_id"=>$a->item_id, "item_price_kart"=>$price, "updated"=>date('Y-m-d H:i:s'),);
+            //         $status= $this->edit->updateInfoByParams('order_details',$info,$params);
+            //     }
                 
-                // If last order's remaining item is not in the current order then add it to current order stock (For Kart stock purpose, Amt. is not affected)
-                else{
-                    $price=$this->fetch->getInfoById('items_master','id',$a->item_id)->item_price_kart;
-                    $info= array("order_id"=>$oid, "qty"=>$a->qty, "item_id"=>$a->item_id, "item_price_kart"=>$price);
-                    $status= $this->add->saveInfo('order_details',$info);
-                }
-            }
+            //     // If last order's remaining item is not in the current order then add it to current order stock (For Kart stock purpose, Amt. is not affected)
+            //     else{
+            //         $price=$this->fetch->getInfoById('items_master','id',$a->item_id)->item_price_kart;
+            //         $info= array("order_id"=>$oid, "qty"=>$a->qty, "item_id"=>$a->item_id, "item_price_kart"=>$price);
+            //         $status= $this->add->saveInfo('order_details',$info);
+            //     }
+            // }
 
             // Now change order status to delivered and update order total qty & price if altered by admin
             $info2= array("total_qty"=>$total_qty, "total_amt"=>$total_amt, "status"=>"DELIVERED");

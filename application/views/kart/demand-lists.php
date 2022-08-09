@@ -44,15 +44,11 @@
                                             <td><?=$d->name?></td>
                                             <td><?=$d->itemsCount?> <?=$d->itemsCount>1 ? 'items' : 'item'?></td>
                                             <td class='d-flex'>
-
                                                 <span data-id='<?=$d->id?>' class="orderOpen">
                                                     <a href="#" data-toggle="tooltip" title="Order now"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-primary bx bx-truck font-medium-1"></i></a>
                                                 </span>
-
                                                 <a href="<?=base_url('demand-form/').$d->id?>" class="mx-1" data-toggle="tooltip" data-placement="top" title="Edit list"><i class="badge-circle text-primary badge-circle-light-secondary bx bx-edit font-medium-1"></i></a>
-
                                                 <a href="<?=base_url('Delete/demand/').$d->id?>"  onclick="return confirm(' you want to delete?');" class="mx-1" data-toggle="tooltip" data-placement="top" title="Delete list"><i class="badge-circle badge-circle-light-secondary text-danger bx bx-trash font-medium-1"></i></a>
-
                                                 <span data-id='<?=$d->id?>' class="listOpen">
                                                     <a href="#" data-toggle="tooltip" title="See list"><i class="badge-circle badge-circle-light-secondary bx bx-info-circle text-warning font-medium-1"></i></a>
                                                 </span>
@@ -107,6 +103,32 @@
             </div>
         </div>
     </div>
+
+    <script>
+            $('.orderOpen').click(function()
+    {
+        var id=$(this).data('id');
+        $.ajax
+        ({
+            url: 'Home/orderDetails',
+            type:'post',
+            data: {id: id},
+            beforeSend : function()
+            {
+                $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
+                $('#orderModal').modal('show');
+            },
+            success: function(response)
+            {
+                $('#orderModal .modal-body').html(response);
+            },
+            error: function(response)
+            {
+                $('#orderModal .modal-body').html('Error !');
+            }
+        });
+    });
+    </script>
 
     <!-- END: Content-->
 

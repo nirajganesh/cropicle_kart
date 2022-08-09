@@ -25,6 +25,9 @@
                         <div class="card">
                             <div class="card-header row">
                                 <h4 class="card-title col-sm-9">List of all the registered karts (hawkers)</h4>
+                                <div class="col-sm-3 text-sm-right mt-1 mt-sm-0">
+                                    <a href="<?=base_url()?>add-kart" class="btn btn-sm btn-primary">+ Add new KartUsers</a>
+                                </div>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -54,7 +57,6 @@
                                                     <?php }?>
                                                     <td class=''>
                                                         <a href="<?=base_url('toggle-kart-status/').$d->id.'/'.$d->is_active?>"  onclick="return confirm('Change status of this kart?');" class="" data-toggle="tooltip" data-placement="top" title="Toggle status"><i class="badge-circle badge-circle-light-secondary text-info bx bx-transfer-alt font-medium-1"></i></a>
-
                                                         <!-- <a href="<?=base_url('delete-kart/').$d->id?>"  onclick="return confirm('Delete this kart?');" class="" data-toggle="tooltip" data-placement="top" title="Delete kart"><i class="badge-circle badge-circle-light-secondary text-danger bx bx-trash font-medium-1"></i></a> -->
                                                     </td>
                                                 </tr>
@@ -81,5 +83,4 @@
     <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
     <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
     <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
-    
     <script src="<?=base_url()?>app-assets/js/scripts/datatables/datatable.js"></script>

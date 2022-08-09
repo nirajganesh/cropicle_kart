@@ -417,6 +417,10 @@ class GetModel extends CI_Model{
     {
         return $this->db->get('users')->row();
     }
+    public function getAdminLocation()
+    {
+        return $this->db->get('locations_master')->result();
+    }
 
     public function getEnquiries()
     {

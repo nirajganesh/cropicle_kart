@@ -114,7 +114,7 @@
                                                 </div>
                                                 <div class="row justify-content-end">
                                                     <span data-id='<?=$d->id?>' class="orderOpen mr-md-1 mr-0 my-1">
-                                                        <a href="#" data-toggle="tooltip" class="badge-circle badge-circle badge-circle-light-primary" title="Order now"><i class="bx bx-truck font-small-5"></i></a>
+                                                        <a href="<?=base_url()?>neworder" data-toggle="tooltip" class="badge-circle badge-circle badge-circle-light-primary" title="Order now"><i class="bx bx-truck font-small-5"></i></a>
                                                     </a>
                                                     </span>
                                                     <span data-id='<?=$d->id?>' class="listOpen">

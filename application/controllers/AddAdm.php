@@ -19,7 +19,8 @@ class AddAdm extends MY_Controller {
             $this->form_validation->set_rules('max_order_qty', 'Max order qty', 'required');
             $this->form_validation->set_rules('unit_id', 'Unit', 'required');
             $this->form_validation->set_rules('category_id', 'Category', 'required');
-            if($this->form_validation->run() == true){
+            if($this->form_validation->run() == true)
+            {
                 $imagename = 'defaultItem.jpg';
                 $data=$this->input->post();
                 $data['buying_qtys']=explode(',',$data['buying_qtys']);
@@ -148,6 +149,53 @@ class AddAdm extends MY_Controller {
             else{
                 $this->session->set_flashdata('failed','Invalid input');
                 redirect('new-demand');
+            }
+        }
+
+
+        public function addKartUser()
+        {
+            $this->form_validation->set_rules('name', 'name', 'required');
+            $this->form_validation->set_rules('contact', 'contact', 'required');
+            $this->form_validation->set_rules('address', 'address', 'required');
+            $this->form_validation->set_rules('item_id[]', 'location', 'required');
+            $this->form_validation->set_rules('email', 'email', 'required');
+            $this->form_validation->set_rules('password', 'password', 'required');
+            if($this->form_validation->run() == true)
+            {
+                // $arr=$this->input->post();
+                $data['name']=$this->input->post('name');
+                $data['mobile_no']=$this->input->post('contact');
+                $data['email']=$this->input->post('email');
+                $data['password']=password_hash($this->input->post('password'),PASSWORD_DEFAULT);
+                $data['role_id']='2';
+                $data['is_active']='1';
+                // echo'<pre>';var_dump($data);exit;
+
+                $this->db->trans_start();
+                $user_id=$this->save->saveInfo('users',$data);
+                $data2['user_id']=$user_id;
+                $data['location_id']=$this->input->post('item_id[]');
+                $data2['profile_img']="user.png";
+                $data2['address']=$this->input->post('address');
+                $this->save->saveInfo('user_info',$data2);
+                $this->db->trans_complete();
+
+                if ($this->db->trans_status() === FALSE)
+                {
+                    var_dump("Enter");exit;
+                    $this->session->set_flashdata('failed','Some error occured');
+                    redirect('kart-form');
+                }
+                else{
+                    $this->session->set_flashdata('success','Demand created !');
+                    redirect('karts');
+                }
+            }
+            else{
+                var_dump("Outer");exit;
+                $this->session->set_flashdata('failed','Invalid input');
+                redirect('kart-form');
             }
         }
 

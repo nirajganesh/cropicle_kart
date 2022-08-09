@@ -84,5 +84,4 @@
     <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
     <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
     <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
-    
     <script src="<?=base_url()?>app-assets/js/scripts/datatables/datatable.js"></script>

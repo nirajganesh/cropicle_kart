@@ -6,6 +6,7 @@ class Admin extends MY_Controller {
 		parent:: __construct();
 		$this->load->model('GetModel','fetch');
 		$this->load->model('AddModel','save');
+		$this->load->model('AddAdm','save');
 		$this->redirectIfAdminNotLoggedIn();
 	}
 
@@ -187,6 +188,14 @@ class Admin extends MY_Controller {
 	{
 		$this->load->view('admin/header',['title'=>'Add Location','submissionPath'=>base_url('AddAdm/location')]);
 		$this->load->view('admin/location-form');
+		$this->load->view('admin/footer');
+	}
+
+	public function addKart()
+	{
+		$location=$this->fetch->getAdminLocation();
+		$this->load->view('admin/header',['title'=>'Add Kart','location'=>$location,'submissionPath'=>base_url('AddAdm/addKartUser')]);
+		$this->load->view('admin/kart-form');
 		$this->load->view('admin/footer');
 	}
 

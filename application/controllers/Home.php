@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends MY_Controller {
-	function __construct(){
+	function __construct()
+	{
 		parent:: __construct();
 		$this->load->model('GetModel','fetch');
 		$this->load->model('AddModel','save');
@@ -16,31 +17,37 @@ class Home extends MY_Controller {
 		$total_orders=$this->fetch->record_count('orders','user_id',$this->session->kart->id);
 		$total_payments=$this->fetch->getInfoQuery('orders',['user_id'=>$this->session->kart->id, 'status'=>'DELIVERED']);
 		$last_payment=0;
-		$amt=$this->fetch->getLastPayment($this->session->kart->id);
-		if($amt){
-			$last_payment=$amt;
-		}
+		// $amt=$this->fetch->getLastPayment($this->session->kart->id);
+		// if($amt){
+		// 	$last_payment=$amt;
+		// }
 		$q=0;
 		$tc=0;
-		if($order){
-			foreach($order as $o){
-				if(isset($o->remaining_qty)){
+		if($order)
+		{
+			foreach($order as $o)
+			{
+				if(isset($o->remaining_qty))
+				{
 					$o->qty=$o->remaining_qty;
 				}
 				$time=date('d-m-Y',strtotime($o->updated));
 				$q+=$o->qty;
-
-				if($o->qty>0) { $tc++; }
+				if($o->qty>0) 
+				{
+					$tc++; 
+				}
 			}
 		}
-		$response=['title'=>'Dashboard',
+		$response=[
+			        'title'=>'Dashboard',
 					'total_demands'=>$total_demands,
 					'total_orders'=>$total_orders,
 					'total_payments'=>sizeof($total_payments),
 					'last_payment'=>$last_payment,
 					'count'=>$tc,
 					'qty'=>$q	
-					];
+				  ];
 		$this->load->view('kart/header',$response);
 		$this->load->view('kart/index');
 		$this->load->view('kart/footer');
@@ -206,18 +213,75 @@ class Home extends MY_Controller {
 			echo $response;
 		}
 		elseif($this->fetch->getStockToUpdate()){
-			$response='
-						<h4 class="text-dark mb-1">Cannot order !</h4>
-						<h6 class="text-dark">Order can be placed only after EOD (End of Day).</h6>
-						<h6 class="text-dark">You can do EOD between 6pm to 10pm.</h6>
-				</div>
+			// $response='
+			// 			<h4 class="text-dark mb-1">Cannot order !</h4>
+			// 			<h6 class="text-dark">Order can be placed only after EOD (End of Day).</h6>
+			// 			<h6 class="text-dark">You can do EOD between 6pm to 10pm.</h6>
+			 //	</div>
 					
-				<div class="modal-footer px-0 mt-2">
-						<button type="button" class="btn btn-light-secondary" data-dismiss="modal">
-							<i class="bx bx-x d-block d-sm-none"></i>
-							<span class="d-none d-sm-block">Close</span>
-						</button>
-				';
+			// 	<div class="modal-footer px-0 mt-2">
+			// 			<button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+			// 				<i class="bx bx-x d-block d-sm-none"></i>
+			// 				<span class="d-none d-sm-block">Close</span>
+			// 			</button>
+			// 	';
+			// echo $response;
+
+
+			$list=$this->fetch->demandListById($this->input->post('id'));
+			$response='
+				<div class="row">
+					<p class="ml-1 text-dark">List Name - <strong>'.$list->name.'</strong></p>
+				</div>
+				<div class="row">
+					<p class="ml-1 text-dark">No. of items - '.$list->itemsCount.'</p>
+				</div>
+				<hr class="mt-0">
+				<div class="row">';
+			$total_cost=0;
+			$total_qty=0;
+			foreach($list->items as $i){
+				$total_qty+=$i->qty;
+				$total_cost+=$i->qty*$i->item_price_kart;
+				$response.='
+							<div class="col-sm-6 p-0 pt-1 border-right d-flex">
+								<div class="col-6">'.$i->item_name.' -</div>
+								<div class="col-5">'.$i->qty.' '.$i->unit_short_name.' (₹'.$i->qty*$i->item_price_kart.'/-)</div>
+							</div>
+							';
+			}	
+			$response.='</div>';
+			
+			$response='
+						<div class="row mt-2">
+							<mark class="p-1"><span class="">Total amt. = ₹ '.$total_cost.'/-</span></mark>
+						</div>
+						<form action="'.base_url("Add/newOrder").'" class="mt-2" method="POST">
+							<h6>Payment mode:</h6>
+							<div class="row">
+								<div class="col-sm-6 mb-1 mb-sm-0">
+									<input id="cash" type="radio" name="payment_type" value="CASH" required>
+									<label for="cash">Cash</label>
+								</div>
+								<!--<div class="col-sm-6">
+									<input id="online" type="radio" name="payment_type" value="ONLINE">
+									<label for="online">Online</label>
+								</div>-->
+								<input type="text" name="total_amt" value="'.$total_cost.'" hidden required>
+								<input type="text" name="total_qty" value="'.$total_qty.'" hidden required>
+								<input type="text" name="demand_list_id" value="'.$this->input->post('id').'" hidden required>
+							</div>
+							<div class="modal-footer px-0">
+								<button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+									<i class="bx bx-x d-block d-sm-none"></i>
+									<span class="d-none d-sm-block">Cancel</span>
+								</button>
+								<button type="submit" class="btn btn-primary">Place order</button>
+							</div>
+						</form>
+						
+						';
+			
 			echo $response;
 		}
 		else{

@@ -65,6 +65,7 @@ $route['demand-lists'] = 'Home/demandLists';
 $route['demand-form'] = 'Home/demandForm';
 $route['demand-form/(:num)'] = 'Home/editDemand/$1';
 $route['orders'] = 'Home/orders';
+$route['neworder']='Add/newOrder';
 $route['payments'] = 'Home/payments';
 $route['update-stock'] = 'Edit/updateStock';
 
@@ -92,6 +93,7 @@ $route['toggle-loc-status/(:num)/(:num)'] = 'EditAdm/locStatus/$1/$2';
 $route['delete-loc/(:num)'] = 'DeleteAdm/location/$1';
 
 $route['karts'] = 'Admin/kartUsers';
+$route['add-kart'] = 'Admin/addKart';
 $route['toggle-kart-status/(:num)/(:num)'] = 'EditAdm/kartStatus/$1/$2';
 $route['toggle-user-status/(:num)/(:num)'] = 'EditAdm/userStatus/$1/$2';
 $route['delete-kart/(:num)'] = 'DeleteAdm/kart/$1';
@@ -102,7 +104,9 @@ $route['delivered-kart-orders'] = 'Admin/delvKartOrders';
 $route['rejected-kart-orders'] = 'Admin/rejKartOrders';
 $route['kart-payments'] = 'Admin/kartPayments';
 
+
 $route['users'] = 'Admin/Users';
+$route['add-user']='AddAdm/addKartUser';
 $route['new-demand'] = 'Admin/createUserDemand';
 $route['user-demands'] = 'Admin/userDemands';
 $route['approved-user-demands'] = 'Admin/apprUserDemands';

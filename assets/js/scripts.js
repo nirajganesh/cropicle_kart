@@ -121,11 +121,13 @@
     
     $('.listOpen').click(function(){
         var id=$(this).data('id');
+        console.log(id);
         $.ajax({
             url: 'Home/listFullDetails',
             type:'post',
             data: {id: id},
-            beforeSend : function(){
+            beforeSend : function()
+            {
                 $('#listModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#listModal').modal('show');
             },
@@ -138,8 +140,34 @@
         });
     });
 
+    // $('.orderOpen').click(function()
+    // {
+    //     var id=$(this).data('id');
+    //     console.log(id);
+    //     $.ajax
+    //     ({
+    //         url: 'Home/orderDetails',
+    //         type:'post',
+    //         data: {id: id},
+    //         beforeSend : function()
+    //         {
+    //             $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
+    //             $('#orderModal').modal('show');
+    //         },
+    //         success: function(response)
+    //         {
+    //             $('#orderModal .modal-body').html(response);
+    //         },
+    //         error: function(response)
+    //         {
+    //             $('#orderModal .modal-body').html('Error !');
+    //         }
+    //     });
+    // });
+
     $(".order-dt").on("click", ".orderOpen", function(){
         var id=$(this).data('id');
+        console.log(id);
         $.ajax({
             url: 'Home/orderDetails',
             type:'post',
@@ -148,7 +176,8 @@
                 $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },
-            success: function(response){
+            success: function(response)
+            {
                 $('#orderModal .modal-body').html(response);
             },
             error: function(response){
@@ -157,13 +186,15 @@
         });
     });
 
+
     $(".order-dt").on("click", ".pendingOrderOpen", function(){
         var id=$(this).data('id');
         $.ajax({
             url: 'Admin/pOrderDetails',
             type:'post',
             data: {id: id},
-            beforeSend : function(){
+            beforeSend : function()
+            {
                 $('#orderModal .modal-body').html('<div class="d-flex justify-content-center align-items-center"><i class="bx bx-loader-alt bx-spin"> </i>&nbsp; Loading...</div>');
                 $('#orderModal').modal('show');
             },

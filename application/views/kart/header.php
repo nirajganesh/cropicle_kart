@@ -135,7 +135,7 @@
 
 
                 <li class="nav-item mr-2 my-25">
-                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='payments'?' activeLink':''?>" href="#">
+                    <a class="nav-link bg-white <?=$this->uri->segment(1)=='payments'?' activeLink':''?>" href="<?=base_url()?>payments">
                         <i class="menu-livicon" data-icon="bank"></i><span data-i18n="Dashboard">
                         Payments</span>
                     </a>

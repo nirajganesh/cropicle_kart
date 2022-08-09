@@ -49,6 +49,7 @@ class Add extends MY_Controller {
 
         public function newOrder()
         {
+            // var_dump($this->input->post());exit;
             $this->form_validation->set_rules('payment_type', 'Payment type', 'required');
             $this->form_validation->set_rules('total_qty', 'Qty', 'required');
             $this->form_validation->set_rules('total_amt', 'Amt', 'required');
