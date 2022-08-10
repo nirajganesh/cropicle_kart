@@ -81,7 +81,7 @@
                                                     <td>25-06-2020</td>
                                                     <td>Rs. 10500/-</td>
                                                     <td>order id- #5148</td>
-                                                    <td class="text-danger">Failed</td>
+                                                    <td class="text-success">Success</td>
                                                     <td class='d-flex'>
                                                         <span data-toggle="modal" data-target="#payModal">
                                                             <a href="#" data-toggle="tooltip" title="See details"><i class="badge-circle border badge-circle-light-primary bx bx-info-circle text-dark font-medium-1"></i></a>

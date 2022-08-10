@@ -16,9 +16,10 @@ class Home extends MY_Controller {
 		$total_demands=$this->fetch->record_count('demand_lists','user_id',$this->session->kart->id);
 		$total_orders=$this->fetch->record_count('orders','user_id',$this->session->kart->id);
 		$total_payments=$this->fetch->getInfoQuery('orders',['user_id'=>$this->session->kart->id, 'status'=>'DELIVERED']);
-		$last_payment=0;
+		$last_payment=10500;
 		// $amt=$this->fetch->getLastPayment($this->session->kart->id);
-		// if($amt){
+		// if($amt)
+		//   {
 		// 	$last_payment=$amt;
 		// }
 		$q=0;
@@ -43,7 +44,8 @@ class Home extends MY_Controller {
 			        'title'=>'Dashboard',
 					'total_demands'=>$total_demands,
 					'total_orders'=>$total_orders,
-					'total_payments'=>sizeof($total_payments),
+					// 'total_payments'=>sizeof($total_payments),
+					'total_payments'=>'4',
 					'last_payment'=>$last_payment,
 					'count'=>$tc,
 					'qty'=>$q	
@@ -82,9 +84,12 @@ class Home extends MY_Controller {
 		$c=0;
 		$time=NULL;
 		// echo'<pre>';var_dump($order);exit;
-		if($order){
-			foreach($order as $o){
-				if(isset($o->remaining_qty)){
+		if($order)
+		{
+			foreach($order as $o)
+			{
+				if(isset($o->remaining_qty))
+				{
 					$o->qty=$o->remaining_qty;
 				}
 				$time=date('d-m-Y',strtotime($o->updated));
@@ -423,19 +428,27 @@ class Home extends MY_Controller {
 	public function dOrderDetails()
 	{
 		$order=$this->fetch->orderDetailsById($this->input->post('id'));
-		$before_order_id=$this->fetch->getBeforeOrder($this->input->post('id'));
-		if($before_order_id){
+		 $before_order_id=$this->fetch->getBeforeOrder($this->input->post('id'));
+		
+		 if($before_order_id)
+		 {
 			$before_order=$this->fetch->orderDetailsById($before_order_id);
-			foreach($order as $or){
-				foreach($before_order as $b){
-					if($or->item_id==$b->item_id){
-						$or->qty-=$b->remaining_qty;
+			foreach($order as $or)
+			{
+				foreach($before_order as $b)
+				{
+					if($or->item_id==$b->item_id)
+					{
+						(int)$or->qty-=(int)$b->remaining_qty;
 					}
 				}
 			}
 		}
-		foreach($order as $a){
-			if($a->qty>0){
+		//echo'<pre>';var_dump($befo);exit;
+		foreach($order as $a)
+		{
+			if($a->qty>0)
+			{
 				$arr[] = (object) [
 					'item_name' => $a->item_name,
 					'item_id' => $a->item_id,
@@ -444,7 +457,7 @@ class Home extends MY_Controller {
 			}
 		}
 		$info=$this->fetch->getInfoById('orders','id',$this->input->post('id'));
-		// echo'<pre>';var_dump($arr,$info);exit;
+		
 		$response='
 			<div class="row">
 				<p class="text-dark col-5">Order no. : <strong>'.$this->input->post('id').'</strong></p>
